@@ -1,0 +1,594 @@
+{
+  "paperMetadata": {
+    "title": "Series QQARR/1 SET-2 Q.P. Code 31/1/2",
+    "subject": "SCIENCE",
+    "examType": "CBSE Board Examination",
+    "duration": "2 hours",
+    "totalMarks": 40,
+    "instructions": [
+      "This question paper comprises 15 questions. All questions are compulsory.",
+      "This question paper is divided into three sections - A, B and C.",
+      "Section A - Questions No. 1 to 7 are short answer type questions. Each question carries 2 marks.",
+      "Section B - Questions No. 8 to 13 are also short answer type questions. Each question carries 3 marks.",
+      "Section C - Questions No. 14 and 15 are case-based questions. Each question carries 4 marks.",
+      "Internal choices have been provided in some questions. Only one of the alternatives has to be attempted."
+    ]
+  },
+  "parsingStatus": {
+    "success": true,
+    "paperClarity": "clear",
+    "confidence": 0.98,
+    "errors": [],
+    "warnings": []
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q1.a",
+          "text": "What is ozone? How is it formed in the upper layers of the Earth's atmosphere? How does ozone affect our ecosystem ?",
+          "marks": "2",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q1.b",
+          "text": "",
+          "marks": "infer from children and choice description",
+          "attachments": [],
+          "ruberic": [],
+          "children": [
+            {
+              "id": "Q1.b.i",
+              "text": "List two human-made ecosystems.",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q1.b.ii",
+              "text": "We do not clean a pond in the same manner as we do in an aquarium. Give reason to justify this statement.",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "text": "",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q2.a",
+          "text": "",
+          "marks": "infer from children and choice description",
+          "attachments": [],
+          "ruberic": [],
+          "children": [
+            {
+              "id": "Q2.a.i",
+              "text": "Name and state the rule to determine the direction of force experienced by a current carrying straight conductor placed in a uniform magnetic field which is perpendicular to it.",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q2.a.ii",
+              "text": "An alpha particle while passing through a magnetic field gets projected towards north. In which direction will an electron project when it passes through the same magnetic field?",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "Q2.b",
+          "text": "",
+          "marks": "infer from children and choice description",
+          "attachments": [],
+          "ruberic": [],
+          "children": [
+            {
+              "id": "Q2.b.i",
+              "text": "What is a solenoid ?",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q2.b.ii",
+              "text": "Draw the pattern of magnetic field lines of the magnetic field produced by a solenoid through which a steady current flows.",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "text": "",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q3.a",
+          "text": "What is variation? List two main reasons that may lead to variation in a population.",
+          "marks": "2",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q3.b",
+          "text": "",
+          "marks": "infer from children and choice description",
+          "attachments": [],
+          "ruberic": [],
+          "children": [
+            {
+              "id": "Q3.b.i",
+              "text": "In a cross between violet flowered plants and white flowered plants, state the characteristics of the plants obtained in the F1 progeny.",
+              "marks": "0.5",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q3.b.ii",
+              "text": "If the plants of F1 progeny are self-pollinated, then what would be observed in the plants of F2 progeny?",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q3.b.iii",
+              "text": "If 100 plants are produced in F2 progeny, then how many plants will show the recessive trait ?",
+              "marks": "0.5",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "text": "",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q4.a",
+          "text": "Which of the following flowers will have higher possibility of self-pollination? Mustard, Papaya, Watermelon, Hibiscus",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q4.b",
+          "text": "List the two reproductive parts of a bisexual flower.",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "text": "",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q5.a",
+          "text": "Name the process shown below and define it :",
+          "marks": "1",
+          "attachments": [
+            {
+              "type": "diagram",
+              "description": "Diagram illustrating regeneration in Planaria where the organism is cut into three pieces, and each piece grows back into a complete individual organism."
+            }
+          ],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q5.b",
+          "text": "Name the types of cells present in the organisms which exhibit this process.",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "text": "What is a Döbereiner triad? Why can't the following three elements form such a triad? N (14); P (31); As (75) (Atomic masses are given in parenthesis)",
+      "marks": "2",
+      "attachments": [],
+      "ruberic": [],
+      "children": []
+    },
+    {
+      "id": "Q7",
+      "text": "The molecular formulae of two alkynes, A and B are CxH2 and C3Hy respectively.",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q7.a",
+          "text": "Find the values of x and y.",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q7.b",
+          "text": "Write the names of A and B.",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "text": "",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q8.a",
+          "text": "Name the group of organisms which form in the first trophic level of all food chains. Why are they called so ?",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q8.b",
+          "text": "Why are the human beings most adversely affected by bio-magnification?",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q8.c",
+          "text": "State one ill-effect of the absence of decomposers from a natural ecosystem.",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "text": "",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q9.a",
+          "text": "",
+          "marks": "infer from children and choice description",
+          "attachments": [],
+          "ruberic": [],
+          "children": [
+            {
+              "id": "Q9.a.i",
+              "text": "Define Electric Power and write its SI unit.",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q9.a.ii",
+              "text": "Two bulbs rated 100 W; 220 V and 60 W; 220 V are connected in parallel to an electric mains of 220 V. Find the current drawn by the bulbs from the mains.",
+              "marks": "2",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "Q9.b",
+          "text": "",
+          "marks": "infer from children and choice description",
+          "attachments": [],
+          "ruberic": [],
+          "children": [
+            {
+              "id": "Q9.b.i",
+              "text": "State Joule's law of heating. Express it mathematically when an appliance of resistance R is connected to a source of voltage V and the current I flows through the appliance for a time t.",
+              "marks": "2",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q9.b.ii",
+              "text": "A 5 Ω resistor is connected across a battery of 6 volts. Calculate the energy that dissipates as heat in 10 s.",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "text": "",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q10.a",
+          "text": "Calculate the resistance of a metal wire of length 2m and area of cross-section 1.55 x 10^-6 m^2. (Resistivity of the metal is 2.8 x 10^-8 Ω m)",
+          "marks": "2",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q10.b",
+          "text": "Why are alloys preferred over pure metals to make the heating elements of electrical heating devices ?",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "text": "A cross was made between green-stemmed tomato plants denoted by (GG) and purple-stemmed tomato plants denoted as (gg) to obtain F1 progeny.",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q11.a",
+          "text": "What colour of the stem would you expect in their F1 progeny and why?",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q11.b",
+          "text": "Give the percentage of purple-stemmed plants if F1 plants are allowed to self-pollinate to produce F2 progeny.",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q11.c",
+          "text": "Write the ratio between GG and gg plants in the F2 progeny?",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "text": "",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q12.a",
+          "text": "Draw two different possible structures of a saturated hydrocarbon having four carbon atoms in its molecule. What are these two structures of the hydrocarbon having same molecular formula called? Write the molecular formula and the common name of this compound. Also write the molecular formula of its alkyne.",
+          "marks": "3",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q12.b",
+          "text": "",
+          "marks": "infer from children and choice description",
+          "attachments": [],
+          "ruberic": [],
+          "children": [
+            {
+              "id": "Q12.b.i",
+              "text": "Write the molecular formula of benzene and draw its structure.",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q12.b.ii",
+              "text": "Write the number of single and double covalent bonds present in a molecule of benzene.",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q12.b.iii",
+              "text": "Which compounds are called alkynes?",
+              "marks": "1",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "text": "",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q13.a",
+          "text": "List two advantages of adopting the atomic number of an element as the basis of classification of elements in the Modern Periodic Table.",
+          "marks": "1.5",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q13.b",
+          "text": "Write the electronic configurations of the elements X (atomic number 13) and Y (atomic number 20).",
+          "marks": "1.5",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "text": "A student fixes a sheet of white paper on a drawing board using some adhesive materials. She places a bar magnet in the centre of it and sprinkles some iron filings uniformly around the bar magnet using a salt-sprinkler. On tapping the board gently, she observes that the iron filings have arranged themselves in a particular pattern.",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q14.a",
+          "text": "Draw a diagram to show this pattern of iron filings.",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q14.b",
+          "text": "What does this pattern of iron filings demonstrate ?",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q14.c",
+          "text": "",
+          "marks": "infer from children and choice description",
+          "attachments": [],
+          "ruberic": [],
+          "children": [
+            {
+              "id": "Q14.c.i",
+              "text": "How is the direction of magnetic field at a point determined using the field lines ? Why do two magnetic field lines not cross each other ?",
+              "marks": "2",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q14.c.ii",
+              "text": "How are the magnetic field lines of a bar magnet drawn using a small compass needle ? Draw one magnetic field line each on both sides of the magnet.",
+              "marks": "2",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q15",
+      "text": "The mechanism by which the sex of an individual is determined is called sex-determination. In human beings, sex of a newborn is genetically determined, whereas in some others it is not. There are 46 (23 pairs) chromosomes in human beings. Out of these, 44 (22 pairs) control the body characters and 2 (one pair) are known as sex chromosomes. The sex chromosomes are of two types X chromosome and Y chromosome. At the time of fertilisation, depending upon which type of male gamete fuses with the female gamete, the sex of the newborn child is decided.",
+      "marks": "infer from children and choice description",
+      "attachments": [],
+      "ruberic": [],
+      "children": [
+        {
+          "id": "Q15.a",
+          "text": "Why is a pair of sex chromosomes in human beings called a mismatched pair in terms of type and size ?",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q15.b",
+          "text": "If the gametes always have half the number of chromosomes, then how is the original number of chromosomes restored in the organism ?",
+          "marks": "1",
+          "attachments": [],
+          "ruberic": [],
+          "children": []
+        },
+        {
+          "id": "Q15.c",
+          "text": "",
+          "marks": "infer from children and choice description",
+          "attachments": [],
+          "ruberic": [],
+          "children": [
+            {
+              "id": "Q15.c.i",
+              "text": "Name two animals whose sex is not genetically determined. Explain the process of their sex determination.",
+              "marks": "2",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            },
+            {
+              "id": "Q15.c.ii",
+              "text": "With the help of a flowchart only, show how sex is genetically determined in human beings.",
+              "marks": "2",
+              "attachments": [],
+              "ruberic": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "choiceInformation": {
+    "detailedDescription": "Internal choices are provided at the main question level or sub-question levels in the paper. For Question 1, candidates choose between Q1.a or Q1.b (i and ii). For Question 2, candidates choose between Q2.a (i and ii) or Q2.b (i and ii). For Question 3, candidates choose between Q3.a or Q3.b (i, ii, and iii). For Question 9, candidates choose between Q9.a (i and ii) or Q9.b (i and ii). For Question 12, candidates choose between Q12.a or Q12.b (i, ii, and iii). For Case-based Question 14, sub-question (c) offers a choice between option (i) or option (ii). For Case-based Question 15, sub-question (c) offers a choice between option (i) or option (ii).",
+    "summary": "All 15 questions are compulsory, but internal choices are offered within specific questions: (Q1.a OR Q1.b), (Q2.a OR Q2.b), (Q3.a OR Q3.b), (Q9.a OR Q9.b), (Q12.a OR Q12.b), (Q14.c.i OR Q14.c.ii), and (Q15.c.i OR Q15.c.ii)."
+  }
+}

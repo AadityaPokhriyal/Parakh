@@ -1,0 +1,1246 @@
+{
+  "studentMetadata": {
+    "name": "",
+    "rollNumber": "",
+    "examCode": "086",
+    "subject": "SCIENCE"
+  },
+  "parsingStatus": {
+    "success": true,
+    "paperClarity": "clear",
+    "overallConfidence": 0.98,
+    "errors": [],
+    "warnings": []
+  },
+  "answerBlocks": [
+    {
+      "id": "Q1",
+      "sourcePages": [2],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "The student gave the name of the compound as Butanal and drew its correct chemical structure with four carbon atoms and an aldehyde functional group.",
+      "satisfies": [
+        "Correct chemical structure drawn",
+        "Correct name written"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct structure and name provided."
+      },
+      "children": []
+    },
+    {
+      "id": "Q2",
+      "sourcePages": [2],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "The student mentioned that the ovary secretes female hormones (oestrogen and progesterone) and releases the female gamete (ovum).",
+      "satisfies": [
+        "Lists secretion of female hormones",
+        "Lists release of female gamete"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Two correct functions listed."
+      },
+      "children": []
+    },
+    {
+      "id": "Q3",
+      "sourcePages": [2],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "The student mapped out the food chain (Grass -> Insect -> Frog -> Snake) and determined that the frog occupies the third trophic level.",
+      "satisfies": [
+        "Correctly assigns the third trophic level to the frog"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct trophic level assignment."
+      },
+      "children": []
+    },
+    {
+      "id": "Q4",
+      "sourcePages": [3],
+      "attemptStatus": "attempted",
+      "confidence": 0.95,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "The student calculated the speed of light in water using the refractive indices of glass and water. Using the correct proportions, they arrived at the result of 2.25 x 10^8 m/s.",
+      "satisfies": [
+        "Correct mathematical computation",
+        "Correct final value with units"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 2.0,
+        "reason": "Calculations and final speed are accurate."
+      },
+      "children": []
+    },
+    {
+      "id": "Q5",
+      "sourcePages": [3, 4],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "The student listed the four main stakeholders: local inhabitants, the forest department, industrialists, and wildlife conservationists.",
+      "satisfies": [
+        "Identifies all four correct stakeholders"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 2.0,
+        "reason": "All four stakeholders correctly detailed."
+      },
+      "children": []
+    },
+    {
+      "id": "Q6",
+      "sourcePages": [4],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "The student provided two social problems (displacement of people without proper rehabilitation and loss of livelihood/benefits) and two environmental problems (submergence of flora/fauna and destruction of biodiversity).",
+      "satisfies": [
+        "Lists two distinct social problems",
+        "Lists two distinct environmental problems"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 2.0,
+        "reason": "Appropriate social and environmental problems stated."
+      },
+      "children": []
+    },
+    {
+      "id": "Q7",
+      "sourcePages": [4, 5],
+      "attemptStatus": "attempted",
+      "confidence": 0.95,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "",
+      "satisfies": [],
+      "missing": [],
+      "earnedMarks": {
+        "value": 2.5,
+        "reason": "Derived from sub-questions; sub-question (v) was not answered."
+      },
+      "children": [
+        {
+          "id": "Q7.i",
+          "sourcePages": [4],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Stated as 2, 8, 8, 2.",
+          "satisfies": [
+            "Correct electronic configuration for Ca"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 0.5,
+            "reason": "Correct."
+          },
+          "children": []
+        },
+        {
+          "id": "Q7.ii",
+          "sourcePages": [4],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Stated as 1.",
+          "satisfies": [
+            "Correct number of valence electrons"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 0.5,
+            "reason": "Correct."
+          },
+          "children": []
+        },
+        {
+          "id": "Q7.iii",
+          "sourcePages": [4],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Stated as 5.",
+          "satisfies": [
+            "Correct number of shells"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 0.5,
+            "reason": "Correct."
+          },
+          "children": []
+        },
+        {
+          "id": "Q7.iv",
+          "sourcePages": [4],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Correctly identified K as a metal.",
+          "satisfies": [
+            "Correct classification"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 0.5,
+            "reason": "Correct."
+          },
+          "children": []
+        },
+        {
+          "id": "Q7.v",
+          "sourcePages": [5],
+          "attemptStatus": "uncertain",
+          "confidence": 0.5,
+          "errors": [],
+          "warnings": [],
+          "issues": [
+            "Student wrote Rb under a generic label line but omitted a specific answer line for part v."
+          ],
+          "answerSummary": "This part is missing a distinct written block, though Rb appears written as an intermediate observation on the right side.",
+          "satisfies": [],
+          "missing": [
+            "No clear isolated response for part v"
+          ],
+          "earnedMarks": {
+            "value": 0.0,
+            "reason": "Explicit answer block for part v missing."
+          },
+          "children": []
+        },
+        {
+          "id": "Q7.vi",
+          "sourcePages": [4],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Listed as Be, Mg, Ca, Rb.",
+          "satisfies": [
+            "Correct increasing order of atomic size"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 0.5,
+            "reason": "Correct."
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "sourcePages": [],
+      "attemptStatus": "uncertain",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [
+        "Question skipped completely in Section A"
+      ],
+      "answerSummary": "The student skipped this question in Section A. Note: a partial unrelated reaction of ethanoic acid with sodium hydrogen carbonate is written in Section B under Q36.",
+      "satisfies": [],
+      "missing": [
+        "Three distinct reactions showing conversion of ethanoic acid to sodium ethanoate with balanced equations are missing"
+      ],
+      "earnedMarks": {
+        "value": 0.0,
+        "reason": "Question not attempted."
+      },
+      "children": []
+    },
+    {
+      "id": "Q9",
+      "sourcePages": [6],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "",
+      "satisfies": [],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Only sub-question (a) was completed correctly; parts (b) and (c) are omitted."
+      },
+      "children": [
+        {
+          "id": "Q9.a",
+          "sourcePages": [6],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Student deduced the element as Aluminum (atomic number 13) and stated valence electrons = 3 and valency = 3.",
+          "satisfies": [
+            "Correct number of valence electrons",
+            "Correct valency"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 1.0,
+            "reason": "Correct derivation of valence electrons and valency."
+          },
+          "children": []
+        },
+        {
+          "id": "Q9.b",
+          "sourcePages": [6],
+          "attemptStatus": "uncertain",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Not attempted.",
+          "satisfies": [],
+          "missing": [
+            "Molecular formula of the compound with Y missing"
+          ],
+          "earnedMarks": {
+            "value": 0.0,
+            "reason": "Not attempted."
+          },
+          "children": []
+        },
+        {
+          "id": "Q9.c",
+          "sourcePages": [6],
+          "attemptStatus": "uncertain",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Not attempted.",
+          "satisfies": [],
+          "missing": [
+            "Name and formula of compound with chlorine missing"
+          ],
+          "earnedMarks": {
+            "value": 0.0,
+            "reason": "Not attempted."
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "sourcePages": [6],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "The student calculated atomic number = 17, electronic configuration = 2, 8, 7, group number = 17, period number = 3, and valency = 1.",
+      "satisfies": [
+        "Correct atomic number calculation",
+        "Correct electronic configuration",
+        "Correct group and period numbers",
+        "Correct valency"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 3.0,
+        "reason": "All values computed correctly."
+      },
+      "children": []
+    },
+    {
+      "id": "Q11",
+      "sourcePages": [7],
+      "attemptStatus": "attempted",
+      "confidence": 0.95,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "",
+      "satisfies": [],
+      "missing": [],
+      "earnedMarks": {
+        "value": 3.0,
+        "reason": "Derived from correct sub-question completions."
+      },
+      "children": [
+        {
+          "id": "Q11.a",
+          "sourcePages": [7],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Gave reasons including chromosomal crossover during sexual reproduction involving two parents, and inaccuracies during DNA replication.",
+          "satisfies": [
+            "Lists chromosomal crossover / genetic exchange",
+            "Lists DNA replication inaccuracies"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 1.0,
+            "reason": "Two valid reasons listed."
+          },
+          "children": []
+        },
+        {
+          "id": "Q11.b",
+          "sourcePages": [7],
+          "attemptStatus": "attempted",
+          "confidence": 0.95,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "",
+          "satisfies": [],
+          "missing": [],
+          "earnedMarks": {
+            "value": 2.0,
+            "reason": "Derived from children."
+          },
+          "children": [
+            {
+              "id": "Q11.b.i",
+              "sourcePages": [7],
+              "attemptStatus": "attempted",
+              "confidence": 1.0,
+              "errors": [],
+              "warnings": [],
+              "issues": [],
+              "answerSummary": "Identified 'A' as the pollen grain.",
+              "satisfies": [
+                "Correctly names Pollen grain"
+              ],
+              "missing": [],
+              "earnedMarks": {
+                "value": 0.5,
+                "reason": "Correct identity."
+          }      ,
+              "children": []
+            },
+            {
+              "id": "Q11.b.ii",
+              "sourcePages": [7],
+              "attemptStatus": "attempted",
+              "confidence": 1.0,
+              "errors": [],
+              "warnings": [],
+              "issues": [],
+              "answerSummary": "Stated that pollination occurs via wind, water, or animals.",
+              "satisfies": [
+                "Mentions agents of pollination"
+              ],
+              "missing": [],
+              "earnedMarks": {
+                "value": 0.5,
+                "reason": "Correct explanation."
+              },
+              "children": []
+            },
+            {
+              "id": "Q11.b.iii",
+              "sourcePages": [7],
+              "attemptStatus": "attempted",
+              "confidence": 1.0,
+              "errors": [],
+              "warnings": [],
+              "issues": [],
+              "answerSummary": "Described 'C' as the pollen tube carrying male gametes through the style to the embryo sac.",
+              "satisfies": [
+                "Correctly states importance of pollen tube"
+              ],
+              "missing": [],
+              "earnedMarks": {
+                "value": 0.5,
+                "reason": "Correct functionality defined."
+              },
+              "children": []
+            },
+            {
+              "id": "Q11.b.iv",
+              "sourcePages": [7],
+              "attemptStatus": "attempted",
+              "confidence": 1.0,
+              "errors": [],
+              "warnings": [],
+              "issues": [],
+              "answerSummary": "Stated that after fertilisation, the zygote is formed.",
+              "satisfies": [
+                "Mentions zygote formation from gamete fusion"
+              ],
+              "missing": [],
+              "earnedMarks": {
+                "value": 0.5,
+                "reason": "Correctly notes zygote formation."
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "sourcePages": [7, 8],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Defined reproduction as creating new individuals from existing individuals for species survival. Explained stability in terms of DNA consistency, body designs fitting specific niches, and maintaining the gene pool.",
+      "satisfies": [
+        "Defines reproduction clearly",
+        "Explains link to stability via DNA design and population maintenance"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 3.0,
+        "reason": "Comprehensive definitions and explanation provided."
+      },
+      "children": []
+    },
+    {
+      "id": "Q13",
+      "sourcePages": [8, 9],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Explained regeneration as the ability of fully differentiated multicellular organisms to grow complete new individuals from cut parts. Described cell proliferation forming a mass of cells which develop into organized structures, mentioning Hydra and Planaria.",
+      "satisfies": [
+        "Defines regeneration",
+        "Explains process of proliferation and development in Hydra",
+        "Differentiates it from simple reproduction dependency"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 3.0,
+        "reason": "Meets academic criteria with explicit reference to Hydra."
+      },
+      "children": []
+    },
+    {
+      "id": "Q14",
+      "sourcePages": [9, 10],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Justified the interlinking by explaining that classification forms hierarchies based on shared characteristics reflecting common ancestry. Discussed molecular phylogeny, genetic affinities, and DNA sequences revealing distant/common ancestors.",
+      "satisfies": [
+        "Explains link between similarity, hierarchy, and ancestry",
+        "Mentions molecular phylogeny and genetic affinities"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 3.0,
+        "reason": "Sound logical argument presented with proper examples."
+      },
+      "children": []
+    },
+    {
+      "id": "Q15",
+      "sourcePages": [10, 11],
+      "attemptStatus": "attempted",
+      "confidence": 0.95,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Described Mendel's dihybrid cross. Listed the F1 generation (RrYy - Round Yellow) and the F2 phenotypic ratio (9:3:3:1), illustrating that traits like shape and color assort independently to form new combinations.",
+      "satisfies": [
+        "Mentions dihybrid cross",
+        "Identifies 9:3:3:1 phenotype ratio",
+        "Explains independent assortment leading to new trait mixtures"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 3.0,
+        "reason": "Complete explanation supported by accurate cross nomenclature."
+      },
+      "children": []
+    },
+    {
+      "id": "Q16",
+      "sourcePages": [11],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "",
+      "satisfies": [],
+      "missing": [],
+      "earnedMarks": {
+        "value": 3.0,
+        "reason": "Derived from sub-questions."
+      },
+      "children": [
+        {
+          "id": "Q16.a",
+          "sourcePages": [11],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Stated it is necessary to meet needs sustainably, safe-keep resources for future generations, and maintain biodiversity to avoid ecological imbalance.",
+          "satisfies": [
+            "Mentions sustainable development and ecological balance"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 1.0,
+            "reason": "Valid reasons given."
+          },
+          "children": []
+        },
+        {
+          "id": "Q16.b",
+          "sourcePages": [11],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Stated that segregation into biodegradable and non-biodegradable waste allows appropriate disposal and saves time/energy for recycling.",
+          "satisfies": [
+            "Mentions segregation of waste types for recycling"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 1.0,
+            "reason": "Correct description of importance."
+          },
+          "children": []
+        },
+        {
+          "id": "Q16.c",
+          "sourcePages": [11],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Listed values: sensitivity towards environmental degradation, active citizenship, and being a caring student.",
+          "satisfies": [
+            "Lists two valid values"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 1.0,
+            "reason": "Values accurately identified."
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q17",
+      "sourcePages": [11, 12],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Calculated object distance using magnification formula ($m = -v/u$) to find $u = -15\\text{ cm}$. Used mirror formula to calculate focal length $f = -10\\text{ cm}$. Determined that if the object moves 10 cm closer ($u = -5\\text{ cm}$, inside focus), the image becomes virtual, erect, and enlarged.",
+      "satisfies": [
+        "Correct computation of object distance (-15 cm)",
+        "Correct calculation of focal length (-10 cm)",
+        "Correctly identifies new image characteristics (virtual, erect, enlarged)"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 3.0,
+        "reason": "All calculations and characteristics are completely accurate."
+      },
+      "children": []
+    },
+    {
+      "id": "Q18",
+      "sourcePages": [12, 13],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Described Newton's experiment using an upright prism to disperse white light into a spectrum and an inverted prism to recombine the colours back into white light. A neat ray diagram illustrating this setup is drawn.",
+      "satisfies": [
+        "Provides proper method description",
+        "Includes accurate ray diagram demonstrating recombination"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 3.0,
+        "reason": "Activity description and ray diagram are entirely correct."
+      },
+      "children": []
+    },
+    {
+      "id": "Q19",
+      "sourcePages": [13, 14],
+      "attemptStatus": "attempted",
+      "confidence": 0.95,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "",
+      "satisfies": [],
+      "missing": [],
+      "earnedMarks": {
+        "value": 5.0,
+        "reason": "All segments successfully answered."
+      },
+      "children": [
+        {
+          "id": "Q19.i",
+          "sourcePages": [13],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Stated the range should be between 0 and 12 cm (between focus F and pole P).",
+          "satisfies": [
+            "Correct range of distance specified"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 1.0,
+            "reason": "Correct."
+          },
+          "children": []
+        },
+        {
+          "id": "Q19.ii",
+          "sourcePages": [13],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Stated the image will be larger and behind the mirror. Included a labeled ray diagram showing an erect, magnified virtual image.",
+          "satisfies": [
+            "Identifies larger image size",
+            "Draws appropriate ray diagram with P and F marked"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 2.0,
+            "reason": "Accurate prediction and supporting ray diagram."
+          },
+          "children": []
+        },
+        {
+          "id": "Q19.iii",
+          "sourcePages": [13, 14],
+          "attemptStatus": "attempted",
+          "confidence": 0.95,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Calculated using mirror formula that if $u = -24\\text{ cm}$ (at $C$, since $f = -12\\text{ cm}$), the image forms at $-24\\text{ cm}$. Drew the matching ray diagram showing a real, inverted image of the same size at $C$.",
+          "satisfies": [
+            "Correctly calculates image location (-24 cm)",
+            "Draws accurate ray diagram for object at C"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 2.0,
+            "reason": "Correct numerical proof and schematic validation."
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q20",
+      "sourcePages": [14, 15],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Defined evolution as a process of gradual change from simple to complex life forms. Listed drivers such as variation, speciation, natural selection, and genetic drift. Described fossils as preserved traces providing evolutionary proof, using Archaeopteryx as an intermediate link and noting relative depth layering (Ammonite, trilobite, Rajasaurus).",
+      "satisfies": [
+        "Defines evolution adequately",
+        "Explains mechanism of occurrence (selection, drift, variations)",
+        "Details fossil evidence with specific examples (Archaeopteryx, layering)"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 5.0,
+        "reason": "Thorough discussion addressing definition, mechanisms, and fossil evidence."
+      },
+      "children": []
+    },
+    {
+      "id": "Q21",
+      "sourcePages": [15],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Defined placenta as a disc-like tissue embedded in the uterine wall. Described its structure containing villi on the embryo side and blood spaces on the mother's side. Detailed its functions in transferring glucose/oxygen to the fetus and removing metabolic waste.",
+      "satisfies": [
+        "Defines placenta",
+        "Describes villi and maternal blood spaces structure",
+        "Explains physiological functions (nutrition, waste removal)"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 5.0,
+        "reason": "Addresses definition, structural attributes, and maternal-fetal exchange roles."
+      },
+      "children": []
+    },
+    {
+      "id": "Q22",
+      "sourcePages": [15, 16],
+      "attemptStatus": "attempted",
+      "confidence": 0.95,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Identified P = Ethanol, Q = Ethene, R = Ethane based on the combustion ratio ($1\\text{ R} \\rightarrow 2\\text{ CO}_2 + 3\\text{ H}_2\\text{O}$). Wrote the balanced equation for dehydration of P to Q using conc. $H_2SO_4$, addition reaction of Q to R with a Nickel catalyst, and the complete combustion equation of R.",
+      "satisfies": [
+        "Correctly identifies P, Q, and R",
+        "Writes balanced chemical equation for dehydration",
+        "Writes balanced equation for hydrogenation",
+        "Writes balanced equation for combustion"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 5.0,
+        "reason": "All compounds identified correctly and backed by proper balanced equations."
+      },
+      "children": []
+    },
+    {
+      "id": "Q23",
+      "sourcePages": [16, 17, 18],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Defined atmospheric refraction as the bending of light rays passing through layers of varying atmospheric density. Used it to explain: (a) Twinkling of stars (due to changing apparent positions and flux fluctuations), and (b) Advanced sunrise / delayed sunset (explaining the 2-minute horizon shifts). Accompanied both with descriptive structural diagrams.",
+      "satisfies": [
+        "Defines atmospheric refraction",
+        "Explains twinkling of stars with an illustrative diagram",
+        "Explains advanced sunrise/delayed sunset with an illustrative diagram"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 5.0,
+        "reason": "Comprehensive textual insights paired with complete structural ray layouts."
+      },
+      "children": []
+    },
+    {
+      "id": "Q24",
+      "sourcePages": [18, 19],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "",
+      "satisfies": [],
+      "missing": [],
+      "earnedMarks": {
+        "value": 5.0,
+        "reason": "All parts answered correctly with accurate numerical work and diagrams."
+      },
+      "children": [
+        {
+          "id": "Q24.a",
+          "sourcePages": [18],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Defined focal length as the distance between the principal focus and the optical centre of the divergent lens.",
+          "satisfies": [
+            "Correct definition of focal length"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 1.0,
+            "reason": "Correct."
+          },
+          "children": []
+        },
+        {
+          "id": "Q24.b",
+          "sourcePages": [18, 19],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Applied lens formula with $f = -30\\text{ cm}$ and $v = -15\\text{ cm}$ to calculate object distance $u = -30\\text{ cm}$. Used magnification $m = v/u = h'/h$ to calculate image height $h' = 3\\text{ cm}$.",
+          "satisfies": [
+            "Correct computation of object distance (-30 cm)",
+            "Correct calculation of image size (3 cm)"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 2.0,
+            "reason": "Calculations and sign conventions applied flawlessly."
+          },
+          "children": []
+        },
+        {
+          "id": "Q24.c",
+          "sourcePages": [19],
+          "attemptStatus": "attempted",
+          "confidence": 1.0,
+          "errors": [],
+          "warnings": [],
+          "issues": [],
+          "answerSummary": "Drew a proper ray diagram for a diverging lens showing the object at $2F_1$ (30 cm) and the virtual, diminished image forming between $F_1$ and $O$ (15 cm).",
+          "satisfies": [
+            "Accurate ray diagram representing a concave lens system"
+          ],
+          "missing": [],
+          "earnedMarks": {
+            "value": 2.0,
+            "reason": "Correctly matches calculations from part b."
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "Q25",
+      "sourcePages": [20],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Selected option (d) Radicle, cotyledon, Plumule.",
+      "satisfies": [
+        "Correct MCQ choice selected"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct option selected."
+      },
+      "children": []
+    },
+    {
+      "id": "Q26",
+      "sourcePages": [20],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Selected option (a) carrot and Radish.",
+      "satisfies": [
+        "Correct MCQ choice selected"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct option selected."
+      },
+      "children": []
+    },
+    {
+      "id": "Q27",
+      "sourcePages": [20],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Selected option (c) i, e, A and P (student noted text mapping as i, e, A, P matching option c parameters).",
+      "satisfies": [
+        "Correct MCQ choice selected"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct option selected."
+      },
+      "children": []
+    },
+    {
+      "id": "Q28",
+      "sourcePages": [20],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Selected option (a) ∠i is more than ∠r but nearly equal to ∠e.",
+      "satisfies": [
+        "Correct MCQ choice selected"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct option selected."
+      },
+      "children": []
+    },
+    {
+      "id": "Q29",
+      "sourcePages": [20],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Selected option (b) inverted and diminished.",
+      "satisfies": [
+        "Correct MCQ choice selected"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct option selected."
+      },
+      "children": []
+    },
+    {
+      "id": "Q30",
+      "sourcePages": [20],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Selected option (a) lens slightly towards the screen.",
+      "satisfies": [
+        "Correct MCQ choice selected"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct option selected."
+      },
+      "children": []
+    },
+    {
+      "id": "Q31",
+      "sourcePages": [20],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Selected option (c) castor oil and Sodium hydroxide.",
+      "satisfies": [
+        "Correct MCQ choice selected"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct option selected."
+      },
+      "children": []
+    },
+    {
+      "id": "Q32",
+      "sourcePages": [20],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Selected option (c) There is no change in the blue litmus paper and the red litmus paper turns blue.",
+      "satisfies": [
+        "Correct MCQ choice selected"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct option selected."
+      },
+      "children": []
+    },
+    {
+      "id": "Q33",
+      "sourcePages": [20],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Selected option (d) calcium chloride, magnesium chloride.",
+      "satisfies": [
+        "Correct MCQ choice selected"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 1.0,
+        "reason": "Correct option selected."
+      },
+      "children": []
+    },
+    {
+      "id": "Q34",
+      "sourcePages": [21],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Identified the process as budding in yeast. Wrote observations describing the appearance of a protuberance called a bud, nuclear division, and the subsequent colony or chain formation of buds. Included a layout of sequential process drawings.",
+      "satisfies": [
+        "Identifies budding in yeast",
+        "Provides clear operational observations",
+        "Draws proper sequence diagrams of yeast reproduction"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 2.0,
+        "reason": "Correct terminology, descriptions, and structural drawings."
+      },
+      "children": []
+    },
+    {
+      "id": "Q35",
+      "sourcePages": [21],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Calculated position using lens formula ($1/v - 1/u = 1/f \\rightarrow v = 30\\text{ cm}$) and size ($h' = -5\\text{ cm}$). Sketched a detailed corresponding ray diagram displaying labels for optical centre O, principal focus F, object height, and image height.",
+      "satisfies": [
+        "Correctly determines image position (30 cm) and size (-5 cm)",
+        "Draws a fully labeled convex lens ray diagram"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 2.0,
+        "reason": "Analytical values and technical drawing elements are correct."
+      },
+      "children": []
+    },
+    {
+      "id": "Q36",
+      "sourcePages": [22],
+      "attemptStatus": "attempted",
+      "confidence": 1.0,
+      "errors": [],
+      "warnings": [],
+      "issues": [],
+      "answerSummary": "Wrote the balanced chemical equation for the reaction of ethanoic acid with sodium bicarbonate. Listed two main observations: brisk effervescence and the release of an odorless/colorless $CO_2$ gas that turns limewater milky.",
+      "satisfies": [
+        "Writes correct chemical equation",
+        "Lists two proper experimental observations"
+      ],
+      "missing": [],
+      "earnedMarks": {
+        "value": 2.0,
+        "reason": "Accurate equation and observations provided."
+      },
+      "children": []
+    }
+  ],
+  "invalidAnswers": [],
+  "attemptSummary": {
+    "totalAnswerBlocks": 35,
+    "attemptedQuestionIds": [
+      "Q1",
+      "Q2",
+      "Q3",
+      "Q4",
+      "Q5",
+      "Q6",
+      "Q7.i",
+      "Q7.ii",
+      "Q7.iii",
+      "Q7.iv",
+      "Q7.v",
+      "Q7.vi",
+      "Q9.a",
+      "Q9.b",
+      "Q9.c",
+      "Q10",
+      "Q11.a",
+      "Q11.b.i",
+      "Q11.b.ii",
+      "Q11.b.iii",
+      "Q11.b.iv",
+      "Q12",
+      "Q13",
+      "Q14",
+      "Q15",
+      "Q16.a",
+      "Q16.b",
+      "Q16.c",
+      "Q17",
+      "Q18",
+      "Q19.i",
+      "Q19.ii",
+      "Q19.iii",
+      "Q20",
+      "Q21",
+      "Q22",
+      "Q23",
+      "Q24.a",
+      "Q24.b",
+      "Q24.c",
+      "Q25",
+      "Q26",
+      "Q27",
+      "Q28",
+      "Q29",
+      "Q30",
+      "Q31",
+      "Q32",
+      "Q33",
+      "Q34",
+      "Q35",
+      "Q36"
+    ]
+  }
+}

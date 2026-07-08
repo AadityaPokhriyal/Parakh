@@ -1,0 +1,759 @@
+{
+    "paperMetadata": {
+        "duration": "2 hours",
+        "examType": "CBSE Board Exam",
+        "instructions": {
+            "en": [
+                "Please check that this question paper contains 23 printed pages.",
+                "Please check that this question paper contains 21 questions.",
+                "Q.P. Code given on the right hand side of the question paper should be written on the title page of the answer-book by the candidate.",
+                "Please write down the serial number of the question in the answer-book at the given place before attempting it.",
+                "15 minute time has been allotted to read this question paper. The question paper will be distributed at 10.15 a.m. From 10.15 a.m. to 10.30 a.m., the candidates will read the question paper only and will not write any answer on the answer-book during this period.",
+                "This question paper consists of 21 questions in two Sections: Section - A & Section - B.",
+                "Section - A has Objective type questions whereas Section - B contains Subjective type questions.",
+                "Out of the given (5 + 16) = 21 questions, a candidate has to answer (5 + 10) = 15 questions in the allotted (maximum) time of 2 hours.",
+                "All questions of a particular section must be attempted in the correct order.",
+                "Section - A : Objective Type Questions (24 marks): This section has 5 questions. There is no negative marking. Do as per the instructions given. Marks allotted are mentioned against each question/part.",
+                "Section - B : Subjective Type Questions (26 marks): This section has 16 questions. A candidate has to do 10 questions. Do as per the instructions given. Marks allotted are mentioned against each question/part."
+            ],
+            "hi": [
+                "कृपया जाँच कर लें कि इस प्रश्न-पत्र में मुद्रित पृष्ठ 23 हैं ।",
+                "कृपया जाँच कर लें कि इस प्रश्न-पत्र में 21 प्रश्न हैं ।",
+                "प्रश्न-पत्र में दाहिने हाथ की ओर दिए गए प्रश्न-पत्र कोड को परीक्षार्थी उत्तर-पुस्तिका के मुख-पृष्ठ पर लिखें ।",
+                "कृपया प्रश्न का उत्तर लिखना शुरू करने से पहले, उत्तर-पुस्तिका में यथा स्थान पर प्रश्न का क्रमांक अवश्य लिखें ।",
+                "इस प्रश्न-पत्र को पढ़ने के लिए 15 मिनट का समय दिया गया है । प्रश्न-पत्र का वितरण पूर्वाह्न में 10.15 बजे किया जाएगा । 10.15 बजे से 10.30 बजे तक परीक्षार्थी केवल प्रश्न-पत्र को पढ़ेंगे और इस अवधि के दौरान वे उत्तर-पुस्तिका पर कोई उत्तर नहीं लिखेंगे ।",
+                "इस प्रश्न-पत्र में दो खण्डों में 21 प्रश्न हैं : खण्ड-अ और खण्ड-ब ।",
+                "खण्ड-अ में वस्तुपरक प्रकार के प्रश्न हैं, जबकि खण्ड-ब में विषयपरक प्रकार के प्रश्न हैं ।",
+                "दिये गए (5 + 16) = 21 प्रश्नों में से, उम्मीदवार को 2 घंटे के आवंटित (अधिकतम) समय में (5 + 10) = 15 प्रश्नों के उत्तर देने हैं ।",
+                "किसी विशेष खण्ड के सभी प्रश्नों को सही क्रम में करने का प्रयास किया जाना चाहिए ।",
+                "खण्ड-अ : वस्तुपरक प्रकार के प्रश्न (24 अंक): इस खण्ड में 5 प्रश्न हैं । कोई नकारात्मक अंकन नहीं है । दिए गए निर्देशों के अनुसार कीजिए । प्रत्येक प्रश्न/भाग के सामने आवंटित अंकों का उल्लेख किया गया है ।",
+                "खण्ड-ब : विषयपरक प्रकार के प्रश्न (26 अंक): इस खण्ड में 16 प्रश्न हैं । उम्मीदवार को 10 प्रश्न हल करने हैं । दिए गए निर्देशों के अनुसार कीजिए । प्रत्येक प्रश्न/भाग के सामने आवंटित अंकों का उल्लेख किया गया है ।"
+            ]
+        },
+        "subject": "Artificial Intelligence",
+        "title": "Artificial Intelligence",
+        "totalMarks": 50
+    },
+    "parsingStatus": {
+        "confidence": 0.98,
+        "errors": [],
+        "paperClarity": "clear",
+        "success": true,
+        "warnings": []
+    },
+    "questions": [
+        {
+            "id": "Q1",
+            "text": {
+                "en": "Answer any 4 out of the given 6 questions on Employability Skills.",
+                "hi": "रोजगार कौशल पर आधारित दिए गए 6 प्रश्नों में से किन्हीं 4 प्रश्नों के उत्तर दीजिए ।"
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "choiceInformation": {
+                "detailedDescription": "Answer any 4 questions out of the 6 sub-questions.",
+                "summary": "4 of 6"
+            }
+        },
+        {
+            "id": "Q1.i",
+            "text": {
+                "en": "Communication involves a sender, who encodes and sends a message through a channel, and a receiver, who decodes the message and gives ________.\n(A) Message\n(B) Feedback\n(C) Signal\n(D) Output",
+                "hi": "संचार (Communication) में एक प्रेषक शामिल होता है, जो संदेश को एनकोड (encode) करता है और चैनल के माध्यम से भेजता है और एक प्राप्तकर्ता, जो संदेश को डिकोड (decode) करता है और ________ देता है ।\n(A) संदेश (Message)\n(B) फीडबैक (Feedback)\n(C) संकेत (Signal)\n(D) आउटपुट (Output)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q1.ii",
+            "text": {
+                "en": "________ is a kind of motivation that includes activities for which there is no apparent reward but one derives enjoyment and satisfaction in doing them.\n(A) Intrinsic\n(B) Extrinsic\n(C) Positive\n(D) Self",
+                "hi": "________ एक प्रकार की प्रेरणा (motivation) है जिसमें ऐसे क्रियाकलाप शामिल हैं जिनके लिये कोई प्रत्यक्ष पुरस्कार नहीं है परंतु व्यक्ति को इन्हें करने में आनंद और संतोष प्राप्त होता है ।\n(A) आंतरिक (Intrinsic)\n(B) बाह्य (Extrinsic)\n(C) सकारात्मक (Positive)\n(D) आत्म/स्वयं (Self)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q1.iii",
+            "text": {
+                "en": "Rakhi is not able to trust anyone, not even her friends or family members. She holds grudges against others. What is the kind of personality disorder that she suffers from?\n(A) Schizoid\n(B) Paranoid\n(C) Dependent\n(D) Obsessive",
+                "hi": "राखी किसी पर विश्वास नहीं कर पाती, यहाँ तक कि अपने मित्रों और पारिवारिक सदस्यों पर भी नहीं । वह दूसरों के प्रति द्वेष (grudge) रखती है । वह किस प्रकार के व्यक्तित्व विकार से ग्रसित है ?\n(A) अंतराबंधी (Schizoid)\n(B) शंका रोग (Paranoid)\n(C) पराश्रित (Dependent)\n(D) वहमी (Obsessive)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q1.iv",
+            "text": {
+                "en": "Varsha has created a spreadsheet on a laptop that is shared by her group members. She does not want anyone to open or edit her file. How can she protect her file ?",
+                "hi": "वर्षा ने एक स्प्रेड शीट (spreadsheet) उस लैपटॉप पर तैयार की है जिसका उपयोग उसके साथी कर रहे हैं । वह यह नहीं चाहती है कि कोई उसकी फाइल खोले या संशोधित (edit) करे । वह अपनी फाइल को किस तरह संरक्षित कर सकती है ?"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q1.v",
+            "text": {
+                "en": "Which of the following is NOT an environmental barrier for an entrepreneur ?\n(A) Availability of skilled labour\n(B) Lack of adequate raw material\n(C) Lack of requisite machinery\n(D) Unavailability of money on time",
+                "hi": "निम्नलिखित में से कौन किसी उद्यमी के लिये पर्यावरणीय बाधा (barrier) नहीं है ?\n(A) कुशल श्रमिकों की उपलब्धता\n(B) पर्याप्त कच्चे माल की कमी\n(C) आवश्यक मशीनरी की कमी\n(D) समय पर धन की अनुपलब्धता"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q1.vi",
+            "text": {
+                "en": "Which of the following is not a greenhouse gas ?\n(A) Carbon dioxide\n(B) Methane\n(C) Oxygen\n(D) Nitrous oxide",
+                "hi": "निम्नलिखित में से कौन ग्रीन हाउस गैस (greenhouse gas) नहीं है ?\n(A) कार्बन डाइऑक्साइड\n(B) मीथेन\n(C) ऑक्सीजन\n(D) नाइट्रस ऑक्साइड"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q2",
+            "text": {
+                "en": "Answer any 5 out of the given 6 questions.",
+                "hi": "दिए गए 6 प्रश्नों में से किन्हीं 5 प्रश्नों के उत्तर दीजिए ।"
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "choiceInformation": {
+                "detailedDescription": "Answer any 5 questions out of the 6 sub-questions.",
+                "summary": "5 of 6"
+            }
+        },
+        {
+            "id": "Q2.i",
+            "text": {
+                "en": "Statement - I : A capstone project is the final project of an academic program.\nStatement - II : For a capstone project, the students research on a topic independently.\n(A) Both Statement I and Statement II are correct.\n(B) Both Statement I and Statement II are incorrect.\n(C) Statement I is correct but Statement II is incorrect.\n(D) Statement II is correct but Statement I is incorrect.",
+                "hi": "कथन - I : किसी शैक्षणिक कार्यक्रम के लिये कैपस्टोन प्रोजेक्ट (Capstone Project) अंतिम प्रोजेक्ट (परियोजना) है ।\nकथन - II : कैपस्टोन प्रोजेक्ट के लिये छात्र किसी विषय पर स्वतंत्र रूप से अनुसंधान करते हैं ।\n(A) कथन I और कथन II दोनों सही हैं ।\n(B) कथन I और कथन II दोनों गलत हैं ।\n(C) कथन I सही है परंतु कथन II गलत है ।\n(D) कथन II सही है परंतु कथन I गलत है ।"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q2.ii",
+            "text": {
+                "en": "What are the three key elements of data storytelling ?\n(A) Data, visuals and narrative\n(B) Data, charts and statistics\n(C) Data, algorithms and visualization\n(D) Data, graphs and reports",
+                "hi": "डेटा स्टोरी टेलिंग (Data storytelling) के तीन मुख्य तत्त्व क्या हैं ?\n(A) डेटा (data), विजुअल (visuals) और नैरेटिव (narrative)\n(B) डेटा (data), चार्ट (charts) और स्टैटिस्टिक्स (statistics)\n(C) डेटा (data), एल्गोरिद्म (algorithms) और विजुअलाइजेशन (visualization)\n(D) डेटा (data), ग्राफ (graphs) और रिपोर्ट (reports)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q2.iii",
+            "text": {
+                "en": "Which of the following is true about RMSE ?\n(A) It helps to find the square root of a number.\n(B) It stands for Rough Mean Square Error.\n(C) It helps to determine the accuracy of an AI model.\n(D) It is the square root of the sum of test values and predicted values.",
+                "hi": "RMSE के बारे में निम्नलिखित में से क्या सही है ?\n(A) यह किसी संख्या के वर्गमूल (square root) को बताने में मदद करता है ।\n(B) इसका मतलब Rough Mean Square Error है ।\n(C) यह किसी कृत्रिम बुद्धिमत्ता (AI) मॉडल की परिशुद्धता (accuracy) का निर्धारण कराता है ।\n(D) यह परीक्षण मूल्यों (test values) और पूर्वानुमानित मूल्यों (predicted values) के योग का वर्गमूल (square root) है ।"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q2.iv",
+            "text": {
+                "en": "Which of the following is NOT one of the three main stages of an AI project's life-cycle ?\n(A) Project scoping\n(B) Data visualization\n(C) Design or build phase\n(D) Deployment in production",
+                "hi": "निम्नलिखित में से कौन किसी कृत्रिम बुद्धिमत्ता परियोजना जीवन-चक्र (AI project life-cycle) के मुख्य तीन स्तरों में से नहीं है ?\n(A) परियोजना व्याप्ति (Project scoping)\n(B) डेटा प्रत्यक्षीकरण (Data visualization)\n(C) डिजाइन या निर्माण चरण (Design or build phase)\n(D) उत्पादन में परिनियोजन (Deployment in production)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q2.v",
+            "text": {
+                "en": "At high level, any AI project follows six steps. What is the first step in the AI project process ?\n(A) Data gathering\n(B) AI model construction\n(C) Problem definition\n(D) Deployment",
+                "hi": "उच्च स्तर पर कोई भी AI project छः (6) चरणों का अनुपालन करता है । AI project प्रक्रिया में पहला चरण क्या है ?\n(A) डेटा संग्रहण (Data gathering)\n(B) कृत्रिम बुद्धिमत्ता मॉडल निर्माण (AI model construction)\n(C) समस्या परिभाषा (Problem definition)\n(D) परिनियोजन (Deployment)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q2.vi",
+            "text": {
+                "en": "Which of the following is true about Design or Build stage of an AI Project Life-cycle ?\n(A) It is the first stage.\n(B) It is an iterative process.\n(C) It takes 15 days to complete.\n(D) It includes only data acquisition and exploration.",
+                "hi": "किसी ए.आई. परियोजना जीवन-चक्र (AI Project Life-cycle) के डिजाइन (Design) या निर्माण स्तर (Build stage) के बारे में निम्नलिखित में से क्या सही है ?\n(A) यह पहला चरण है ।\n(B) यह एक पुनरावृत्ति प्रक्रिया (iterative process) है ।\n(C) इसे पूरा होने में 15 दिन लगते हैं ।\n(D) इसमें केवल आँकड़ा अधिग्रहण (data acquisition) और अन्वेषण (exploration) शामिल है ।"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q3",
+            "text": {
+                "en": "Answer any 5 out of the given 6 questions.",
+                "hi": "दिये गये 6 प्रश्नों में से किन्हीं 5 के उत्तर दीजिये ।"
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "choiceInformation": {
+                "detailedDescription": "Answer any 5 questions out of the 6 sub-questions.",
+                "summary": "5 of 6"
+            }
+        },
+        {
+            "id": "Q3.i",
+            "text": {
+                "en": "Which of the following is NOT one of the six steps in an AI project ?\n(A) Data gathering\n(B) Data cleaning\n(C) Evaluation & Refinements\n(D) Deployment",
+                "hi": "निम्नलिखित में से कौन AI project के 6 चरणों में से नहीं है ?\n(A) डेटा संग्रहण (Data gathering)\n(B) डेटा संशोधन (Data cleaning)\n(C) मूल्यांकन और सुधार (Evaluation & Refinements)\n(D) परिनियोजन (Deployment)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q3.ii",
+            "text": {
+                "en": "Why is narrative important in data storytelling ?\n(A) It increases the volume of data.\n(B) It supplies context, insight and interpretation to make data meaningful.\n(C) It eliminates the need for data visualization.\n(D) It automates the data analysis process.",
+                "hi": "डेटा स्टोरी टेलिंग (Data storytelling) में narrative क्यों महत्त्वपूर्ण है ?\n(A) यह डेटा मात्रा (data volume) को बढ़ाता है ।\n(B) डेटा (data) को सार्थक बनाने के लिये यह संदर्भ (context), अंतर्दृष्टि (insight) और व्याख्या (interpretation) प्रदान करता है ।\n(C) यह डेटा प्रत्यक्षीकरण (data visualization) की आवश्यकता समाप्त करता है ।\n(D) यह डेटा (data) विश्लेषण प्रक्रिया को स्वचालित करता है ।"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q3.iii",
+            "text": {
+                "en": "What does the phrase \"garbage in, garbage out\" mean in the context of an AI project ?\n(A) If the data collected is bad, the AI model will not be effective.\n(B) If you select the wrong AI model, the project will fail.\n(C) AI algorithms can correct bad data inputs automatically.\n(D) Garbage data should be avoided in the deployment phase.",
+                "hi": "AI project के संदर्भ में \"garbage in, garbage out\" का क्या अर्थ है ?\n(A) यदि संग्रहीत data खराब है तो AI मॉडल प्रभावकारी नहीं होगा ।\n(B) यदि आप गलत AI मॉडल चुनते हैं तो प्रोजेक्ट (project) विफल हो जाएगा ।\n(C) ए.आई. एल्गोरिद्म (AI algorithms) गलत डेटा इनपुट (data inputs) को स्वतः ही ठीक कर सकता है ।\n(D) परिनियोजन चरण (deployment phase) में कचरा डेटा (Garbage data) से बचना चाहिए ।"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q3.iv",
+            "text": {
+                "en": "What is one of the long-term benefits of data storytelling ?\n(A) It generates more data.\n(B) It makes information more memorable and easier to retain.\n(C) It eliminates the need for analysis.\n(D) It simplifies the data collection process.",
+                "hi": "डेटा स्टोरी टेलिंग (Data storytelling) के दीर्घकालिक लाभों में से एक लाभ क्या है ?\n(A) यह अधिक data उत्पन्न करता है ।\n(B) यह सूचना को अधिक याद रखने योग्य और आसानी से रखने योग्य बनाता है ।\n(C) यह विश्लेषण की आवश्यकता को समाप्त करता है ।\n(D) यह आँकड़ा संग्रहण प्रक्रिया को सरल बनाता है ।"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q3.v",
+            "text": {
+                "en": "Design thinking is extremely useful in tackling complex problems that are ill-defined or unknown. What is the primary focus of Design Thinking ?\n(A) Aesthetics of design\n(B) Solution-based approach to problem-solving\n(C) Technical coding skills\n(D) Project management",
+                "hi": "डिजाइन थिंकिंग (Design thinking) उन जटिल समस्याओं से निपटने में अत्यंत उपयोगी है जो ठीक से परिभाषित नहीं हैं या अज्ञात हैं । डिजाइन थिंकिंग का प्राथमिक फोकस (focus) क्या है ?\n(A) डिजाइन का सौंदर्यबोध\n(B) समस्या समाधान के लिये समाधान आधारित प्रयास\n(C) तकनीकी कोडिंग (coding) कौशल\n(D) परियोजना प्रबंधन"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q3.vi",
+            "text": {
+                "en": "Which of the following is NOT a key activity during the scoping phase of an AI model life-cycle ?\n(A) Defining the business objectives\n(B) Aligning stakeholders' expectations\n(C) Cleaning and preparing the data\n(D) Evaluating Return On Investment (ROI)",
+                "hi": "किसी AI model life-cycle के अवलोकन चरण (scoping phase) के दौरान निम्नलिखित में से कौन मुख्य क्रिया-कलाप नहीं है ?\n(A) व्यावसायिक उद्देश्यों को परिभाषित करना ।\n(B) हितधारकों (stakeholders) की आशाओं का समर्थन करना ।\n(C) डेटा (Data) शोधन और विनिर्माण\n(D) निवेश प्रतिलाभ का मूल्यांकन (ROI)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q4",
+            "text": {
+                "en": "Answer any 5 out of the given 6 questions.",
+                "hi": "दिये गये 6 प्रश्नों में से किन्हीं 5 के उत्तर दीजिए ।"
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "choiceInformation": {
+                "detailedDescription": "Answer any 5 questions out of the 6 sub-questions.",
+                "summary": "5 of 6"
+            }
+        },
+        {
+            "id": "Q4.i",
+            "text": {
+                "en": "The ________ stage of an AI project cycle involves the planning and motivational aspects of your project.\n(A) Design\n(B) Deployment\n(C) Testing\n(D) Requirement Analysis",
+                "hi": "किसी AI परियोजना चक्र के ________ स्तर में आपकी परियोजना के योजना और प्रेरणादायक पहलू शामिल होते हैं ।\n(A) डिजाइन (Design)\n(B) परिनियोजन (Deployment)\n(C) परीक्षण (Testing)\n(D) आवश्यकता विश्लेषण (Requirement Analysis)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q4.ii",
+            "text": {
+                "en": "________ is a structured approach for communicating insights drawn from data, combined with visuals and narratives.\n(A) Graphs\n(B) Data storytelling\n(C) Data requirements\n(D) Data acquisition",
+                "hi": "________ डेटा से प्राप्त अंतर्दृष्टि (गहन जानकारी) को दृश्यों और कथाओं के साथ संप्रेषित करने के लिए एक संरचित दृष्टिकोण है ।\n(A) ग्राफ\n(B) डेटा स्टोरी टेलिंग (Data storytelling)\n(C) डेटा आवश्यकता (Data requirements)\n(D) डेटा अधिग्रहण (Data acquisition)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q4.iii",
+            "text": {
+                "en": "A good model should have an RMSE value less than ________.\n(A) 160\n(B) 170\n(C) 180\n(D) 190",
+                "hi": "एक अच्छे मॉडल में आर एम एस इ वैल्यू (RMSE value) ________ से कम होना चाहिए ।\n(A) 160\n(B) 170\n(C) 180\n(D) 190"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q4.iv",
+            "text": {
+                "en": "The narrative is accompanied with ________, to explain why a particular insight has been generated.\n(A) Scores\n(B) Probability\n(C) Data\n(D) Project",
+                "hi": "कोई विशिष्ट गहन अध्ययन (insight) क्यों तैयार किया गया है, इसे स्पष्ट करने के लिये कथन (narrative) को ________ के साथ दिया जाता है ।\n(A) स्कोर्स (Scores)\n(B) संभाव्यता (Probability)\n(C) डेटा (Data)\n(D) परियोजना (Project)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q4.v",
+            "text": {
+                "en": "Which of the following is not an AI development platform ?\n(A) Google Cloud AI Platform\n(B) IBM Watson Developer Platform\n(C) Infosys Nia Resources\n(D) Alexa AI",
+                "hi": "निम्नलिखित में से कौन कृत्रिम बुद्धिमत्ता विकास प्लेटफार्म (AI development platform) नहीं है ?\n(A) गूगल क्लाउड ए.आई. प्लेटफार्म (Google Cloud AI Platform)\n(B) आई.बी.एम. वाटसन डेवलपर प्लेटफार्म (IBM Watson Developer Platform)\n(C) इन्फोसिस निया रिसोर्सेज (Infosys Nia Resources)\n(D) अलेक्सा ए.आई. (Alexa AI)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q4.vi",
+            "text": {
+                "en": "Assertion (A) : MSE is a regression loss function.\nReason (R) : It is not good to use MSE if your target data is normally distributed around a mean value.\nSelect the appropriate option for the statements given above :\n(A) Both (A) and (R) are true and (R) is the correct explanation of (A).\n(B) Both (A) and (R) are true and (R) is not the correct explanation of (A).\n(C) (A) is true but (R) is false.\n(D) (A) is false but (R) is true.",
+                "hi": "अभिकथन (A) : MSE एक रिग्रेशन लॉस फंक्शन (regression loss function) है ।\nतर्क (R) : यदि आपका लक्ष्य डेटा सामान्य रूप से एक औसत मूल्य के आसपास वितरित है तो MSE का उपयोग करना अच्छा नहीं है ।\nउपर्युक्त कथनों के लिये उचित विकल्प चुनिये :\n(A) (A) और (R) दोनों सही हैं और (R), (A) का सही स्पष्टीकरण है ।\n(B) (A) और (R) दोनों सही हैं और (R), (A) का सही स्पष्टीकरण नहीं है ।\n(C) (A) सही है परंतु (R) गलत है ।\n(D) (A) गलत है परंतु (R) सही है ।"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q5",
+            "text": {
+                "en": "Answer any 5 out of the given 6 questions.",
+                "hi": "दिये गये 6 प्रश्नों में से किन्हीं 5 के उत्तर दीजिये :"
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "choiceInformation": {
+                "detailedDescription": "Answer any 5 questions out of the 6 sub-questions.",
+                "summary": "5 of 6"
+            }
+        },
+        {
+            "id": "Q5.i",
+            "text": {
+                "en": "Match the following :\n(a) [Database icon with arrows] -> (i) Narrative\n(b) [Document icon with lines] -> (ii) Visuals\n(c) [Pie chart icon] -> (iii) Data\nOptions :\n(A) (a)-(i), (b)-(ii), (c)-(iii)\n(B) (a)-(ii), (b)-(i), (c)-(iii)\n(C) (a)-(iii), (b)-(i), (c)-(ii)\n(D) (a)-(iii), (b)-(ii), (c)-(i)",
+                "hi": "निम्नलिखित का मिलान कीजिए :\n(a) [डेटाबेस आइकन] -> (i) वर्णन (Narrative)\n(b) [दस्तावेज़ आइकन] -> (ii) दृश्य (Visuals)\n(c) [पाई चार्ट आइकन] -> (iii) डेटा (Data)\nविकल्प :\n(A) (a)-(i), (b)-(ii), (c)-(iii)\n(B) (a)-(ii), (b)-(i), (c)-(iii)\n(C) (a)-(iii), (b)-(i), (c)-(ii)\n(D) (a)-(iii), (b)-(ii), (c)-(i)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [
+                {
+                    "description": "A matching diagram showing three icons: (a) a database cylinder with arrows pointing to it, (b) a document with text lines and a bar chart inside, (c) a pie chart.",
+                    "type": "diagram"
+                }
+            ],
+            "children": []
+        },
+        {
+            "id": "Q5.ii",
+            "text": {
+                "en": "State True or False :\nIf there is no pattern in the data, then AI development techniques may be employed.",
+                "hi": "बताइये कि यह सही है या गलत :\nयदि data में कोई pattern नहीं है तो ए आई विकास तकनीकों (AI development techniques) का उपयोग किया जा सकता है ।"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q5.iii",
+            "text": {
+                "en": "Which of the following is NOT one of the open frameworks used in AI model building ?\n(A) Tensor flow\n(B) Apple Siri\n(C) Scikit-learn\n(D) XG Boost",
+                "hi": "निम्नलिखित में से कौन सा AI model, निर्माण में प्रयुक्त खुली संरचना (open frameworks) में से नहीं है ?\n(A) टेंसर फ्लो (Tensor flow)\n(B) एप्पल सिरी (Apple Siri)\n(C) सीकिट लर्न (Scikit-learn)\n(D) एक्स जी बूस्ट (XG Boost)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q5.iv",
+            "text": {
+                "en": "Design thinking is a 5-stage process. Which of the following is the first stage and last stage respectively ?\n(A) Empathize, Test\n(B) Empathize, Prototype\n(C) Define, Prototype\n(D) Define, Test",
+                "hi": "डिजाइन थिंकिंग (Design thinking) एक 5 स्तरीय प्रक्रिया है । निम्नलिखित में से कौन क्रमशः पहली और अंतिम प्रक्रिया है ?\n(A) सहानुभूति, परीक्षण करना (Empathize, Test)\n(B) सहानुभूति, प्रोटोटाइप बनाना (Empathize, Prototype)\n(C) परिभाषित करना, प्रोटोटाइप बनाना (Define, Prototype)\n(D) परिभाषित करना, परीक्षण करना (Define, Test)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q5.v",
+            "text": {
+                "en": "State True or False :\nHuman Biases in selecting test data can adversely impact the testing phase.",
+                "hi": "सही या गलत बताइये :\nपरीक्षण आँकड़ा चयन में मानवीय पूर्वाग्रह (Human Biases) परीक्षण चरण को विपरीत रूप से प्रभावित कर सकते हैं ।"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q5.vi",
+            "text": {
+                "en": "Which of the following analytical approach should be used to show relationships ?\n(A) Predictive\n(B) Classification\n(C) Descriptive\n(D) Statistical Analysis",
+                "hi": "संबंध दिखाने के लिये निम्नलिखित में से कौन सी विश्लेषणात्मक पद्धति प्रयोग की जानी चाहिए ?\n(A) पूर्वानुमानत्मक (Predictive)\n(B) वर्गीकरण (Classification)\n(C) विवरणात्मक (Descriptive)\n(D) सांख्यिकीय विश्लेषण (Statistical Analysis)"
+            },
+            "marks": "1",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "SectionB_Part1",
+            "text": {
+                "en": "Answer any 3 out of the given 5 questions on Employability Skills. Answer each question in 20-30 words.",
+                "hi": "रोजगार कौशल पर दिए गए 5 प्रश्नों में से किन्हीं 3 प्रश्नों के उत्तर दीजिए और प्रत्येक प्रश्न का उत्तर 20-30 शब्दों से अधिक न हो ।"
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "choiceInformation": {
+                "detailedDescription": "Answer any 3 questions out of the 5 sub-questions (Q6 to Q10).",
+                "summary": "3 of 5"
+            }
+        },
+        {
+            "id": "Q6",
+            "text": {
+                "en": "There are five stages of active listening. The first stage is 'Receiving'. Write the names of other four stages.",
+                "hi": "सक्रिय श्रवण (active listening) के पाँच चरण हैं । पहला चरण 'Receiving' है । अन्य चार चरणों के नाम लिखिए ।"
+            },
+            "marks": "2",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q7",
+            "text": {
+                "en": "Explain the term : Personality Traits. Name any two parameters that describe a personality, based on Five Factor Model.",
+                "hi": "व्यक्तित्व लक्षण (Personality Traits) शब्द को स्पष्ट कीजिये । पंच कारक प्रतिमान (Five Factor Model) के आधार पर व्यक्तित्व को बताने वाले किन्हीं दो पैरामीटरों के नाम लिखिये ।"
+            },
+            "marks": "2",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q8",
+            "text": {
+                "en": "Write steps to print a presentation.",
+                "hi": "प्रेजेंटेशन (presentation) को print करने के लिए steps लिखिये ।"
+            },
+            "marks": "2",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q9",
+            "text": {
+                "en": "List any four qualities of a successful entrepreneur.",
+                "hi": "एक सफल उद्यमी के कोई चार गुण लिखिये ।"
+            },
+            "marks": "2",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q10",
+            "text": {
+                "en": "Write any two ways to minimize waste and pollution in manufacturing plants and factories.",
+                "hi": "विनिर्माण संयंत्रों और फैक्ट्रियों में बर्बादी और प्रदूषण कम करने के कोई दो तरीके बताइये ।"
+            },
+            "marks": "2",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "SectionB_Part2",
+            "text": {
+                "en": "Answer any 4 out of the given 6 questions in 20-30 words each.",
+                "hi": "दिए गए 6 प्रश्नों में से किन्हीं 4 प्रश्नों के उत्तर दीजिए और प्रत्येक प्रश्न का उत्तर 20-30 शब्दों से अधिक न हो ।"
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "choiceInformation": {
+                "detailedDescription": "Answer any 4 questions out of the 6 sub-questions (Q11 to Q16).",
+                "summary": "4 of 6"
+            }
+        },
+        {
+            "id": "Q11",
+            "text": {
+                "en": "Briefly explain the Cross Validation Procedure to validate a model.",
+                "hi": "किसी मॉडल के वैधीकरण (validate) के लिये क्रॉस वैधीकरण प्रक्रिया (Cross Validation Procedure) को संक्षेप में लिखिये ।"
+            },
+            "marks": "2",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q12",
+            "text": {
+                "en": "What is Train-Test Split Evaluation ? What are the two types of problems for which Train-Test Split Evaluation can be used ?",
+                "hi": "ट्रेन टेस्ट स्प्लिट मूल्यांकन (Train-Test Split Evaluation) क्या है ? वह दो प्रकार की समस्याएँ कौन सी हैं, जिनके लिये Train-Test Split Evaluation का प्रयोग किया जा सकता है ?"
+            },
+            "marks": "2",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q13",
+            "text": {
+                "en": "Write any two factors that make storytelling powerful and integral part of indigenous culture.",
+                "hi": "उन दो कारकों को बताइये जो कथाकारिता (storytelling) को सशक्त और स्वदेशी संस्कृति का अभिन्न अंग बनाते हैं ।"
+            },
+            "marks": "2",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q14",
+            "text": {
+                "en": "Draw a diagram to represent foundational methodology for Data Science.",
+                "hi": "डेटा विज्ञान (Data Science) के लिये बुनियादी कार्यप्रणाली (Foundational methodology) प्रदर्शित करने वाला चित्र (diagram) बनाइये ।"
+            },
+            "marks": "2",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q15",
+            "text": {
+                "en": "\"Time series decomposition involves thinking of a series as a combination of level, trend, seasonality and noise components.\" Define any two of these components.",
+                "hi": "“समय श्रृंखला अपघटन (Time series decomposition) में श्रृंखला को स्तर (level), प्रवृत्ति (trend), मौसमी (seasonality) और शोर घटकों (noise components) के संयोजन के रूप में सोचना शामिल है ।” इनमें से किन्हीं दो घटकों (components) की व्याख्या करिए ।"
+            },
+            "marks": "2",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q16",
+            "text": {
+                "en": "Give any two examples of each of the following with respect to evaluation of AI development platforms :",
+                "hi": "ए.आई. विकास प्लेटफार्म (AI development platforms) के मूल्यांकन (evaluation) के संबंध में निम्नलिखित प्रत्येक के कोई दो उदाहरण दीजिए :"
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "children": [
+                {
+                    "id": "Q16.a",
+                    "text": {
+                        "en": "Open Languages",
+                        "hi": "खुली भाषाएँ (Open Languages)"
+                    },
+                    "marks": "1",
+                    "rubric": [],
+                    "attachments": []
+                },
+                {
+                    "id": "Q16.b",
+                    "text": {
+                        "en": "Productivity Enhancing Capabilities",
+                        "hi": "उत्पादकता वर्धन क्षमताएँ (Productivity Enhancing Capabilities)"
+                    },
+                    "marks": "1",
+                    "rubric": [],
+                    "attachments": []
+                }
+            ]
+        },
+        {
+            "id": "SectionB_Part3",
+            "text": {
+                "en": "Answer any 3 out of the given 5 questions in 50-80 words each.",
+                "hi": "दिए गए 5 प्रश्नों में से किन्हीं 3 प्रश्नों के उत्तर दीजिए और प्रत्येक प्रश्न का उत्तर 50-80 शब्दों से अधिक न हो ।"
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "choiceInformation": {
+                "detailedDescription": "Answer any 3 questions out of the 5 sub-questions (Q17 to Q21).",
+                "summary": "3 of 5"
+            }
+        },
+        {
+            "id": "Q17",
+            "text": {
+                "en": "List down the steps that can assist in finding compelling stories in the data sets.",
+                "hi": "उन कदमों की सूची बनाइये जो data sets में सम्मोहक कहानियाँ (compelling stories) प्राप्त करने में सहायता कर सकते हैं ।"
+            },
+            "marks": "4",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q18",
+            "text": {
+                "en": "",
+                "hi": ""
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "children": [
+                {
+                    "id": "Q18.a",
+                    "text": {
+                        "en": "What is a loss function ? Write the two categories of loss functions.",
+                        "hi": "लॉस फंक्शन (Loss function) क्या है ? लॉस फंक्शन (Loss functions) की दो श्रेणियाँ लिखिये ।"
+                    },
+                    "marks": "2",
+                    "rubric": [],
+                    "attachments": []
+                },
+                {
+                    "id": "Q18.b",
+                    "text": {
+                        "en": "Explain, with an example, when to use MSE as the loss function.",
+                        "hi": "उदाहरण के साथ स्पष्ट कीजिये कि कब MSE का प्रयोग लॉस फंक्शन (loss function) के रूप में किया जा सकता है ।"
+                    },
+                    "marks": "2",
+                    "rubric": [],
+                    "attachments": []
+                }
+            ]
+        },
+        {
+            "id": "Q19",
+            "text": {
+                "en": "Explain the following stages of every AI project life-cycle :",
+                "hi": "प्रत्येक ए.आई. परियोजना जीवन-चक्र (AI project life-cycle) के निम्नलिखित स्तरों को स्पष्ट कीजिये :"
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "children": [
+                {
+                    "id": "Q19.a",
+                    "text": {
+                        "en": "Requirements Analysis",
+                        "hi": "आवश्यकता विश्लेषण (Requirements Analysis)"
+                    },
+                    "marks": "2",
+                    "rubric": [],
+                    "attachments": []
+                },
+                {
+                    "id": "Q19.b",
+                    "text": {
+                        "en": "Building the Model",
+                        "hi": "मॉडल निर्माण (Building the Model)"
+                    },
+                    "marks": "2",
+                    "rubric": [],
+                    "attachments": []
+                }
+            ]
+        },
+        {
+            "id": "Q20",
+            "text": {
+                "en": "Picking an Analytic Approach to solve a problem is based on the type of question. Explain the given statement with suitable examples.",
+                "hi": "किसी प्रश्न या समस्या को हल करने के लिये कोई विश्लेषणात्मक तरीका चुनना प्रश्न की किस्म पर निर्भर करता है । उपर्युक्त कथन को उचित उदाहरणों के साथ स्पष्ट कीजिए ।"
+            },
+            "marks": "4",
+            "rubric": [],
+            "attachments": [],
+            "children": []
+        },
+        {
+            "id": "Q21",
+            "text": {
+                "en": "",
+                "hi": ""
+            },
+            "marks": "infer from children and choice description",
+            "rubric": [],
+            "attachments": [],
+            "children": [
+                {
+                    "id": "Q21.a",
+                    "text": {
+                        "en": "How do good stories emerge ?",
+                        "hi": "अच्छी कहानियाँ कैसे उत्पन्न होती हैं ?"
+                    },
+                    "marks": "2",
+                    "rubric": [],
+                    "attachments": []
+                },
+                {
+                    "id": "Q21.b",
+                    "text": {
+                        "en": "Which of the following is a better data story ? Give reasons.",
+                        "hi": "निम्नलिखित में से कौन बेहतर data story है ? उसके कारण बताइये ।"
+                    },
+                    "marks": "2",
+                    "rubric": [],
+                    "attachments": [
+                        {
+                            "description": "Two line graphs comparing 'Least Forest Area Lost from 2001-22' and 'Max. Growth in Gross State Domestic Product (GSDP) from 2001-22' across various Indian states (Arunachal Pradesh, Assam, Karnataka, Kerala, Manipur, Meghalaya, Mizoram, Nagaland, Odisha, Tripura).",
+                            "type": "graph"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "globalChoices": []
+}

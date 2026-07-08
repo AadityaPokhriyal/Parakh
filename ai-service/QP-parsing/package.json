@@ -11,9 +11,12 @@
     "start": "nodemon ./src/index.js"
   },
   "dependencies": {
+    "@google/genai": "^2.10.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "file-type": "^22.0.1",
     "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
     "nodemon": "^3.1.14"
   }
 }

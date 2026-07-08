@@ -1,15 +1,17 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
+import multer from 'multer';
+
+import parseQuestionPaper from './ai.js';
+import validateFileType from './validFile.js'
+
 dotenv.config();
+const upload = multer({ storage: multer.memoryStorage() });
 
 const app=express();
 const port=process.env.PORT || 3000;
 
-
-//algo to be used in JWT authentication RS256
-
-
+app.post('/api/qp',upload.array('QP',15),validateFileType,parseQuestionPaper);
 
 app.listen(port,()=>{
     console.log(`Listening to port ${port}...`);

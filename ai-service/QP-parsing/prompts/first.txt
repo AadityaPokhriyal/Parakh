@@ -1,0 +1,264 @@
+You are given a PDF of a question paper.
+Your task is:
+
+Read the question paper.
+Evaluate OCR quality and paper clarity.
+Extract information into the EXACT JSON structure below.
+Follow ALL rules strictly.
+Return VALID JSON ONLY.
+Never explain anything outside JSON.
+
+
+# RULES:
+-If there is any quotation mark like double quotes or single quote in the question paper USE escape character (backslash) '\'
+on it while parsing.
+
+-If node has NO children:
+Write the marks extracted from question as following example
+"marks":"2"
+
+-If node HAS children:
+DO NOT calculate marks.
+DO NOT duplicate marks.
+Instead write:
+"marks":"infer from children and choice description"
+
+-attachments
+Possible structures:
+Diagram:
+{
+"type":"diagram",
+"description":"Detailed description"
+}
+Table:
+{
+"type":"table",
+"description":"",
+"headers":[],
+"rows":[]
+}
+-children
+-Recursive structure.
+-Unlimited nesting allowed.
+
+# STRICT STRUCTURE RULES
+
+## RULE 1:
+-Parent nodes are organizational containers only.
+-If content exists entirely inside children:
+-Parent text MUST be empty.
+-Correct:
+{
+"id":"Q5",
+"text":"",
+"children":[
+{
+"id":"Q5.a",
+"text":"Name the process shown below and define it:",
+...
+}
+]
+}
+-Wrong:
+{
+"id":"Q5",
+"text":"(a) Name process ... (b)...",
+...
+}
+
+## RULE 2:
+-If a question contains (a),(b),(c), OR (i),(ii),(iii) or any other numbering style, create child nodes.
+-Do NOT duplicate child text into parent.
+-Wrong:
+Q1.text = full question text
+Q1.a.text = repeated text
+Correct:
+Q1.text=""
+Q1.a.text="..."
+Q1.b.text="..."
+
+## RULE 3:
+-Parent text exists ONLY when there is actual shared text before children.
+
+### Correct Example:
+Q14.text="Explain the following in brief:"
+Q14.children:
+Q14.a.text="What is JSON?"
+Q14.b.text="What is Javascript?"
+
+-Reason:
+Scenario paragraph is shared. In this example both children questions must be answered in brief.
+
+### Wrong example:
+Q14.text=""
+Q14.children:
+Q14.a.text="Explain the following in brief: What is JSON?"
+Q14.b.text="Explain the following in brief: What is Javascript?"
+this example is wrong.
+
+## RULE 4:
+-Attachments belong to the lowest relevant node.
+-Wrong:
+Q5.attachments=[diagram]
+-Correct:
+Q5.a.attachments=[diagram]
+because diagram belongs only to part a.
+
+## RULE 5:
+-Never move attachments upward.
+-Never dilute attachments to parent.
+
+## RULE 6:
+-"OR" creates choice between sibling branches.
+-if "OR" is given, evaluate choices on the basis of indentation of the questions. If indentation is not proper then
+evaluate choices on the basis of marks provided.
+Also many types of choices can be given in question like using "OR", using "any one", "any two" etc.
+Evaluate choices and mention it in the choiceInformation key.
+
+-Example:
+Q1 Attempt any one of the following: (4)
+a) What is Javascript (2)
+b) What is JSON (2)
+
+choice is between Q1.a and Q1.b.
+reason:Q1 shared text specifies the "any one" condition.
+
+-Example 2:
+Q1 Explain:
+    a) What is Javascript (2)
+    b) What is JSON (2)
+    OR
+Q2 Solve:
+    a) 1+2/4%4//2 (2)
+    b) 9-2//2%7 (2)
+
+choice is between Q1 and Q2
+reason: Due to indentation or if indentation is improper then evaluated due to Q1 and Q2 having equal marks.
+
+## RULE 7:
+If question hierarchy is:
+Q1
+(a)
+(i)
+then structure MUST be:
+{
+"id":"Q1",
+"text":"",
+"children":[
+{
+"id":"Q1.a",
+"text":"",
+"children":[
+{
+"id":"Q1.a.i",
+"text":"actual question"
+}
+]
+}
+]
+}
+Intermediate levels without actual text remain empty.
+
+## RULE 8:
+children must be []
+Never null
+
+## RULE 9:
+attachments must be []
+Never null
+
+## RULE 10:
+-Never invent missing text.
+-Add warning for unreadable content:
+example-"Question 5 image unclear"
+
+## RULE 11:
+Return JSON only.
+No markdown.
+No explanation.
+No surrounding text.
+
+---
+
+# JSON FIELD DEFINITIONS
+
+-paperMetadata
+General information of paper.
+
+-instructions
+Preserve exactly as written.
+One instruction per array item.
+
+-parsingStatus.success
+true if extraction mostly reliable.
+
+-paperClarity values:
+clear
+partially_clear
+unclear
+
+-confidence [0 to 1] inclusive:
+0 → impossible extraction
+1 → highly reliable extraction
+
+-errors
+Critical extraction failures.
+
+-warnings
+Non-fatal extraction issues.
+
+-id
+Use human-readable hierarchy:
+Q1
+Q1.a
+Q1.a.i
+Q1.a.i.A
+
+-ruberic
+Always return [].
+Must exist in every question node including nested child nodes.
+
+-text
+IMPORTANT INSTRUCTION:
+Preserve exact OCR text.
+Never paraphrase.
+Never correct grammar.
+Never normalize wording.
+The choiceInformation.detailedDescription must be very detailed and clear with no ambiguity.
+The choiceInformation.summary must reflect the detailedDescription correctly. use following structure as example:
+Example: 
+Any four: (Q1, Q2, Q3, Q4, Q5, Q6),
+(Q1 OR Q2), (Q3, Or Q3), (Q4.i or Q4.ii)
+
+JSON STRUCTURE:
+{
+"paperMetadata":{
+"title":"",
+"subject":"",
+"examType":"",
+"duration":"",
+"totalMarks":0,
+"instructions":[]
+},
+"parsingStatus":{
+"success":true,
+"paperClarity":"clear",
+"confidence":0.95,
+"errors":[],
+"warnings":[]
+},
+"questions":[
+{
+"id":"Q1",
+"text":"",
+"marks":"",
+"attachments":[],
+"ruberic":[],
+"children":[]
+}
+],
+"choiceInformation":{
+"detailedDescription":"",
+"summary":""
+}
+}

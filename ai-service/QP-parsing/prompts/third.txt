@@ -1,0 +1,36 @@
+You are given PDF/Images of a question paper.
+Your task is to read the question paper, evaluate OCR quality, and extract the information into the EXACT JSON structure below.
+
+Follow ALL rules strictly. Return VALID JSON ONLY. Do not wrap the JSON in markdown code blocks (e.g., do not use ```json). Never explain anything outside the JSON.
+
+# RULES:
+- If there are double quotes inside any text fields, ensure they are properly escaped using a backslash (\") to maintain valid JSON.
+- If a node has NO children: Extract the marks exactly as shown (e.g., "marks":"2").
+- If a node HAS children: DO NOT calculate or duplicate marks. Instead, write exactly: "marks":"infer from children and choice description"
+- Attachments possible structures:
+  attachments: {"type":"Type of attachment (e.g. diagram, table, graph)", "description":"Detailed description"}
+- Children: Use hierarchy defined by response schema. Always return an empty array `[]` in case of no children, never `null`.
+- Attachments: Always return an empty array `[]` if no attachment exists, never `null`.
+- Never omit a field defined in the response schema. If information is unavailable, return the appropriate empty value: "", [], 0, false depending on the field type.
+
+# STRICT STRUCTURE RULES
+## RULE 1: Parent nodes without unique text must have empty strings for all language tags inside the text object (e.g., `"text": {"en": "", "hi": ""}`). Do not duplicate child text into the parent.
+## RULE 2: Parent text exists ONLY when there is actual shared text/context before children (e.g., Paragraphs or "Explain in brief:").
+## RULE 3: Attachments belong to the lowest relevant node. Never move them upward to a parent.
+## RULE 4: "OR", "any one", "any two" etc conditions create choices. Evaluate choices based on layout/indentation or marks. Document this in the `choiceInformation` object inside that specific question node. The `choiceInformation` object must contain choice information about its immediate children only and no information about interchoices. If no local choices exist, leave fields empty.
+## RULE 5: A `globalChoices` array will be used for interchoices between independent questions. Use the `targetNodes` key to list the IDs of the top-level questions involved in the choice. Other keys will be same as that of choiceInformation object.
+## RULE 6: Keep strict hierarchy (Q1 -> Q1.a -> Q1.a.i). Intermediate levels without actual text remain empty strings `""` inside their respective language keys.
+## RULE 7: Never invent missing text. If unreadable, add a clear note in the `"warnings"` array (e.g., "Question 5 image unclear").
+
+---
+
+# JSON FIELD DEFINITIONS
+- paperMetadata: General information of the paper. Use empty strings (or 0 for totalMarks) if unavailable.
+- instructions: instruction text contains the languages defined by the response schema (currently en and hi).
+- parsingStatus: Success flag (true(paper can be extracted into meaningful hierarchy)/false(paper cannot be extracted into meaningful hierarchy)), paperClarity ("clear", "partially_clear", "unclear"), confidence score (0 to 1) inclusive, (0 reflects unreadable and OCR cannot be done) and (1 reflects OCR can be done very easily and confidently) , and arrays are used for errors/warnings.
+- id: Human-readable hierarchy (e.g., Q1, Q1.a, Q1.a.i, Q2.b, Q5.c.ii).
+- rubric: Always return an array `[]`.
+- text: Text contains the languages defined by the response schema (currently en and hi). Never paraphrase, correct grammar, or normalize wording. Preserve spelling mistakes exactly as printed.
+- choiceInformation: Handles child-level choices. Contains `detailedDescription` and a formulaic `summary`.
+- globalChoices: Array of objects for macro-level choices between independent questions; contains `targetNodes` (IDs involved), `detailedDescription` (clear logic), and `summary` (a short standardized summary), or `[]` if no global choices exist.
+  

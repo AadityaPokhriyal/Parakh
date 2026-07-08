@@ -13,7 +13,7 @@ const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "http://localhost:8000";
  */
 const parseQuestionPaper = async (pdfBuffer, originalFilename) => {
   const formData = new FormData();
-  formData.append("file", pdfBuffer, {
+  formData.append("QP", pdfBuffer, {
     filename: originalFilename,
     contentType: "application/pdf",
   });
@@ -27,7 +27,7 @@ const parseQuestionPaper = async (pdfBuffer, originalFilename) => {
       },
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
-      timeout: 120000, // 2 minutes timeout for AI processing
+      timeout: 300000, // 2 minutes timeout for AI processing
     }
   );
 
@@ -36,5 +36,4 @@ const parseQuestionPaper = async (pdfBuffer, originalFilename) => {
 };
 
 module.exports = { parseQuestionPaper };
-
 

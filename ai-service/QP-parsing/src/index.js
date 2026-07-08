@@ -11,7 +11,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 const app=express();
 const port=process.env.PORT || 3000;
 
-app.post('/api/qp',upload.array('QP',15),validateFileType,parseQuestionPaper);
+app.post('/ai/parse-question-paper',upload.array('QP',15),validateFileType,parseQuestionPaper);
 
 app.listen(port,()=>{
     console.log(`Listening to port ${port}...`);

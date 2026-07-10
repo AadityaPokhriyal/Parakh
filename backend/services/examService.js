@@ -10,6 +10,14 @@ const supabase = require("../config/supabase");
  * @returns {Object} The inserted record with its generated ID
  */
 const storeExamPaper = async (parsedData, pdfFilename) => {
+  if (!supabase) {
+    const configError = new Error(
+      "Database configuration is missing. Supabase is not configured on this server."
+    );
+    configError.statusCode = 500;
+    throw configError;
+  }
+
   const { data, error } = await supabase
     .from("exam_papers")
     .insert({

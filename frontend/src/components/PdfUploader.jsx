@@ -1,7 +1,9 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import tempJson from "../tempMockData.json";
 
 export default function PdfUploader() {
+  const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [dragActive, setDragActive] = useState(false);
   const [uploadStatus, setUploadStatus] = useState("idle"); // idle | uploading | success | error
@@ -146,6 +148,7 @@ export default function PdfUploader() {
   };
 
   // Reset the state to upload a new file
+
   const handleReset = () => {
     setFiles([]);
     setUploadStatus("idle");
@@ -154,6 +157,10 @@ export default function PdfUploader() {
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+  };
+
+  const handleTestStep2 = () => {
+    navigate("/review", { state: tempJson });
   };
 
   // Compute summary for display card
@@ -168,6 +175,9 @@ export default function PdfUploader() {
       <div style={styles.card}>
         <h2 style={styles.title}>Upload Question Paper</h2>
         <p style={styles.subtitle}>Upload your exam PDF or images for automated AI parsing</p>
+        <button type="button" onClick={handleTestStep2} style={{...styles.submitButton, backgroundColor: '#10b981', marginBottom: '16px'}}>
+          Test Step 2 (Mock Data)
+        </button>
 
         <form onSubmit={uploadPdfFile} style={styles.form}>
           <input

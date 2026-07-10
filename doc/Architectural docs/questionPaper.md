@@ -39,6 +39,12 @@ The parsed question paper is represented as a single JSON object structured as f
         }
       ],
       "ruberic": ["Array - Marking criteria or grading rubric guidelines (always return [] initially)"],
+      "options": [
+        {
+          "optionId": "String - Identifier for the option (e.g., 'A', 'B')",
+          "text": "Object or String - Exact OCR text of the option"
+        }
+      ],
       "children": ["Recursive Array - List of child sub-questions following the same structure"]
     }
   ],
@@ -78,6 +84,9 @@ A recursive tree structure containing the actual questions:
   * For **parent nodes** (has children): Must write `"infer from children and choice description"`. Do not aggregate or duplicate marks.
 * **`attachments`**: Contains associated visual elements (e.g., `diagram` or `table` structures).
 * **`ruberic`**: Mapped marking criteria (always initialized to `[]`).
+* **`options`**: Array of multiple choice options for MCQ questions. Always initialized to `[]` if no options are present.
+  * **`optionId`**: Identifier for the option (e.g., `"A"`, `"B"`, `"1"`, `"2"`).
+  * **`text`**: Exact text of the given option.
 * **`children`**: Recursive list of sub-questions. Must be `[]` (never `null`) if there are no sub-questions.
 
 ### 4. `choiceInformation`
@@ -110,5 +119,6 @@ To ensure a deterministic, machine-readable tree structure, the following rules 
 ### 🧹 Integrity & Null Checks
 * **Rule 8 (Children Array)**: The `children` property must always be an array `[]`. It must **never** be `null`.
 * **Rule 9 (Attachments Array)**: The `attachments` property must always be an array `[]`. It must **never** be `null`.
-* **Rule 10 (Text Fidelity)**: Never invent or modify text. If a question or diagram is unreadable, preserve the clarity state and append a warning to the `warnings` array (e.g., `"Question 5 image unclear"`).
-* **Rule 11 (Strict JSON Output)**: Extractor output must be valid JSON only. No surrounding markdown, explanation, or conversational text.
+* **Rule 10 (Options Array)**: The `options` property must always be an array `[]`. It must **never** be `null`.
+* **Rule 11 (Text Fidelity)**: Never invent or modify text. If a question or diagram is unreadable, preserve the clarity state and append a warning to the `warnings` array (e.g., `"Question 5 image unclear"`).
+* **Rule 12 (Strict JSON Output)**: Extractor output must be valid JSON only. No surrounding markdown, explanation, or conversational text.

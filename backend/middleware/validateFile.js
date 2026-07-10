@@ -46,6 +46,7 @@ async function validateFileType(req,res,next){
         }
     }
     catch(err){
+        console.error("Error in validateFileType:", err);
         const errStatus = Number.isInteger(err.status) ? err.status : 500;
         return res.status(errStatus).json({
                     success:false,

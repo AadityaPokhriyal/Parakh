@@ -10,18 +10,30 @@ from pydantic_models.questions_schema_model import QuestionPaper
 
 import os
 import logging
+from dotenv import load_dotenv
 
+
+# logs setup
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 )
 logger = logging.getLogger(__name__)
 
+# env setup
+load_dotenv()
+
+# fastapi setup
 app = FastAPI()
 
-client = genai.Client(api_key = os.getenv("GEMINI_API_KEY"))
+# gemini sdk setup
+client = genai.Client(api_key = os.getenv("GEMINI_API_KEY"));
 logger.info("client loaded")
 
+
+
+
+# ENDPOINTS
 @app.get('/')
 def status():
     return {"messege": "api is running"}

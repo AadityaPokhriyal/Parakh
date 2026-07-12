@@ -68,7 +68,10 @@ Parakh/
 │
 ├── ai-service/                # AI Microservices (Gemini API integrations)
 │   ├── QP-parsing/            # Question Paper JSON schema parser (Node.js)
-│   │   ├── controllers/       # Handles prompt building and Gemini file processing
+│   │   ├── controllers/       # Handles Gemini file parsing logic
+│   │   ├── middlewares/       # File upload and validation middleware
+│   │   ├── prompts/           # Multi-shot prompts for structured output
+│   │   ├── schemas/           # JSON schema files for parsed output
 │   │   ├── src/index.js       # Express server running on Port 3000
 │   │   └── package.json
 │   │

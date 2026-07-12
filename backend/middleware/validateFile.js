@@ -1,3 +1,5 @@
+// Validates the uploaded PDF file or image files.
+
 let fileTypeModule;
 
 async function getFileTypeFromBuffer(buffer) {
@@ -53,7 +55,12 @@ async function validateFileType(req,res,next){
                     error:"Internal Error from validateFile.js"
             });
     }
-    
+    //sort in original ascending order of indexes as arranged in frontend.
+    req.files.sort((file1,file2)=>{
+        const index1=parseInt(file1.originalname.split('_')[0],10);
+        const index2=parseInt(file2.originalname.split('_')[0],10);
+        return index1-index2;
+    });
     next();
 }
 

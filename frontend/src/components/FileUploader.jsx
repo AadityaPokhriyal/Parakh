@@ -1,8 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import tempJson from "../tempMockData.json";
+import { jsPDF } from "jspdf";
 
-export default function PdfUploader() {
+export default function FileUploader() {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [dragActive, setDragActive] = useState(false);
@@ -10,7 +11,70 @@ export default function PdfUploader() {
   const [errorMessage, setErrorMessage] = useState("");
   const [responseData, setResponseData] = useState(null);
   const fileInputRef = useRef(null);
+  const [previewUrls, setPreviewUrls] = useState([]);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [viewerActiveIndex, setViewerActiveIndex] = useState(0);
+  const dragItem = useRef(null);
   const backendUrl = `${import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"}/api/exams/upload-paper`;
+
+  // Handle Object URL generation and cleanup
+  useEffect(() => {
+    const urls = files.map((file) => URL.createObjectURL(file));
+    const handle = setTimeout(() => {
+      setPreviewUrls(urls);
+    }, 0);
+    return () => {
+      clearTimeout(handle);
+      urls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [files]);
+
+  // Keep the hidden input file list in sync with files state
+  useEffect(() => {
+    if (fileInputRef.current) {
+      const dataTransfer = new DataTransfer();
+      files.forEach((file) => dataTransfer.items.add(file));
+      fileInputRef.current.files = dataTransfer.files;
+    }
+  }, [files]);
+
+  // Drag and drop sorting handlers for images
+  const handleDragStart = (e, index) => {
+    dragItem.current = index; //whichever image we are dragging is set dragItem.current so that rerender doesnt occur.
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleDragEnter = (e, targetIndex) => {
+    e.preventDefault();
+    const sourceIndex = dragItem.current; //start index of image we are dragging right now is source index.
+    if (sourceIndex === null || sourceIndex === undefined || sourceIndex === targetIndex) return;
+
+    const listCopy = [...files];
+    const temp = listCopy[sourceIndex];
+    listCopy.splice(sourceIndex, 1); //remove File object at source index whatever we are dragging
+    listCopy.splice(targetIndex, 0, temp); //place the dragged object at targetIndex.
+
+    dragItem.current = targetIndex; // when dragged to particular index set current to targetIndex.
+    // console.log(listCopy); //used to verify that File Object list ordering is correct or not.
+    setFiles(listCopy);
+  };
+
+  const handleDragEnd = () => {
+    dragItem.current = null;
+  };
+
+  const removeFileAtIndex = (indexToRemove) => {
+    const updatedFiles = files.filter((_, index) => index !== indexToRemove);
+    setFiles(updatedFiles);
+    if (updatedFiles.length === 0) {
+      handleReset();
+    }
+  };
+
+  const openViewer = (index) => {
+    setViewerActiveIndex(index);
+    setIsViewerOpen(true);
+  };
 
   // Handle drag events
   const handleDrag = (e) => {
@@ -103,45 +167,80 @@ export default function PdfUploader() {
   };
 
   // Send the PDF/Images to the backend
-  const uploadPdfFile = async (e) => {
+  const uploadFile = async (e) => {
     e.preventDefault();
     if (files.length === 0) return;
 
+    // 1. Create a local variable holding the files we want to send
+    let filesToUpload = [...files]; 
+
+    if (files.length > 15) {
+      console.log("Converting images to pdf...");
+      const doc = new jsPDF();
+      const readFileAsDataURL = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+          reader.readAsDataURL(file);
+        });
+      };
+
+      try {
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          if (!file.type.startsWith("image/")) continue;
+
+          const imgData = await readFileAsDataURL(file);
+          if (i > 0) doc.addPage();
+          doc.addImage(imgData, file.type.split('/')[1].toUpperCase(), 10, 10, 190, 277,undefined,'FAST');
+        }
+
+        const pdfBlob = doc.output("blob");
+        const pdfFile = new File([pdfBlob], "memory_doc.pdf", { type: "application/pdf" });
+        console.log("Size of generated pdf: ",formatFileSize(pdfFile.size));
+        setFiles([pdfFile]); // Updates UI state for later
+        resetStatus();
+
+        // 2. Override the local variable with the freshly created PDF file
+        filesToUpload = [pdfFile]; 
+
+      } catch (error) {
+        console.error("Error generating client-side PDF:", error);
+        setErrorMessage("Failed to compile images into a PDF.");
+        setUploadStatus("error");
+        return; // Stop execution if PDF creation fails
+      }
+    }
+
+    // 3. The rest of your network code now runs smoothly for BOTH use cases
     setUploadStatus("uploading");
     setErrorMessage("");
 
     const formData = new FormData();
 
-    files.forEach(file => {
-      formData.append("files", file);
+    // 4. Loop through the local variable, NOT the stale React state
+    filesToUpload.forEach((file, index) => {
+      formData.append("files", file, `${index}_${file.name}`);
     });
 
     try {
-      console.log(`Sending POST request to: ${backendUrl}`);
       const response = await fetch(backendUrl, {
         method: "POST",
         body: formData,
-        // Content-Type header must NOT be set manually when uploading FormData. 
-        // The browser will automatically set it to multipart/form-data with the correct boundary.
       });
 
-      console.log("Raw Fetch Response Object:", response);
       const data = await response.json();
-      console.log("Parsed Response JSON Data:", data);
-
-     if (response.ok && data.success) {
+      if (response.ok && data.success) {
         setUploadStatus("success");
         setResponseData(data);
-
-           navigate("/review", {
-              state: data,
-             });
-        }   else {
-          setUploadStatus("error");
-          setErrorMessage(data.error || `Server responded with status ${response.status}`);
-        }
+        navigate("/review", { state: data });
+      } else {
+        setUploadStatus("error");
+        setErrorMessage(data.error || `Server responded with status ${response.status}`);
+      }
     } catch (error) {
-      console.error("Network or parsing error:", error);
+      console.error("Network error:", error);
       setUploadStatus("error");
       setErrorMessage(error.message || "Failed to connect to the backend server.");
     }
@@ -179,7 +278,7 @@ export default function PdfUploader() {
           Test Step 2 (Mock Data)
         </button>
 
-        <form onSubmit={uploadPdfFile} style={styles.form}>
+        <form onSubmit={uploadFile} style={styles.form}>
           <input
             ref={fileInputRef}
             type="file"
@@ -232,16 +331,25 @@ export default function PdfUploader() {
           {files.length > 0 && (
             <div style={styles.fileDetailsCard}>
               <div style={styles.fileDetailsRow}>
-                <div style={{
-                  ...styles.pdfBadge, 
-                  backgroundColor: isPdf ? "rgba(239, 68, 68, 0.1)" : "rgba(59, 130, 246, 0.1)",
-                  borderColor: isPdf ? "rgba(239, 68, 68, 0.2)" : "rgba(59, 130, 246, 0.2)"
-                }}>
+                <div 
+                  style={{
+                    ...styles.pdfBadge, 
+                    backgroundColor: isPdf ? "rgba(239, 68, 68, 0.1)" : "rgba(59, 130, 246, 0.1)",
+                    borderColor: isPdf ? "rgba(239, 68, 68, 0.2)" : "rgba(59, 130, 246, 0.2)",
+                    cursor: "pointer"
+                  }}
+                  onClick={() => openViewer(0)}
+                  title="Click to view file"
+                >
                   <span style={{...styles.pdfBadgeText, color: isPdf ? "#ef4444" : "#3b82f6"}}>
                     {isPdf ? "PDF" : "IMG"}
                   </span>
                 </div>
-                <div style={styles.fileMeta}>
+                <div 
+                  style={{ ...styles.fileMeta, cursor: "pointer" }} 
+                  onClick={() => openViewer(0)}
+                  title="Click to view file"
+                >
                   <p style={styles.fileName}>{displayTitle}</p>
                   <p style={styles.fileSize}>{formatFileSize(totalSize)}</p>
                 </div>
@@ -268,6 +376,46 @@ export default function PdfUploader() {
                   </button>
                 )}
               </div>
+
+              {/* Grid of image thumbnails if uploading images */}
+              {!isPdf && (
+                <div style={styles.thumbnailGrid}>
+                  {files.map((file, index) => (
+                    <div
+                      key={index}
+                      draggable={uploadStatus !== "uploading"}
+                      onDragStart={(e) => handleDragStart(e, index)}
+                      onDragOver={(e) => e.preventDefault()}
+                      onDragEnter={(e) => handleDragEnter(e, index)}
+                      onDragEnd={handleDragEnd}
+                      onClick={() => openViewer(index)}
+                      style={styles.thumbnailWrapper}
+                      title="Drag to reorder, click to view"
+                    >
+                      <img
+                        src={previewUrls[index]}
+                        alt={`page-${index + 1}`}
+                        draggable={false}
+                        style={styles.thumbnailImage}
+                      />
+                      <div style={styles.thumbnailIndex}>{index + 1}</div>
+                      {uploadStatus !== "uploading" && (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            removeFileAtIndex(index);
+                          }}
+                          style={styles.thumbnailDelete}
+                          title="Remove image"
+                        >
+                          &times;
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {/* Progress bar for upload */}
               {uploadStatus === "uploading" && (
@@ -360,6 +508,73 @@ export default function PdfUploader() {
           </div>
         </form>
       </div>
+
+      {/* Fullscreen View List Screen Modal */}
+      {isViewerOpen && (
+        <div style={styles.viewerOverlay} onClick={() => setIsViewerOpen(false)}>
+          <div style={styles.viewerContainer} onClick={(e) => e.stopPropagation()}>
+            {/* Header / Close Button */}
+            <button
+              type="button"
+              style={styles.viewerCloseButton}
+              onClick={() => setIsViewerOpen(false)}
+              title="Close viewer"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+
+            {/* Main Content Area */}
+            <div style={styles.viewerContent}>
+              {files[viewerActiveIndex] && (
+                files[viewerActiveIndex].type === "application/pdf" || files[viewerActiveIndex].name.endsWith(".pdf") ? (
+                  <iframe
+                    src={previewUrls[viewerActiveIndex]}
+                    style={styles.viewerPdf}
+                    title="PDF Full Preview"
+                  />
+                ) : (
+                  <img
+                    src={previewUrls[viewerActiveIndex]}
+                    style={styles.viewerImage}
+                    alt={`Preview element ${viewerActiveIndex + 1}`}
+                  />
+                )
+              )}
+            </div>
+
+            {/* Bottom-Center Index Navigation Buttons */}
+            <div style={styles.viewerNavigation}>
+              {files.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => setViewerActiveIndex(index)}
+                  style={{
+                    ...styles.viewerNavButton,
+                    ...(viewerActiveIndex === index
+                      ? styles.viewerNavButtonActive
+                      : styles.viewerNavButtonInactive),
+                  }}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -565,6 +780,172 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     gap: "8px",
+  },
+  thumbnailGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(75px, 1fr))",
+    gap: "12px",
+    marginTop: "12px",
+    maxHeight: "260px",
+    overflowY: "auto",
+    padding: "4px",
+    borderTop: "1px solid var(--border)",
+    paddingTop: "12px",
+  },
+  thumbnailWrapper: {
+    position: "relative",
+    width: "75px",
+    height: "75px",
+    borderRadius: "8px",
+    overflow: "hidden",
+    border: "2px solid var(--border)",
+    cursor: "grab",
+    transition: "transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.05)",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+  },
+  thumbnailImage: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+  },
+  thumbnailIndex: {
+    position: "absolute",
+    bottom: "2px",
+    left: "2px",
+    backgroundColor: "rgba(0, 0, 0, 0.65)",
+    color: "#fff",
+    fontSize: "10px",
+    fontWeight: "bold",
+    padding: "1px 5px",
+    borderRadius: "4px",
+    pointerEvents: "none",
+  },
+  thumbnailDelete: {
+    position: "absolute",
+    top: "2px",
+    right: "2px",
+    backgroundColor: "rgba(239, 68, 68, 0.85)",
+    color: "#fff",
+    border: "none",
+    width: "16px",
+    height: "16px",
+    borderRadius: "50%",
+    fontSize: "12px",
+    lineHeight: "1",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    transition: "background-color 0.15s ease",
+  },
+  viewerOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.85)",
+    backdropFilter: "blur(8px)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 9999,
+  },
+  viewerContainer: {
+    position: "relative",
+    width: "90vw",
+    height: "90vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
+  },
+  viewerCloseButton: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    border: "none",
+    color: "#fff",
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    transition: "background-color 0.2s ease, transform 0.1s ease",
+    zIndex: 10001,
+  },
+  viewerContent: {
+    width: "100%",
+    height: "calc(100% - 100px)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  viewerImage: {
+    maxWidth: "100%",
+    maxHeight: "100%",
+    objectFit: "contain",
+    borderRadius: "8px",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
+  },
+  viewerPdf: {
+    width: "100%",
+    height: "100%",
+    border: "none",
+    borderRadius: "8px",
+    backgroundColor: "#fff",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
+  },
+  viewerNavigation: {
+    position: "absolute",
+    bottom: "20px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    display: "flex",
+    gap: "10px",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    padding: "8px 16px",
+    borderRadius: "30px",
+    maxWidth: "90%",
+    overflowX: "auto",
+    zIndex: 10000,
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+  },
+  viewerNavButton: {
+    width: "36px",
+    height: "36px",
+    borderRadius: "50%",
+    border: "none",
+    fontSize: "14px",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  viewerNavButtonActive: {
+    backgroundColor: "var(--accent)",
+    color: "#fff",
+    boxShadow: "0 0 12px var(--accent)",
+    border: "2px solid #fff",
+    transform: "scale(1.1)",
+  },
+  viewerNavButtonInactive: {
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    color: "#fff",
+    border: "1px solid rgba(255, 255, 255, 0.3)",
   },
 };
 

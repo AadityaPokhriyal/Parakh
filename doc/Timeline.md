@@ -35,17 +35,26 @@ AI based answer sheet evaluation system, dbms agent environment
 - Anshu Joined the team.
 
 8 PM meet -  Functional Points were discussed along with software design models like Sequence Diagram, Activity diagram etc 
-        Initial Roles were discussed. 
-        Raj and Jai -- Design
-        Gaurav and Anshu -- Frontend
-        Aaditya and Divyanshu -- Backend
-        The structure and roles were modified later.
+       - Initial Roles were discussed. 
+         - Raj and Jai $\rightarrow$ Design
+         - Gaurav and Anshu $\rightarrow$ Frontend
+         - Aaditya and Divyanshu $\rightarrow$ Backend
+         - The structure and roles were modified and refined later.
 
 ## 29 June, 2026
 
 - Dr. Raj Kumar was assigned to be our Team Mentor.
 
 8 PM meet - Initial Design was shown by Jai Singh Rathore, Repo Structure was discussed. Github Repository was created.
+
+- Finalized roles:
+* **Aaditya Pokhriyal** – Team Leader / Backend Developer & AI Lead
+* **Divyanshu** – AI Services Developer (Concept Originator) & Data Standardization Lead
+* **Gaurav Verma** – Backend & Integration Developer (Database Connectivity & Service Alignment) & Frontend Lead
+* **Anshu** – Frontend Developer
+* **Jai Singh Rathore** – UI/UX Designer
+* **Raj** – UI/UX Designer
+  
 
 ## 30 June, 2026
 

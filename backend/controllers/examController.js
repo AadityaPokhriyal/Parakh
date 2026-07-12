@@ -4,13 +4,13 @@ const examService = require("../services/examService");
 /**
  * Handles POST /api/exams/upload-paper
  *
- * 1. Validates the uploaded PDF file
- * 2. Sends PDF to AI service for parsing
- * 3. Returns success with parsed data (no database write here)
+ * 1. Sends validated files to AI service for parsing
+ * 2. Returns success with parsed data (no database write here)
+ * 
  */
 const uploadPaper = async (req, res, next) => {
   const filename = req.files && req.files[0] ? req.files[0].originalname : "unknown_paper.pdf";
-  console.log(`[Exam] >>> Incoming POST /api/exams/upload-paper. File: ${filename}`);
+  console.log(`[Exam] >>> Incoming POST /api/exams/upload-paper. No. of Files: ${req.files.length}`);
 
   try {
     console.log("[Exam] => Sending question paper PDF to AI Parsing Service (QP-parsing)...");
@@ -29,7 +29,10 @@ const uploadPaper = async (req, res, next) => {
       throw error;
     }
 
-    console.log(`[Exam] <<< Responding 201 Created for file: ${filename}`);
+    for(const file of req.files){
+        console.log(`[Exam] <<< Responding 201 Created for file: ${file.originalname}`);
+    }
+    console.log(parsedData);
     return res.status(201).json({
       success: true,
       message: "Question paper uploaded and parsed successfully.",

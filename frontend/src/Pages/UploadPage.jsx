@@ -1,9 +1,9 @@
-import PdfUploader from "../components/PdfUploader";
+import FileUploader from "../components/FileUploader";
 
 function UploadPage() {
   return (
     <div>
-      <PdfUploader />
+      <FileUploader />
     </div>
   );
 }

@@ -42,6 +42,13 @@ export default async function validateFileType(req,res,next){
                     message:"Internal Error as fileTypeFromBuffer"
             });
     }
-    
+    req.files.sort((file1,file2)=>{
+        const index1=parseInt(file1.originalname.split('_')[0],10);
+        const index2=parseInt(file2.originalname.split('_')[0],10);
+        return index1-index2;
+    });
+    for(const file of req.files){
+        console.log(file.originalname);
+    }
     next();
 }

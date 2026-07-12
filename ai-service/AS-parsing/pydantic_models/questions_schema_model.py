@@ -1,92 +1,128 @@
-from typing import List
+from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from typing import List, Optional
 
+from pydantic import BaseModel, ConfigDict
+
+
+# -----------------------------------------------------
+# Base model (reject unknown fields)
+# -----------------------------------------------------
+
+class StrictModel(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+
+# -----------------------------------------------------
 # Common Models
-class LocalizedText(BaseModel):
-    en: str = ""
-    hi: str = ""
+# -----------------------------------------------------
+
+class LocalizedText(StrictModel):
+    en: Optional[str] = None
+    hi: Optional[str] = None
 
 
-class Attachment(BaseModel):
-    type: str = Field(
-        description="Type of attachment such as image, table, graph, equation, diagram, etc."
-    )
-    description: str = ""
+class LocalizedStringList(StrictModel):
+    en: Optional[List[str]] = None
+    hi: Optional[List[str]] = None
 
 
-class ChoiceInformation(BaseModel):
-    detailedDescription: str = ""
-    summary: str = ""
+class ChoiceInformation(StrictModel):
+    detailedDescription: Optional[str] = None
+    summary: Optional[str] = None
 
 
-class GlobalChoice(BaseModel):
-    targetNodes: List[str] = Field(default_factory=list)
-    detailedDescription: str = ""
-    summary: str = ""
-
-# Recursive Question Model
-class Question(BaseModel):
-    id: str
-
+class Option(StrictModel):
+    optionId: str
     text: LocalizedText
 
-    marks: str = Field(
-        description="Maximum marks or 'infer from children and choice description'."
-    )
 
-    attachments: List[Attachment] = Field(default_factory=list)
-
-    rubric: List[str] = Field(
-        default_factory=list,
-        description="Marking rubric for this question."
-    )
-
-    choiceInformation: ChoiceInformation | None = None
-
-    children: List["Question"] = Field(default_factory=list)
+class MatchItem(StrictModel):
+    en: Optional[str] = None
+    hi: Optional[str] = None
 
 
-Question.model_rebuild()
+class MatchData(StrictModel):
+    matchFrom: Optional[List[MatchItem]] = None
+    matchTo: Optional[List[MatchItem]] = None
 
+
+class Attachment(StrictModel):
+    type: Optional[str] = None
+    description: Optional[str] = None
+
+
+class ChoiceDefinition(StrictModel):
+    targetNodes: Optional[List[str]] = None
+    detailedDescription: Optional[str] = None
+    summary: Optional[str] = None
+
+
+# -----------------------------------------------------
+# Question Models
+# -----------------------------------------------------
+
+
+class Question(StrictModel):
+    id: str
+    type: str
+    text: LocalizedText
+
+    options: Optional[List[Option]] = None
+    matchData: Optional[MatchData] = None
+
+    marks: str
+
+    attachments: Optional[List[Attachment]] = None
+
+    rubric: List[str]
+
+    choiceInformation: Optional[ChoiceInformation] = None
+
+    children: Optional[List[Question]] = None
+
+
+# -----------------------------------------------------
+# Section
+# -----------------------------------------------------
+
+class Section(StrictModel):
+    sectionId: str
+
+    sectionChoices: Optional[List[ChoiceDefinition]] = None
+
+    sectionInstructions: Optional[LocalizedText] = None
+
+    questions: List[Question]
+
+
+# -----------------------------------------------------
 # Metadata
-class Instructions(BaseModel):
-    en: List[str] = Field(default_factory=list)
-    hi: List[str] = Field(default_factory=list)
+# -----------------------------------------------------
+
+class PaperMetadata(StrictModel):
+    title: Optional[str] = None
+    subject: Optional[str] = None
+    examType: Optional[str] = None
+    duration: Optional[str] = None
+    totalMarks: Optional[int] = None
+    instructions: Optional[LocalizedStringList] = None
 
 
-class PaperMetadata(BaseModel):
-    title: str = ""
-    subject: str = ""
-    examType: str = ""
-    duration: str = ""
-    totalMarks: int
+class ParsingStatus(StrictModel):
+    success: Optional[bool] = None
+    paperClarity: Optional[str] = None
+    confidence: Optional[float] = None
+    errors: Optional[List[str]] = None
+    warnings: Optional[List[str]] = None
 
-    instructions: Instructions = Field(default_factory=Instructions)
 
-# Parsing Status
-class ParsingStatus(BaseModel):
-    success: bool
-
-    paperClarity: str = Field(
-        description="clear | partially_clear | unclear"
-    )
-
-    confidence: float = Field(
-        ge=0,
-        le=1
-    )
-
-    errors: List[str] = Field(default_factory=list)
-
-    warnings: List[str] = Field(default_factory=list)
-
+# -----------------------------------------------------
 # Root Model
-class QuestionPaper(BaseModel):
+# -----------------------------------------------------
+
+class QuestionPaper(StrictModel):
     paperMetadata: PaperMetadata
-
     parsingStatus: ParsingStatus
-
-    questions: List[Question] = Field(default_factory=list)
-
-    globalChoices: List[GlobalChoice] = Field(default_factory=list)
+    sections: List[Section]
+    globalChoices: List[ChoiceDefinition]

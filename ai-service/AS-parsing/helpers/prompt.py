@@ -30,6 +30,22 @@ The hierarchy defined in `questionStructure` is authoritative and MUST be follow
 * If a question identifier is completely missing from the student sheet but an answer is present, map it sequentially using `UNMAPPED_1`, `UNMAPPED_2`, etc.
 * Do not merge separated answer blocks unless structural continuity across pages is strongly supported.
 
+#### 3A. Tree Construction Rules (Mandatory)
+
+The `answerBlocks` output MUST be a recursive tree that exactly mirrors the hierarchy of `questionStructure`.
+
+Construction rules:
+
+* Every question node that exists in `questionStructure` must appear exactly once in the output tree.
+* If a node has subquestions in `questionStructure`, those subquestions MUST be placed inside that node's `children` array.
+* A child node MUST NEVER appear as a top-level element in `answerBlocks`.
+* Every answer block has exactly one parent except true root questions.
+* The order of `children` must match the order defined in `questionStructure`.
+* The `children` array recursively follows the same schema as its parent.
+* Continue nesting until the deepest level of `questionStructure` only.
+* Do not flatten nested questions into sibling answer blocks.
+* Match the exact `id` string format provided in `questionStructure` (e.g., if it uses "Q1.a", use "Q1.a"; Do not alter or reinvent the ID keys.
+
 #### 4. Optional Questions & Conflicts
 * If a student attempts mutually exclusive optional questions, use the `choiceInformation` and rules within `questionStructure` to determine validity.
 * Mark only the excess or conflicting attempts as invalid, and isolate their IDs within the `invalidAnswers` array. Do not include these invalid IDs inside the active `answerBlocks` tree or the `attemptSummary` counts.
@@ -49,4 +65,25 @@ Perform the extraction systematically using the following internal passes before
 * Pass 3: Apply rubric-based scoring or fallback academic evaluation to calculate exact values and write evaluation justifications.
 * Pass 4: Construct the final hierarchical tree matching `questionStructure`.
 * Pass 5: Validate data consistency across metadata totals and structural boundaries.
+
+### MANDATORY OUTPUT STRUCTURE REMINDER
+Your `answerBlocks` output must strictly follow a nested tree architecture. Sub-questions must NEVER sit at the root level of the array:
+
+CORRECT NESTED ARCHITECTURE EXAMPLE:
+{
+  "answerBlocks": [
+    {
+      "id": "Q1",
+      "answerSummary": "Parent question content...",
+      "children": [
+        {
+          "id": "Q1.a",
+          "answerSummary": "Child question content...",
+          "children": []
+        }
+      ]
+    }
+  ]
+}
 '''
+

@@ -96,15 +96,15 @@ async def evaluate(answer_pdf: UploadFile, question_json: UploadFile):
         store = False,
         input=[
             {
-                "type": "document",
-                "uri": uploaded_answersheet.uri,
-                "mime_type": "application/pdf"
-            },
-            {
                 "type":"document",
                 "uri": uploaded_questionJson.uri,
                 "mime_type":"application/json"
             },
+            {
+                "type": "document",
+                "uri": uploaded_answersheet.uri,
+                "mime_type": "application/pdf"
+            }, 
             {"type": "text", "text": evaluation_prompt}
         ],
         response_format = {

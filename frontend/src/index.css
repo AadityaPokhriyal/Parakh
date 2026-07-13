@@ -207,3 +207,17 @@ button {
 code {
   font-family: var(--mono);
 }
+
+.jump-btn-hover {
+  transition: all 0.2s ease-in-out;
+}
+.jump-btn-hover:hover {
+  background: rgba(139, 92, 246, 0.25) !important;
+  border-color: rgba(139, 92, 246, 0.6) !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+.jump-btn-hover:active {
+  transform: translateY(0);
+}

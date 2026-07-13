@@ -4,7 +4,6 @@
         "examType": "SUMMATIVE ASSESSMENT - II",
         "instructions": {
             "en": [
-                "Candidates must write the Code on the title page of the answer-book.",
                 "Please check that this question paper contains 16 printed pages.",
                 "Code number given on the right hand side of the question paper should be written on the title page of the answer-book by the candidate.",
                 "Please check that this question paper contains 36 questions.",
@@ -12,1587 +11,981 @@
                 "15 minute time has been allotted to read this question paper. The question paper will be distributed at 10.15 a.m. From 10.15 a.m. to 10.30 a.m., the students will read the question paper only and will not write any answer on the answer-book during this period.",
                 "The question paper comprises two Sections, A and B. You are to attempt both the sections.",
                 "All questions are compulsory.",
-                "There is no choice in any of the Questions.",
+                "There is no choice in any of the questions.",
                 "All questions of Section A and all questions of Section B are to be attempted separately.",
                 "Question numbers 1 to 3 in Section A are one-mark questions. These are to be answered in one word or in one sentence.",
-                "Question numbers 4 to 6 in Section A are two-marks questions. These are to be answered in about 30 words each.",
+                "Question numbers 4 to 6 in Section A are two-marks questions. These are to be answered in about 20 words each.",
                 "Question numbers 7 to 18 Section A are three-marks questions. These are to be answered in about 50 words each.",
                 "Question numbers 19 to 24 in Section A are five-marks questions. These are to be answered in about 70 words each.",
                 "Question numbers 25 to 33 in Section B are multiple choice questions based on practical skills. Each question is a one-mark question. You are to select one most appropriate response out of the four provided to you.",
                 "Question numbers 34 to 36 in Section B are two-marks questions based on practical skills. These are to be answered in brief."
             ],
             "hi": [
-                "परीक्षार्थी कोड को उत्तर-पुस्तिका के मुख-पृष्ठ पर अवश्य लिखें।",
                 "कृपया जाँच कर लें कि इस प्रश्न-पत्र में मुद्रित पृष्ठ 16 हैं।",
-                "प्रश्न-पत्र में दाहिने हाथ की ओर दिए गए कोड नम्बर को छात्र उत्तर-पुस्तिका के मुख-पृष्ठ पर लिखें।",
+                "प्रश्न-पत्र में दाहिने हाथ की ओर दिए गए कोड नम्बर को छात्र उत्तर-पुस्तिका के मुख पृष्ठ पर लिखें।",
                 "कृपया जाँच कर लें कि इस प्रश्न-पत्र में 36 प्रश्न हैं।",
                 "कृपया प्रश्न का उत्तर लिखना शुरू करने से पहले, प्रश्न का क्रमांक अवश्य लिखें।",
                 "इस प्रश्न-पत्र को पढ़ने के लिए 15 मिनट का समय दिया गया है। प्रश्न-पत्र का वितरण पूर्वाह्न में 10.15 बजे किया जाएगा। 10.15 बजे से 10.30 बजे तक छात्र केवल प्रश्न-पत्र को पढ़ेंगे और इस अवधि के दौरान वे उत्तर-पुस्तिका पर कोई उत्तर नहीं लिखेंगे।",
-                "इस प्रश्न पत्र को दो भागों, भाग अ और भाग ब, में बाँटा गया है। आपको दोनों भागों के प्रश्नों के उत्तर लिखने हैं।",
+                "इस प्रश्न पत्र को दो भागों, भाग अ और भाग ब, में बांटा गया है। आपको दोनों भागों के प्रश्नों के उत्तर लिखने हैं।",
                 "सभी प्रश्न अनिवार्य हैं।",
                 "पूरे प्रश्न पत्र में किसी प्रश्न में कोई चयन प्राप्त नहीं है।",
-                "आपको भाग अ और भाग ब के सभी प्रश्नों के उत्तर पृथक् पृथक् भाग के आधार पर लिखने हैं।",
+                "आपको भाग अ और भाग ब के सभी प्रश्नों के उत्तर पृथक्-पृथक् भाग के आधार पर लिखने हैं।",
                 "भाग अ के प्रश्न संख्या 1 से 3 प्रश्न एक-एक अंक के हैं। इनके उत्तर एक शब्द अथवा एक वाक्य में दें।",
-                "भाग अ के प्रश्न संख्या 4 से 6 के प्रश्न दो-दो अंकों के हैं। इनके उत्तर लगभग 30 शब्दों में देने हैं।",
+                "भाग अ के प्रश्न संख्या 4 से 6 के प्रश्न दो-दो अंकों के हैं। इनके उत्तर लगभग 20 शब्दों में देने हैं।",
                 "भाग अ के प्रश्न संख्या 7 से 18 के प्रश्न तीन-तीन अंकों के हैं। इनके उत्तर लगभग 50 शब्दों में देने हैं।",
-                "भाग अ के प्रश्न संख्या 19 से 24 के प्रश्न पाँच-पाँच अंकों के हैं। इनके उत्तर लगभग 70 शब्दों में देने हैं।",
+                "भाग अ के प्रश्न संख्या 19 से 24 के प्रश्न पांच-पांच अंकों के हैं। इनके उत्तर लगभग 70 शब्दों में देने हैं।",
                 "भाग ब के प्रश्न संख्या 25 से 33 के प्रश्न प्रयोगात्मक कौशल पर आधारित बहुविकल्पी प्रश्न हैं। प्रत्येक प्रश्न एक अंक का है। दिए गए चार विकल्पों में से आपको केवल एक सबसे उपयुक्त विकल्प चुनना है।",
                 "भाग ब के प्रश्न संख्या 34 से 36 के प्रश्न प्रयोगात्मक कौशल पर आधारित दो-दो अंकों के प्रश्न हैं। इनके उत्तर संक्षिप्त में देने हैं।"
             ]
         },
         "subject": "SCIENCE",
-        "title": "SUMMATIVE ASSESSMENT - II",
+        "title": "SUMMATIVE ASSESSMENT - II SCIENCE",
         "totalMarks": 90
     },
     "parsingStatus": {
-        "confidence": 0.98,
+        "confidence": 1,
         "errors": [],
         "paperClarity": "clear",
         "success": true,
         "warnings": []
     },
-    "questions": [
+    "sections": [
         {
-            "id": "Q1",
-            "text": {
-                "en": "Write the name and structure of an aldehyde with four carbon atoms in its molecule.",
-                "hi": "उस एल्डिहाइड का नाम और संरचना लिखिए जिसके अणु में चार कार्बन परमाणु हैं।"
-            },
-            "marks": "1",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q2",
-            "text": {
-                "en": "List two functions of ovary of human female reproductive system.",
-                "hi": "मानव मादा जनन तंत्र में अण्डाशय के दो कार्य लिखिए।"
-            },
-            "marks": "1",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q3",
-            "text": {
-                "en": "In a food chain of frog, grass, insect and snake, assign trophic level to frog.",
-                "hi": "मेंढ़क, घास, कीट और साँप की किसी आहार श्रृंखला में मेंढ़क का पोषी स्तर निर्धारित कीजिए।"
-            },
-            "marks": "1",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q4",
-            "text": {
-                "en": "The refractive indices of glass and water with respect to air are 3/2 and 4/3 respectively. If speed of light in glass is 2 × 10^8 m/s, find the speed of light in water.",
-                "hi": "वायु के सापेक्ष कांच और जल के अपवर्तनांक क्रमशः 3/2 और 4/3 हैं। यदि कांच में प्रकाश की चाल 2×10^8 m/s है, तो जल में प्रकाश की चाल परिकलित कीजिए।"
-            },
-            "marks": "2",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q5",
-            "text": {
-                "en": "List four stakeholders which may be helpful in the conservation of forests.",
-                "hi": "उन चार भागीदारों की सूची बनाइए जो वनों के संरक्षण में सहायक हो सकते हैं।"
-            },
-            "marks": "2",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q6",
-            "text": {
-                "en": "The construction of large dams leads to social and environmental problems. List two problems of each category.",
-                "hi": "बड़े बांधों के निर्माण से सामाजिक और पर्यावरणीय समस्याएं उत्पन्न होती हैं। इन दोनों श्रेणियों की दो-दो समस्याओं की सूची बनाइए।"
-            },
-            "marks": "2",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q7",
-            "text": {
-                "en": "The position of eight elements in the Modern Periodic Table is given below where atomic numbers of elements are given in the parenthesis.",
-                "hi": "आधुनिक आवर्त सारणी में आठ तत्वों की स्थितियां नीचे दिए अनुसार हैं। यहाँ तत्वों की परमाणु संख्या कोष्टक में दर्शायी गयी हैं"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [
+            "sectionId": "A",
+            "questions": [
                 {
-                    "description": "Table showing elements and their atomic numbers in the Modern Periodic Table",
-                    "type": "table"
-                }
-            ],
-            "children": [
-                {
-                    "id": "Q7.i",
+                    "type": "Theory",
+                    "id": "Q1",
                     "text": {
-                        "en": "Write the electronic configuration of Ca.",
-                        "hi": "Ca का इलेक्ट्रॉन विन्यास लिखिए।"
+                        "en": "Write the name and structure of an aldehyde with four carbon atoms in its molecule.",
+                        "hi": "उस एल्डिहाइड का नाम और संरचना लिखिए जिसके अणु में चार कार्बन परमाणु हैं।"
                     },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
+                    "marks": "1",
+                    "rubric": []
                 },
                 {
-                    "id": "Q7.ii",
+                    "type": "Theory",
+                    "id": "Q2",
                     "text": {
-                        "en": "Predict the number of valence electrons in Rb.",
-                        "hi": "Rb में संयोजी इलेक्ट्रॉनों की संख्या का अनुमान लगाइए।"
+                        "en": "List two functions of ovary of human female reproductive system.",
+                        "hi": "मानव मादा जनन तंत्र में अण्डाशय के दो कार्य लिखिए।"
                     },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
+                    "marks": "1",
+                    "rubric": []
                 },
                 {
-                    "id": "Q7.iii",
+                    "type": "Theory",
+                    "id": "Q3",
                     "text": {
-                        "en": "What is the number of shells in Sr?",
-                        "hi": "Sr में कोशों की संख्या क्या है?"
+                        "en": "In a food chain of frog, grass, insect and snake, assign trophic level to frog.",
+                        "hi": "मेंढक, घास, कीट और साँप की किसी आहार श्रृंखला में मेंढक का पोषी स्तर निर्धारित कीजिए।"
                     },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
+                    "marks": "1",
+                    "rubric": []
                 },
                 {
-                    "id": "Q7.iv",
+                    "type": "Theory",
+                    "id": "Q4",
                     "text": {
-                        "en": "Predict whether K is a metal or a non - metal.",
-                        "hi": "अनुमान लगाइए कि K धातु है अथवा अधातु।"
+                        "en": "The refractive indices of glass and water with respect to air are 3/2 and 4/3 respectively. If speed of light in glass is 2 × 10⁸ m/s, find the speed of light in water.",
+                        "hi": "वायु के सापेक्ष कांच और जल के अपवर्तनांक क्रमशः 3/2 और 4/3 हैं। यदि कांच में प्रकाश की चाल 2×10⁸ m/s है, तो जल में प्रकाश की चाल परिकलित कीजिए।"
                     },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
+                    "marks": "2",
+                    "rubric": []
                 },
                 {
-                    "id": "Q7.v",
+                    "type": "Theory",
+                    "id": "Q5",
                     "text": {
-                        "en": "Which one of these elements has the largest atom in size ?",
-                        "hi": "इन तत्वों में किसका साइज़ सबसे बड़ा है?"
+                        "en": "List four stakeholders which may be helpful in the conservation of forests.",
+                        "hi": "उन चार भागीदारों की सूची बनाइए जो वनों के संरक्षण में सहायक हो सकते हैं।"
                     },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
+                    "marks": "2",
+                    "rubric": []
                 },
                 {
-                    "id": "Q7.vi",
+                    "type": "Theory",
+                    "id": "Q6",
                     "text": {
-                        "en": "Arrange Be, Ca, Mg and Rb in the increasing order of the size of their respective atoms.",
-                        "hi": "Be, Ca, Mg और Rb को इनके परमाणु के साइज़ के बढ़ते क्रम में व्यवस्थित कीजिए।"
+                        "en": "The construction of large dams leads to social and environmental problems. List two problems of each category.",
+                        "hi": "बड़े बांधों के निर्माण से सामाजिक और पर्यावरणीय समस्याएं उत्पन्न होती हैं। इन दोनों श्रेणियों की दो-दो समस्याओं की सूची बनाइए।"
                     },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q8",
-            "text": {
-                "en": "Write three different chemical reactions showing the conversion of ethanoic acid to sodium ethanoate. Write balanced chemical equation in each case. Write the name of the reactants and the products other than ethanoic acid and sodium ethanoate in each case.",
-                "hi": "एथेनॉइक अम्ल के सोडियम एथेनॉएट में परिवर्तन को दर्शाने के लिए तीन विभिन्न अभिक्रियाओं के रासायनिक समीकरण लिखिए तथा प्रत्येक प्रकरण में इन समीकरणों को संतुलित भी कीजिए। एथेनॉइक अम्ल तथा सोडियम एथेनॉएट के अतिरिक्त अन्य सभी अभिकर्मकों और उत्पादों के नाम भी लिखिए।"
-            },
-            "marks": "3",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q9",
-            "text": {
-                "en": "An element 'X' belong to 3rd period and group 13 of the Modern Periodic Table.",
-                "hi": "कोई तत्व 'X' आधुनिक आवर्त सारणी के आवर्त 3 तथा समूह 13 में स्थित है।"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q9.a",
-                    "text": {
-                        "en": "Determine the valence electrons and the valency of ‘X’.",
-                        "hi": "'X' में संयोजकता इलेक्ट्रॉनों की संख्या तथा इसकी संयोजकता निर्धारित कीजिए।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
+                    "marks": "2",
+                    "rubric": []
                 },
                 {
-                    "id": "Q9.b",
+                    "type": "Theory",
+                    "id": "Q7",
                     "text": {
-                        "en": "Molecular formula of the compound formed when ‘X' reacts with an element 'Y' (atomic number = 8).",
-                        "hi": "'X' की तत्व 'Y' (परमाणु संख्या = 8) से अभिक्रिया द्वारा बने यौगिक का अणुसूत्र लिखिए।"
+                        "en": "The position of eight elements in the Modern Periodic Table is given below where atomic numbers of elements are given in the parenthesis.",
+                        "hi": "आधुनिक आवर्त सारणी में आठ तत्वों की स्थितियां नीचे दिए अनुसार हैं। यहाँ तत्वों की परमाणु संख्या कोष्टक में दर्शायी गयी हैं"
                     },
-                    "marks": "infer from parent",
+                    "marks": "infer from children and choice description",
                     "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
+                    "children": [
+                        {
+                            "type": "Theory",
+                            "id": "Q7.i",
+                            "text": {
+                                "en": "Write the electronic configuration of Ca.",
+                                "hi": "Ca का इलेक्ट्रॉन विन्यास लिखिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q7.ii",
+                            "text": {
+                                "en": "Predict the number of valence electrons in Rb.",
+                                "hi": "Rb में संयोजी इलेक्ट्रॉनों की संख्या का अनुमान लगाइए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q7.iii",
+                            "text": {
+                                "en": "What is the number of shells in Sr?",
+                                "hi": "Sr में कोशों की संख्या क्या है?"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q7.iv",
+                            "text": {
+                                "en": "Predict whether K is a metal or a non - metal.",
+                                "hi": "अनुमान लगाइए कि K धातु है अथवा अधातु।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q7.v",
+                            "text": {
+                                "en": "Which one of these elements has the largest atom in size ?",
+                                "hi": "इन तत्वों में किसका साइज़ सबसे बड़ा है?"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q7.vi",
+                            "text": {
+                                "en": "Arrange Be, Ca, Mg and Rb in the increasing order of the size of their respective atoms.",
+                                "hi": "Be, Ca, Mg और Rb को इनके परमाणु के साइज़ के बढ़ते क्रम में व्यवस्थित कीजिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        }
+                    ]
                 },
                 {
-                    "id": "Q9.c",
+                    "type": "Theory",
+                    "id": "Q8",
                     "text": {
-                        "en": "Write the name and formula of the compound formed when ‘X' combines with chlorine.",
-                        "hi": "'X' की क्लोरीन (CI) से अभिक्रिया द्वारा बने यौगिक का नाम और सूत्र लिखिए।"
+                        "en": "Write three different chemical reactions showing the conversion of ethanoic acid to sodium ethanoate. Write balanced chemical equation in each case. Write the name of the reactants and the products other than ethanoic acid and sodium ethanoate in each case.",
+                        "hi": "एथेनॉइक अम्ल के सोडियम एथेनॉएट में परिवर्तन को दर्शाने के लिए तीन विभिन्न अभिक्रियाओं के रासायनिक समीकरण लिखिए तथा प्रत्येक प्रकरण में इन समीकरणों को संतुलित भी कीजिए। एथेनॉइक अम्ल तथा सोडियम एथेनॉएट के अतिरिक्त अन्य सभी अभिकर्मकों और उत्पादों के नाम भी लिखिए।"
                     },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q10",
-            "text": {
-                "en": "An element 'X' has mass number 35 and number of neutrons 18. Write atomic number and electronic configuration of ‘X’. Also write group number, period number and valency of 'X'.",
-                "hi": "किसी तत्व 'X' की द्रव्यमान संख्या 35 तथा इसमें न्यूट्रॉनों की संख्या 18 है। 'X' की परमाणु संख्या और इसका इलेक्ट्रॉन-विन्यास लिखिए। 'X' की समूह संख्या, आवर्त संख्या और संयोजकता का उल्लेख भी कीजिए।"
-            },
-            "marks": "3",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q11",
-            "text": {
-                "en": "",
-                "hi": ""
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q11.a",
-                    "text": {
-                        "en": "List two reasons for the appearance of variations among the progeny formed by sexual reproduction.",
-                        "hi": "लैंगिक जनन द्वारा उत्पन्न संतति में विभिन्नता दृष्टिगोचर होने के दो कारणों की सूची बनाइए।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
+                    "marks": "3",
+                    "rubric": []
                 },
                 {
-                    "id": "Q11.b",
+                    "type": "Theory",
+                    "id": "Q9",
+                    "text": {
+                        "en": "An element 'X' belong to 3rd period and group 13 of the Modern Periodic Table.",
+                        "hi": "कोई तत्व 'X' आधुनिक आवर्त सारणी के आवर्त 3 तथा समूह 13 में स्थित है।"
+                    },
+                    "marks": "infer from children and choice description",
+                    "rubric": [],
+                    "children": [
+                        {
+                            "type": "Theory",
+                            "id": "Q9.a",
+                            "text": {
+                                "en": "Determine the valence electrons and the valency of ‘X’.",
+                                "hi": "'X' में संयोजकता इलेक्ट्रॉनों की संख्या तथा इसकी संयोजकता निर्धारित कीजिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q9.b",
+                            "text": {
+                                "en": "Molecular formula of the compound formed when ‘X' reacts with an element 'Y' (atomic number = 8).",
+                                "hi": "'X' की तत्व 'Y' (परमाणु संख्या = 8) से अभिक्रिया द्वारा बने यौगिक का अणुसूत्र लिखिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q9.c",
+                            "text": {
+                                "en": "Write the name and formula of the compound formed when ‘X' combines with chlorine.",
+                                "hi": "'X' की क्लोरीन (CI) से अभिक्रिया द्वारा बने यौगिक का नाम और सूत्र लिखिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        }
+                    ]
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q10",
+                    "text": {
+                        "en": "An element 'X' has mass number 35 and number of neutrons 18. Write atomic number and electronic configuration of ‘X’. Also write group number, period number and valency of 'X'.",
+                        "hi": "किसी तत्व 'X' की द्रव्यमान संख्या 35 तथा इसमें न्यूट्रॉनों की संख्या 18 है। 'X' की परमाणु संख्या और इसका इलेक्ट्रॉन-विन्यास लिखिए। 'X' की समूह संख्या, आवर्त संख्या और संयोजकता का उल्लेख भी कीजिए।"
+                    },
+                    "marks": "3",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q11",
                     "text": {
                         "en": "",
                         "hi": ""
                     },
-                    "marks": "infer from parent",
+                    "marks": "infer from children and choice description",
+                    "rubric": [],
+                    "children": [
+                        {
+                            "type": "Theory",
+                            "id": "Q11.a",
+                            "text": {
+                                "en": "List two reasons for the appearance of variations among the progeny formed by sexual reproduction.",
+                                "hi": "लैंगिक जनन द्वारा उत्पन्न संतति में विभिन्नता दृष्टिगोचर होने के दो कारणों की सूची बनाइए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q11.b",
+                            "text": {
+                                "en": "",
+                                "hi": ""
+                            },
+                            "marks": "infer from children and choice description",
+                            "rubric": [],
+                            "attachments": [
+                                {
+                                    "description": "Diagram showing a longitudinal section of a flower with parts labeled A (stigma), B (style), C (ovary wall), D (ovule).",
+                                    "type": "image"
+                                }
+                            ],
+                            "children": [
+                                {
+                                    "type": "Theory",
+                                    "id": "Q11.b.i",
+                                    "text": {
+                                        "en": "Name the part marked ‘A’ in the diagram.",
+                                        "hi": "आरेख में अंकित भाग 'A' का नाम लिखिए।"
+                                    },
+                                    "marks": "",
+                                    "rubric": []
+                                },
+                                {
+                                    "type": "Theory",
+                                    "id": "Q11.b.ii",
+                                    "text": {
+                                        "en": "How does ‘A’ reaches part ‘B’?",
+                                        "hi": "'A' भाग 'B' तक किस प्रकार पहुँचता है?"
+                                    },
+                                    "marks": "",
+                                    "rubric": []
+                                },
+                                {
+                                    "type": "Theory",
+                                    "id": "Q11.b.iii",
+                                    "text": {
+                                        "en": "State the importance of the part ‘C’.",
+                                        "hi": "भाग 'C' का महत्व लिखिए।"
+                                    },
+                                    "marks": "",
+                                    "rubric": []
+                                },
+                                {
+                                    "type": "Theory",
+                                    "id": "Q11.b.iv",
+                                    "text": {
+                                        "en": "What happens to the part marked ‘D’ after fertilisation is over ?",
+                                        "hi": "'D' द्वारा अंकित भाग का निषेचन के पश्चात क्या होता है ?"
+                                    },
+                                    "marks": "",
+                                    "rubric": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q12",
+                    "text": {
+                        "en": "Define reproduction. How does it help in providing stability to the population of species?",
+                        "hi": "जनन की परिभाषा लिखिए। स्पीशीज़ की समष्टि को स्थायित्व प्रदान करने में यह किस प्रकार सहायता करता है?"
+                    },
+                    "marks": "3",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q13",
+                    "text": {
+                        "en": "Explain the term “Regeneration” as used in relation to reproduction of organisms. Describe briefly how regeneration is carried out in multicellular organisms like Hydra.",
+                        "hi": "जीवों के जनन के संदर्भ में उपयोग होने वाले पद \"पुनरुद्भवन' (पुनर्जनन) की व्याख्या कीजिए। संक्षेप में वर्णन कीजिए कि हाइड्रा जैसे बहु कोशिक जीवों में 'पुनरुद्भवन' की प्रक्रिया किस प्रकार सम्पन्न होती है?"
+                    },
+                    "marks": "3",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q14",
+                    "text": {
+                        "en": "\"Two areas of study namely ‘evolution' and 'classification' are interlinked\". Justify this statement.",
+                        "hi": "“अध्ययन के दो क्षेत्र- 'विकास' और 'वर्गीकरण' परस्पर जुड़े हैं।\" इस कथन की पुष्टि कीजिए।"
+                    },
+                    "marks": "3",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q15",
+                    "text": {
+                        "en": "How do Mendel's experiment show that traits are inherited independently?",
+                        "hi": "मेंडल ने प्रयोगों द्वारा किस प्रकार दर्शाया कि लक्षण स्वतंत्र रूप से वंशानुगत होते हैं ?"
+                    },
+                    "marks": "3",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q16",
+                    "text": {
+                        "en": "The activities of man had adverse effects on all forms of living organisms in the biosphere. Unlimited exploitation of nature by man disturbed the delicate ecological balance between the living and non-living components of the biosphere. The unfavourable conditions created by man himself threatened the survival not only of himself but also of the entire living organisms on the mother earth. One of your classmates is an active member of ‘Eco club' of your school which is creating environmental awareness amongst the school students, spreading the same in the society and also working hard for preventing environmental degradation of the surroundings.",
+                        "hi": "मानव के क्रियाकलापों ने जीव मण्डल के जीव रूपों को बुरी तरह से प्रभावित किया है। मानव द्वारा प्रकृति के असीमित दोहन ने जीव-मण्डल के जैव एवं अजैव अवयवों के संवेदनशील संतुलन को अस्त-व्यस्त कर दिया है। मानव द्वारा स्वयं सृजित प्रतिकूल परिस्थितियों ने न केवल उसकी अपनी उत्तर जीविता को ललकारा है, बल्कि पृथ्वी के समस्त जीवों को भी ललकारा है। आपका एक सहपाठी जो आपके स्कूल के 'ईको क्लब' का सक्रिय सदस्य है स्कूल के छात्रों में पर्यावरण के प्रति जागरूकता उत्पन्न कर रहा है, तथा इसे समाज में भी फैला रहा है। वह पास-पड़ोस के पर्यावरण के निम्नीकरण को रोकने के लिए भी कठोर कार्य कर रहा है।"
+                    },
+                    "marks": "infer from children and choice description",
+                    "rubric": [],
+                    "children": [
+                        {
+                            "type": "Theory",
+                            "id": "Q16.a",
+                            "text": {
+                                "en": "Why is it necessary to conserve our environment ?",
+                                "hi": "हमें अपने पर्यावरण का संरक्षण करना क्यों आवश्यक है?"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q16.b",
+                            "text": {
+                                "en": "State the importance of green and blue dust-bins in the safe disposal of the household waste.",
+                                "hi": "घरेलू अपशिष्टों के निरापद निपटारे के लिए हरी और नीली कूड़ा-पेटियों का महत्व लिखिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q16.c",
+                            "text": {
+                                "en": "List two values exhibited by your classmate who is an active member of Eco-club of your school.",
+                                "hi": "आपके उस सहपाठी द्वारा प्रदर्शित दो मूल्यों की सूची बनाइए जो आपके विद्यालय के 'ईको क्लब' का सक्रिय सदस्य है।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        }
+                    ]
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q17",
+                    "text": {
+                        "en": "The image formed by a spherical mirror is real, inverted and is of magnification - 2. If the image is at a distance of 30 cm from the mirror, where is the object placed? Find the focal length of the mirror. List two characteristics of the image formed if the object is moved 10 cm towards the mirror.",
+                        "hi": "किसी गोलीय दर्पण द्वारा किसी बिम्ब का बना प्रतिबिम्ब वास्तविक, उल्टा और – 2 आवर्धन का है। यदि प्रतिबिम्ब की दर्पण से दूरी 30 cm पर है, तो बिम्ब कहां स्थित है ? दर्पण की फोकस दूरी ज्ञात कीजिए। यदि बिम्ब को दर्पण की ओर 10cm स्थानान्तरित कर दिया जाए, तो दर्पण द्वारा बने प्रतिबिम्ब के दो अभिलक्षणों की सूची बनाइए।"
+                    },
+                    "marks": "3",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q18",
+                    "text": {
+                        "en": "Describe an activity to show that the colours of white light splitted by a glass prism can be recombined to get white light by another identical glass prism. Also draw ray diagram to show the recombination of the spectrum of white light.",
+                        "hi": "यह दर्शाने के लिए किसी क्रियाकलाप का वर्णन कीजिए कि किस प्रकार एक प्रिज़्म द्वारा विपाटित श्वेत प्रकाश को अन्य सर्वसम प्रिज़्म द्वारा पुनर्योजित करके पुनः श्वेत प्रकाश प्राप्त किया जा सकता है। श्वेत प्रकाश के स्पेक्ट्रम के पुनर्योजन को दर्शाने के लिए किरण आरेख भी खींचिए।"
+                    },
+                    "marks": "3",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q19",
+                    "text": {
+                        "en": "It is desired to obtain an erect image of an object, using concave mirror of focal length of 12 cm. Show the positions of pole, principal focus and the centre of curvature in the above ray diagrams.",
+                        "hi": "12 cm फोकस दूरी के अवतल दर्पण द्वारा किसी बिम्ब का सीधा प्रतिबिम्ब बनाने के लिए कहा गया है। उपरोक्त किरण आरेखों में ध्रुव, मुख्य फोकस और वक्रता केन्द्र की स्थितियों को भी दर्शाइए।"
+                    },
+                    "marks": "infer from children and choice description",
+                    "rubric": [],
+                    "children": [
+                        {
+                            "type": "Theory",
+                            "id": "Q19.i",
+                            "text": {
+                                "en": "What should be the range of distance of an object placed in front of the mirror?",
+                                "hi": "दर्पण के सामने बिम्ब की दूरी का क्या परिसर होना चाहिए ?"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q19.ii",
+                            "text": {
+                                "en": "Will the image be smaller or larger than the object. Draw ray diagram to show the formation of image in this case.",
+                                "hi": "बनने वाला प्रतिबिम्ब साइज़ में बिम्ब से छोटा होगा अथवा बड़ा ? इस प्रकरण में प्रतिबिम्ब बनना दर्शाने के लिए किरण आरेख खींचिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q19.iii",
+                            "text": {
+                                "en": "Where will the image of this object be, if it is placed 24 cm in front of the mirror? Draw ray diagram for this situation also to justify your answer.",
+                                "hi": "इस बिम्ब का प्रतिबिम्ब कहाँ बनेगा, यदि इसे दर्पण के सामने 24 cm दूरी पर रख दिया जाए ? अपने उत्तर की पुष्टि के लिए इस स्थिति के लिए भी किरण आरेख खींचिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        }
+                    ]
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q20",
+                    "text": {
+                        "en": "Define evolution. How does it occur? Describe how fossils provide us evidences in support of evolution.",
+                        "hi": "विकास की परिभाषा लिखिए। यह किस प्रकार होता है? वर्णन कीजिए कि जीवाश्म किस प्रकार विकास के समर्थन में प्रमाण प्रस्तुत करते हैं?"
+                    },
+                    "marks": "5",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q21",
+                    "text": {
+                        "en": "What is placenta ? Describe its structure. State its functions in case of a pregnant human female.",
+                        "hi": "प्लैसेन्टा क्या है? इसकी संरचना का वर्णन कीजिए। गर्भवती मानव मादा के प्रकरण में इसके कार्यों का उल्लेख कीजिए।"
+                    },
+                    "marks": "5",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q22",
+                    "text": {
+                        "en": "A carbon compound 'P' on heating with excess conc. H2SO4 forms another carbon compound ‘Q' which on addition of hydrogen in the presence of nickel catalyst forms a saturated carbon compound ‘R'. One molecule of 'R' on combustion forms two molecules of carbon dioxide and three molecules of water. Identify P, Q and R and write chemical equations for the reactions involved.",
+                        "hi": "कोई कार्बन यौगिक 'P' आधिक्य सांद्र H₂SO₄ के साथ गर्म किए जाने पर कोई अन्य यौगिक 'Q' बनाता है जो निकेल उत्प्रेरक की उपस्थित में हाइड्रोजन से संकलन करके कोई संतृप्त यौगिक 'R' बनाता है। 'R' का एक अणु, दहन होने पर, कार्बन डाइऑक्साइड के दो अणु तथा जल के तीन अणु बनाता है। P, Q और R को पहचानिए और सम्मिलित अभिक्रियाओं के रासायनिक समीकरण लिखिए।"
+                    },
+                    "marks": "5",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q23",
+                    "text": {
+                        "en": "What is atmospheric refraction? Use this phenomenon to explain the following natural events : Draw diagrams to illustrate your answers.",
+                        "hi": "वायुमण्डलीय अपवर्तन क्या है ? इस परिघटना का उपयोग करके नीचे दी गयी प्राकृतिक घटनाओं की व्याख्या कीजिए : अपने उत्तरों के स्पष्टीकरण के लिए आरेख खींचिए।"
+                    },
+                    "marks": "infer from children and choice description",
+                    "rubric": [],
+                    "children": [
+                        {
+                            "type": "Theory",
+                            "id": "Q23.a",
+                            "text": {
+                                "en": "Twinkling of stars",
+                                "hi": "तारों का टिमटिमाना"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q23.b",
+                            "text": {
+                                "en": "Advanced sun-rise and delayed sun-set.",
+                                "hi": "अग्रिम सूर्योदय और विलम्बित सूर्यास्त"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        }
+                    ]
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q24",
+                    "text": {
+                        "en": "",
+                        "hi": ""
+                    },
+                    "marks": "infer from children and choice description",
+                    "rubric": [],
+                    "children": [
+                        {
+                            "type": "Theory",
+                            "id": "Q24.a",
+                            "text": {
+                                "en": "Define focal length of a divergent lens.",
+                                "hi": "अपसारी लेंस की फोकस दूरी की परिभाषा लिखिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q24.b",
+                            "text": {
+                                "en": "A divergent lens of focal length 30 cm forms the image of an object of size 6 cm on the same side as the object at a distance of 15 cm from its optical centre. Use lens formula to determine the distance of the object from the lens and the size of the image formed.",
+                                "hi": "30 cm फोकस दूरी का कोई अपसारी लेंस 6 cm साइज़ के किसी बिम्ब का प्रतिबिम्ब प्रकाशिक केन्द्र से 15 cm दूरी पर बिम्ब की ही दिशा में बनाता है। लेंस-सूत्र का उपयोग करके बिम्ब की लेंस से दूरी तथा प्रतिबिम्ब का साइज़ परिकलित कीजिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        },
+                        {
+                            "type": "Theory",
+                            "id": "Q24.c",
+                            "text": {
+                                "en": "Draw a ray diagram to show the formation of image in the above situation.",
+                                "hi": "उपरोक्त स्थिति में प्रतिबिम्ब बनना दर्शाने के लिए किरण आरेख खींचिए।"
+                            },
+                            "marks": "",
+                            "rubric": []
+                        }
+                    ]
+                }
+            ],
+            "sectionChoices": [],
+            "sectionInstructions": {
+                "en": "SECTION - A",
+                "hi": "भाग - अ"
+            }
+        },
+        {
+            "sectionId": "B",
+            "questions": [
+                {
+                    "type": "MCQ",
+                    "id": "Q25",
+                    "text": {
+                        "en": "A student while observing an embryo of a pea seed in the laboratory listed various parts of the embryo as given below : Testa, Tegmen, Radicle, Plumule, Micropyle, Cotyledon. On examining the list the teacher remarked that only three parts are correct. Select three correct parts from the above list :",
+                        "hi": "प्रयोगशाला में मटर के बीज के भ्रूण का प्रेक्षण करते समय किसी छात्र ने नीचे दिए अनुसार भ्रूण के विभिन्न भागों की अपनी नोट बुक में सूची बनाई। बीजावरण, अन्तःकवच, मूलांकुर, प्रांकुर, बीजाण्ड द्वार, बीजपत्र । इस सूची का परीक्षण करने के पश्चात शिक्षक महोदय ने यह टिप्पणी की, कि इनमें से केवल तीन भाग ही सही हैं। उपरोक्त सूची में से तीन सही भाग छांटिए :"
+                    },
+                    "marks": "1",
+                    "rubric": [],
+                    "options": [
+                        {
+                            "optionId": "a",
+                            "text": {
+                                "en": "Testa, Radicle, Cotyledon",
+                                "hi": "बीजावरण, मूलांकुर, बीजपत्र"
+                            }
+                        },
+                        {
+                            "optionId": "b",
+                            "text": {
+                                "en": "Tegmen, Radicle, Micropyle",
+                                "hi": "अन्तःकवच, मूलांकुर, बीजाण्ड द्वार"
+                            }
+                        },
+                        {
+                            "optionId": "c",
+                            "text": {
+                                "en": "Cotyledon, Plumule, Testa",
+                                "hi": "बीजपत्र, प्रांकुर, बीजावरण"
+                            }
+                        },
+                        {
+                            "optionId": "d",
+                            "text": {
+                                "en": "Radicle, Cotyledon, Plumule",
+                                "hi": "मूलांकुर, बीजपत्र, प्रांकुर"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "MCQ",
+                    "id": "Q26",
+                    "text": {
+                        "en": "If you are asked to select a group of two vegetables, out of the following, having homologous structures which one would you select ?",
+                        "hi": "यदि आपसे नीचे दी गयी सब्जियों में उन दो सब्जियों के समूह को चुनने के लिए कहा जाए जिनकी संरचनाएँ समजात हैं, तो आप इनमें से किसे चुनेंगे ?"
+                    },
+                    "marks": "1",
+                    "rubric": [],
+                    "options": [
+                        {
+                            "optionId": "a",
+                            "text": {
+                                "en": "Carrot and radish",
+                                "hi": "गाजर और मूली"
+                            }
+                        },
+                        {
+                            "optionId": "b",
+                            "text": {
+                                "en": "Potato and sweet potato",
+                                "hi": "आलू और शकरकन्दी"
+                            }
+                        },
+                        {
+                            "optionId": "c",
+                            "text": {
+                                "en": "Potato and tomato",
+                                "hi": "आलू और टमाटर"
+                            }
+                        },
+                        {
+                            "optionId": "d",
+                            "text": {
+                                "en": "Lady finger and potato",
+                                "hi": "भिण्डी और आलू"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "MCQ",
+                    "id": "Q27",
+                    "text": {
+                        "en": "In the following ray diagram the correctly marked angle are :",
+                        "hi": "नीचे दिए गए आरेख में सही अंकित कोण कौन से है?"
+                    },
+                    "marks": "1",
                     "rubric": [],
                     "attachments": [
                         {
-                            "description": "Diagram of a flower's reproductive system with parts A, B, C, D labeled",
-                            "type": "diagram"
+                            "description": "Ray diagram showing a prism. An incident ray enters the prism, refracts, and then exits as an emergent ray. Angles are marked: A (angle of prism), D (angle of deviation), i (angle of incidence), r (angle of refraction inside prism), e (angle of emergence).",
+                            "type": "image"
                         }
                     ],
-                    "children": [
+                    "options": [
                         {
-                            "id": "Q11.b.i",
+                            "optionId": "a",
                             "text": {
-                                "en": "Name the part marked ‘A' in the diagram.",
-                                "hi": "आरेख में अंकित भाग 'A' का नाम लिखिए।"
-                            },
-                            "marks": "infer from parent",
-                            "rubric": [],
-                            "attachments": [],
-                            "choiceInformation": {
-                                "detailedDescription": "",
-                                "summary": ""
+                                "en": "∠i and ∠e",
+                                "hi": "∠i और ∠e"
                             }
                         },
                         {
-                            "id": "Q11.b.ii",
+                            "optionId": "b",
                             "text": {
-                                "en": "How does ‘A' reaches part 'B' ?",
-                                "hi": "'A' भाग 'B' तक किस प्रकार पहुँचता है?"
-                            },
-                            "marks": "infer from parent",
-                            "rubric": [],
-                            "attachments": [],
-                            "choiceInformation": {
-                                "detailedDescription": "",
-                                "summary": ""
+                                "en": "∠A and ∠D",
+                                "hi": "∠A और ∠D"
                             }
                         },
                         {
-                            "id": "Q11.b.iii",
+                            "optionId": "c",
                             "text": {
-                                "en": "State the importance of the part ‘C’.",
-                                "hi": "भाग 'C' का महत्व लिखिए।"
-                            },
-                            "marks": "infer from parent",
-                            "rubric": [],
-                            "attachments": [],
-                            "choiceInformation": {
-                                "detailedDescription": "",
-                                "summary": ""
+                                "en": "∠i, ∠e and ∠D",
+                                "hi": "∠i, ∠e और ∠D"
                             }
                         },
                         {
-                            "id": "Q11.b.iv",
+                            "optionId": "d",
                             "text": {
-                                "en": "What happens to the part marked ‘D' after fertilisation is over ?",
-                                "hi": "'D' द्वारा अंकित भाग का निषेचन के पश्चात क्या होता है?"
-                            },
-                            "marks": "infer from parent",
-                            "rubric": [],
-                            "attachments": [],
-                            "choiceInformation": {
-                                "detailedDescription": "",
-                                "summary": ""
+                                "en": "∠r, ∠A and ∠D",
+                                "hi": "∠r, ∠A और ∠D"
                             }
                         }
-                    ],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
+                    ]
+                },
+                {
+                    "type": "MCQ",
+                    "id": "Q28",
+                    "text": {
+                        "en": "In your laboratory you trace the path of light rays through a glass slab for different values of angle of incidence (∠ i) and in each case measure the values of the corresponding angle of refraction (∠ r) and angle of emergence (∠ e). On the basis of your observations your correct conclusion is :",
+                        "hi": "आप अपनी प्रयोगशाला में विभिन्न आपतन कोणों (∠i) के लिए कांच के स्लैब से गुजरने वाली प्रकाश किरण का पथ आरेखित करते हैं, तथा प्रत्येक प्रकरण में तदनरूपी अपवर्तन कोण (∠ r) और निर्गत कोण (∠e) भी मापते हैं। आपके प्रेक्षणों के आधार आपका सही निष्कर्ष यह है कि :"
+                    },
+                    "marks": "1",
+                    "rubric": [],
+                    "options": [
+                        {
+                            "optionId": "a",
+                            "text": {
+                                "en": "∠i is more than ∠r, but nearly equal to ∠e",
+                                "hi": "∠i बड़ा है ∠r से, परन्तु ∠e के लगभग बराबर है"
+                            }
+                        },
+                        {
+                            "optionId": "b",
+                            "text": {
+                                "en": "∠i is less than ∠r, but nearly equal to ∠e",
+                                "hi": "∠i छोटा है ∠r से, परन्तु ∠e के लगभग बराबर है"
+                            }
+                        },
+                        {
+                            "optionId": "c",
+                            "text": {
+                                "en": "∠i is more than ∠e, but nearly equal to ∠r",
+                                "hi": "∠i बड़ा है ∠e से, परन्तु ∠r के लगभग बराबर है"
+                            }
+                        },
+                        {
+                            "optionId": "d",
+                            "text": {
+                                "en": "∠i is less than ∠e, but nearly equal to ∠r",
+                                "hi": "∠i छोटा है ∠e से, परन्तु ∠r के लगभग बराबर है"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "MCQ",
+                    "id": "Q29",
+                    "text": {
+                        "en": "To determine the approximate value of the focal length of a given concave mirror, you focus the image of a distant object formed by the mirror on a screen. The image obtained on the screen, as compared to the object is always:",
+                        "hi": "दिए गए अवतल दर्पण की सन्निकट फोकस दूरी ज्ञात करने के लिए आप दर्पण द्वारा किसी दूरस्थ बिम्ब का प्रतिबिम्ब किसी पर्दे पर फोकसित करते हैं। पर्दे पर प्राप्त प्रतिबिम्ब बिम्ब की तुलना में सदैव :"
+                    },
+                    "marks": "1",
+                    "rubric": [],
+                    "options": [
+                        {
+                            "optionId": "a",
+                            "text": {
+                                "en": "Laterally inverted and diminished",
+                                "hi": "पार्श्व परिवर्तित और छोटा होता है।"
+                            }
+                        },
+                        {
+                            "optionId": "b",
+                            "text": {
+                                "en": "Inverted and diminished",
+                                "hi": "उल्टा और छोटा होता है।"
+                            }
+                        },
+                        {
+                            "optionId": "c",
+                            "text": {
+                                "en": "Erect and diminished",
+                                "hi": "सीधा और छोटा होता है।"
+                            }
+                        },
+                        {
+                            "optionId": "d",
+                            "text": {
+                                "en": "Erect and highly diminished",
+                                "hi": "सीधा और अत्यधिक छोटा होता है।"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "MCQ",
+                    "id": "Q30",
+                    "text": {
+                        "en": "Suppose you have focused on a screen the image of candle flame placed at the farthest end of the laboratory table using a convex lens. If your teacher suggests you to focus the parallel rays of the sun, reaching your laboratory table, on the same screen, what you are expected to do is to move the :",
+                        "hi": "मान लीजिए आपने अपनी प्रयोगशाला की मेज के दूरस्थ सिरे पर रखी मोमबत्ती की ज्वाला का प्रतिबिम्ब उत्तल लेंस द्वारा पर्दे पर फोकसित कर लिया है। अब यदि आपके शिक्षक महोदय आपको सूर्य से आपकी मेज पर आती सूर्य की समान्तर किरणों को उसी पर्दे पर फोकसित करने का सुझाव दें, तो आपसे यह अपेक्षा की जाती है कि आप :"
+                    },
+                    "marks": "1",
+                    "rubric": [],
+                    "options": [
+                        {
+                            "optionId": "a",
+                            "text": {
+                                "en": "lens slightly towards the screen",
+                                "hi": "लेंस को थोड़ा सा पर्दे की ओर सरकाएंगे।"
+                            }
+                        },
+                        {
+                            "optionId": "b",
+                            "text": {
+                                "en": "lens slightly away from the screen",
+                                "hi": "लेंस को थोड़ा सा पर्दे से दूर सरकाएंगे।"
+                            }
+                        },
+                        {
+                            "optionId": "c",
+                            "text": {
+                                "en": "lens slightly towards the sun",
+                                "hi": "लेंस को थोड़ा सा सूर्य की दिशा में सरकाएंगे।"
+                            }
+                        },
+                        {
+                            "optionId": "d",
+                            "text": {
+                                "en": "lens and screen both towards the sun",
+                                "hi": "लेंस और पर्दे दोनों को सूर्य की ओर सरकाएंगे।"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "MCQ",
+                    "id": "Q31",
+                    "text": {
+                        "en": "For preparing soap in the laboratory we require an oil and a base. Which of the following combinations of an oil and a base would be best suited for the preparation of soap ?",
+                        "hi": "प्रयोगशाला में साबुन बनाने के लिए हमें कोई तेल और कोई क्षार चाहिए। साबुन बनाने के लिए तेल और क्षार का नीचे दिया गया कौन सा संयोजन सबसे उपयुक्त रहेगा ?"
+                    },
+                    "marks": "1",
+                    "rubric": [],
+                    "options": [
+                        {
+                            "optionId": "a",
+                            "text": {
+                                "en": "Castor oil and calcium hydroxide",
+                                "hi": "एरण्ड का तेल और कैल्सियम हाइड्रॉक्साइड"
+                            }
+                        },
+                        {
+                            "optionId": "b",
+                            "text": {
+                                "en": "Turpentine oil and sodium hydroxide",
+                                "hi": "तारपीन का तेल और सोडियम हाइड्रॉक्साइड"
+                            }
+                        },
+                        {
+                            "optionId": "c",
+                            "text": {
+                                "en": "Castor oil and sodium hydroxide",
+                                "hi": "एरण्ड का तेल और सोडियम हाइड्रॉक्साइड"
+                            }
+                        },
+                        {
+                            "optionId": "d",
+                            "text": {
+                                "en": "Mustard oil and calcium hydroxide",
+                                "hi": "सरसों का तेल और कैल्सियम हाइड्रॉक्साइड"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "MCQ",
+                    "id": "Q32",
+                    "text": {
+                        "en": "A student puts a drop of reaction mixture of a saponification reaction first an a blue litmus paper and then on a red litmus paper. He may observe that :",
+                        "hi": "कोई छात्र साबुनीकरण अभिक्रिया के अभिक्रिया मिश्रण की एक बूंद पहले नीले लिटमस पत्र और फिर लाल लिटमस पत्र पर डालता है। वह यह प्रेक्षण करता है कि :"
+                    },
+                    "marks": "1",
+                    "rubric": [],
+                    "options": [
+                        {
+                            "optionId": "a",
+                            "text": {
+                                "en": "There is no change in the blue litmus paper and the red litmus paper turns white.",
+                                "hi": "नीले लिटमस पत्र में कोई परिवर्तन नहीं होता और लाल लिटमस पत्र सफेद हो जाता है।"
+                            }
+                        },
+                        {
+                            "optionId": "b",
+                            "text": {
+                                "en": "There is no change in the red litmus paper and the blue litmus paper turns red.",
+                                "hi": "लाल लिटमस पत्र में कोई परिवर्तन नहीं होता और नीला लिटमस पत्र लाल हो जाता है।"
+                            }
+                        },
+                        {
+                            "optionId": "c",
+                            "text": {
+                                "en": "There is no change in the blue litmus paper and the red litmus paper turns blue.",
+                                "hi": "नीले लिटमस पत्र में कोई परिवर्तन नहीं होता और लाल लिटमस पत्र नीला हो जाता है।"
+                            }
+                        },
+                        {
+                            "optionId": "d",
+                            "text": {
+                                "en": "No change in colour is observed in both the litmus papers.",
+                                "hi": "दोनों ही लिटमस पत्रों के रंग में कोई परिवर्तन नहीं होता।"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "MCQ",
+                    "id": "Q33",
+                    "text": {
+                        "en": "In the neighbourhood of your school, hard water required for an experiment is not available. Select from the following groups of salts available in your school, a group each member of which, if dissolved in distilled water, will make it hard:",
+                        "hi": "आपके विद्यालय के पास-पड़ोस में प्रयोग के लिए आवश्यक कठोर जल उपलब्ध नहीं है। आपके विद्यालय में उपलब्ध लवणों के नीचे दिए समूहों में से वह एक समूह चुनिए जिसके प्रत्येक सदस्य को आसुत जल में घोलने पर, वह उसे कठोर जल बना देगा :"
+                    },
+                    "marks": "1",
+                    "rubric": [],
+                    "options": [
+                        {
+                            "optionId": "a",
+                            "text": {
+                                "en": "Sodium chloride, calcium chloride",
+                                "hi": "सोडियम क्लोराइड, कैल्सियम क्लोराइड"
+                            }
+                        },
+                        {
+                            "optionId": "b",
+                            "text": {
+                                "en": "Potassium chloride, sodium chloride",
+                                "hi": "पोटैशियम क्लोराइड, सोडियम क्लोराइड"
+                            }
+                        },
+                        {
+                            "optionId": "c",
+                            "text": {
+                                "en": "Sodium chloride, magnesium chloride",
+                                "hi": "सोडियम क्लोराइड, मैग्नीशियम क्लोराइड"
+                            }
+                        },
+                        {
+                            "optionId": "d",
+                            "text": {
+                                "en": "Calcium chloride, magnesium chloride",
+                                "hi": "कैल्सियम क्लोराइड, मैग्नीशियम क्लोराइड"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q34",
+                    "text": {
+                        "en": "A student is observing a permanent slide showing sequentially the different stages of asexual reproduction taking place in yeast. Name this process and draw diagrams, of what he observes, in a proper sequence.",
+                        "hi": "कोई छात्र यीस्ट में होने वाले अलैंगिक जनन के विभिन्न चरणों को क्रमवार दर्शाने वाली स्थायी स्लाइड का प्रेक्षण कर रहा है। इस प्रक्रिया का नाम लिखिए। जो कुछ वह प्रेक्षण करता है, उसे उचित क्रम में, आरेख खींचकर दर्शाइए।"
+                    },
+                    "marks": "2",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q35",
+                    "text": {
+                        "en": "An object of height 2.5 cm is placed at a distance of 15 cm from the optical centre 'O' of a convex lens of focal length 10 cm. Draw a ray diagram to find the position and size of the image formed. Mark optical centre ‘O', principal focus F and height of the image on the diagram.",
+                        "hi": "2.5 cm ऊँचाई का कोई बिम्ब 10 cm फोकस दूरी के किसी उत्तल लेंस के प्रकाशिक केन्द्र 'O' से 15 cm दूरी पर स्थित है। बनने वाले प्रतिबिम्ब की स्थिति और साइज़ ज्ञात करने के लिए किरण आरेख खींचिए। इस आरेख में प्रकाशिक केन्द्र 'O', मुख्य फोकस F' तथा प्रतिबिम्ब की ऊँचाई अंकित कीजिए।"
+                    },
+                    "marks": "2",
+                    "rubric": []
+                },
+                {
+                    "type": "Theory",
+                    "id": "Q36",
+                    "text": {
+                        "en": "A student adds a spoon full of powdered sodium hydrogen carbonate to a flask containing ethanoic acid. List two main observations, he must note in his note book, about the reaction that takes place. Also write chemical equation for the reaction.",
+                        "hi": "कोई छात्र एक चम्मच सोडियम हाइड्रोजन कार्बोनेट चूर्ण फ्लास्क में लिए गए एथेनॉइक अम्ल में मिलाता है। उन दो मुख्य प्रेक्षणों की सूची बनाइए, जिन्हें उसे फ्लास्क में होने वाली अभिक्रिया के विषय में अपनी नोट बुक में लिखना चाहिए। होने वाली रासायनिक अभिक्रिया का रासायनिक समीकरण भी लिखिए।"
+                    },
+                    "marks": "2",
+                    "rubric": []
                 }
             ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q12",
-            "text": {
-                "en": "Define reproduction. How does it help in providing stability to the population of species?",
-                "hi": "जनन की परिभाषा लिखिए। स्पीशीज़ की समष्टि को स्थायित्व प्रदान करने में यह किस प्रकार सहायता करता है?"
-            },
-            "marks": "3",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q13",
-            "text": {
-                "en": "Explain the term “Regeneration” as used in relation to reproduction of organisms. Describe briefly how regeneration is carried out in multicellular organisms like Hydra.",
-                "hi": "जीवों के जनन के संदर्भ में उपयोग होने वाले पद \"पुनरुद्भवन' (पुनर्जनन) की व्याख्या कीजिए। संक्षेप में वर्णन कीजिए कि हाइड्रा जैसे बहु कोशिक जीवों में 'पुनरुद्भवन' की प्रक्रिया किस प्रकार सम्पन्न होती है?"
-            },
-            "marks": "3",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q14",
-            "text": {
-                "en": "\"Two areas of study namely ‘evolution' and 'classification' are interlinked\". Justify this statement.",
-                "hi": "“अध्ययन के दो क्षेत्र- 'विकास' और 'वर्गीकरण' परस्पर जुड़े हैं।\" इस कथन की पुष्टि कीजिए।"
-            },
-            "marks": "3",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q15",
-            "text": {
-                "en": "How do Mendel's experiment show that traits are inherited independently?",
-                "hi": "मेंडल ने प्रयोगों द्वारा किस प्रकार दर्शाया कि लक्षण स्वतंत्र रूप से वंशानुगत होते हैं ?"
-            },
-            "marks": "3",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q16",
-            "text": {
-                "en": "The activities of man had adverse effects on all forms of living organisms in the biosphere. Unlimited exploitation of nature by man disturbed the delicate ecological balance between the living and non-living components of the biosphere. The unfavourable conditions created by man himself threatened the survival not only of himself but also of the entire living organisms on the mother earth. One of your classmates is an active member of ‘Eco club' of your school which is creating environmental awareness amongst the school students, spreading the same in the society and also working hard for preventing environmental degradation of the surroundings.",
-                "hi": "मानव के क्रियाकलापों ने जीव मण्डल के जीव रूपों को बुरी तरह से प्रभावित किया है। मानव द्वारा प्रकृति के असीमित दोहन ने जीव-मण्डल के जैव एवं अजैव अवयवों के संवेदनशील संतुलन को अस्त-व्यस्त कर दिया है। मानव द्वारा स्वयं सृजित प्रतिकूल परिस्थितियों ने न केवल उसकी अपनी उत्तर जीविता को ललकारा है, बल्कि पृथ्वी के समस्त जीवों को भी ललकारा है। आपका एक सहपाठी जो आपके स्कूल के 'ईको क्लब' का सक्रिय सदस्य है स्कूल के छात्रों में पर्यावरण के प्रति जागरूकता उत्पन्न कर रहा है, तथा इसे समाज में भी फैला रहा है। वह पास-पड़ोस के पर्यावरण के निम्नीकरण को रोकने के लिए भी कठोर कार्य कर रहा है।"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q16.a",
-                    "text": {
-                        "en": "Why is it necessary to conserve our environment ?",
-                        "hi": "हमें अपने पर्यावरण का संरक्षण करना क्यों आवश्यक है?"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q16.b",
-                    "text": {
-                        "en": "State the importance of green and blue dust-bins in the safe disposal of the household waste.",
-                        "hi": "घरेलू अपशिष्टों के निरापद निपटारे के लिए हरी और नीली कूड़ा-पेटियों का महत्व लिखिए।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q16.c",
-                    "text": {
-                        "en": "List two values exhibited by your classmate who is an active member of Eco-club of your school.",
-                        "hi": "आपके उस सहपाठी द्वारा प्रदर्शित दो मूल्यों की सूची बनाइए जो आपके विद्यालय के 'ईको क्लब' का सक्रिय सदस्य है।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q17",
-            "text": {
-                "en": "The image formed by a spherical mirror is real, inverted and is of magnification - 2. If the image is at a distance of 30 cm from the mirror, where is the object placed? Find the focal length of the mirror. List two characteristics of the image formed if the object is moved 10 cm towards the mirror.",
-                "hi": "किसी गोलीय दर्पण द्वारा किसी बिम्ब का बना प्रतिबिम्ब वास्तविक, उल्टा और – 2 आवर्धन का है। यदि प्रतिबिम्ब की दर्पण से दूरी 30 cm पर है, तो बिम्ब कहां स्थित है ? दर्पण की फोकस दूरी ज्ञात कीजिए। यदि बिम्ब को दर्पण की ओर 10cm स्थानान्तरित कर दिया जाए, तो दर्पण द्वारा बने प्रतिबिम्ब के दो अभिलक्षणों की सूची बनाइए।"
-            },
-            "marks": "3",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q18",
-            "text": {
-                "en": "Describe an activity to show that the colours of white light splitted by a glass prism can be recombined to get white light by another identical glass prism. Also draw ray diagram to show the recombination of the spectrum of white light.",
-                "hi": "यह दर्शाने के लिए किसी क्रियाकलाप का वर्णन कीजिए कि किस प्रकार एक प्रिज़्म द्वारा विपाटित श्वेत प्रकाश को अन्य सर्वसम प्रिज़्म द्वारा पुनर्योजित करके पुनः श्वेत प्रकाश प्राप्त किया जा सकता है। श्वेत प्रकाश के स्पेक्ट्रम के पुनर्योजन को दर्शाने के लिए किरण आरेख भी खींचिए।"
-            },
-            "marks": "3",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q19",
-            "text": {
-                "en": "It is desired to obtain an erect image of an object, using concave mirror of focal length of 12 cm. Show the positions of pole, principal focus and the centre of curvature in the above ray diagrams.",
-                "hi": "12 cm फोकस दूरी के अवतल दर्पण द्वारा किसी बिम्ब का सीधा प्रतिबिम्ब बनाने के लिए कहा गया है। उपरोक्त किरण आरेखों में ध्रुव, मुख्य फोकस और वक्रता केन्द्र की स्थितियों को भी दर्शाइए।"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q19.i",
-                    "text": {
-                        "en": "What should be the range of distance of an object placed in front of the mirror?",
-                        "hi": "दर्पण के सामने बिम्ब की दूरी का क्या परिसर होना चाहिए ?"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q19.ii",
-                    "text": {
-                        "en": "Will the image be smaller or larger than the object. Draw ray diagram to show the formation of image in this case.",
-                        "hi": "बनने वाला प्रतिबिम्ब साइज़ में बिम्ब से छोटा होगा अथवा बड़ा ? इस प्रकरण में प्रतिबिम्ब बनना दर्शाने के लिए किरण आरेख खींचिए।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q19.iii",
-                    "text": {
-                        "en": "Where will the image of this object be, if it is placed 24 cm in front of the mirror? Draw ray diagram for this situation also to justify your answer.",
-                        "hi": "इस बिम्ब का प्रतिबिम्ब कहाँ बनेगा, यदि इसे दर्पण के सामने 24 cm दूरी पर रख दिया जाए ? अपने उत्तर की पुष्टि के लिए इस स्थिति के लिए भी किरण आरेख खींचिए।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q20",
-            "text": {
-                "en": "Define evolution. How does it occur? Describe how fossils provide us evidences in support of evolution.",
-                "hi": "विकास की परिभाषा लिखिए। यह किस प्रकार होता है? वर्णन कीजिए कि जीवाश्म किस प्रकार विकास के समर्थन में प्रमाण प्रस्तुत करते हैं?"
-            },
-            "marks": "5",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q21",
-            "text": {
-                "en": "What is placenta ? Describe its structure. State its functions in case of a pregnant human female.",
-                "hi": "प्लैसेन्टा क्या है? इसकी संरचना का वर्णन कीजिए। गर्भवती मानव मादा के प्रकरण में इसके कार्यों का उल्लेख कीजिए।"
-            },
-            "marks": "5",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q22",
-            "text": {
-                "en": "A carbon compound 'P' on heating with excess conc. H2SO4 forms another carbon compound ‘Q' which on addition of hydrogen in the presence of nickel catalyst forms a saturated carbon compound ‘R'. One molecule of 'R' on combustion forms two molecules of carbon dioxide and three molecules of water. Identify P, Q and R and write chemical equations for the reactions involved.",
-                "hi": "कोई कार्बन यौगिक 'P' आधिक्य सांद्र H₂SO₄ के साथ गर्म किए जाने पर कोई अन्य यौगिक 'Q' बनाता है जो निकेल उत्प्रेरक की उपस्थित में हाइड्रोजन से संकलन करके कोई संतृप्त यौगिक 'R' बनाता है। 'R' का एक अणु, दहन होने पर, कार्बन डाइऑक्साइड के दो अणु तथा जल के तीन अणु बनाता है। P, Q और R को पहचानिए और सम्मिलित अभिक्रियाओं के रासायनिक समीकरण लिखिए।"
-            },
-            "marks": "5",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q23",
-            "text": {
-                "en": "What is atmospheric refraction? Use this phenomenon to explain the following natural events : Draw diagrams to illustrate your answers.",
-                "hi": "वायुमण्डलीय अपवर्तन क्या है ? इस परिघटना का उपयोग करके नीचे दी गयी प्राकृतिक घटनाओं की व्याख्या कीजिए : अपने उत्तरों के स्पष्टीकरण के लिए आरेख खींचिए।"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q23.a",
-                    "text": {
-                        "en": "Twinkling of stars",
-                        "hi": "तारों का टिमटिमाना"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q23.b",
-                    "text": {
-                        "en": "Advanced sun-rise and delayed sun-set.",
-                        "hi": "अग्रिम सूर्योदय और विलम्बित सूर्यास्त"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q24",
-            "text": {
-                "en": "",
-                "hi": ""
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q24.a",
-                    "text": {
-                        "en": "Define focal length of a divergent lens.",
-                        "hi": "अपसारी लेंस की फोकस दूरी की परिभाषा लिखिए।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q24.b",
-                    "text": {
-                        "en": "A divergent lens of focal length 30 cm forms the image of an object of size 6 cm on the same side as the object at a distance of 15 cm from its optical centre. Use lens formula to determine the distance of the object from the lens and the size of the image formed.",
-                        "hi": "30 cm फोकस दूरी का कोई अपसारी लेंस 6 cm साइज़ के किसी बिम्ब का प्रतिबिम्ब प्रकाशिक केन्द्र से 15 cm दूरी पर बिम्ब की ही दिशा में बनाता है। लेंस-सूत्र का उपयोग करके बिम्ब की लेंस से दूरी तथा प्रतिबिम्ब का साइज़ परिकलित कीजिए।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q24.c",
-                    "text": {
-                        "en": "Draw a ray diagram to show the formation of image in the above situation.",
-                        "hi": "उपरोक्त स्थिति में प्रतिबिम्ब बनना दर्शाने के लिए किरण आरेख खींचिए।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q25",
-            "text": {
-                "en": "A student while observing an embryo of a pea seed in the laboratory listed various parts of the embryo as given below : Testa, Tegmen, Radicle, Plumule, Micropyle, Cotyledon. On examining the list the teacher remarked that only three parts are correct. Select three correct parts from the above list :",
-                "hi": "प्रयोगशाला में मटर के बीज के भ्रूण का प्रेक्षण करते समय किसी छात्र ने नीचे दिए अनुसार भ्रूण के विभिन्न भागों की अपनी नोट बुक में सूची बनाई। बीजावरण, अन्तःकवच, मूलांकुर, प्रांकुर, बीजाण्ड द्वार, बीजपत्र। इस सूची का परीक्षण करने के पश्चात शिक्षक महोदय ने यह टिप्पणी की, कि इनमें से केवल तीन भाग ही सही हैं। उपरोक्त सूची में से तीन सही भाग छाँटिए :"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q25.a",
-                    "text": {
-                        "en": "Testa, Radicle, Cotyledon",
-                        "hi": "बीजावरण, मूलांकुर, बीजपत्र"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q25.b",
-                    "text": {
-                        "en": "Tegmen, Radicle, Micropyle",
-                        "hi": "अन्तःकवच, मूलांकुर, बीजाण्ड द्वार"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q25.c",
-                    "text": {
-                        "en": "Cotyledon, Plumule, Testa",
-                        "hi": "बीजपत्र, प्रांकुर, बीजावरण"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q25.d",
-                    "text": {
-                        "en": "Radicle, Cotyledon, Plumule",
-                        "hi": "मूलांकुर, बीजपत्र, प्रांकुर"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q26",
-            "text": {
-                "en": "If you are asked to select a group of two vegetables, out of the following, having homologous structures which one would you select ?",
-                "hi": "यदि आपसे नीचे दी गयी सब्जियों में उन दो सब्जियों के समूह को चुनने के लिए कहा जाए जिनकी संरचनाएँ समजात हैं, तो आप इनमें से किसे चुनेंगे ?"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q26.a",
-                    "text": {
-                        "en": "Carrot and radish",
-                        "hi": "गाजर और मूली"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q26.b",
-                    "text": {
-                        "en": "Potato and sweet potato",
-                        "hi": "आलू और शकरकन्दी"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q26.c",
-                    "text": {
-                        "en": "Potato and tomato",
-                        "hi": "आलू और टमाटर"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q26.d",
-                    "text": {
-                        "en": "Lady finger and potato",
-                        "hi": "भिण्डी और आलू"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q27",
-            "text": {
-                "en": "In the following ray diagram the correctly marked angle are :",
-                "hi": "नीचे दिए गए आरेख में सही अंकित कोण कौन से है?"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [
-                {
-                    "description": "Ray diagram showing angles of incidence, refraction, and emergence through a prism",
-                    "type": "diagram"
-                }
-            ],
-            "children": [
-                {
-                    "id": "Q27.a",
-                    "text": {
-                        "en": "∠i and ∠e",
-                        "hi": "∠i और ∠e"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q27.b",
-                    "text": {
-                        "en": "∠A and ∠D",
-                        "hi": "∠A और ∠D"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q27.c",
-                    "text": {
-                        "en": "∠i, ∠e and ∠D",
-                        "hi": "∠i, ∠e और ∠D"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q27.d",
-                    "text": {
-                        "en": "∠r, ∠A and ∠D",
-                        "hi": "∠r, ∠A और ∠D"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q28",
-            "text": {
-                "en": "In your laboratory you trace the path of light rays through a glass slab for different values of angle of incidence (∠ i) and in each case measure the values of the corresponding angle of refraction (∠ r) and angle of emergence (∠ e). On the basis of your observations your correct conclusion is :",
-                "hi": "आप अपनी प्रयोगशाला में विभिन्न आपतन कोणों (∠i) के लिए कांच के स्लैब से गुजरने वाली प्रकाश किरण का पथ आरेखित करते हैं, तथा प्रत्येक प्रकरण में तदनरूपी अपवर्तन कोण (∠ r) और निर्गत कोण (∠e) भी मापते हैं। आपके प्रेक्षणों के आधार आपका सही निष्कर्ष यह है कि :"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q28.a",
-                    "text": {
-                        "en": "∠i is more than ∠r, but nearly equal to ∠e",
-                        "hi": "∠i बड़ा है ∠r से, परन्तु ∠e के लगभग बराबर है"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q28.b",
-                    "text": {
-                        "en": "∠i is less than ∠r, but nearly equal to ∠e",
-                        "hi": "∠i छोटा है ∠r से, परन्तु ∠e के लगभग बराबर है"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q28.c",
-                    "text": {
-                        "en": "∠i is more than ∠e, but nearly equal to ∠r",
-                        "hi": "∠i बड़ा है ∠e से, परन्तु ∠r के लगभग बराबर है"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q28.d",
-                    "text": {
-                        "en": "∠i is less than ∠e, but nearly equal to ∠r",
-                        "hi": "∠i छोटा है ∠e से, परन्तु ∠r के लगभग बराबर है"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q29",
-            "text": {
-                "en": "To determine the approximate value of the focal length of a given concave mirror, you focus the image of a distant object formed by the mirror on a screen. The image obtained on the screen, as compared to the object is always:",
-                "hi": "दिए गए अवतल दर्पण की सन्निकट फोकस दूरी ज्ञात करने के लिए आप दर्पण द्वारा किसी दूरस्थ बिम्ब का प्रतिबिम्ब किसी पर्दे पर फोकसित करते हैं। पर्दे पर प्राप्त प्रतिबिम्ब बिम्ब की तुलना में सदैव :"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q29.a",
-                    "text": {
-                        "en": "Laterally inverted and diminished",
-                        "hi": "पार्श्व परिवर्तित और छोटा होता है।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q29.b",
-                    "text": {
-                        "en": "Inverted and diminished",
-                        "hi": "उल्टा और छोटा होता है।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q29.c",
-                    "text": {
-                        "en": "Erect and diminished",
-                        "hi": "सीधा और छोटा होता है।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q29.d",
-                    "text": {
-                        "en": "Erect and highly diminished",
-                        "hi": "सीधा और अत्यधिक छोटा होता है।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q30",
-            "text": {
-                "en": "Suppose you have focused on a screen the image of candle flame placed at the farthest end of the laboratory table using a convex lens. If your teacher suggests you to focus the parallel rays of the sun, reaching your laboratory table, on the same screen, what you are expected to do is to move the :",
-                "hi": "मान लीजिए आपने अपनी प्रयोगशाला की मेज के दूरस्थ सिरे पर रखी मोमबत्ती की ज्वाला का प्रतिबिम्ब उत्तल लेंस द्वारा पर्दे पर फोकसित कर लिया है। अब यदि आपके शिक्षक महोदय आपको सूर्य से आपकी मेज पर आती सूर्य की समान्तर किरणों को उसी पर्दे पर फोकसित करने का सुझाव दें, तो आपसे यह अपेक्षा की जाती है कि आप :"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q30.a",
-                    "text": {
-                        "en": "lens slightly towards the screen",
-                        "hi": "लेंस को थोड़ा सा पर्दे की ओर सरकाएंगे।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q30.b",
-                    "text": {
-                        "en": "lens slightly away from the screen",
-                        "hi": "लेंस को थोड़ा सा पर्दे से दूर सरकाएंगे।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q30.c",
-                    "text": {
-                        "en": "lens slightly towards the sun",
-                        "hi": "लेंस को थोड़ा सा सूर्य की दिशा में सरकाएंगे।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q30.d",
-                    "text": {
-                        "en": "lens and screen both towards the sun",
-                        "hi": "लेंस और पर्दे दोनों को सूर्य की ओर सरकाएंगे।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q31",
-            "text": {
-                "en": "For preparing soap in the laboratory we require an oil and a base. Which of the following combinations of an oil and a base would be best suited for the preparation of soap ?",
-                "hi": "प्रयोगशाला में साबुन बनाने के लिए हमें कोई तेल और कोई क्षार चाहिए। साबुन बनाने के लिए तेल और क्षार का नीचे दिया गया कौन सा संयोजन सबसे उपयुक्त रहेगा ?"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q31.a",
-                    "text": {
-                        "en": "Castor oil and calcium hydroxide",
-                        "hi": "एरण्ड का तेल और कैल्सियम हाइड्रॉक्साइड"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q31.b",
-                    "text": {
-                        "en": "Turpentine oil and sodium hydroxide",
-                        "hi": "तारपीन का तेल और सोडियम हाइड्रॉक्साइड"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q31.c",
-                    "text": {
-                        "en": "Castor oil and sodium hydroxide",
-                        "hi": "एरण्ड का तेल और सोडियम हाइड्रॉक्साइड"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q31.d",
-                    "text": {
-                        "en": "Mustard oil and calcium hydroxide",
-                        "hi": "सरसों का तेल और कैल्सियम हाइड्रॉक्साइड"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q32",
-            "text": {
-                "en": "A student puts a drop of reaction mixture of a saponification reaction first an a blue litmus paper and then on a red litmus paper. He may observe that :",
-                "hi": "कोई छात्र साबुनीकरण अभिक्रिया के अभिक्रिया मिश्रण की एक बूंद पहले नीले लिटमस पत्र और फिर लाल लिटमस पत्र पर डालता है। वह यह प्रेक्षण करता है कि :"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q32.a",
-                    "text": {
-                        "en": "There is no change in the blue litmus paper and the red litmus paper turns white.",
-                        "hi": "नीले लिटमस पत्र में कोई परिवर्तन नहीं होता और लाल लिटmus पत्र सफेद हो जाता है।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q32.b",
-                    "text": {
-                        "en": "There is no change in the red litmus paper and the blue litmus paper turns red.",
-                        "hi": "लाल लिटमस पत्र में कोई परिवर्तन नहीं होता और नीला लिटमस पत्र लाल हो जाता है।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q32.c",
-                    "text": {
-                        "en": "There is no change in the blue litmus paper and the red litmus paper turns blue.",
-                        "hi": "नीले लिटमस पत्र में कोई परिवर्तन नहीं होता और लाल लिटमस पत्र नीला हो जाता है।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q32.d",
-                    "text": {
-                        "en": "No change in colour is observed in both the litmus papers.",
-                        "hi": "दोनों ही लिटमस पत्रों के रंग में कोई परिवर्तन नहीं होता।"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q33",
-            "text": {
-                "en": "In the neighbourhood of your school, hard water required for an experiment is not available. Select from the following groups of salts available in your school, a group each member of which, if dissolved in distilled water, will make it hard:",
-                "hi": "आपके विद्यालय के पास-पड़ोस में प्रयोग के लिए आवश्यक कठोर जल उपलब्ध नहीं है। आपके विद्यालय में उपलब्ध लवणों के नीचे दिए समूहों में से वह एक समूह चुनिए जिसके प्रत्येक सदस्य को आसुत जल में घोलने पर, वह उसे कठोर जल बना देगा :"
-            },
-            "marks": "infer from children and choice description",
-            "rubric": [],
-            "attachments": [],
-            "children": [
-                {
-                    "id": "Q33.a",
-                    "text": {
-                        "en": "Sodium chloride, calcium chloride",
-                        "hi": "सोडियम क्लोराइड, कैल्सियम क्लोराइड"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q33.b",
-                    "text": {
-                        "en": "Potassium chloride, sodium chloride",
-                        "hi": "पोटैशियम क्लोराइड, सोडियम क्लोराइड"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q33.c",
-                    "text": {
-                        "en": "Sodium chloride, magnesium chloride",
-                        "hi": "सोडियम क्लोराइड, मैग्नीशियम क्लोराइड"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                },
-                {
-                    "id": "Q33.d",
-                    "text": {
-                        "en": "Calcium chloride, magnesium chloride",
-                        "hi": "कैल्सियम क्लोराइड, मैग्नीशियम क्लोराइड"
-                    },
-                    "marks": "infer from parent",
-                    "rubric": [],
-                    "attachments": [],
-                    "children": [],
-                    "choiceInformation": {
-                        "detailedDescription": "",
-                        "summary": ""
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q34",
-            "text": {
-                "en": "A student is observing a permanent slide showing sequentially the different stages of asexual reproduction taking place in yeast. Name this process and draw diagrams, of what he observes, in a proper sequence.",
-                "hi": "कोई छात्र यीस्ट में होने वाले अलैंगिक जनन के विभिन्न चरणों को क्रमवार दर्शाने वाली स्थायी स्लाइड का प्रेक्षण कर रहा है। इस प्रक्रिया का नाम लिखिए। जो कुछ वह प्रेक्षण करता है, उसे उचित क्रम में, आरेख खींचकर दर्शाइए।"
-            },
-            "marks": "2",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q35",
-            "text": {
-                "en": "An object of height 2.5 cm is placed at a distance of 15 cm from the optical centre 'O' of a convex lens of focal length 10 cm. Draw a ray diagram to find the position and size of the image formed. Mark optical centre ‘O', principal focus F and height of the image on the diagram.",
-                "hi": "2.5 cm ऊँचाई का कोई बिम्ब 10 cm फोकस दूरी के किसी उत्तल लेंस के प्रकाशिक केन्द्र 'O' से 15 cm दूरी पर स्थित है। बनने वाले प्रतिबिम्ब की स्थिति और साइज़ ज्ञात करने के लिए किरण आरेख खींचिए। इस आरेख में प्रकाशिक केन्द्र 'O', मुख्य फोकस F' तथा प्रतिबिम्ब की ऊँचाई अंकित कीजिए।"
-            },
-            "marks": "2",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q36",
-            "text": {
-                "en": "A student adds a spoon full of powdered sodium hydrogen carbonate to a flask containing ethanoic acid. List two main observations, he must note in his note book, about the reaction that takes place. Also write chemical equation for the reaction.",
-                "hi": "कोई छात्र एक चम्मच सोडियम हाइड्रोजन कार्बोनेट चूर्ण फ्लास्क में लिए गए एथेनॉइक अम्ल में मिलाता है। उन दो मुख्य प्रेक्षणों की सूची बनाइए, जिन्हें उसे फ्लास्क में होने वाली अभिक्रिया के विषय में अपनी नोट बुक में लिखना चाहिए। होने वाली रासायनिक अभिक्रिया का रासायनिक समीकरण भी लिखिए।"
-            },
-            "marks": "2",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
-            }
-        },
-        {
-            "id": "Q37",
-            "text": {
-                "en": "Communication involves a sender, who encodes and sends a message through a channel, and a receiver, who decodes the message and gives __________.",
-                "hi": "संचार (Communication) में एक प्रेषक शामिल होता है, जो संदेश को एनकोड (encode) करता है और चैनल के माध्यम से भेजता है और एक प्राप्तिकर्त्ता, जो संदेश को डिकोड (decode) करता है और ___________ देता है ।"
-            },
-            "marks": "1",
-            "rubric": [],
-            "attachments": [],
-            "children": [],
-            "options": [
-                {
-                    "optionId": "A",
-                    "text": {
-                        "en": "Message",
-                        "hi": "संदेश"
-                    }
-                },
-                {
-                    "optionId": "B",
-                    "text": {
-                        "en": "Feedback",
-                        "hi": "फीडबैक"
-                    }
-                },
-                {
-                    "optionId": "C",
-                    "text": {
-                        "en": "Signal",
-                        "hi": "संकेत"
-                    }
-                },
-                {
-                    "optionId": "D",
-                    "text": {
-                        "en": "Output",
-                        "hi": "आउटपुट"
-                    }
-                }
-            ],
-            "choiceInformation": {
-                "detailedDescription": "",
-                "summary": ""
+            "sectionChoices": [],
+            "sectionInstructions": {
+                "en": "SECTION - B",
+                "hi": "भाग - ब"
             }
         }
     ],

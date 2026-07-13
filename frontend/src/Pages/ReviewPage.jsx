@@ -63,6 +63,19 @@ function ReviewPage() {
   const [instrLang, setInstrLang] = useState("en");
   const [questionPaperId, setQuestionPaperId] = useState(null);
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(`section-${sectionId}`);
+    if (element) {
+      const bannerElement = document.getElementById("status-banner");
+      const offset = bannerElement ? bannerElement.offsetHeight + 20 : 100;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
     if (location.state) {
       const data = location.state.questionPaper || location.state;
@@ -236,7 +249,7 @@ function ReviewPage() {
 
       {/* ── Parsing Status Banner ───────────────────────────────────── */}
       {status && (
-        <div style={styles.statusBanner}>
+        <div style={styles.statusBanner} id="status-banner">
           <div style={styles.statusRow}>
             <div style={styles.statusItem}>
               <span style={styles.statusLabel}>Status</span>
@@ -268,6 +281,27 @@ function ReviewPage() {
                 </span>
               </div>
             </div>
+
+            {hasSections && (
+              <div style={styles.jumpItem}>
+                <span style={styles.statusLabel}>Jump to Section</span>
+                <div style={styles.jumpButtons}>
+                  {paperData.sections.map((section, sIdx) => {
+                    const sId = section.sectionId || `${sIdx + 1}`;
+                    return (
+                      <button
+                        key={sId}
+                        onClick={() => scrollToSection(section.sectionId || sIdx)}
+                        style={styles.jumpBtn}
+                        className="jump-btn-hover"
+                      >
+                        {sId}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Errors & Warnings */}
@@ -365,7 +399,11 @@ function ReviewPage() {
 
         {/* ── Sections-based questions ─────────────────────────────── */}
         {hasSections && paperData.sections.map((section, sIdx) => (
-          <div key={section.sectionId || sIdx} style={sectionStyles.card}>
+          <div
+            key={section.sectionId || sIdx}
+            id={`section-${section.sectionId || sIdx}`}
+            style={sectionStyles.card}
+          >
             {/* Section Header */}
             <div style={sectionStyles.header}>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
@@ -507,19 +545,24 @@ const styles = {
   },
   // ── Parsing Status Banner ─────────────────────────────────────
   statusBanner: {
+    position: "sticky",
+    top: "12px",
+    zIndex: 1000,
     maxWidth: "1000px",
     margin: "0 auto 24px",
     padding: "16px 20px",
     borderRadius: "14px",
     background: "#131d30",
     border: "1px solid #1e293b",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+    boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4)",
+    transition: "box-shadow 0.2s ease",
   },
   statusRow: {
     display: "flex",
     gap: "24px",
     flexWrap: "wrap",
     alignItems: "center",
+    width: "100%",
   },
   statusItem: {
     display: "flex",
@@ -563,6 +606,30 @@ const styles = {
     color: "#fbbf24",
     fontSize: "13px",
     marginBottom: "4px",
+  },
+  jumpItem: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "4px",
+    minWidth: "120px",
+    marginLeft: "auto",
+  },
+  jumpButtons: {
+    display: "flex",
+    gap: "8px",
+    flexWrap: "wrap",
+    alignItems: "center",
+  },
+  jumpBtn: {
+    background: "rgba(139, 92, 246, 0.12)",
+    border: "1px solid rgba(139, 92, 246, 0.35)",
+    borderRadius: "8px",
+    color: "#c4b5fd",
+    padding: "5px 12px",
+    fontSize: "12px",
+    fontWeight: "700",
+    cursor: "pointer",
+    transition: "all 0.2s ease-in-out",
   },
 };
 

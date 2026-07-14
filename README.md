@@ -133,6 +133,8 @@ This service parses question papers (PDFs/Images) into structured JSON schemas u
    ```bash
    # Windows (PowerShell)
    Copy-Item .env.example .env
+   # Windows (cmd)
+   copy .env.example .env
    # Linux / macOS
    cp .env.example .env
    ```
@@ -287,7 +289,7 @@ To verify your installation without uploading your own custom documents:
 ---
 
 ## 👥 Contributors (Team Parakh)
-* **Aaditya Pokhriyal** – Team Leader & AI Services Developer
+* **Aaditya Pokhriyal** – Team Leader & AI Services Developer & Backend Developer 
 * **Divyanshu** – AI Services Developer (Concept Originator) & Data Standardization Lead
 * **Gaurav Verma** – Backend & Integration Developer (Database Connectivity & Service Alignment) & Frontend Lead
 * **Anshu** – Frontend Developer

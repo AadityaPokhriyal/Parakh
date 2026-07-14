@@ -1,21 +1,8 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEvaluation, createBlankSheet } from "../context/EvaluationContext";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
-
-let _idCounter = 0;
-const nextId = () => `sheet-${Date.now()}-${++_idCounter}`;
-
-const createBlankSheet = (overrides = {}) => ({
-  id: nextId(),
-  studentName: "",
-  files: [],
-  dragActive: false,
-  uploadStatus: "idle", // idle | uploading | success | error
-  errorMessage: "",
-  responseData: null,
-  ...overrides,
-});
 
 const formatFileSize = (bytes) => {
   if (bytes === 0) return "0 Bytes";
@@ -25,27 +12,39 @@ const formatFileSize = (bytes) => {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
 };
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-const BATCH_COOLDOWN_MS = 5000; // 5s gap between sheets to respect Gemini RPM limits
-
 // ── Component ────────────────────────────────────────────────────────────────
 
 function UploadAnswersPage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { examPaperId, filename, totalMarks } = location.state || {};
+  const {
+    sheets,
+    isBulkUploading,
+    bulkProgress,
+    examPaperId: contextExamPaperId,
+    filename: contextFilename,
+    totalMarks: contextTotalMarks,
+    setExamInfo,
+    updateSheet,
+    handleAddSheet,
+    handleDuplicateSheet,
+    handleDeleteSheet,
+    handleResetSheet,
+    uploadSingleSheet,
+    handleSubmitAll,
+    isLoading: isContextLoading,
+  } = useEvaluation();
 
-  // Each entry in `sheets` is a self‑contained upload card
-  const [sheets, setSheets] = useState(() => [createBlankSheet()]);
+  const stateExamPaperId = location.state?.examPaperId;
+  const stateFilename = location.state?.filename;
+  const stateTotalMarks = location.state?.totalMarks;
 
-  // Bulk‑upload orchestration
-  const [isBulkUploading, setIsBulkUploading] = useState(false);
-  const [bulkProgress, setBulkProgress] = useState({ current: 0, total: 0, successCount: 0 });
+  const examPaperId = stateExamPaperId || contextExamPaperId;
+  const filename = stateFilename || contextFilename;
+  const totalMarks = stateTotalMarks !== undefined ? stateTotalMarks : contextTotalMarks;
 
   // We keep a Map of refs keyed by sheet id for file inputs
   const fileInputRefs = useRef({});
-
-  const backendBase = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
   // ── Guard ─────────────────────────────────────────────────────────────────
   if (!examPaperId) {
@@ -62,47 +61,12 @@ function UploadAnswersPage() {
     );
   }
 
-  // ── State helpers ─────────────────────────────────────────────────────────
-
-  const updateSheet = useCallback((id, updates) => {
-    setSheets((prev) => prev.map((s) => (s.id === id ? { ...s, ...updates } : s)));
-  }, []);
-
-  const handleAddSheet = () => {
-    setSheets((prev) => [...prev, createBlankSheet()]);
-  };
-
-  const handleDuplicateSheet = (id) => {
-    setSheets((prev) => {
-      const idx = prev.findIndex((s) => s.id === id);
-      if (idx === -1) return prev;
-      const source = prev[idx];
-      const duplicate = createBlankSheet({ studentName: source.studentName });
-      const next = [...prev];
-      next.splice(idx + 1, 0, duplicate);
-      return next;
-    });
-  };
-
-  const handleDeleteSheet = (id) => {
-    setSheets((prev) => {
-      if (prev.length <= 1) return prev;
-      return prev.filter((s) => s.id !== id);
-    });
-    // Clean up ref
-    delete fileInputRefs.current[id];
-  };
-
-  const handleResetSheet = (id) => {
-    updateSheet(id, {
-      files: [],
-      uploadStatus: "idle",
-      errorMessage: "",
-      responseData: null,
-    });
-    const input = fileInputRefs.current[id];
-    if (input) input.value = "";
-  };
+  // ── Initialize Context ────────────────────────────────────────────────────
+  useEffect(() => {
+    if (examPaperId && examPaperId !== contextExamPaperId) {
+      setExamInfo({ examPaperId, filename, totalMarks });
+    }
+  }, [examPaperId, filename, totalMarks, contextExamPaperId, setExamInfo]);
 
   // ── File handling (scoped per sheet) ──────────────────────────────────────
 
@@ -148,86 +112,14 @@ function UploadAnswersPage() {
     if (input) input.click();
   };
 
-  // ── Upload logic ──────────────────────────────────────────────────────────
-
-  const uploadSingleSheet = async (sheet) => {
-    const { id, files, studentName } = sheet;
-    if (files.length === 0) return false;
-
-    updateSheet(id, { uploadStatus: "uploading", errorMessage: "" });
-
-    const formData = new FormData();
-    formData.append("files", files[0]);
-    formData.append("question_paper_id", examPaperId);
-    if (studentName.trim()) formData.append("student_name", studentName.trim());
-
-    try {
-      const response = await fetch(`${backendBase}/api/evaluations/upload-answers`, {
-        method: "POST",
-        body: formData,
-      });
-
-      let data = null;
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
-        try { data = await response.json(); } catch { /* ignore parse error */ }
-      }
-
-      if (response.ok && data && data.success) {
-        updateSheet(id, { uploadStatus: "success", responseData: data });
-        return true;
-      } else {
-        const errMsg = (data && data.error) || (data && data.message) || `Server responded with status ${response.status}`;
-        updateSheet(id, { uploadStatus: "error", errorMessage: errMsg });
-        return false;
-      }
-    } catch (error) {
-      updateSheet(id, { uploadStatus: "error", errorMessage: error.message || "Failed to connect to the backend server." });
-      return false;
-    }
-  };
-
   const handleIndividualUpload = (id, e) => {
     e.preventDefault();
     const sheet = sheets.find((s) => s.id === id);
     if (sheet) uploadSingleSheet(sheet);
   };
 
-  const handleSubmitAll = async () => {
-    // Get the latest sheets state via a ref‑like pattern
-    const eligible = sheets.filter((s) => s.files.length > 0 && s.uploadStatus !== "success");
-    if (eligible.length === 0) return;
-
-    setIsBulkUploading(true);
-    setBulkProgress({ current: 0, total: eligible.length, successCount: 0 });
-
-    let successCount = 0;
-
-    for (let i = 0; i < eligible.length; i++) {
-      const ok = await uploadSingleSheet(eligible[i]);
-      if (ok) successCount++;
-      setBulkProgress({ current: i + 1, total: eligible.length, successCount });
-
-      // Wait before sending the next sheet to avoid Gemini API rate limits
-      if (i < eligible.length - 1) {
-        await delay(BATCH_COOLDOWN_MS);
-      }
-    }
-
-    setIsBulkUploading(false);
-  };
-
   const navigateToResults = () => {
-    const evaluations = sheets
-      .filter((s) => s.uploadStatus === "success" && s.responseData)
-      .map((s) => ({
-        id: s.id,
-        studentName: s.studentName || s.responseData?.evaluationData?.studentMetadata?.name || "Unknown Student",
-        filename: s.files[0]?.name || "answers.pdf",
-        evaluationId: s.responseData.evaluationId,
-        evaluationData: s.responseData.evaluationData,
-      }));
-    navigate("/evaluation/results", { state: { evaluations, totalMarks } });
+    navigate("/evaluation/results");
   };
 
   // ── Derived values ────────────────────────────────────────────────────────
@@ -279,8 +171,13 @@ function UploadAnswersPage() {
         )}
 
         {/* ── Sheet cards ─────────────────────────────────────────── */}
-        <div style={styles.sheetsContainer}>
-          {sheets.map((sheet, index) => {
+        {isContextLoading ? (
+          <div style={{ textAlign: "center", padding: "40px", color: "var(--text)" }}>
+            <p>Loading previous evaluations from database...</p>
+          </div>
+        ) : (
+          <div style={styles.sheetsContainer}>
+            {sheets.map((sheet, index) => {
             const isActive = isBulkUploading && sheet.uploadStatus === "uploading";
 
             return (
@@ -488,7 +385,8 @@ function UploadAnswersPage() {
               </div>
             );
           })}
-        </div>
+          </div>
+        )}
 
         {/* ── Add sheet button ────────────────────────────────────── */}
         {!globalDisabled && (
@@ -547,7 +445,6 @@ function UploadAnswersPage() {
             type="button"
             onClick={() => navigate("/")}
             style={styles.backButton}
-            disabled={globalDisabled}
           >
             Back to Home
           </button>
@@ -556,11 +453,10 @@ function UploadAnswersPage() {
             <button
               type="button"
               onClick={navigateToResults}
-              disabled={globalDisabled}
               style={{
                 ...styles.submitAllButton,
-                backgroundColor: globalDisabled ? "var(--border)" : "#10b981",
-                cursor: globalDisabled ? "not-allowed" : "pointer",
+                backgroundColor: "#10b981",
+                cursor: "pointer",
                 boxShadow: "0 4px 6px -1px rgba(16, 185, 129, 0.2), 0 2px 4px -1px rgba(16, 185, 129, 0.1)",
               }}
             >

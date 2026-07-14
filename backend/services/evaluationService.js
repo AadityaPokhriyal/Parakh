@@ -76,7 +76,38 @@ const storeEvaluation = async (examPaperId, evaluationData, pdfFilename, student
   return data;
 };
 
+/**
+ * Fetches all evaluation results for a specific question paper.
+ *
+ * @param {string} examPaperId - The UUID of the question paper
+ * @returns {Array} List of evaluation records
+ */
+const getEvaluationsByPaperId = async (examPaperId) => {
+  if (!supabase) {
+    const configError = new Error(
+      "Database configuration is missing. Supabase is not configured on this server."
+    );
+    configError.statusCode = 500;
+    throw configError;
+  }
+
+  const { data, error } = await supabase
+    .from("evaluations")
+    .select("*")
+    .eq("exam_paper_id", examPaperId)
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    const dbError = new Error(`Database error: ${error.message}`);
+    dbError.statusCode = 500;
+    throw dbError;
+  }
+
+  return data || [];
+};
+
 module.exports = {
   getQuestionPaperById,
   storeEvaluation,
+  getEvaluationsByPaperId,
 };

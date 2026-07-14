@@ -117,6 +117,40 @@ const uploadAnswers = async (req, res, next) => {
   }
 };
 
+const getEvaluations = async (req, res, next) => {
+  const { examPaperId } = req.params;
+  console.log(`[Evaluation] >>> Incoming GET /api/evaluations/paper/${examPaperId}`);
+
+  try {
+    if (!examPaperId) {
+      console.warn("[Evaluation] Validation failed: Missing examPaperId parameter.");
+      return res.status(400).json({
+        success: false,
+        error: "Missing examPaperId parameter.",
+      });
+    }
+
+    const data = await evaluationService.getEvaluationsByPaperId(examPaperId);
+    console.log(`[Evaluation] => Successfully retrieved ${data.length} evaluations.`);
+
+    return res.status(200).json({
+      success: true,
+      evaluations: data.map((item) => ({
+        id: item.id,
+        studentName: item.student_name,
+        filename: item.pdf_filename,
+        evaluationId: item.id,
+        evaluationData: item.parsed_data,
+        createdAt: item.created_at,
+      })),
+    });
+  } catch (error) {
+    console.error(`[Evaluation] [FATAL ERROR] => ${error.message}`);
+    next(error);
+  }
+};
+
 module.exports = {
   uploadAnswers,
+  getEvaluations,
 };

@@ -19,4 +19,10 @@ router.post(
   evaluationController.uploadAnswers
 );
 
+// GET /api/evaluations/paper/:examPaperId
+router.get(
+  "/paper/:examPaperId",
+  evaluationController.getEvaluations
+);
+
 module.exports = router;

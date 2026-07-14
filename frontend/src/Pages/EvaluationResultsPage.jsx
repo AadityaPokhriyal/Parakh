@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEvaluation } from "../context/EvaluationContext";
 
 // Helper to calculate total earned marks for a student evaluation
 const calculateTotalMarks = (evaluationData) => {
@@ -133,8 +134,7 @@ function EvaluationResultsPage() {
   const location = useLocation();
   const navigate = useNavigate();
   
-  const evaluations = location.state?.evaluations || [];
-  const totalMarks = location.state?.totalMarks;
+  const { evaluations, totalMarks, isBulkUploading, bulkProgress, examPaperId, filename } = useEvaluation();
   const [selectedId, setSelectedId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -146,6 +146,33 @@ function EvaluationResultsPage() {
   }, [evaluations, selectedId]);
 
   if (evaluations.length === 0) {
+    if (isBulkUploading) {
+      return (
+        <div style={styles.invalidContainer}>
+          <h2>Evaluating Student Answer Sheets...</h2>
+          <p style={{ color: "#94a3b8", margin: "12px 0 24px", maxWidth: "450px", textAlign: "center" }}>
+            AI evaluation is running in the background ({bulkProgress.current} of {bulkProgress.total} sheets processed). Results will automatically load on this page as they finish grading.
+          </p>
+          <div style={{ ...styles.backgroundProgressTrack, width: "300px", height: "8px", marginBottom: "24px" }}>
+            <div
+              style={{
+                ...styles.backgroundProgressFill,
+                width: `${bulkProgress.total > 0 ? (bulkProgress.current / bulkProgress.total) * 100 : 0}%`,
+              }}
+            />
+          </div>
+          <div style={{ display: "flex", gap: "12px" }}>
+            <button onClick={() => navigate("/evaluation/upload", { state: { examPaperId, filename, totalMarks } })} style={styles.backHomeBtn}>
+              ← Back to Uploading Sheets
+            </button>
+            <button onClick={() => navigate("/")} style={{ ...styles.sidebarReturnBtn, marginTop: 0 }}>
+              Return Home
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div style={styles.invalidContainer}>
         <h2>No Assessment Results Found</h2>
@@ -187,6 +214,25 @@ function EvaluationResultsPage() {
         
         {/* Left column: Student list selection */}
         <div style={styles.sidebar}>
+          {isBulkUploading && (
+            <div style={styles.backgroundProgressBanner}>
+              <div style={styles.backgroundProgressHeader}>
+                <span style={styles.backgroundProgressLabel}>
+                  Evaluating: {bulkProgress.current} / {bulkProgress.total} sheets
+                </span>
+                <span style={styles.backgroundSpinner}>⟳</span>
+              </div>
+              <div style={styles.backgroundProgressTrack}>
+                <div
+                  style={{
+                    ...styles.backgroundProgressFill,
+                    width: `${bulkProgress.total > 0 ? (bulkProgress.current / bulkProgress.total) * 100 : 0}%`,
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
           <div style={styles.searchWrapper}>
             <input
               type="text"
@@ -237,12 +283,20 @@ function EvaluationResultsPage() {
             )}
           </div>
 
-          <button
-            onClick={() => navigate("/")}
-            style={styles.sidebarReturnBtn}
-          >
-            ← Return to Home
-          </button>
+          <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: "10px" }}>
+            <button
+              onClick={() => navigate("/evaluation/upload", { state: { examPaperId, filename, totalMarks } })}
+              style={{ ...styles.sidebarReturnBtn, color: "#c084fc", borderColor: "rgba(192, 132, 252, 0.3)" }}
+            >
+              ← Back to Uploading Sheets
+            </button>
+            <button
+              onClick={() => navigate("/")}
+              style={styles.sidebarReturnBtn}
+            >
+              ← Return to Home
+            </button>
+          </div>
         </div>
 
         {/* Right column: Selected student analysis */}
@@ -668,6 +722,46 @@ const styles = {
     color: "#f87171",
     fontWeight: "600",
   },
+  backgroundProgressBanner: {
+    padding: "12px 14px",
+    borderRadius: "10px",
+    background: "rgba(139, 92, 246, 0.08)",
+    border: "1px solid rgba(139, 92, 246, 0.2)",
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    marginBottom: "16px",
+  },
+  backgroundProgressHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  backgroundProgressLabel: {
+    fontSize: "12px",
+    fontWeight: "600",
+    color: "#cbd5e1",
+  },
+  backgroundSpinner: {
+    fontSize: "13px",
+    color: "#a855f7",
+    fontWeight: "bold",
+    display: "inline-block",
+    animation: "spin 1.5s infinite linear",
+  },
+  backgroundProgressTrack: {
+    height: "4px",
+    width: "100%",
+    backgroundColor: "#1e293b",
+    borderRadius: "2px",
+    overflow: "hidden",
+  },
+  backgroundProgressFill: {
+    height: "100%",
+    background: "linear-gradient(90deg, #a855f7, #3b82f6)",
+    borderRadius: "2px",
+    transition: "width 0.4s ease",
+  },
 };
 
 // ── Styles for recursive AnswerBlock cards ──────────────────────────────────────
@@ -805,5 +899,22 @@ const blockStyles = {
     width: "100%",
   },
 };
+
+// ── Inject spin keyframes ───────────────────────────────────────────────────
+if (typeof document !== "undefined") {
+  const id = "results-page-keyframes";
+  if (!document.getElementById(id)) {
+    const styleSheet = document.createElement("style");
+    styleSheet.id = id;
+    styleSheet.type = "text/css";
+    styleSheet.innerText = `
+      @keyframes spin {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+  }
+}
 
 export default EvaluationResultsPage;

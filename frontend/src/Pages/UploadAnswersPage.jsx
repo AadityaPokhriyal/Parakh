@@ -1,23 +1,53 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+let _idCounter = 0;
+const nextId = () => `sheet-${Date.now()}-${++_idCounter}`;
+
+const createBlankSheet = (overrides = {}) => ({
+  id: nextId(),
+  studentName: "",
+  files: [],
+  dragActive: false,
+  uploadStatus: "idle", // idle | uploading | success | error
+  errorMessage: "",
+  responseData: null,
+  ...overrides,
+});
+
+const formatFileSize = (bytes) => {
+  if (bytes === 0) return "0 Bytes";
+  const k = 1024;
+  const sizes = ["Bytes", "KB", "MB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+};
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const BATCH_COOLDOWN_MS = 5000; // 5s gap between sheets to respect Gemini RPM limits
+
+// ── Component ────────────────────────────────────────────────────────────────
 
 function UploadAnswersPage() {
   const location = useLocation();
   const navigate = useNavigate();
-
   const { examPaperId, filename } = location.state || {};
 
-  const [studentName, setStudentName] = useState("");
-  const [files, setFiles] = useState([]);
-  const [dragActive, setDragActive] = useState(false);
-  const [uploadStatus, setUploadStatus] = useState("idle"); // idle | uploading | success | error
-  const [errorMessage, setErrorMessage] = useState("");
-  const [responseData, setResponseData] = useState(null);
-  const fileInputRef = useRef(null);
+  // Each entry in `sheets` is a self‑contained upload card
+  const [sheets, setSheets] = useState(() => [createBlankSheet()]);
+
+  // Bulk‑upload orchestration
+  const [isBulkUploading, setIsBulkUploading] = useState(false);
+  const [bulkProgress, setBulkProgress] = useState({ current: 0, total: 0, successCount: 0 });
+
+  // We keep a Map of refs keyed by sheet id for file inputs
+  const fileInputRefs = useRef({});
 
   const backendBase = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
-  // Validate accessibility
+  // ── Guard ─────────────────────────────────────────────────────────────────
   if (!examPaperId) {
     return (
       <div style={styles.invalidContainer}>
@@ -32,90 +62,104 @@ function UploadAnswersPage() {
     );
   }
 
-  // Handle drag events
-  const handleDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
+  // ── State helpers ─────────────────────────────────────────────────────────
+
+  const updateSheet = useCallback((id, updates) => {
+    setSheets((prev) => prev.map((s) => (s.id === id ? { ...s, ...updates } : s)));
+  }, []);
+
+  const handleAddSheet = () => {
+    setSheets((prev) => [...prev, createBlankSheet()]);
   };
 
-  // Handle drop events
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-
-    if (e.dataTransfer.files) {
-      validateAndSetFile(e.dataTransfer.files);
-    }
+  const handleDuplicateSheet = (id) => {
+    setSheets((prev) => {
+      const idx = prev.findIndex((s) => s.id === id);
+      if (idx === -1) return prev;
+      const source = prev[idx];
+      const duplicate = createBlankSheet({ studentName: source.studentName });
+      const next = [...prev];
+      next.splice(idx + 1, 0, duplicate);
+      return next;
+    });
   };
 
-  // Handle file input selection
-  const handleFileChange = (e) => {
-    if (e.target.files) {
-      validateAndSetFile(e.target.files);
-    }
+  const handleDeleteSheet = (id) => {
+    setSheets((prev) => {
+      if (prev.length <= 1) return prev;
+      return prev.filter((s) => s.id !== id);
+    });
+    // Clean up ref
+    delete fileInputRefs.current[id];
   };
 
-  // Validate single PDF selection
-  const validateAndSetFile = (fileList) => {
+  const handleResetSheet = (id) => {
+    updateSheet(id, {
+      files: [],
+      uploadStatus: "idle",
+      errorMessage: "",
+      responseData: null,
+    });
+    const input = fileInputRefs.current[id];
+    if (input) input.value = "";
+  };
+
+  // ── File handling (scoped per sheet) ──────────────────────────────────────
+
+  const validateAndSetFile = (id, fileList) => {
     const selectedFiles = Array.from(fileList);
     if (selectedFiles.length === 0) return;
-
     const firstFile = selectedFiles[0];
 
     if (firstFile.type === "application/pdf" || firstFile.name.toLowerCase().endsWith(".pdf")) {
       if (selectedFiles.length > 1) {
-        setErrorMessage("Please select only one PDF answer sheet.");
-        setUploadStatus("error");
-        setFiles([]);
+        updateSheet(id, { errorMessage: "Please select only one PDF answer sheet.", uploadStatus: "error", files: [] });
         return;
       }
-      setFiles([firstFile]);
-      setUploadStatus("idle");
-      setErrorMessage("");
+      updateSheet(id, { files: [firstFile], uploadStatus: "idle", errorMessage: "" });
     } else {
-      setErrorMessage("Invalid file type. The student answer sheet must be a PDF file.");
-      setUploadStatus("error");
-      setFiles([]);
+      updateSheet(id, { errorMessage: "Invalid file type. The student answer sheet must be a PDF file.", uploadStatus: "error", files: [] });
     }
   };
 
-  const handleReset = () => {
-    setFiles([]);
-    setStudentName("");
-    setUploadStatus("idle");
-    setErrorMessage("");
-    setResponseData(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  };
-
-  const onButtonClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleUpload = async (e) => {
+  const handleDrag = (id, e) => {
     e.preventDefault();
-    if (files.length === 0) return;
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      updateSheet(id, { dragActive: true });
+    } else if (e.type === "dragleave") {
+      updateSheet(id, { dragActive: false });
+    }
+  };
 
-    setUploadStatus("uploading");
-    setErrorMessage("");
+  const handleDrop = (id, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    updateSheet(id, { dragActive: false });
+    if (e.dataTransfer.files) validateAndSetFile(id, e.dataTransfer.files);
+  };
+
+  const handleFileChange = (id, e) => {
+    if (e.target.files) validateAndSetFile(id, e.target.files);
+  };
+
+  const triggerFilePicker = (id) => {
+    const input = fileInputRefs.current[id];
+    if (input) input.click();
+  };
+
+  // ── Upload logic ──────────────────────────────────────────────────────────
+
+  const uploadSingleSheet = async (sheet) => {
+    const { id, files, studentName } = sheet;
+    if (files.length === 0) return false;
+
+    updateSheet(id, { uploadStatus: "uploading", errorMessage: "" });
 
     const formData = new FormData();
     formData.append("files", files[0]);
     formData.append("question_paper_id", examPaperId);
-    
-    if (studentName.trim()) {
-      formData.append("student_name", studentName.trim());
-    }
+    if (studentName.trim()) formData.append("student_name", studentName.trim());
 
     try {
       const response = await fetch(`${backendBase}/api/evaluations/upload-answers`, {
@@ -126,257 +170,374 @@ function UploadAnswersPage() {
       let data = null;
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
-        try {
-          data = await response.json();
-        } catch (jsonErr) {
-          console.error("Failed to parse JSON response:", jsonErr);
-        }
+        try { data = await response.json(); } catch { /* ignore parse error */ }
       }
 
       if (response.ok && data && data.success) {
-        setUploadStatus("success");
-        setResponseData(data);
+        updateSheet(id, { uploadStatus: "success", responseData: data });
+        return true;
       } else {
-        setUploadStatus("error");
         const errMsg = (data && data.error) || (data && data.message) || `Server responded with status ${response.status}`;
-        setErrorMessage(errMsg);
+        updateSheet(id, { uploadStatus: "error", errorMessage: errMsg });
+        return false;
       }
     } catch (error) {
-      console.error("Network error during answer evaluation:", error);
-      setUploadStatus("error");
-      setErrorMessage(error.message || "Failed to connect to the backend server.");
+      updateSheet(id, { uploadStatus: "error", errorMessage: error.message || "Failed to connect to the backend server." });
+      return false;
     }
   };
 
-  const formatFileSize = (bytes) => {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+  const handleIndividualUpload = (id, e) => {
+    e.preventDefault();
+    const sheet = sheets.find((s) => s.id === id);
+    if (sheet) uploadSingleSheet(sheet);
   };
+
+  const handleSubmitAll = async () => {
+    // Get the latest sheets state via a ref‑like pattern
+    const eligible = sheets.filter((s) => s.files.length > 0 && s.uploadStatus !== "success");
+    if (eligible.length === 0) return;
+
+    setIsBulkUploading(true);
+    setBulkProgress({ current: 0, total: eligible.length, successCount: 0 });
+
+    let successCount = 0;
+
+    for (let i = 0; i < eligible.length; i++) {
+      const ok = await uploadSingleSheet(eligible[i]);
+      if (ok) successCount++;
+      setBulkProgress({ current: i + 1, total: eligible.length, successCount });
+
+      // Wait before sending the next sheet to avoid Gemini API rate limits
+      if (i < eligible.length - 1) {
+        await delay(BATCH_COOLDOWN_MS);
+      }
+    }
+
+    setIsBulkUploading(false);
+  };
+
+  // ── Derived values ────────────────────────────────────────────────────────
+
+  const eligibleCount = sheets.filter((s) => s.files.length > 0 && s.uploadStatus !== "success").length;
+  const anyUploading = sheets.some((s) => s.uploadStatus === "uploading");
+  const globalDisabled = isBulkUploading || anyUploading;
+
+  // ── Render ────────────────────────────────────────────────────────────────
 
   return (
     <div style={styles.container}>
-      <div style={styles.card}>
+      <div style={styles.outerCard}>
+        {/* ── Page header ─────────────────────────────────────────── */}
         <div>
-          <h2 style={styles.title}>Step 3: Upload Student Answer Sheet</h2>
-          <p style={styles.subtitle}>Upload a student's answer sheet for AI grading against the active question paper</p>
+          <h2 style={styles.title}>Step 3: Upload Student Answer Sheets</h2>
+          <p style={styles.subtitle}>
+            Upload one or more student answer sheets for AI grading against the active question paper
+          </p>
         </div>
 
-        {/* Associated Question Paper Details */}
+        {/* ── Associated question paper ───────────────────────────── */}
         <div style={styles.infoCard}>
           <h4 style={styles.infoTitle}>Associated Question Paper</h4>
           <p style={styles.infoText}>📄 {filename}</p>
           <p style={styles.infoSubtext}>Exam Paper ID: {examPaperId}</p>
         </div>
 
-        <form onSubmit={handleUpload} style={styles.form}>
-          {/* Student Name Input */}
-          <div style={styles.inputGroup}>
-            <label htmlFor="student-name-input" style={styles.label}>Student Name</label>
-            <input
-              id="student-name-input"
-              type="text"
-              placeholder="Enter student name (e.g. John Doe)"
-              value={studentName}
-              onChange={(e) => setStudentName(e.target.value)}
-              style={styles.textInput}
-              disabled={uploadStatus === "uploading"}
-            />
-          </div>
-
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".pdf,application/pdf"
-            onChange={handleFileChange}
-            style={styles.hiddenInput}
-          />
-
-          {/* Drag & Drop Area */}
-          {files.length === 0 && (
-            <div
-              style={{
-                ...styles.dropZone,
-                borderColor: dragActive ? "var(--accent)" : "var(--border)",
-                backgroundColor: dragActive ? "var(--accent-bg)" : "transparent",
-              }}
-              onDragEnter={handleDrag}
-              onDragOver={handleDrag}
-              onDragLeave={handleDrag}
-              onDrop={handleDrop}
-              onClick={onButtonClick}
-            >
-              <div style={styles.iconContainer}>
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="var(--accent)"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                  <polyline points="14 2 14 8 20 8" />
-                  <path d="M9 15h1.5a1.5 1.5 0 0 0 0-3H9v4Z" />
-                  <path d="M12 12v4" />
-                  <path d="M12 12h2" />
-                </svg>
-              </div>
-              <p style={styles.dropText}>
-                Drag & drop student's answer sheet here, or <span style={styles.browseText}>browse</span>
-              </p>
-              <p style={styles.limitText}>Only PDF files accepted (Max 20 MB)</p>
+        {/* ── Global progress bar (visible during bulk upload) ───── */}
+        {isBulkUploading && (
+          <div style={styles.globalProgressWrapper}>
+            <div style={styles.globalProgressHeader}>
+              <span style={styles.globalProgressLabel}>
+                Evaluating Sheets: {bulkProgress.current} / {bulkProgress.total} completed
+              </span>
+              <span style={styles.globalProgressSuccess}>
+                ✓ {bulkProgress.successCount} successful
+              </span>
             </div>
-          )}
+            <div style={styles.globalProgressTrack}>
+              <div
+                style={{
+                  ...styles.globalProgressFill,
+                  width: `${bulkProgress.total > 0 ? (bulkProgress.current / bulkProgress.total) * 100 : 0}%`,
+                }}
+              />
+            </div>
+          </div>
+        )}
 
-          {/* Selected File Details */}
-          {files.length > 0 && (
-            <div style={styles.fileDetailsCard}>
-              <div style={styles.fileDetailsRow}>
-                <div style={styles.pdfBadge}>
-                  <span style={styles.pdfBadgeText}>PDF</span>
+        {/* ── Sheet cards ─────────────────────────────────────────── */}
+        <div style={styles.sheetsContainer}>
+          {sheets.map((sheet, index) => {
+            const isActive = isBulkUploading && sheet.uploadStatus === "uploading";
+
+            return (
+              <div
+                key={sheet.id}
+                style={{
+                  ...styles.sheetCard,
+                  ...(isActive ? styles.sheetCardActive : {}),
+                  ...(sheet.uploadStatus === "success" ? styles.sheetCardSuccess : {}),
+                  ...(sheet.uploadStatus === "error" ? styles.sheetCardError : {}),
+                }}
+              >
+                {/* Card header */}
+                <div style={styles.sheetHeader}>
+                  <div style={styles.sheetHeaderLeft}>
+                    <span style={styles.sheetBadge}>#{index + 1}</span>
+                    <span style={styles.sheetHeaderTitle}>Answer Sheet</span>
+                    {sheet.uploadStatus === "success" && (
+                      <span style={styles.statusTagSuccess}>✓ Evaluated</span>
+                    )}
+                    {sheet.uploadStatus === "error" && (
+                      <span style={styles.statusTagError}>✕ Failed</span>
+                    )}
+                    {sheet.uploadStatus === "uploading" && (
+                      <span style={styles.statusTagUploading}>⟳ Evaluating…</span>
+                    )}
+                  </div>
+                  {sheets.length > 1 && !globalDisabled && (
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteSheet(sheet.id)}
+                      style={styles.deleteSheetButton}
+                      title="Remove this answer sheet"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                      </svg>
+                    </button>
+                  )}
                 </div>
-                <div style={styles.fileMeta}>
-                  <p style={styles.fileName}>{files[0].name}</p>
-                  <p style={styles.fileSize}>{formatFileSize(files[0].size)}</p>
+
+                {/* Student name input */}
+                <div style={styles.inputGroup}>
+                  <label htmlFor={`student-name-${sheet.id}`} style={styles.label}>Student Name</label>
+                  <input
+                    id={`student-name-${sheet.id}`}
+                    type="text"
+                    placeholder="Enter student name (e.g. John Doe)"
+                    value={sheet.studentName}
+                    onChange={(e) => updateSheet(sheet.id, { studentName: e.target.value })}
+                    style={styles.textInput}
+                    disabled={globalDisabled || sheet.uploadStatus === "success"}
+                  />
                 </div>
-                {uploadStatus !== "uploading" && (
+
+                {/* Hidden file input */}
+                <input
+                  ref={(el) => { fileInputRefs.current[sheet.id] = el; }}
+                  type="file"
+                  accept=".pdf,application/pdf"
+                  onChange={(e) => handleFileChange(sheet.id, e)}
+                  style={styles.hiddenInput}
+                />
+
+                {/* Drop zone (shown when no file selected) */}
+                {sheet.files.length === 0 && sheet.uploadStatus !== "success" && (
+                  <div
+                    style={{
+                      ...styles.dropZone,
+                      borderColor: sheet.dragActive ? "var(--accent)" : "var(--border)",
+                      backgroundColor: sheet.dragActive ? "var(--accent-bg)" : "transparent",
+                      pointerEvents: globalDisabled ? "none" : "auto",
+                      opacity: globalDisabled ? 0.5 : 1,
+                    }}
+                    onDragEnter={(e) => handleDrag(sheet.id, e)}
+                    onDragOver={(e) => handleDrag(sheet.id, e)}
+                    onDragLeave={(e) => handleDrag(sheet.id, e)}
+                    onDrop={(e) => handleDrop(sheet.id, e)}
+                    onClick={() => triggerFilePicker(sheet.id)}
+                  >
+                    <div style={styles.iconContainer}>
+                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                        <polyline points="14 2 14 8 20 8" />
+                      </svg>
+                    </div>
+                    <p style={styles.dropText}>
+                      Drag & drop answer sheet here, or <span style={styles.browseText}>browse</span>
+                    </p>
+                    <p style={styles.limitText}>Only PDF files accepted (Max 20 MB)</p>
+                  </div>
+                )}
+
+                {/* Selected file details */}
+                {sheet.files.length > 0 && (
+                  <div style={styles.fileDetailsCard}>
+                    <div style={styles.fileDetailsRow}>
+                      <div style={styles.pdfBadge}>
+                        <span style={styles.pdfBadgeText}>PDF</span>
+                      </div>
+                      <div style={styles.fileMeta}>
+                        <p style={styles.fileName}>{sheet.files[0].name}</p>
+                        <p style={styles.fileSize}>{formatFileSize(sheet.files[0].size)}</p>
+                      </div>
+                      {sheet.uploadStatus !== "uploading" && sheet.uploadStatus !== "success" && !globalDisabled && (
+                        <button
+                          type="button"
+                          onClick={() => handleResetSheet(sheet.id)}
+                          style={styles.removeButton}
+                          title="Remove selected file"
+                        >
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Per‑card uploading indicator */}
+                    {sheet.uploadStatus === "uploading" && (
+                      <div style={styles.progressContainer}>
+                        <div style={styles.progressBarContainer}>
+                          <div style={styles.progressBar} />
+                        </div>
+                        <p style={styles.progressText}>Evaluating answer sheet with AI, please wait…</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Per‑card error */}
+                {sheet.uploadStatus === "error" && sheet.errorMessage && (
+                  <div style={styles.errorAlert}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 8, flexShrink: 0 }}>
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="12" />
+                      <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <span>{sheet.errorMessage}</span>
+                  </div>
+                )}
+
+                {/* Per‑card success */}
+                {sheet.uploadStatus === "success" && (
+                  <div style={styles.successAlert}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 8, flexShrink: 0 }}>
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    <div>
+                      <strong style={{ display: "block" }}>Evaluation Completed Successfully!</strong>
+                      <span style={{ fontSize: "13px" }}>
+                        Record ID: {sheet.responseData?.evaluationId}. Evaluated student: {sheet.responseData?.evaluationData?.studentMetadata?.name || sheet.studentName || "Unknown"}.
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Per‑card action row */}
+                <div style={styles.cardActionRow}>
+                  {/* Duplicate */}
                   <button
                     type="button"
-                    onClick={handleReset}
-                    style={styles.removeButton}
-                    title="Remove selected file"
+                    onClick={() => handleDuplicateSheet(sheet.id)}
+                    style={styles.duplicateButton}
+                    disabled={globalDisabled}
+                    title="Duplicate this card below"
                   >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                     </svg>
+                    Duplicate
                   </button>
-                )}
-              </div>
 
-              {/* Uploading progress bar */}
-              {uploadStatus === "uploading" && (
-                <div style={styles.progressContainer}>
-                  <div style={styles.progressBarContainer}>
-                    <div style={styles.progressBar}></div>
-                  </div>
-                  <p style={styles.progressText}>Evaluating answer sheet with AI, please wait...</p>
+                  {/* Individual submit */}
+                  {sheet.files.length > 0 && sheet.uploadStatus !== "success" && (
+                    <button
+                      type="button"
+                      onClick={(e) => handleIndividualUpload(sheet.id, e)}
+                      disabled={globalDisabled}
+                      style={{
+                        ...styles.individualSubmitButton,
+                        backgroundColor: globalDisabled ? "var(--border)" : "var(--accent)",
+                        cursor: globalDisabled ? "not-allowed" : "pointer",
+                      }}
+                    >
+                      {sheet.uploadStatus === "uploading" ? "Evaluating…" : "Upload & Evaluate"}
+                    </button>
+                  )}
+
+                  {/* Reset (after success/error) */}
+                  {(sheet.uploadStatus === "success" || sheet.uploadStatus === "error") && !globalDisabled && (
+                    <button
+                      type="button"
+                      onClick={() => handleResetSheet(sheet.id)}
+                      style={styles.resetButton}
+                    >
+                      Reset
+                    </button>
+                  )}
                 </div>
-              )}
-            </div>
-          )}
-
-          {/* Error Alert */}
-          {uploadStatus === "error" && errorMessage && (
-            <div style={styles.errorAlert}>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#ef4444"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{ marginRight: 8, flexShrink: 0 }}
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-              <span>{errorMessage}</span>
-            </div>
-          )}
-
-          {/* Success Alert */}
-          {uploadStatus === "success" && (
-            <div style={styles.successAlert}>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#10b981"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{ marginRight: 8, flexShrink: 0 }}
-              >
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-              </svg>
-              <div>
-                <strong style={{ display: "block" }}>Evaluation Completed Successfully!</strong>
-                <span style={{ fontSize: "13px" }}>
-                  Record ID: {responseData?.evaluationId}. Evaluated student: {responseData?.evaluationData?.studentMetadata?.name || studentName || "Unknown"}.
-                </span>
               </div>
-            </div>
-          )}
+            );
+          })}
+        </div>
 
-          {/* Action Row */}
-          <div style={styles.actionRow}>
-            <button
-              type="button"
-              onClick={() => navigate("/")}
-              style={styles.backButton}
-              disabled={uploadStatus === "uploading"}
-            >
-              Back to Home
-            </button>
+        {/* ── Add sheet button ────────────────────────────────────── */}
+        {!globalDisabled && (
+          <button
+            type="button"
+            onClick={handleAddSheet}
+            style={styles.addSheetButton}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Add Another Answer Sheet
+          </button>
+        )}
 
-            {files.length > 0 && uploadStatus !== "success" && (
-              <button
-                type="submit"
-                disabled={uploadStatus === "uploading"}
-                style={{
-                  ...styles.submitButton,
-                  backgroundColor: uploadStatus === "uploading" ? "var(--border)" : "var(--accent)",
-                  cursor: uploadStatus === "uploading" ? "not-allowed" : "pointer",
-                }}
-              >
-                {uploadStatus === "uploading" ? "Evaluating..." : "Upload & Evaluate Answers"}
-              </button>
-            )}
-
-            {uploadStatus === "success" && (
-              <button
-                type="button"
-                onClick={handleReset}
-                style={{
-                  ...styles.submitButton,
-                  backgroundColor: "var(--accent)",
-                }}
-              >
-                Evaluate Another Sheet
-              </button>
-            )}
+        {/* ── Bulk progress summary (after completion) ────────────── */}
+        {!isBulkUploading && bulkProgress.total > 0 && (
+          <div style={styles.bulkSummary}>
+            <span style={styles.bulkSummaryText}>
+              Batch complete — {bulkProgress.successCount} of {bulkProgress.total} sheets evaluated successfully
+            </span>
           </div>
-        </form>
+        )}
+
+        {/* ── Global action row ──────────────────────────────────── */}
+        <div style={styles.globalActionRow}>
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            style={styles.backButton}
+            disabled={globalDisabled}
+          >
+            Back to Home
+          </button>
+
+          <button
+            type="button"
+            onClick={handleSubmitAll}
+            disabled={globalDisabled || eligibleCount === 0}
+            style={{
+              ...styles.submitAllButton,
+              backgroundColor: globalDisabled || eligibleCount === 0 ? "var(--border)" : "var(--accent)",
+              cursor: globalDisabled || eligibleCount === 0 ? "not-allowed" : "pointer",
+            }}
+          >
+            {isBulkUploading
+              ? `Evaluating… (${bulkProgress.current}/${bulkProgress.total})`
+              : `Submit All (${eligibleCount} sheet${eligibleCount !== 1 ? "s" : ""})`}
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
+// ── Styles ───────────────────────────────────────────────────────────────────
+
 const styles = {
   container: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
     padding: "40px 20px",
     width: "100%",
     minHeight: "100vh",
@@ -393,16 +554,9 @@ const styles = {
     backgroundColor: "var(--bg)",
     color: "var(--text-h)",
   },
-  card: {
+  outerCard: {
     width: "100%",
-    maxWidth: "600px",
-    padding: "36px",
-    borderRadius: "16px",
-    border: "1px solid var(--border)",
-    background: "var(--bg)",
-    boxShadow: "var(--shadow)",
-    textAlign: "left",
-    boxSizing: "border-box",
+    maxWidth: "680px",
     display: "flex",
     flexDirection: "column",
     gap: "24px",
@@ -419,6 +573,8 @@ const styles = {
     fontSize: "15px",
     lineHeight: "140%",
   },
+
+  // Info card
   infoCard: {
     background: "var(--accent-bg)",
     border: "1px solid var(--accent-border, rgba(192, 132, 252, 0.3))",
@@ -436,131 +592,229 @@ const styles = {
     textTransform: "uppercase",
     letterSpacing: "0.5px",
   },
-  infoText: {
-    margin: 0,
-    fontSize: "15px",
-    color: "var(--text-h)",
-  },
-  infoSubtext: {
-    margin: 0,
-    fontSize: "12px",
-    color: "var(--text)",
-  },
-  form: {
+  infoText: { margin: 0, fontSize: "15px", color: "var(--text-h)" },
+  infoSubtext: { margin: 0, fontSize: "12px", color: "var(--text)" },
+
+  // Global progress
+  globalProgressWrapper: {
+    padding: "16px 20px",
+    borderRadius: "12px",
+    background: "var(--accent-bg)",
+    border: "1px solid var(--accent-border, rgba(192, 132, 252, 0.3))",
     display: "flex",
     flexDirection: "column",
-    gap: "20px",
+    gap: "10px",
   },
-  inputGroup: {
+  globalProgressHeader: {
     display: "flex",
-    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap",
     gap: "8px",
   },
-  label: {
+  globalProgressLabel: {
     fontSize: "14px",
     fontWeight: "600",
     color: "var(--text-h)",
   },
+  globalProgressSuccess: {
+    fontSize: "13px",
+    fontWeight: "600",
+    color: "#10b981",
+  },
+  globalProgressTrack: {
+    height: "8px",
+    width: "100%",
+    backgroundColor: "var(--border)",
+    borderRadius: "4px",
+    overflow: "hidden",
+  },
+  globalProgressFill: {
+    height: "100%",
+    background: "linear-gradient(90deg, #a855f7, #c084fc)",
+    borderRadius: "4px",
+    transition: "width 0.4s ease",
+  },
+
+  // Sheet list
+  sheetsContainer: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+  },
+
+  // Individual sheet card
+  sheetCard: {
+    padding: "24px",
+    borderRadius: "14px",
+    border: "1px solid var(--border)",
+    background: "var(--bg)",
+    boxShadow: "rgba(0,0,0,0.06) 0 4px 12px -2px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+    transition: "box-shadow 0.3s ease, border-color 0.3s ease",
+  },
+  sheetCardActive: {
+    borderColor: "var(--accent)",
+    boxShadow: "0 0 0 3px var(--accent-bg), rgba(0,0,0,0.06) 0 4px 12px -2px",
+  },
+  sheetCardSuccess: {
+    borderColor: "rgba(16, 185, 129, 0.4)",
+  },
+  sheetCardError: {
+    borderColor: "rgba(239, 68, 68, 0.3)",
+  },
+
+  // Sheet header
+  sheetHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  sheetHeaderLeft: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+  },
+  sheetBadge: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "28px",
+    height: "28px",
+    borderRadius: "8px",
+    background: "var(--accent-bg)",
+    color: "var(--accent)",
+    fontSize: "13px",
+    fontWeight: "700",
+  },
+  sheetHeaderTitle: {
+    fontSize: "16px",
+    fontWeight: "600",
+    color: "var(--text-h)",
+  },
+  statusTagSuccess: {
+    fontSize: "11px",
+    fontWeight: "700",
+    color: "#10b981",
+    background: "rgba(16, 185, 129, 0.1)",
+    padding: "3px 8px",
+    borderRadius: "6px",
+    textTransform: "uppercase",
+    letterSpacing: "0.3px",
+  },
+  statusTagError: {
+    fontSize: "11px",
+    fontWeight: "700",
+    color: "#ef4444",
+    background: "rgba(239, 68, 68, 0.1)",
+    padding: "3px 8px",
+    borderRadius: "6px",
+    textTransform: "uppercase",
+    letterSpacing: "0.3px",
+  },
+  statusTagUploading: {
+    fontSize: "11px",
+    fontWeight: "700",
+    color: "var(--accent)",
+    background: "var(--accent-bg)",
+    padding: "3px 8px",
+    borderRadius: "6px",
+    textTransform: "uppercase",
+    letterSpacing: "0.3px",
+  },
+  deleteSheetButton: {
+    background: "transparent",
+    border: "none",
+    color: "var(--text)",
+    cursor: "pointer",
+    padding: "6px",
+    borderRadius: "6px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    transition: "color 0.2s, background 0.2s",
+  },
+
+  // Form fields
+  inputGroup: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "6px",
+  },
+  label: {
+    fontSize: "13px",
+    fontWeight: "600",
+    color: "var(--text-h)",
+  },
   textInput: {
-    padding: "12px 16px",
+    padding: "10px 14px",
     borderRadius: "8px",
     border: "1px solid var(--border)",
     background: "var(--code-bg)",
     color: "var(--text-h)",
-    fontSize: "15px",
+    fontSize: "14px",
     outline: "none",
     transition: "border-color 0.2s ease",
   },
-  hiddenInput: {
-    display: "none",
-  },
+  hiddenInput: { display: "none" },
+
+  // Drop zone
   dropZone: {
     borderWidth: "2px",
     borderStyle: "dashed",
     borderRadius: "12px",
-    padding: "40px 20px",
+    padding: "30px 20px",
     textAlign: "center",
     cursor: "pointer",
     transition: "border-color 0.2s ease, background-color 0.2s ease",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "12px",
+    gap: "10px",
   },
   iconContainer: {
-    width: "64px",
-    height: "64px",
+    width: "56px",
+    height: "56px",
     borderRadius: "50%",
     backgroundColor: "var(--accent-bg)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
-  dropText: {
-    fontSize: "15px",
-    color: "var(--text-h)",
-    margin: 0,
-  },
-  browseText: {
-    color: "var(--accent)",
-    fontWeight: "600",
-    textDecoration: "underline",
-  },
-  limitText: {
-    fontSize: "12px",
-    color: "var(--text)",
-    margin: 0,
-  },
+  dropText: { fontSize: "14px", color: "var(--text-h)", margin: 0 },
+  browseText: { color: "var(--accent)", fontWeight: "600", textDecoration: "underline" },
+  limitText: { fontSize: "12px", color: "var(--text)", margin: 0 },
+
+  // File details
   fileDetailsCard: {
-    padding: "16px",
+    padding: "14px",
     borderRadius: "10px",
     border: "1px solid var(--border)",
     backgroundColor: "var(--code-bg)",
     display: "flex",
     flexDirection: "column",
-    gap: "12px",
+    gap: "10px",
   },
-  fileDetailsRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-  },
+  fileDetailsRow: { display: "flex", alignItems: "center", gap: "12px" },
   pdfBadge: {
-    padding: "6px 10px",
+    padding: "5px 9px",
     borderRadius: "6px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
-    borderWidth: "1px",
-    borderStyle: "solid",
+    border: "1px solid rgba(239, 68, 68, 0.2)",
     backgroundColor: "rgba(239, 68, 68, 0.1)",
-    borderColor: "rgba(239, 68, 68, 0.2)",
   },
-  pdfBadgeText: {
-    fontWeight: "bold",
-    fontSize: "12px",
-    letterSpacing: "0.5px",
-    color: "#ef4444",
-  },
-  fileMeta: {
-    flex: 1,
-    minWidth: 0,
-  },
+  pdfBadgeText: { fontWeight: "bold", fontSize: "11px", letterSpacing: "0.5px", color: "#ef4444" },
+  fileMeta: { flex: 1, minWidth: 0 },
   fileName: {
-    margin: 0,
-    fontSize: "14px",
-    fontWeight: "600",
-    color: "var(--text-h)",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
+    margin: 0, fontSize: "13px", fontWeight: "600", color: "var(--text-h)",
+    overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
   },
-  fileSize: {
-    margin: "2px 0 0 0",
-    fontSize: "12px",
-    color: "var(--text)",
-  },
+  fileSize: { margin: "2px 0 0 0", fontSize: "11px", color: "var(--text)" },
   removeButton: {
     background: "transparent",
     border: "none",
@@ -573,11 +827,11 @@ const styles = {
     justifyContent: "center",
     transition: "color 0.2s, background-color 0.2s",
   },
-  progressContainer: {
-    width: "100%",
-  },
+
+  // Progress (per card)
+  progressContainer: { width: "100%" },
   progressBarContainer: {
-    height: "6px",
+    height: "5px",
     width: "100%",
     backgroundColor: "var(--border)",
     borderRadius: "3px",
@@ -592,53 +846,126 @@ const styles = {
     animation: "shimmer 1.5s infinite linear",
   },
   progressText: {
-    margin: "8px 0 0 0",
-    fontSize: "12px",
+    margin: "6px 0 0 0",
+    fontSize: "11px",
     color: "var(--text)",
     textAlign: "center",
     fontStyle: "italic",
   },
+
+  // Alerts
   errorAlert: {
-    padding: "12px 16px",
+    padding: "10px 14px",
     borderRadius: "8px",
     backgroundColor: "rgba(239, 68, 68, 0.08)",
     border: "1px solid rgba(239, 68, 68, 0.2)",
     color: "#ef4444",
-    fontSize: "14px",
+    fontSize: "13px",
     display: "flex",
     alignItems: "center",
     lineHeight: "140%",
   },
   successAlert: {
-    padding: "12px 16px",
+    padding: "10px 14px",
     borderRadius: "8px",
     backgroundColor: "rgba(16, 185, 129, 0.08)",
     border: "1px solid rgba(16, 185, 129, 0.2)",
     color: "#10b981",
-    fontSize: "14px",
+    fontSize: "13px",
     display: "flex",
     alignItems: "flex-start",
     lineHeight: "140%",
   },
-  actionRow: {
+
+  // Per‑card actions
+  cardActionRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    flexWrap: "wrap",
+    paddingTop: "4px",
+    borderTop: "1px solid var(--border)",
+  },
+  duplicateButton: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    padding: "7px 14px",
+    borderRadius: "7px",
+    border: "1px solid var(--border)",
+    background: "transparent",
+    color: "var(--text-h)",
+    fontSize: "13px",
+    fontWeight: "500",
+    cursor: "pointer",
+    transition: "background 0.2s, border-color 0.2s",
+  },
+  individualSubmitButton: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    padding: "7px 16px",
+    borderRadius: "7px",
+    border: "none",
+    color: "#fff",
+    fontSize: "13px",
+    fontWeight: "600",
+    transition: "background-color 0.2s ease",
+  },
+  resetButton: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    padding: "7px 14px",
+    borderRadius: "7px",
+    border: "1px solid var(--border)",
+    background: "transparent",
+    color: "var(--text)",
+    fontSize: "13px",
+    fontWeight: "500",
+    cursor: "pointer",
+    transition: "background 0.2s",
+  },
+
+  // Add sheet button
+  addSheetButton: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    width: "100%",
+    padding: "14px",
+    borderRadius: "12px",
+    border: "2px dashed var(--border)",
+    background: "transparent",
+    color: "var(--text)",
+    fontSize: "14px",
+    fontWeight: "500",
+    cursor: "pointer",
+    transition: "border-color 0.2s, color 0.2s, background 0.2s",
+  },
+
+  // Bulk summary
+  bulkSummary: {
+    padding: "12px 16px",
+    borderRadius: "10px",
+    background: "rgba(16, 185, 129, 0.08)",
+    border: "1px solid rgba(16, 185, 129, 0.2)",
+    textAlign: "center",
+  },
+  bulkSummaryText: {
+    fontSize: "14px",
+    fontWeight: "600",
+    color: "#10b981",
+  },
+
+  // Global actions
+  globalActionRow: {
     display: "flex",
     justifyContent: "flex-end",
     gap: "12px",
     marginTop: "8px",
-  },
-  submitButton: {
-    padding: "12px 24px",
-    borderRadius: "8px",
-    border: "none",
-    color: "#fff",
-    fontSize: "15px",
-    fontWeight: "600",
-    transition: "background-color 0.2s ease, transform 0.1s ease",
-    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "8px",
+    flexWrap: "wrap",
   },
   backButton: {
     padding: "12px 24px",
@@ -651,23 +978,49 @@ const styles = {
     cursor: "pointer",
     transition: "background-color 0.2s ease",
   },
+  submitButton: {
+    padding: "12px 24px",
+    borderRadius: "8px",
+    border: "none",
+    color: "#fff",
+    fontSize: "15px",
+    fontWeight: "600",
+    backgroundColor: "var(--accent)",
+    cursor: "pointer",
+    transition: "background-color 0.2s ease",
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  },
+  submitAllButton: {
+    padding: "12px 24px",
+    borderRadius: "8px",
+    border: "none",
+    color: "#fff",
+    fontSize: "15px",
+    fontWeight: "600",
+    transition: "background-color 0.2s ease",
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+  },
 };
 
-// Add shimmer keyframe animation to document head if we are in client browser environment
+// ── Inject shimmer animation ─────────────────────────────────────────────────
 if (typeof document !== "undefined") {
-  const styleSheet = document.createElement("style");
-  styleSheet.type = "text/css";
-  styleSheet.innerText = `
-    @keyframes shimmer {
-      0% {
-        background-position: 200% 0;
+  const id = "upload-answers-keyframes";
+  if (!document.getElementById(id)) {
+    const styleSheet = document.createElement("style");
+    styleSheet.id = id;
+    styleSheet.type = "text/css";
+    styleSheet.innerText = `
+      @keyframes shimmer {
+        0%   { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
       }
-      100% {
-        background-position: -200% 0;
-      }
-    }
-  `;
-  document.head.appendChild(styleSheet);
+    `;
+    document.head.appendChild(styleSheet);
+  }
 }
 
 export default UploadAnswersPage;

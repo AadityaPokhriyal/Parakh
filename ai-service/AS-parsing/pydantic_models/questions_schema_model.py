@@ -59,11 +59,10 @@ class ChoiceDefinition(StrictModel):
 
 
 # -----------------------------------------------------
-# Question Models
+# Base Question Model
 # -----------------------------------------------------
 
-
-class Question(StrictModel):
+class QuestionBase(StrictModel):
     id: str
     type: str
     text: LocalizedText
@@ -79,7 +78,22 @@ class Question(StrictModel):
 
     choiceInformation: Optional[ChoiceInformation] = None
 
-    children: Optional[List[Question]] = None
+
+# -----------------------------------------------------
+# Question Levels
+# -----------------------------------------------------
+
+class Level3Question(QuestionBase):
+    pass
+
+
+class Level2Question(QuestionBase):
+    children: Optional[List[Level3Question]] = None
+
+
+class Level1Question(QuestionBase):
+    extractedTotalMarks: str
+    children: Optional[List[Level2Question]] = None
 
 
 # -----------------------------------------------------
@@ -93,7 +107,7 @@ class Section(StrictModel):
 
     sectionInstructions: Optional[LocalizedText] = None
 
-    questions: List[Question]
+    questions: List[Level1Question]
 
 
 # -----------------------------------------------------

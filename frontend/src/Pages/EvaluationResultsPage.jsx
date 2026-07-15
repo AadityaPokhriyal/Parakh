@@ -199,6 +199,13 @@ function EvaluationResultsPage() {
   const metadata = evalData?.studentMetadata;
   const status = evalData?.parsingStatus;
 
+  const activeTotalScore = selectedItem?.obtainedMarks !== undefined && selectedItem?.obtainedMarks !== null
+    ? selectedItem.obtainedMarks
+    : calculateTotalMarks(evalData);
+  const activeMaxMarks = selectedItem?.maxMarks !== undefined && selectedItem?.maxMarks !== null
+    ? selectedItem.maxMarks
+    : (totalMarks !== undefined && totalMarks !== null ? totalMarks : null);
+
   return (
     <div style={styles.container}>
       {/* Page Header */}
@@ -252,7 +259,12 @@ function EvaluationResultsPage() {
               filteredEvaluations.map((item) => {
                 const sName = item.studentName || item.evaluationData?.studentMetadata?.name || "Unknown Student";
                 const roll = item.evaluationData?.studentMetadata?.rollNumber || "-";
-                const totalScore = calculateTotalMarks(item.evaluationData);
+                const totalScore = item.obtainedMarks !== undefined && item.obtainedMarks !== null
+                  ? item.obtainedMarks
+                  : calculateTotalMarks(item.evaluationData);
+                const paperMaxMarks = item.maxMarks !== undefined && item.maxMarks !== null
+                  ? item.maxMarks
+                  : (totalMarks !== undefined && totalMarks !== null ? totalMarks : null);
                 const isSelected = item.id === selectedId;
 
                 return (
@@ -270,7 +282,7 @@ function EvaluationResultsPage() {
                       <span style={styles.studentCardName}>{sName}</span>
                       <span style={styles.studentScoreBadge}>
                         {totalScore}
-                        {totalMarks !== undefined && totalMarks !== null ? ` / ${totalMarks}` : ""} Marks
+                        {paperMaxMarks !== null ? ` / ${paperMaxMarks}` : ""} Marks
                       </span>
                     </div>
                     <div style={styles.studentCardSub}>
@@ -317,13 +329,12 @@ function EvaluationResultsPage() {
                     <div><span style={styles.metaLabel}>File:</span> <span style={styles.metaValue} title={selectedItem.filename}>{selectedItem.filename}</span></div>
                   </div>
                 </div>
-
                 <div style={styles.totalScoreDisplay}>
                   <span style={styles.scoreDisplayLabel}>Total Score</span>
                   <span style={styles.scoreDisplayValue}>
-                    {calculateTotalMarks(evalData)}
-                    {totalMarks !== undefined && totalMarks !== null && (
-                      <span style={{ fontSize: "16px", color: "#94a3b8", fontWeight: "600" }}>/{totalMarks}</span>
+                    {activeTotalScore}
+                    {activeMaxMarks !== null && (
+                      <span style={{ fontSize: "16px", color: "#94a3b8", fontWeight: "600" }}>/{activeMaxMarks}</span>
                     )}
                   </span>
                   <span style={styles.scoreDisplayUnits}>Marks Awarded</span>

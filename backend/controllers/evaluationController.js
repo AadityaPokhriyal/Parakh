@@ -109,6 +109,8 @@ const uploadAnswers = async (req, res, next) => {
       message: "Answer sheet evaluated and stored successfully.",
       evaluationId: result.id,
       createdAt: result.created_at,
+      obtainedMarks: result.obtained_marks,
+      maxMarks: result.max_marks,
       evaluationData,
     });
   } catch (error) {
@@ -141,6 +143,8 @@ const getEvaluations = async (req, res, next) => {
         filename: item.pdf_filename,
         evaluationId: item.id,
         evaluationData: item.parsed_data,
+        obtainedMarks: item.obtained_marks,
+        maxMarks: item.max_marks,
         createdAt: item.created_at,
       })),
     });

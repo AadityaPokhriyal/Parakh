@@ -51,6 +51,25 @@ const storeEvaluation = async (examPaperId, evaluationData, pdfFilename, student
 
   const studentMetadata = evaluationData.studentMetadata || {};
 
+  // Calculate student's total obtained marks from the evaluation answer blocks
+  let obtainedMarks = 0;
+  if (evaluationData && Array.isArray(evaluationData.answerBlocks)) {
+    obtainedMarks = evaluationData.answerBlocks.reduce((sum, block) => {
+      return sum + (block.earnedMarks?.value || 0);
+    }, 0);
+  }
+
+  // Fetch max marks from the associated question paper
+  let maxMarks = 0;
+  try {
+    const examPaper = await getQuestionPaperById(examPaperId);
+    if (examPaper && examPaper.parsed_data && examPaper.parsed_data.paperMetadata) {
+      maxMarks = examPaper.parsed_data.paperMetadata.totalMarks || 0;
+    }
+  } catch (err) {
+    console.warn(`Failed to retrieve max marks from question paper: ${err.message}`);
+  }
+
   const record = {
     exam_paper_id: examPaperId,
     pdf_filename: pdfFilename,
@@ -59,12 +78,14 @@ const storeEvaluation = async (examPaperId, evaluationData, pdfFilename, student
     roll_number: studentMetadata.rollNumber || "",
     exam_code: studentMetadata.examCode || "",
     subject: studentMetadata.subject || "",
+    obtained_marks: obtainedMarks,
+    max_marks: maxMarks,
   };
 
   const { data, error } = await supabase
     .from("evaluations")
     .insert(record)
-    .select("id, created_at")
+    .select("id, created_at, obtained_marks, max_marks")
     .single();
 
   if (error) {

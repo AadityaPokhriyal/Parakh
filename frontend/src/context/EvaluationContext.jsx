@@ -71,6 +71,8 @@ export const EvaluationProvider = ({ children }) => {
               success: true,
               evaluationId: e.evaluationId,
               evaluationData: e.evaluationData,
+              obtainedMarks: e.obtainedMarks,
+              maxMarks: e.maxMarks,
             },
           }));
 
@@ -235,6 +237,8 @@ export const EvaluationProvider = ({ children }) => {
         filename: s.files[0]?.name || "answers.pdf",
         evaluationId: s.responseData.evaluationId,
         evaluationData: s.responseData.evaluationData,
+        obtainedMarks: s.responseData.obtainedMarks,
+        maxMarks: s.responseData.maxMarks,
       }));
   }, [sheets]);
 

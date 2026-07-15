@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS public.evaluations (
     roll_number TEXT,
     exam_code TEXT,
     subject TEXT,
+    obtained_marks NUMERIC,
+    max_marks NUMERIC,
     created_at TIMESTAMPTZ DEFAULT now()
 );
 

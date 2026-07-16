@@ -4,6 +4,8 @@ import finalPaperSchema from '../schemas/newSchema.js'; //this is new schema.
 import dotenv from 'dotenv';
 import fs from 'fs/promises';
 
+import marksDistributor from '../utils/marksDistributor.js';
+
 dotenv.config();
 
 const ai = new GoogleGenAI({
@@ -58,8 +60,19 @@ export default async function parseQuestionPaper(req, res, next) {
 
                 try {
                     const parsedData = JSON.parse(completeText);
-                    console.log("Successfully sent the response!");
-                    return res.json(parsedData);
+                    const processedData=marksDistributor(parsedData);
+                    if(processedData){
+                        console.log("Successfully sent the response!");
+                        return res.json(processedData);
+                    }
+                    else{
+                        return res.status(422).json({
+                            success: false,
+                            error: "Inconsistent Marks Assignment",
+                            message: "The AI extracted marks inconsistently (e.g., some subparts are missing weights, or the parent total marks could not be found to distribute). Please review the document or assign marks manually."
+                        });
+                    }
+                    
                 } catch (parseError) {
                     console.error(`[Attempt ${attempt}] Malformed JSON payload:`, completeText);
                     
@@ -87,7 +100,7 @@ export default async function parseQuestionPaper(req, res, next) {
                 //     continue;
                 // }
                 const status = err.status ?? err.code ?? 500;
-                if ((status === 503 || status === 429 || status === 422) && attempt < maxRetries) {
+                if ((status === 503 || status === 429) && attempt < maxRetries) {
                     const delay = Math.pow(2, attempt) * 1000;
                     console.log(`${status} received. Retry ${attempt}/${maxRetries}`);
                     await new Promise(resolve => setTimeout(resolve, delay));
@@ -99,7 +112,7 @@ export default async function parseQuestionPaper(req, res, next) {
     }
     catch (err) {
         console.error(err);
-        const errStatus = err.status ?? err.code ?? 500;
+        let errStatus = err.status ?? err.code ?? 500;
         // If the error was a timeout/abort, explicitly set code to standard HTTP 408
         if (err.name === "AbortError" || errStatus === 20 || err.message?.toLowerCase().includes("abort")) {
             errStatus = 408;

@@ -4,3 +4,4 @@ venv
 .venv
 .env
 **/.env
+**/runapp.bat

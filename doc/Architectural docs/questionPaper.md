@@ -51,6 +51,7 @@ The parsed question paper is represented as a single JSON object structured as f
             "hi": "String - Exact OCR text of the question in Hindi"
           },
           "marks": "String - Exact marks (e.g., '2') or 'infer from children and choice description' if parent node",
+          "extractedTotalMarks":"String - Total Marks linked to that Independent top level question.",
           "rubric": ["Array - Marking criteria or grading rubric guidelines (always return [])"],
           "attachments": [
             {
@@ -58,6 +59,7 @@ The parsed question paper is represented as a single JSON object structured as f
               "description": "String - Complete, lossless visual data extraction capturing all coordinates, data points, labels, and text snippets"
             }
           ],
+          "diagramRequired":"Boolean-which is set to true if a question states to draw a visual artifact. It should follow the rule as expressed in the strict rule `RULE 12`.",
           "options": [
             {
               "optionId": "String - Identifier for the option (e.g., 'A', 'B')",
@@ -125,8 +127,9 @@ An array containing top-level structural subdivisions of the paper:
 - id: Unique hierarchical identifier mapping structure (e.g., Level 1: Q1 $\rightarrow$ Level 2: Q1.a $\rightarrow$ Level 3: Q1.a.i).
 - type: Category string classified strictly as "MCQ", "MTF", "Theory", or "Hybrid".text: Bilingual object containing the verbatim question strings mapped by en and hi. Preserve spelling mistakes and formatting exactly as printed; never paraphrase.
 - marks:
-  - For leaf nodes (no children): Write the exact explicitly printed numerical value (e.g., "5"). If no individual marks are printed for the sub-part, set it to "".
+  - For leaf nodes (no children): Write the exact explicitly printed numerical value (e.g., "5"). If no individual marks are printed for the sub-part, set it to "". The marks for leaf nodes are calculated later using a function marksDistributor().
   - For parent nodes (has children): Must write exactly "infer from children and choice description". Never aggregate or output numerical values here.
+- extractedTotalMarks: Shows the total marks that can be awarded for solving that particular independent top level question.
 - rubric: Marking criteria layer. Always return an empty array ([]).
 - attachments: Array containing supporting illustrations or figures. Requires a lossless visual data extraction detailing every coordinate, variable, label, and data point.
 - options: Array used ONLY for "MCQ" types containing an optionId and a bilingual text object. Contains visual descriptions if choices are graphical.

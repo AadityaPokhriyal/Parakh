@@ -5,28 +5,38 @@ function LandingPage() {
   const navigate = useNavigate();
 
   const features = [
-    {
-      icon: "📄",
-      title: "Question Paper Upload",
-      desc: "Upload PDF question papers securely for AI-powered processing.",
-    },
-    {
-      icon: "🤖",
-      title: "AI Question Parsing",
-      desc: "Automatically extract questions, marks and hierarchical structure.",
-    },
-    {
-      icon: "✏️",
-      title: "Review & Edit",
-      desc: "Review and modify extracted questions before evaluation.",
-    },
-  ];
+  {
+    icon: "📄",
+    title: "Upload Question Paper",
+    desc: "Upload question papers securely for AI processing.",
+  },
+  {
+    icon: "🤖",
+    title: "AI Question Parsing",
+    desc: "Automatically extract questions and marks.",
+  },
+  {
+    icon: "✏️",
+    title: "Review & Edit",
+    desc: "Review and modify extracted questions.",
+  },
+  {
+    icon: "📋",
+    title: "Generate Rubric",
+    desc: "Create evaluation rubric automatically.",
+  },
+  {
+    icon: "📝",
+    title: "Upload Answer Sheets",
+    desc: "Upload student answer sheets for evaluation.",
+  },
+  {
+    icon: "📊",
+    title: "AI Evaluation Results",
+    desc: "Generate evaluation results and insights.",
+  },
+];
 
-  const steps = [
-    "Upload Question Paper",
-    "Review Extracted Questions",
-    "Start Evaluation",
-  ];
 
   const contributors = [
   {
@@ -87,38 +97,52 @@ function LandingPage() {
             Upload Question Paper →
           </button>
 
-          <button style={styles.secondaryBtn}>
-            Learn More
-          </button>
+           <button
+    style={styles.secondaryBtn}
+    onClick={() => {
+      document
+        .getElementById("workflow")
+        ?.scrollIntoView({
+          behavior: "smooth",
+        });
+    }}
+  >
+    Learn More
+  </button>
         </div>
       </section>
 
-      {/* Features */}
-      <section style={styles.features}>
-        {features.map((feature, index) => (
-          <div key={index} style={styles.card}>
-            <div style={styles.icon}>{feature.icon}</div>
-            <h3 style={styles.cardTitle}>{feature.title}</h3>
-            <p style={styles.cardText}>{feature.desc}</p>
-          </div>
-        ))}
-      </section>
+     {/* Evaluation Workflow */}
+ <section
+  id="workflow"
+   style={styles.workflowSection}>
+  <h2 style={styles.sectionTitle}>
+    Evaluation Workflow
+  </h2>
 
-      {/* Workflow */}
-      <section style={styles.workflow}>
-        <h2 style={styles.sectionTitle}>How It Works</h2>
+  <p style={styles.sectionSubtitle}>
+    Complete end-to-end AI powered answer sheet
+    evaluation process.
+  </p>
 
-        <div style={styles.stepsContainer}>
-          {steps.map((step, index) => (
-            <div key={index} style={styles.stepCard}>
-              <div style={styles.stepNumber}>
-                {String(index + 1).padStart(2, "0")}
-              </div>
-              <p>{step}</p>
-            </div>
-          ))}
+  <div style={styles.features}>
+    {features.map((feature, index) => (
+      <div key={index} style={styles.card}>
+        <div style={styles.icon}>
+          {feature.icon}
         </div>
-      </section>
+
+        <h3 style={styles.cardTitle}>
+          {feature.title}
+        </h3>
+
+        <p style={styles.cardText}>
+          {feature.desc}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* Contributors */}
 <section style={styles.contributors}>
@@ -165,18 +189,30 @@ function LandingPage() {
 
       {/* CTA */}
       <section style={styles.cta}>
-        <h2>Ready to streamline evaluations?</h2>
+        <h2
+  style={{
+    marginBottom: "16px",
+  }}
+>
+  Ready to transform answer sheet evaluation?
+</h2>
 
-        <p>
-          Start by uploading a question paper and let Parakh do the
-          heavy lifting.
-        </p>
+<p
+  style={{
+    color: "#94a3b8",
+    marginBottom: "32px",
+    lineHeight: "1.7",
+  }}
+>
+  Start by uploading a question paper and let
+  Parakh do the heavy lifting.
+</p>
 
         <button
           style={styles.primaryBtn}
           onClick={() => navigate("/upload")}
         >
-          Get Started
+          Get Started →
         </button>
       </section>
     </div>
@@ -287,21 +323,25 @@ const styles = {
     cursor: "pointer",
   },
 
-  features: {
-    maxWidth: "1200px",
-    margin: "100px auto 0",
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
-    gap: "24px",
-  },
+ features: {
+  maxWidth: "1000px",
+  margin: "40px auto 0",
+  display: "grid",
+  gridTemplateColumns:
+    "repeat(auto-fit, minmax(280px, 1fr))",
+  gap: "24px",
+},
 
   card: {
-    background: "#172033",
-    border: "1px solid #28354d",
-    borderRadius: "20px",
-    padding: "28px",
-    textAlign: "center",
-  },
+  background: "#172033",
+  border: "1px solid #28354d",
+  borderRadius: "20px",
+  padding: "28px",
+  textAlign: "center",
+  minHeight: "220px",
+  width: "100%",
+  boxSizing: "border-box",
+},
 
   icon: {
     fontSize: "40px",
@@ -318,42 +358,27 @@ const styles = {
     lineHeight: "1.6",
   },
 
-  workflow: {
-    marginTop: "100px",
-    textAlign: "center",
-  },
-
   sectionTitle: {
     fontSize: "42px",
     marginBottom: "40px",
   },
 
-  stepsContainer: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "24px",
-    flexWrap: "wrap",
-  },
+  workflowSection: {
+  marginTop: "100px",
+  textAlign: "center",
+},
 
-  stepCard: {
-    width: "260px",
-    background: "#172033",
-    border: "1px solid #28354d",
-    borderRadius: "18px",
-    padding: "28px",
-  },
-
-  stepNumber: {
-    fontSize: "40px",
-    fontWeight: "800",
-    color: "#8b5cf6",
-    marginBottom: "10px",
-  },
+sectionSubtitle: {
+  color: "#94a3b8",
+  maxWidth: "700px",
+  margin: "-10px auto 40px",
+  lineHeight: "1.7",
+},
 
   cta: {
     textAlign: "center",
-    marginTop: "100px",
-    padding: "60px 20px",
+    marginTop: "120px",
+    padding: "80px 40px",
     borderRadius: "24px",
     background: "#172033",
     border: "1px solid #28354d",

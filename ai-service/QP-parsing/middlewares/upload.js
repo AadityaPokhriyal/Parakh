@@ -10,7 +10,7 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY
 });
 
-const promptText = await fs.readFile('prompts/sixth.txt', 'utf-8');
+const promptText = await fs.readFile('prompts/seventh.txt', 'utf-8');
 
 export default async function uploadFiles(req, res, next) {
     

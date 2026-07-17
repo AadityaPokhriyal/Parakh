@@ -76,9 +76,10 @@ const level3QuestionSchema = {
             } 
         },
         rubric: { type: Type.ARRAY, items: { type: Type.STRING } },
-        choiceInformation: choiceInfoSchema
+        choiceInformation: choiceInfoSchema,
+        diagramRequired: { type:Type.BOOLEAN },
     },
-    required: ["type", "id", "text", "marks", "rubric"] 
+    required: ["type", "id", "text", "marks", "rubric","diagramRequired"] 
 };
 
 // --- LEVEL 2 (Sub-question) ---
@@ -149,12 +150,13 @@ const level2QuestionSchema = {
         },
         rubric: { type: Type.ARRAY, items: { type: Type.STRING } },
         choiceInformation: choiceInfoSchema,
+        diagramRequired: { type:Type.BOOLEAN },
         children: {
             type: Type.ARRAY,
             items: level3QuestionSchema
         }
     },
-    required: ["type", "id", "text", "marks", "rubric"] 
+    required: ["type", "id", "text", "marks", "rubric","diagramRequired"] 
 };
 
 // --- LEVEL 1 (Top-level question) ---
@@ -213,6 +215,7 @@ const level1QuestionSchema = {
             }
         },
         marks: { type: Type.STRING },
+        extractedTotalMarks:{type: Type.STRING},
         attachments: {
             type: Type.ARRAY,
             items: { 
@@ -225,12 +228,13 @@ const level1QuestionSchema = {
         },
         rubric: { type: Type.ARRAY, items: { type: Type.STRING } },
         choiceInformation: choiceInfoSchema,
+        diagramRequired: { type:Type.BOOLEAN },
         children: {
             type: Type.ARRAY,
             items: level2QuestionSchema
         }
     },
-    required: ["type", "id", "text", "marks", "rubric"] 
+    required: ["type", "id", "text", "marks", "rubric","extractedTotalMarks","diagramRequired"] 
 };
 
 // --- SECTION LEVEL ---

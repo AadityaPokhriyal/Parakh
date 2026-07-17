@@ -18,9 +18,9 @@
             "hi": [
                 "कृपया जाँच कर लें कि इस प्रश्न-पत्र में मुद्रित पृष्ठ 23 हैं।",
                 "कृपया जाँच कर लें कि इस प्रश्न-पत्र में 21 प्रश्न हैं।",
-                "प्रश्न-पत्र में दाहिने हाथ की ओर दिए गए प्रश्न-पत्र कोड को परीक्षार्थी उत्तर-पुस्तिका के मुख-पृष्ठ पर लिखें ।",
-                "कृपया प्रश्न का उत्तर लिखना शुरू करने से पहले, उत्तर-पुस्तिका में यथा स्थान पर प्रश्न का क्रमांक अवश्य लिखें ।",
-                "इस प्रश्न-पत्र को पढ़ने के लिए 15 मिनट का समय दिया गया है । प्रश्न-पत्र का वितरण पूर्वाह्न में 10.15 बजे किया जाएगा । 10.15 बजे से 10.30 बजे तक परीक्षार्थी केवल प्रश्न-पत्र को पढ़ेंगे और इस अवधि के दौरान वे उत्तर-पुस्तिका पर कोई उत्तर नहीं लिखेंगे ।",
+                "प्रश्न-पत्र में दाहिने हाथ की ओर दिए गए प्रश्न-पत्र कोड को परीक्षार्थी उत्तर-पुस्तिका के मुख-पृष्ठ पर लिखें।",
+                "कृपया प्रश्न का उत्तर लिखना शुरू करने से पहले, उत्तर-पुस्तिका में यथा स्थान पर प्रश्न का क्रमांक अवश्य लिखें।",
+                "इस प्रश्न-पत्र को पढ़ने के लिए 15 मिनट का समय दिया गया है। प्रश्न-पत्र का वितरण पूर्वाह्न में 10.15 बजे किया जाएगा। 10.15 बजे से 10.30 बजे तक परीक्षार्थी केवल प्रश्न-पत्र को पढ़ेंगे और इस अवधि के दौरान वे उत्तर-पुस्तिका पर कोई उत्तर नहीं लिखेंगे।",
                 "कृपया निर्देशों को ध्यान से पढ़ें ।",
                 "इस प्रश्न-पत्र में दो खण्डों में 21 प्रश्न हैं : खण्ड-अ और खण्ड-ब ।",
                 "खण्ड-अ में वस्तुपरक प्रकार के प्रश्न हैं, जबकि खण्ड-ब में विषयपरक प्रकार के प्रश्न हैं।",
@@ -29,7 +29,7 @@
             ]
         },
         "subject": "ARTIFICIAL INTELLIGENCE",
-        "title": "ARTIFICIAL INTELLIGENCE",
+        "title": "",
         "totalMarks": 50
     },
     "parsingStatus": {
@@ -37,14 +37,16 @@
         "errors": [],
         "paperClarity": "clear",
         "success": true,
-        "warnings": []
+        "warnings": [
+            "Options for question Q1.iv are missing in the source document. Placeholder options have been provided."
+        ]
     },
     "sections": [
         {
             "sectionId": "A",
             "questions": [
                 {
-                    "type": "Hybrid",
+                    "type": "MCQ",
                     "id": "Q1",
                     "text": {
                         "en": "Answer any 4 out of the given 6 questions on Employability Skills.",
@@ -52,16 +54,19 @@
                     },
                     "marks": "infer from children and choice description",
                     "rubric": [],
+                    "extractedTotalMarks": "4",
+                    "diagramRequired": false,
                     "children": [
                         {
                             "type": "MCQ",
                             "id": "Q1.i",
                             "text": {
-                                "en": "Communication involves a sender, who encodes and sends a message through a channel, and a receiver, who decodes the message and gives _____.",
-                                "hi": "संचार (Communication) में एक प्रेषक शामिल होता है, जो संदेश को एनकोड (encode) करता है और चैनल के माध्यम से भेजता है और एक प्राप्तिकर्त्ता, जो संदेश को डिकोड (decode) करता है और देता है ।"
+                                "en": "Communication involves a sender, who encodes and sends a message through a channel, and a receiver, who decodes the message and gives __________.",
+                                "hi": "संचार (Communication) में एक प्रेषक शामिल होता है, जो संदेश को एनकोड (encode) करता है और चैनल के माध्यम से भेजता है और एक प्राप्तिकर्त्ता, जो संदेश को डिकोड (decode) करता है और ___________ देता है ।"
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -97,11 +102,12 @@
                             "type": "MCQ",
                             "id": "Q1.ii",
                             "text": {
-                                "en": "_____ is a kind of motivation that includes activities for which there is no apparent reward but one derives enjoyment and satisfaction in doing them.",
-                                "hi": "एक प्रकार की प्रेरणा (motivation) है जिसमें ऐसे क्रियाकलाप शामिल हैं जिनके लिये कोई प्रत्यक्ष पुरस्कार नहीं है परंतु व्यक्ति को इन्हें करने में आनंद और संतोष प्राप्त होता है ।"
+                                "en": "___________ is a kind of motivation that includes activities for which there is no apparent reward but one derives enjoyment and satisfaction in doing them.",
+                                "hi": "___________ एक प्रकार की प्रेरणा (motivation) है जिसमें ऐसे क्रियाकलाप शामिल हैं जिनके लिये कोई प्रत्यक्ष पुरस्कार नहीं है परंतु व्यक्ति को इन्हें करने में आनंद और संतोष प्राप्त होता है ।"
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -142,6 +148,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -174,14 +181,45 @@
                             ]
                         },
                         {
-                            "type": "Theory",
+                            "type": "MCQ",
                             "id": "Q1.iv",
                             "text": {
                                 "en": "Varsha has created a spreadsheet on a laptop that is shared by her group members. She does not want anyone to open or edit her file. How can she protect her file ?",
                                 "hi": "वर्षा ने एक स्प्रेड शीट (spreadsheet) उस लैपटॉप पर तैयार की है जिसका उपयोग उसके साथी कर रहे हैं । वह यह नहीं चाहती है कि कोई उसकी फाइल खोले या संशोधित (edit) करे । वह अपनी फाइल को किस तरह संरक्षित कर सकती है ?"
                             },
                             "marks": "1",
-                            "rubric": []
+                            "rubric": [],
+                            "diagramRequired": false,
+                            "options": [
+                                {
+                                    "optionId": "A",
+                                    "text": {
+                                        "en": "Password protect the file",
+                                        "hi": "फाइल को पासवर्ड से सुरक्षित करें"
+                                    }
+                                },
+                                {
+                                    "optionId": "B",
+                                    "text": {
+                                        "en": "Hide the file",
+                                        "hi": "फाइल को छिपाएँ"
+                                    }
+                                },
+                                {
+                                    "optionId": "C",
+                                    "text": {
+                                        "en": "Delete the file",
+                                        "hi": "फाइल को हटाएँ"
+                                    }
+                                },
+                                {
+                                    "optionId": "D",
+                                    "text": {
+                                        "en": "Rename the file",
+                                        "hi": "फाइल का नाम बदलें"
+                                    }
+                                }
+                            ]
                         },
                         {
                             "type": "MCQ",
@@ -192,6 +230,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -232,6 +271,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -265,12 +305,12 @@
                         }
                     ],
                     "choiceInformation": {
-                        "detailedDescription": "Answer any 4 out of the given 6 sub-questions (Q1.i to Q1.vi). Each question carries 1 mark.",
-                        "summary": "Answer any 4 of 6 sub-questions"
+                        "detailedDescription": "Answer any 4 out of the given 6 questions. Each question carries 1 mark.",
+                        "summary": "Choose 4 out of 6 sub-questions."
                     }
                 },
                 {
-                    "type": "Hybrid",
+                    "type": "MCQ",
                     "id": "Q2",
                     "text": {
                         "en": "Answer any 5 out of the given 6 questions.",
@@ -278,16 +318,19 @@
                     },
                     "marks": "infer from children and choice description",
                     "rubric": [],
+                    "extractedTotalMarks": "5",
+                    "diagramRequired": false,
                     "children": [
                         {
                             "type": "MCQ",
                             "id": "Q2.i",
                             "text": {
-                                "en": "Statement - I : A capstone project is the final project of an academic program. Statement – II: For a capstone project, the students research on a topic independently. Select the appropriate option for the statements given above :",
-                                "hi": "कथन - I : किसी शैक्षणिक कार्यक्रम के लिये कैपस्टोन प्रोजेक्ट (Capstone Project) अंतिम प्रोजेक्ट (परियोजना) है । कथन - II : कैपस्टोन प्रोजेक्ट के लिये छात्र किसी विषय पर स्वतंत्र रूप से अनुसंधान करते हैं। उपर्युक्त कथनों के लिये उचित विकल्प चुनिये :"
+                                "en": "Statement - I : A capstone project is the final project of an academic program. Statement – II: For a capstone project, the students research on a topic independently.",
+                                "hi": "कथन - I : किसी शैक्षणिक कार्यक्रम के लिये कैपस्टोन प्रोजेक्ट (Capstone Project) अंतिम प्रोजेक्ट (परियोजना) है । कथन - II : कैपस्टोन प्रोजेक्ट के लिये छात्र किसी विषय पर स्वतंत्र रूप से अनुसंधान करते हैं।"
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -328,6 +371,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -368,6 +412,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -408,6 +453,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -448,6 +494,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -488,6 +535,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -521,12 +569,12 @@
                         }
                     ],
                     "choiceInformation": {
-                        "detailedDescription": "Answer any 5 out of the given 6 sub-questions (Q2.i to Q2.vi). Each question carries 1 mark.",
-                        "summary": "Answer any 5 of 6 sub-questions"
+                        "detailedDescription": "Answer any 5 out of the given 6 questions. Each question carries 1 mark.",
+                        "summary": "Choose 5 out of 6 sub-questions."
                     }
                 },
                 {
-                    "type": "Hybrid",
+                    "type": "MCQ",
                     "id": "Q3",
                     "text": {
                         "en": "Answer any 5 out of the given 6 questions.",
@@ -534,6 +582,8 @@
                     },
                     "marks": "infer from children and choice description",
                     "rubric": [],
+                    "extractedTotalMarks": "5",
+                    "diagramRequired": false,
                     "children": [
                         {
                             "type": "MCQ",
@@ -544,6 +594,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -584,6 +635,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -596,7 +648,7 @@
                                     "optionId": "B",
                                     "text": {
                                         "en": "It supplies context, insight and interpretation to make data meaningful.",
-                                        "hi": "डेटा (data) को सार्थक बनाने के लिये यह संदर्भ (context), अंतर्दृष्टि (insight) और व्याख्या (interpretation) प्रदान करता है ।"
+                                        "hi": "यह डेटा (data) को सार्थक बनाने के लिये यह संदर्भ (context), अंतर्दृष्टि (insight) और व्याख्या (interpretation) प्रदान करता है ।"
                                     }
                                 },
                                 {
@@ -624,6 +676,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -664,6 +717,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -704,6 +758,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -744,6 +799,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -777,12 +833,12 @@
                         }
                     ],
                     "choiceInformation": {
-                        "detailedDescription": "Answer any 5 out of the given 6 sub-questions (Q3.i to Q3.vi). Each question carries 1 mark.",
-                        "summary": "Answer any 5 of 6 sub-questions"
+                        "detailedDescription": "Answer any 5 out of the given 6 questions. Each question carries 1 mark.",
+                        "summary": "Choose 5 out of 6 sub-questions."
                     }
                 },
                 {
-                    "type": "Hybrid",
+                    "type": "MCQ",
                     "id": "Q4",
                     "text": {
                         "en": "Answer any 5 out of the given 6 questions.",
@@ -790,16 +846,19 @@
                     },
                     "marks": "infer from children and choice description",
                     "rubric": [],
+                    "extractedTotalMarks": "5",
+                    "diagramRequired": false,
                     "children": [
                         {
                             "type": "MCQ",
                             "id": "Q4.i",
                             "text": {
-                                "en": "The _____ stage of an AI project cycle involves the planning and motivational aspects of your project.",
-                                "hi": "किसी AI परियोजना चक्र के स्तर में आपकी परियोजना के योजना और प्रेरणादायक पहलू शामिल होते हैं ।"
+                                "en": "The ___________ stage of an AI project cycle involves the planning and motivational aspects of your project.",
+                                "hi": "किसी AI परियोजना चक्र के ___________ स्तर में आपकी परियोजना के योजना और प्रेरणादायक पहलू शामिल होते हैं ।"
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -835,11 +894,12 @@
                             "type": "MCQ",
                             "id": "Q4.ii",
                             "text": {
-                                "en": "_____ is a structured approach for communicating insights drawn from data, combined with visuals and narratives.",
-                                "hi": "डेटा से प्राप्त अंतर्दृष्टि (गहन जानकारी) को दृश्यों और कथाओं के साथ संप्रेषित करने के लिए एक संरचित दृष्टिकोण है ।"
+                                "en": "___________ is a structured approach for communicating insights drawn from data, combined with visuals and narratives.",
+                                "hi": "___________ डेटा से प्राप्त अंतर्दृष्टि (गहन जानकारी) को दृश्यों और कथाओं के साथ संप्रेषित करने के लिए एक संरचित दृष्टिकोण है ।"
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -875,11 +935,12 @@
                             "type": "MCQ",
                             "id": "Q4.iii",
                             "text": {
-                                "en": "A good model should have an RMSE value less than _____.",
-                                "hi": "एक अच्छे मॉडल में आर एम एस इ वैल्यू (RMSE value) से कम होना चाहिए ।"
+                                "en": "A good model should have an RMSE value less than ___________.",
+                                "hi": "एक अच्छे मॉडल में आर एम एस इ वैल्यू (RMSE value) ___________ से कम होना चाहिए ।"
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -915,11 +976,12 @@
                             "type": "MCQ",
                             "id": "Q4.iv",
                             "text": {
-                                "en": "The narrative is accompanied with _____ to explain why a particular insight has been generated.",
-                                "hi": "कोई विशिष्ट गहन अध्ययन (insight) क्यों तैयार किया गया है, इसे स्पष्ट करने के लिये कथन (narrative) को के साथ दिया जाता है ।"
+                                "en": "The narrative is accompanied with ___________ to explain why a particular insight has been generated.",
+                                "hi": "कोई विशिष्ट गहन अध्ययन (insight) क्यों तैयार किया गया है, इसे स्पष्ट करने के लिये कथन (narrative) को ___________ के साथ दिया जाता है ।"
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -960,6 +1022,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -1000,6 +1063,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -1033,8 +1097,8 @@
                         }
                     ],
                     "choiceInformation": {
-                        "detailedDescription": "Answer any 5 out of the given 6 sub-questions (Q4.i to Q4.vi). Each question carries 1 mark.",
-                        "summary": "Answer any 5 of 6 sub-questions"
+                        "detailedDescription": "Answer any 5 out of the given 6 questions. Each question carries 1 mark.",
+                        "summary": "Choose 5 out of 6 sub-questions."
                     }
                 },
                 {
@@ -1046,6 +1110,8 @@
                     },
                     "marks": "infer from children and choice description",
                     "rubric": [],
+                    "extractedTotalMarks": "5",
+                    "diagramRequired": false,
                     "children": [
                         {
                             "type": "MTF",
@@ -1056,19 +1122,20 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "matchData": {
                                 "matchFrom": [
                                     {
-                                        "en": "Image of stacked cylinders/discs, representing data storage or a database.",
-                                        "hi": "स्टैक्ड सिलेंडरों/डिस्क की छवि, डेटा स्टोरेज या डेटाबेस का प्रतिनिधित्व करती है।"
+                                        "en": "Image of stacked cylinders (data storage symbol)",
+                                        "hi": "स्टैक्ड सिलेंडरों की छवि (डेटा स्टोरेज प्रतीक)"
                                     },
                                     {
-                                        "en": "Image of an open book or document, representing text or narrative.",
-                                        "hi": "खुली किताब या दस्तावेज़ की छवि, पाठ या कथा का प्रतिनिधित्व करती है।"
+                                        "en": "Image of a book with a magnifying glass (visuals symbol)",
+                                        "hi": "मैग्नीफाइंग ग्लास वाली किताब की छवि (विजुअल्स प्रतीक)"
                                     },
                                     {
-                                        "en": "Image of a pie chart or graph, representing visual data.",
-                                        "hi": "पाई चार्ट या ग्राफ की छवि, दृश्य डेटा का प्रतिनिधित्व करती है।"
+                                        "en": "Image of a speech bubble (narrative symbol)",
+                                        "hi": "स्पीच बबल की छवि (नैरेटिव प्रतीक)"
                                     }
                                 ],
                                 "matchTo": [
@@ -1125,7 +1192,8 @@
                                 "hi": "बताइये कि यह सही है या गलत : यदि data में कोई pattern नहीं है तो ए आई विकास तकनीकों (AI development techniques) का उपयोग किया जा सकता है ।"
                             },
                             "marks": "1",
-                            "rubric": []
+                            "rubric": [],
+                            "diagramRequired": false
                         },
                         {
                             "type": "MCQ",
@@ -1136,6 +1204,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -1176,6 +1245,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -1215,7 +1285,8 @@
                                 "hi": "सही या गलत बताइये : परीक्षण आँकड़ा चयन में मानवीय पूर्वग्रह (Human Biases) परीक्षण चरण को विपरीत रूप से प्रभावित कर सकते हैं।"
                             },
                             "marks": "1",
-                            "rubric": []
+                            "rubric": [],
+                            "diagramRequired": false
                         },
                         {
                             "type": "MCQ",
@@ -1226,6 +1297,7 @@
                             },
                             "marks": "1",
                             "rubric": [],
+                            "diagramRequired": false,
                             "options": [
                                 {
                                     "optionId": "A",
@@ -1259,15 +1331,15 @@
                         }
                     ],
                     "choiceInformation": {
-                        "detailedDescription": "Answer any 5 out of the given 6 sub-questions (Q5.i to Q5.vi). Each question carries 1 mark.",
-                        "summary": "Answer any 5 of 6 sub-questions"
+                        "detailedDescription": "Answer any 5 out of the given 6 questions. Each question carries 1 mark.",
+                        "summary": "Choose 5 out of 6 sub-questions."
                     }
                 }
             ],
             "sectionChoices": [],
             "sectionInstructions": {
-                "en": "Section – A : Objective Type Questions (24 marks)\n(a) This section has 5 questions.\n(b) There is no negative marking.\n(c) Do as per the instructions given.\n(d) Marks allotted are mentioned against each question/part.",
-                "hi": "खण्ड-अः वस्तुपरक प्रकार के प्रश्न (24 अंक)\n(a) इस खण्ड में 5 प्रश्न हैं।\n(b) कोई नकारात्मक अंकन नहीं है ।\n(c) दिए गए निर्देशों के अनुसार कीजिए ।\n(d) प्रत्येक प्रश्न/भाग के सामने आबंटित अंकों का उल्लेख किया गया है।"
+                "en": "Section – A : Objective Type Questions (24 marks) This section has 5 questions. There is no negative marking. Do as per the instructions given. Marks allotted are mentioned against each question/part.",
+                "hi": "खण्ड-अः वस्तुपरक प्रकार के प्रश्न (24 अंक) इस खण्ड में 5 प्रश्न हैं। कोई नकारात्मक अंकन नहीं है । दिए गए निर्देशों के अनुसार कीजिए । प्रत्येक प्रश्न/भाग के सामने आबंटित अंकों का उल्लेख किया गया है।"
             }
         },
         {
@@ -1281,7 +1353,9 @@
                         "hi": "सक्रिय श्रवण (active listening) के पाँच चरण हैं । पहला चरण ‘Receiving' है । अन्य चार चरणों के नाम लिखिए ।"
                     },
                     "marks": "2",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1291,7 +1365,9 @@
                         "hi": "व्यक्तित्व लक्षण (Personality Traits) शब्द को स्पष्ट कीजिये । पंच कारक प्रतिमान (Five Factor Model) के आधार पर व्यक्तित्व को बताने वाले किन्हीं दो पैरामीटरों के नाम लिखिये ।"
                     },
                     "marks": "2",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1301,7 +1377,9 @@
                         "hi": "प्रेजेन्टेशन (presentation) को print करने के लिए steps लिखिये ।"
                     },
                     "marks": "2",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1311,7 +1389,9 @@
                         "hi": "एक सफल उद्यमी के कोई चार गुण लिखिये ।"
                     },
                     "marks": "2",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1321,7 +1401,9 @@
                         "hi": "विनिर्माण संयंत्रों और फैक्ट्रियों में बर्बादी और प्रदूषण कम करने के कोई दो तरीके बताइये ।"
                     },
                     "marks": "2",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1331,7 +1413,9 @@
                         "hi": "किसी मॉडल के वैधीकरण (validate) के लिये क्रॉस वैधीकरण प्रक्रिया (Cross Validation Procedure) को संक्षेप में लिखिये ।"
                     },
                     "marks": "2",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1341,7 +1425,9 @@
                         "hi": "ट्रेन टेस्ट स्प्लिट मूल्यांकन (Train-Test Split Evaluation) क्या है ? वह दो प्रकार की समस्याएँ कौन सी हैं, जिनके लिये Train-Test Split Evaluation का प्रयोग किया जा सकता है ?"
                     },
                     "marks": "2",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1351,7 +1437,9 @@
                         "hi": "उन दो कारकों को बताइये जो कथाकारिता (storytelling) को सशक्त और स्वदेशी संस्कृति का अभिन्न अंग बनाते हैं ।"
                     },
                     "marks": "2",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1361,7 +1449,9 @@
                         "hi": "डेटा विज्ञान (Data Science) के लिये बुनियादी कार्यप्रणाली (Foundational methodology) प्रदर्शित करने वाला चित्र (diagram) बनाइये ।"
                     },
                     "marks": "2",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": true
                 },
                 {
                     "type": "Theory",
@@ -1371,39 +1461,21 @@
                         "hi": "“समय श्रृंखला अपघटन (Time series decomposition) में श्रृंखला को स्तर (level), प्रवृत्ति (trend), मौसमी (seasonality) और शोर घटकों (noise components) के संयोजन के रूप में सोचना शामिल है ।” इनमें से किन्हीं दो घटकों (components) की व्याख्या करिए ।"
                     },
                     "marks": "2",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
                     "id": "Q16",
                     "text": {
-                        "en": "Give any two examples of each of the following with respect to evaluation of AI development platforms :",
-                        "hi": "ए.आई. विकास प्लेटफार्म (AI development platforms) के मूल्यांकन (evaluation) के संबंध में निम्नलिखित प्रत्येक के कोई दो उदाहरण दीजिए :"
+                        "en": "Give any two examples of each of the following with respect to evaluation of AI development platforms : (a) Open Languages (b) Productivity Enhancing Capabilities",
+                        "hi": "ए.आई. विकास प्लेटफार्म (AI development platforms) के मूल्यांकन (evaluation) के संबंध में निम्नलिखित प्रत्येक के कोई दो उदाहरण दीजिए : (a) खुली भाषाएँ (Open Languages) (b) उत्पादकता वर्धन क्षमताएँ (Productivity Enhancing Capabilities)"
                     },
                     "marks": "2",
                     "rubric": [],
-                    "children": [
-                        {
-                            "type": "Theory",
-                            "id": "Q16.a",
-                            "text": {
-                                "en": "Open Languages",
-                                "hi": "खुली भाषाएँ (Open Languages)"
-                            },
-                            "marks": "",
-                            "rubric": []
-                        },
-                        {
-                            "type": "Theory",
-                            "id": "Q16.b",
-                            "text": {
-                                "en": "Productivity Enhancing Capabilities",
-                                "hi": "उत्पादकता वर्धन क्षमताएँ (Productivity Enhancing Capabilities)"
-                            },
-                            "marks": "",
-                            "rubric": []
-                        }
-                    ]
+                    "extractedTotalMarks": "2",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1413,7 +1485,9 @@
                         "hi": "उन कदमों की सूची बनाइये जो data sets में सम्मोहक कहानियाँ (compelling stories) प्राप्त करने में सहायता कर सकते हैं ।"
                     },
                     "marks": "4",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "4",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1422,8 +1496,10 @@
                         "en": "",
                         "hi": ""
                     },
-                    "marks": "4",
+                    "marks": "infer from children and choice description",
                     "rubric": [],
+                    "extractedTotalMarks": "4",
+                    "diagramRequired": false,
                     "children": [
                         {
                             "type": "Theory",
@@ -1433,7 +1509,8 @@
                                 "hi": "लॉस फंक्शन (Loss function) क्या है ? लॉस फंक्शन (Loss functions) की दो श्रेणियाँ लिखिये ।"
                             },
                             "marks": "2",
-                            "rubric": []
+                            "rubric": [],
+                            "diagramRequired": false
                         },
                         {
                             "type": "Theory",
@@ -1443,7 +1520,8 @@
                                 "hi": "उदाहरण के साथ स्पष्ट कीजिये कि कब MSE का प्रयोग लॉस फंक्शन (loss function) के रूप में किया जा सकता है ।"
                             },
                             "marks": "2",
-                            "rubric": []
+                            "rubric": [],
+                            "diagramRequired": false
                         }
                     ]
                 },
@@ -1454,8 +1532,10 @@
                         "en": "Explain the following stages of every AI project life-cycle :",
                         "hi": "प्रत्येक ए.आई. परियोजना जीवन-चक्र (AI project life-cycle) के निम्नलिखित स्तरों को स्पष्ट कीजिये :"
                     },
-                    "marks": "4",
+                    "marks": "infer from children and choice description",
                     "rubric": [],
+                    "extractedTotalMarks": "4",
+                    "diagramRequired": false,
                     "children": [
                         {
                             "type": "Theory",
@@ -1464,8 +1544,9 @@
                                 "en": "Requirements Analysis",
                                 "hi": "आवश्यकता विश्लेषण (Requirements Analysis)"
                             },
-                            "marks": "",
-                            "rubric": []
+                            "marks": "2",
+                            "rubric": [],
+                            "diagramRequired": false
                         },
                         {
                             "type": "Theory",
@@ -1474,8 +1555,9 @@
                                 "en": "Building the Model",
                                 "hi": "मॉडल निर्माण (Building the Model)"
                             },
-                            "marks": "",
-                            "rubric": []
+                            "marks": "2",
+                            "rubric": [],
+                            "diagramRequired": false
                         }
                     ]
                 },
@@ -1487,7 +1569,9 @@
                         "hi": "किसी प्रश्न या समस्या को हल करने के लिये कोई विश्लेषणात्मक तरीका चुनना प्रश्न की किस्म पर निर्भर करता है। उपर्युक्त कथन को उचित उदाहरणों के साथ स्पष्ट कीजिए ।"
                     },
                     "marks": "4",
-                    "rubric": []
+                    "rubric": [],
+                    "extractedTotalMarks": "4",
+                    "diagramRequired": false
                 },
                 {
                     "type": "Theory",
@@ -1496,8 +1580,10 @@
                         "en": "",
                         "hi": ""
                     },
-                    "marks": "4",
+                    "marks": "infer from children and choice description",
                     "rubric": [],
+                    "extractedTotalMarks": "4",
+                    "diagramRequired": false,
                     "children": [
                         {
                             "type": "Theory",
@@ -1507,31 +1593,27 @@
                                 "hi": "अच्छी कहानियाँ कैसे उत्पन्न होती हैं ?"
                             },
                             "marks": "2",
-                            "rubric": []
+                            "rubric": [],
+                            "diagramRequired": false
                         },
                         {
                             "type": "Theory",
                             "id": "Q21.b",
                             "text": {
-                                "en": "Which of the following is a better data story ? Give reasons.",
-                                "hi": "निम्नलिखित में से कौन बेहतर data story है ? उसके कारण बताइये ।"
+                                "en": "Which of the following is a better data story ? Give reasons. The first graph shows 'Least Forest Area Lost from 2001-22' for various states (Arunachal Pradesh: 2, Assam: 1, Karnataka: 3, Kerala: 2, Manipur: 6, Meghalaya: 5, Mizoram: 4, Nagaland: 10, Odisha: 3, Tripura: 8). The second graph shows 'Max. Growth in Gross State Domestic Product (GSDP) from 2001-22' for various states (Arunachal Pradesh: 4, Assam: 5, Karnataka: 7, Kerala: 7, Manipur: 9, Meghalaya: 6, Mizoram: 9, Nagaland: 10, Odisha: 2, Tripura: 8). Both graphs have Rank on the Y-axis (0-12) and States on the X-axis. PS: Score Global Forest Watch and Scores Ministry of Statistics and Programme Implementation",
+                                "hi": "निम्नलिखित में से कौन बेहतर data story है ? उसके कारण बताइये । पहला ग्राफ विभिन्न राज्यों के लिए '2001-22 तक हासित लघुतम वन आच्छादित क्षेत्र' दिखाता है (अरुणाचल प्रदेश: 2, असम: 1, कर्नाटक: 3, केरल: 2, मणिपुर: 6, मेघालय: 5, मिजोरम: 4, नागालैंड: 10, ओडिशा: 3, त्रिपुरा: 8)। दूसरा ग्राफ विभिन्न राज्यों के लिए '2001-22 तक सकल राज्य घरेलू उत्पाद (GSDP) में अधिकतम वृद्धि' दिखाता है (अरुणाचल प्रदेश: 4, असम: 5, कर्नाटक: 7, केरल: 7, मणिपुर: 9, मेघालय: 6, मिजोरम: 9, नागालैंड: 10, ओडिशा: 2, त्रिपुरा: 8)। दोनों ग्राफ में Y-अक्ष पर रैंक (0-12) और X-अक्ष पर राज्य हैं। पीएस: स्कोर ग्लोबल फॉरेस्ट वॉच और स्कोर सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय"
                             },
                             "marks": "2",
                             "rubric": [],
-                            "attachments": [
-                                {
-                                    "description": "The question refers to two identical line graphs. Both graphs plot 'Rank' (R, a, n, k) on the Y-axis from 0 to 12 and 'State' on the X-axis, listing Arunachal Pradesh, Assam, Karnataka, Kerala, Manipur, Meghalaya, Mizoram, Nagaland, Odisha, and Tripura. Each graph contains two lines representing different metrics.\n\nLine 1 (Least Forest Area Lost from 2001-22) data points:\nArunachal Pradesh: 4\nAssam: 7\nKarnataka: 5\nKerala: 2\nManipur: 7\nMeghalaya: 6\nMizoram: 9\nNagaland: 10\nOdisha: 3\nTripura: 8\n\nLine 2 (Max. Growth in Gross State Domestic Product (GSDP) from 2001-22) data points:\nArunachal Pradesh: 2\nAssam: 1\nKarnataka: 3\nKerala: 5\nManipur: 6\nMeghalaya: 4\nMizoram: 9\nNagaland: 10\nOdisha: 2\nTripura: 8\n\nThe source for both graphs is given as 'PS: Score Global Forest Watch and Scores Ministry of Statistics and Programme Implementation'. The visual representation of both graphs is identical.",
-                                    "type": "Graph"
-                                }
-                            ]
+                            "diagramRequired": false
                         }
                     ]
                 }
             ],
             "sectionChoices": [
                 {
-                    "detailedDescription": "Answer any 3 out of the given 5 questions (Q6 to Q10) on Employability Skills. Each question should be answered in 20-30 words and carries 2 marks.",
-                    "summary": "Answer any 3 of Q6-Q10",
+                    "detailedDescription": "Answer any 3 out of the given 5 questions on Employability Skills. Answer each question in 20-30 words. Each question carries 2 marks.",
+                    "summary": "Choose 3 out of 5 questions (Q6-Q10).",
                     "targetNodes": [
                         "Q6",
                         "Q7",
@@ -1541,8 +1623,8 @@
                     ]
                 },
                 {
-                    "detailedDescription": "Answer any 4 out of the given 6 questions (Q11 to Q16). Each question should be answered in 20-30 words and carries 2 marks.",
-                    "summary": "Answer any 4 of Q11-Q16",
+                    "detailedDescription": "Answer any 4 out of the given 6 questions in 20-30 words each. Each question carries 2 marks.",
+                    "summary": "Choose 4 out of 6 questions (Q11-Q16).",
                     "targetNodes": [
                         "Q11",
                         "Q12",
@@ -1553,8 +1635,8 @@
                     ]
                 },
                 {
-                    "detailedDescription": "Answer any 3 out of the given 5 questions (Q17 to Q21). Each question should be answered in 50-80 words and carries 4 marks.",
-                    "summary": "Answer any 3 of Q17-Q21",
+                    "detailedDescription": "Answer any 3 out of the given 5 questions in 50-80 words each. Each question carries 4 marks.",
+                    "summary": "Choose 3 out of 5 questions (Q17-Q21).",
                     "targetNodes": [
                         "Q17",
                         "Q18",
@@ -1565,8 +1647,8 @@
                 }
             ],
             "sectionInstructions": {
-                "en": "Section – B : Subjective Type Questions (26 marks)\n(a) This section has 16 questions.\n(b) A candidate has to do 10 questions.\n(c) Do as per the instructions given.\n(d) Marks allotted are mentioned against each question/part.",
-                "hi": "खण्ड-बः विषयपरक प्रकार के प्रश्न (26 अंक)\n(a) इस खण्ड में 16 प्रश्न हैं।\n(b) उम्मीदवार को 10 प्रश्न हल करने हैं।\n(c) दिए गए निर्देशों के अनुसार कीजिए ।\n(d) प्रत्येक प्रश्न/भाग के सामने आबंटित अंकों का उल्लेख किया गया है।"
+                "en": "Section – B : Subjective Type Questions (26 marks) This section has 16 questions. A candidate has to do 10 questions. Do as per the instructions given. Marks allotted are mentioned against each question/part.",
+                "hi": "खण्ड-बः विषयपरक प्रकार के प्रश्न (26 अंक) इस खण्ड में 16 प्रश्न हैं। उम्मीदवार को 10 प्रश्न हल करने हैं। दिए गए निर्देशों के अनुसार कीजिए । प्रत्येक प्रश्न/भाग के सामने आबंटित अंकों का उल्लेख किया गया है।"
             }
         }
     ],

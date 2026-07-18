@@ -22,23 +22,25 @@ export default async function parseQuestionPaper(req, res, next) {
 
         console.log("Generating response...");
 
-        const primaryModel="gemini-2.5-flash"; // Not using 3.5-flash right now because of busy servers and less priority to free tier.
+        const primaryModel="gemini-2.5-flash"; // Not using 3.5-flash right now because of busy servers and less priority to free tier. 3.1-flash-lite is suited for speed and it is not reading prompt correctly.
         const fallbackModel="gemini-2.5-flash";
-        let forceFallback=false;
+        
         const maxRetries = 5;
-        const responseTimeLimit=90000; //in milliseconds
+        
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
-            const model_name = (attempt > 3 || forceFallback) ? fallbackModel : primaryModel;
+            const model_name = (attempt > 3) ? fallbackModel : primaryModel;
+
+            const baseConfig={
+                        responseMimeType: 'application/json',
+                        responseSchema: finalPaperSchema, 
+                        temperature:0.1
+                    };
+
             try {
                 const responseStream = await ai.models.generateContentStream({
                     model: model_name,
                     contents: inputArray,
-                    config: {
-                        responseMimeType: 'application/json',
-                        responseSchema: finalPaperSchema, 
-                        temperature: 0.1,
-                        thinking_level: "low",
-                    }
+                    config: baseConfig
                 });
 
                 // 2. Real-time Assembly Line
@@ -82,23 +84,6 @@ export default async function parseQuestionPaper(req, res, next) {
                 }  
             }
             catch (err) {
-                // const isTimeout = err.name === "TimeoutError" ||
-                //                   err.name === "AbortError" ||
-                //                   err.code === "ETIMEDOUT" ||
-                //                   err.code === 20 || // Handles DOMException internal abort code
-                //                   err.message?.toLowerCase().includes("timeout") ||
-                //                   err.message?.toLowerCase().includes("aborted") ||
-                //                   err.message?.includes("DEADLINE_EXCEEDED") ||
-                //                   err.message?.includes("DEADLINE");
-                // if(!forceFallback && model_name===primaryModel && isTimeout){
-                //     console.warn(`[Timeout] Primary model took over ${responseTimeLimit/60000} mins. Switching to ${fallbackModel}...`);
-                //     forceFallback=true; // This sets the flag to true and fallbackModel will be used.
-
-                //     // Linear small backoff for timeouts so it doesn't slam the next model
-                //     await new Promise(resolve => setTimeout(resolve, 1000));
-
-                //     continue;
-                // }
                 const status = err.status ?? err.code ?? 500;
                 if ((status === 503 || status === 429) && attempt < maxRetries) {
                     const delay = Math.pow(2, attempt) * 1000;

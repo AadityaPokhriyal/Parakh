@@ -90,35 +90,41 @@ async def evaluate(answer_pdf: UploadFile, question_json: UploadFile):
     )
     logger.info("question json uploaded")
 
-    # make request to model
-    interaction = client.interactions.create(
-        model="gemini-3.5-flash",
-        store = False,
-        input=[
-            {
-                "type":"document",
-                "uri": uploaded_questionJson.uri,
-                "mime_type":"application/json"
+    try:
+        # make request to model
+        interaction = client.interactions.create(
+            model="gemini-3-flash-preview",
+            store = False,
+            input=[
+                {
+                    "type":"document",
+                    "uri": uploaded_questionJson.uri,
+                    "mime_type":"application/json"
+                },
+                {
+                    "type": "document",
+                    "uri": uploaded_answersheet.uri,
+                    "mime_type": "application/pdf"
+                }, 
+                {"type": "text", "text": evaluation_prompt}
+            ],
+            generation_config = {
+                "temperature" : 0,
+                "thinking_level" : "high"
             },
-            {
-                "type": "document",
-                "uri": uploaded_answersheet.uri,
-                "mime_type": "application/pdf"
-            }, 
-            {"type": "text", "text": evaluation_prompt}
-        ],
-        response_format = {
-            "type":"text",
-            "mime_type":"application/json",
-            "schema":EvaluationOutput.model_json_schema()
-        }
-    )
-    logger.info("gemini interaction created")
+            response_format = {
+                "type":"text",
+                "mime_type":"application/json",
+                "schema":EvaluationOutput.model_json_schema()
+            }
+        )
+        logger.info("gemini interaction created")
 
-    # make sure the files dont accumulate
-    client.files.delete(name = uploaded_questionJson.name)
-    client.files.delete(name = uploaded_answersheet.name)
-    logger.info("uploaded files deleted")
+    finally:
+        # make sure the files dont accumulate
+        client.files.delete(name = uploaded_questionJson.name)
+        client.files.delete(name = uploaded_answersheet.name)
+        logger.info("uploaded files deleted")
 
     # validate the output and return json
     eval_json = EvaluationOutput.model_validate_json(interaction.output_text)

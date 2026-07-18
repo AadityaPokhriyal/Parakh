@@ -24,7 +24,7 @@ Create a `.env` file inside `Parakh/backend/`:
 ```env
 PORT=5000
 SUPABASE_URL=your_supabase_project_url
-SUPABASE_ANON_KEY=your_supabase_anon_api_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 AI_SERVICE_URL=http://localhost:3000
 AI_EVALUATION_SERVICE_URL=http://localhost:8000
 ```

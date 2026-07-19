@@ -33,7 +33,10 @@ export default async function parseQuestionPaper(req, res, next) {
             const baseConfig={
                         responseMimeType: 'application/json',
                         responseSchema: finalPaperSchema, 
-                        temperature:0.1
+                        temperature:0.1,
+                        thinkingConfig: {
+                            thinkingBudget:8192
+                        }
                     };
 
             try {

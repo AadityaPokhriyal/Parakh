@@ -1,15 +1,15 @@
 .question-node {
   margin-bottom: 16px;
-  border: 1px solid #28354d;
+  border: 1px solid var(--border);
   border-radius: 14px;
-  background-color: #172033;
+  background-color: var(--card-bg);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  transition: box-shadow 0.2s ease;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .question-node:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
 .question-header {
@@ -17,21 +17,21 @@
   justify-content: space-between;
   align-items: center;
   padding: 14px 18px;
-  background-color: rgba(139, 92, 246, 0.06);
+  background-color: var(--accent-bg);
   cursor: pointer;
   user-select: none;
-  border-bottom: 1px solid #28354d;
+  border-bottom: 1px solid var(--border);
   transition: background-color 0.15s ease;
 }
 
 .question-header:hover {
-  background-color: rgba(139, 92, 246, 0.12);
+  background-color: var(--accent-border);
 }
 
 .question-title {
   font-weight: 600;
   font-size: 16px;
-  color: #e2e8f0;
+  color: var(--text-h);
   margin: 0;
 }
 
@@ -51,7 +51,7 @@
 .field-group label {
   font-size: 13px;
   font-weight: 500;
-  color: #94a3b8;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -60,13 +60,13 @@
 .field-group textarea {
   width: 100%;
   padding: 10px 14px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
   box-sizing: border-box;
-  background-color: #0f172a;
-  color: #e2e8f0;
+  background-color: var(--code-bg);
+  color: var(--text-h);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -78,13 +78,13 @@
 .field-group input[type="text"]:focus,
 .field-group textarea:focus {
   outline: none;
-  border-color: #8b5cf6;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
 }
 
 .field-group input[type="text"]::placeholder,
 .field-group textarea::placeholder {
-  color: #475569;
+  color: var(--text-muted);
 }
 
 .checkbox-group {
@@ -98,12 +98,12 @@
   width: 16px;
   height: 16px;
   cursor: pointer;
-  accent-color: #8b5cf6;
+  accent-color: var(--accent);
 }
 
 .checkbox-group label {
   font-size: 14px;
-  color: #cbd5e1;
+  color: var(--text-h);
   cursor: pointer;
 }
 
@@ -113,9 +113,9 @@
   flex-direction: column;
   gap: 8px;
   padding: 14px;
-  background-color: #0f172a;
+  background-color: var(--code-bg);
   border-radius: 10px;
-  border: 1px solid #1e293b;
+  border: 1px solid var(--border);
 }
 
 .rubric-item,
@@ -144,9 +144,9 @@
 
 .btn-secondary {
   padding: 8px 14px;
-  background-color: rgba(139, 92, 246, 0.1);
-  color: #c4b5fd;
-  border: 1px solid rgba(139, 92, 246, 0.25);
+  background-color: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
   border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
@@ -156,23 +156,22 @@
 }
 
 .btn-secondary:hover {
-  background-color: rgba(139, 92, 246, 0.2);
-  border-color: rgba(139, 92, 246, 0.4);
+  background-color: var(--accent-border);
 }
 
 .children-container {
   margin-top: 16px;
   padding-left: 24px;
-  border-left: 2px solid #334155;
+  border-left: 2px solid var(--border);
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
 /* Subtle depth indicators for nested levels */
-.level-2 > .question-node { background-color: #1a2640; border-color: #2d3f5e; }
-.level-3 > .question-node { background-color: #1e2d4a; border-color: #334970; }
-.level-4 > .question-node { background-color: #223455; border-color: #3a5380; }
+.level-2 > .question-node { background-color: var(--code-bg); border-color: var(--border); }
+.level-3 > .question-node { background-color: var(--code-bg); border-color: var(--border); }
+.level-4 > .question-node { background-color: var(--code-bg); border-color: var(--border); }
 
 /* ===== Type Badges ===== */
 .type-badge {
@@ -257,17 +256,17 @@
 
 .attachment-desc {
   font-size: 13px;
-  color: #94a3b8;
+  color: var(--text-muted);
   line-height: 1.5;
   word-break: break-word;
 }
 
 /* ===== MTF Match Table ===== */
 .match-table-wrapper {
-  border: 1px solid #1e293b;
+  border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;
-  background: #0f172a;
+  background: var(--code-bg);
 }
 
 .match-table {
@@ -279,19 +278,19 @@
   padding: 10px 14px;
   font-size: 12px;
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   background: rgba(245, 158, 11, 0.06);
-  border-bottom: 1px solid #1e293b;
+  border-bottom: 1px solid var(--border);
   text-align: left;
 }
 
 .match-table td {
   padding: 10px 14px;
   font-size: 13px;
-  color: #cbd5e1;
-  border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+  color: var(--text-h);
+  border-bottom: 1px solid var(--border);
   vertical-align: top;
   line-height: 1.5;
 }
@@ -307,7 +306,7 @@
 .match-lang-label {
   font-size: 10px;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.3px;
   margin-bottom: 2px;
@@ -340,7 +339,7 @@
 
 .choice-info-summary {
   font-size: 13px;
-  color: #cbd5e1;
+  color: var(--text-h);
   line-height: 1.5;
 }
 
@@ -349,7 +348,7 @@
   padding-top: 8px;
   border-top: 1px solid rgba(168, 85, 247, 0.15);
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--text-muted);
   line-height: 1.5;
 }
 

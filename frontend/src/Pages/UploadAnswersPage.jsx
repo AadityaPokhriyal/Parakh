@@ -51,7 +51,7 @@ function UploadAnswersPage() {
   // ── Guard ─────────────────────────────────────────────────────────────────
   if (!examPaperId) {
     return (
-      <div style={{ background: "#0f172a", minHeight: "100vh" }}>
+      <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
         <Navbar />
         <div style={styles.invalidContainer}>
           <h2>Invalid Access</h2>
@@ -136,7 +136,7 @@ function UploadAnswersPage() {
   // ── Render ────────────────────────────────────────────────────────────────
 
   return (
-    <div style={{ background: "#0f172a", minHeight: "100vh" }}>
+    <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
       <Navbar />
       <WorkflowStepper currentStep={3} currentPageName="Upload Student Answer Sheets" />
 
@@ -521,12 +521,12 @@ const styles = {
   pageTitle: {
     fontSize: "28px",
     fontWeight: "700",
-    color: "#fff",
+    color: "var(--text-h)",
     margin: 0,
   },
   pageSubtitle: {
     fontSize: "15px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     margin: "8px 0 0 0",
     lineHeight: "1.5",
   },

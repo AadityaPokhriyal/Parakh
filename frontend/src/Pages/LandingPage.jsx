@@ -39,40 +39,40 @@ function LandingPage() {
 
 
   const contributors = [
-  {
-    name: "Aaditya Pokhriyal",
-    github: "AadityaPokhriyal",
-    role: "Team Leader & AI Services Developer & Backend Developer",
-  },
-  {
-    name: "Divyanshu Yadav",
-    github: "divyanshuyadav-dev",
-    role: "AI Services Developer (Concept Originator) & Data Standardization Lead",
-  },
-  {
-    name: "Gaurav Verma",
-    github: "gouravverma23",
-    role: "Backend & Integration Developer & Frontend Lead",
-  },
-  {
-    name: "Anshu Kumar",
-    github: "anshu-kr576",
-    role: "Frontend Developer",
-  },
-  {
-    name: "Jai Singh Rathore",
-    github: "jaisingh30-design",
-    role: "UI/UX Designer",
-  },
-  {
-    name: "Raj",
-    github: "rj-codecraft",
-    role: "UI/UX Designer",
-  },
-];
+    {
+      name: "Aaditya Pokhriyal",
+      github: "AadityaPokhriyal",
+      role: "Team Leader & AI Services Developer & Backend Developer",
+    },
+    {
+      name: "Divyanshu Yadav",
+      github: "divyanshuyadav-dev",
+      role: "AI Services Developer (Concept Originator) & Data Standardization Lead",
+    },
+    {
+      name: "Gaurav Verma",
+      github: "gouravverma23",
+      role: "Backend & Integration Developer & Frontend Lead",
+    },
+    {
+      name: "Anshu Kumar",
+      github: "anshu-kr576",
+      role: "Frontend Developer",
+    },
+    {
+      name: "Jai Singh Rathore",
+      github: "jaisingh30-design",
+      role: "UI/UX Designer",
+    },
+    {
+      name: "Raj",
+      github: "rj-codecraft",
+      role: "UI/UX Designer",
+    },
+  ];
 
   return (
-    <div style={{ background: "#0b1120", minHeight: "100vh", position: "relative" }}>
+    <div style={{ background: "var(--bg)", minHeight: "100vh", position: "relative" }}>
       <Navbar />
       <div style={{ ...styles.container, paddingTop: 0 }}>
          <div style={styles.heroGlow}></div>
@@ -151,47 +151,47 @@ function LandingPage() {
 </section>
 
       {/* Contributors */}
-<section style={styles.contributors}>
-  <h2 style={styles.sectionTitle}>
-    Contributors
-  </h2>
+      <section style={styles.contributors}>
+        <h2 style={styles.sectionTitle}>
+          Contributors
+        </h2>
 
-  <div style={styles.contributorsGrid}>
-    {contributors.map((person, index) => (
-      <div
-        key={index}
-        style={styles.contributorCard}
-      >
-       <a
-  href={`https://github.com/${person.github}`}
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <img
-    src={`https://github.com/${person.github}.png`}
-    alt={person.name}
-    style={styles.avatar}
-  />
-</a>
+        <div style={styles.contributorsGrid}>
+          {contributors.map((person, index) => (
+            <div
+              key={index}
+              style={styles.contributorCard}
+            >
+              <a
+                href={`https://github.com/${person.github}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={`https://github.com/${person.github}.png`}
+                  alt={person.name}
+                  style={styles.avatar}
+                />
+              </a>
 
-        <h3>{person.name}</h3>
+              <h3>{person.name}</h3>
 
-        <a
-  href={`https://github.com/${person.github}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  style={styles.github}
->
-  @{person.github}
-</a>
+              <a
+                href={`https://github.com/${person.github}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={styles.github}
+              >
+                @{person.github}
+              </a>
 
-        <p style={styles.role}>
-          {person.role}
-        </p>
-      </div>
-    ))}
-  </div>
-</section>
+              <p style={styles.role}>
+                {person.role}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* CTA */}
       <section style={styles.cta}>
@@ -205,7 +205,7 @@ function LandingPage() {
 
 <p
   style={{
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     marginBottom: "32px",
     lineHeight: "1.7",
   }}
@@ -228,25 +228,12 @@ function LandingPage() {
 
 const styles = {
   container: {
-  minHeight: "100vh",
-  background: "#0b1120",
-  color: "#fff",
-  padding: "40px 24px",
-  position: "relative",
-  overflow: "hidden",
-},
-heroGlow: {
-  position: "absolute",
-  top: "180px",
-  left: "50%",
-  transform: "translateX(-50%)",
-  width: "700px",
-  height: "350px",
-  background: "rgba(139,92,246,0.18)",
-  filter: "blur(100px)",
-  borderRadius: "50%",
-  pointerEvents: "none",
-},
+    minHeight: "100vh",
+    background: "var(--bg)",
+    color: "var(--text)",
+    padding: "20px 24px 40px 24px",
+    transition: "all 0.3s ease",
+  },
 
   navbar: {
     display: "flex",
@@ -255,7 +242,8 @@ heroGlow: {
     maxWidth: "1200px",
     margin: "0 auto 20px auto",
     padding: "10px 0",
-    borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
+    borderBottom: "1px solid var(--border)",
+    transition: "all 0.3s ease",
   },
 
   logo: {
@@ -263,18 +251,20 @@ heroGlow: {
     fontWeight: "800",
     letterSpacing: "-0.5px",
     cursor: "pointer",
+    color: "var(--text-h)",
+    transition: "color 0.3s ease",
   },
 
   loginBtn: {
     padding: "10px 20px",
     borderRadius: "10px",
-    border: "1px solid #334155",
-    background: "rgba(30, 41, 59, 0.5)",
-    color: "#e2e8f0",
+    border: "1px solid var(--border)",
+    background: "var(--btn-sec-bg)",
+    color: "var(--text)",
     fontSize: "14px",
     fontWeight: "600",
     cursor: "pointer",
-    transition: "all 0.2s ease",
+    transition: "all 0.3s ease",
   },
 
 hero: {
@@ -289,21 +279,17 @@ hero: {
   zIndex: 1,
 },
 
-badge: {
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: "14px 28px",
-  borderRadius: "999px",
-  background: "rgba(88, 60, 180, 0.25)",
-  border: "1px solid rgba(139,92,246,0.25)",
-  color: "#d8ccff",
-  fontWeight: "500",
-  fontSize: "18px",
-  width: "fit-content",
-  margin: "0 auto 30px",
-  backdropFilter: "blur(10px)",
-},
+  badge: {
+    display: "inline-block",
+    padding: "10px 18px",
+    borderRadius: "999px",
+    background: "var(--accent-bg)",
+    color: "var(--accent)",
+    marginBottom: "24px",
+    fontWeight: "500",
+    border: "1px solid var(--accent-border)",
+    transition: "all 0.3s ease",
+  },
 
   title: {
     fontSize: "76px",
@@ -313,7 +299,7 @@ badge: {
   },
 
   gradient: {
-    background: "linear-gradient(135deg,#8b5cf6,#3b82f6)",
+    background: "linear-gradient(135deg, var(--accent), #3b82f6)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
   },
@@ -323,7 +309,8 @@ badge: {
     margin: "24px auto",
     fontSize: "22px",
     lineHeight: "1.8",
-    color: "#cbd5e1",
+    color: "var(--text-muted)",
+    transition: "color 0.3s ease",
   },
 
   buttonGroup: {
@@ -338,21 +325,23 @@ badge: {
     padding: "16px 28px",
     border: "none",
     borderRadius: "12px",
-    background: "linear-gradient(135deg,#8b5cf6,#6366f1)",
+    background: "linear-gradient(135deg, var(--accent), #6366f1)",
     color: "#fff",
     fontSize: "16px",
     fontWeight: "600",
     cursor: "pointer",
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
   },
 
   secondaryBtn: {
     padding: "16px 28px",
     borderRadius: "12px",
-    border: "1px solid #334155",
-    background: "transparent",
-    color: "#e2e8f0",
+    border: "1px solid var(--border)",
+    background: "var(--btn-sec-bg)",
+    color: "var(--text)",
     fontSize: "16px",
     cursor: "pointer",
+    transition: "all 0.3s ease",
   },
 
  features: {
@@ -365,15 +354,14 @@ badge: {
 },
 
   card: {
-  background: "#172033",
-  border: "1px solid #28354d",
-  borderRadius: "20px",
-  padding: "28px",
-  textAlign: "center",
-  minHeight: "220px",
-  width: "100%",
-  boxSizing: "border-box",
-},
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
+    borderRadius: "20px",
+    padding: "28px",
+    textAlign: "center",
+    transition: "all 0.3s ease",
+    boxShadow: "var(--shadow)",
+  },
 
   icon: {
     fontSize: "40px",
@@ -383,16 +371,21 @@ badge: {
   cardTitle: {
     fontSize: "24px",
     marginBottom: "12px",
+    color: "var(--text-h)",
+    transition: "color 0.3s ease",
   },
 
   cardText: {
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     lineHeight: "1.6",
+    transition: "color 0.3s ease",
   },
 
   sectionTitle: {
     fontSize: "42px",
     marginBottom: "40px",
+    color: "var(--text-h)",
+    transition: "color 0.3s ease",
   },
 
   workflowSection: {
@@ -400,69 +393,87 @@ badge: {
   textAlign: "center",
 },
 
-sectionSubtitle: {
-  color: "#94a3b8",
-  maxWidth: "700px",
-  margin: "-10px auto 40px",
-  lineHeight: "1.7",
-},
+  stepCard: {
+    width: "260px",
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
+    borderRadius: "18px",
+    padding: "28px",
+    transition: "all 0.3s ease",
+    boxShadow: "var(--shadow)",
+  },
+
+  stepNumber: {
+    fontSize: "40px",
+    fontWeight: "800",
+    color: "var(--accent)",
+    marginBottom: "10px",
+    transition: "color 0.3s ease",
+  },
 
   cta: {
     textAlign: "center",
     marginTop: "120px",
     padding: "80px 40px",
     borderRadius: "24px",
-    background: "#172033",
-    border: "1px solid #28354d",
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
     maxWidth: "1000px",
     marginLeft: "auto",
     marginRight: "auto",
+    transition: "all 0.3s ease",
+    boxShadow: "var(--shadow)",
   },
 
   contributors: {
-  marginTop: "100px",
-  textAlign: "center",
-},
+    marginTop: "100px",
+    textAlign: "center",
+  },
 
-contributorsGrid: {
-  maxWidth: "1000px",
-  margin: "40px auto 0",
-  display: "grid",
-  gridTemplateColumns:
-    "repeat(auto-fit,minmax(280px,1fr))",
-  gap: "24px",
-},
+  contributorsGrid: {
+    maxWidth: "1000px",
+    margin: "40px auto 0",
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(auto-fit,minmax(280px,1fr))",
+    gap: "24px",
+  },
 
-contributorCard: {
-  background: "#172033",
-  border: "1px solid #28354d",
-  borderRadius: "20px",
-  padding: "24px",
-  textAlign: "center",
-},
+  contributorCard: {
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
+    borderRadius: "20px",
+    padding: "24px",
+    textAlign: "center",
+    transition: "all 0.3s ease",
+    boxShadow: "var(--shadow)",
+  },
 
-avatar: {
-  width: "90px",
-  height: "90px",
-  borderRadius: "50%",
-  objectFit: "cover",
-  marginBottom: "16px",
-  border: "3px solid #8b5cf6",
-},
+  avatar: {
+    width: "90px",
+    height: "90px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    marginBottom: "16px",
+    border: "3px solid var(--accent)",
+    transition: "border-color 0.3s ease",
+  },
 
-github: {
-  color: "#8b5cf6",
-  fontSize: "14px",
-  marginBottom: "12px",
-  textDecoration: "none",
-  display: "inline-block",
-},
+  github: {
+    color: "var(--accent)",
+    fontSize: "14px",
+    marginBottom: "12px",
+    textDecoration: "none",
+    display: "inline-block",
+    transition: "color 0.3s ease",
+  },
 
-role: {
-  color: "#94a3b8",
-  lineHeight: "1.6",
-  fontSize: "14px",
-},
+  role: {
+    color: "var(--text-muted)",
+    lineHeight: "1.6",
+    fontSize: "14px",
+    transition: "color 0.3s ease",
+  },
 };
 
 export default LandingPage;

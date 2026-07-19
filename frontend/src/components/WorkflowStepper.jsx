@@ -27,12 +27,10 @@ export default function WorkflowStepper({ currentStep, currentPageName }) {
         {steps.map((step, idx) => {
           const isCompleted = step.number < currentStep;
           const isActive = step.number === currentStep;
-          const isFuture = step.number > currentStep;
 
           return (
             <div key={step.number} style={styles.stepWrapper}>
               <div style={styles.stepMain}>
-                {/* Circle icon/indicator */}
                 {isCompleted ? (
                   <div style={styles.completedCircle}>
                     <Check size={14} strokeWidth={3} />
@@ -43,11 +41,14 @@ export default function WorkflowStepper({ currentStep, currentPageName }) {
                   <div style={styles.futureCircle}>{step.number}</div>
                 )}
 
-                {/* Step Label */}
                 <span
                   style={{
                     ...styles.stepLabel,
-                    color: isActive ? "#fff" : isCompleted ? "#94a3b8" : "#475569",
+                    color: isActive
+                      ? "var(--text-h)"
+                      : isCompleted
+                      ? "var(--text-muted)"
+                      : "var(--text-muted)",
                     fontWeight: isActive ? "600" : "500",
                   }}
                 >
@@ -55,12 +56,11 @@ export default function WorkflowStepper({ currentStep, currentPageName }) {
                 </span>
               </div>
 
-              {/* Connecting Line (drawn after all steps except the last) */}
               {idx < steps.length - 1 && (
                 <div
                   style={{
                     ...styles.line,
-                    background: step.number < currentStep ? "#10b981" : "#1e293b",
+                    background: step.number < currentStep ? "#10b981" : "var(--border)",
                   }}
                 />
               )}
@@ -96,12 +96,12 @@ const styles = {
     transition: "color 0.2s",
   },
   breadcrumbSeparator: {
-    color: "#475569",
+    color: "var(--text-muted)",
     fontSize: "16px",
     userSelect: "none",
   },
   activePage: {
-    color: "#f1f5f9",
+    color: "var(--text-h)",
   },
   stepperContainer: {
     display: "flex",
@@ -149,9 +149,9 @@ const styles = {
     width: "28px",
     height: "28px",
     borderRadius: "50%",
-    background: "#0f172a",
-    border: "2px solid #1e293b",
-    color: "#475569",
+    background: "var(--code-bg)",
+    border: "2px solid var(--border)",
+    color: "var(--text-muted)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

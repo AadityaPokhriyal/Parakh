@@ -4,7 +4,6 @@ import { useEvaluation } from "../context/EvaluationContext";
 import Navbar from "../components/Navbar";
 import WorkflowStepper from "../components/WorkflowStepper";
 
-// Helper to calculate total earned marks for a student evaluation
 const calculateTotalMarks = (evaluationData) => {
   if (!evaluationData || !evaluationData.answerBlocks) return 0;
   return evaluationData.answerBlocks.reduce((sum, block) => {
@@ -12,14 +11,12 @@ const calculateTotalMarks = (evaluationData) => {
   }, 0);
 };
 
-// Recursive Component to render answer blocks (Root, Child, Grandchild)
 const AnswerBlockNode = ({ block, level = 1 }) => {
   const hasChildren = block.children && block.children.length > 0;
   const isAttempted = block.attemptStatus === "attempted" || block.attemptStatus === "partial";
 
-  // Different padding/border based on depth level
   const paddingLeft = level === 1 ? "0px" : level === 2 ? "20px" : "35px";
-  const borderLeft = level === 1 ? "none" : "3px solid var(--accent-border, rgba(168, 85, 247, 0.3))";
+  const borderLeft = level === 1 ? "none" : "3px solid var(--accent-border)";
 
   return (
     <div
@@ -33,7 +30,6 @@ const AnswerBlockNode = ({ block, level = 1 }) => {
       }}
     >
       <div style={blockStyles.card}>
-        {/* Header line */}
         <div style={blockStyles.header}>
           <div style={blockStyles.headerLeft}>
             <span style={level === 1 ? blockStyles.idBadge : blockStyles.subIdBadge}>
@@ -55,7 +51,6 @@ const AnswerBlockNode = ({ block, level = 1 }) => {
           </div>
         </div>
 
-        {/* Answer Summary */}
         {block.answerSummary && (
           <div style={blockStyles.summarySection}>
             <div style={blockStyles.sectionLabel}>Student's Answer Summary</div>
@@ -63,7 +58,6 @@ const AnswerBlockNode = ({ block, level = 1 }) => {
           </div>
         )}
 
-        {/* Satisfied / Criteria Met list */}
         {block.satisfies && block.satisfies.length > 0 && (
           <div style={blockStyles.listSection}>
             <div style={{ ...blockStyles.sectionLabel, color: "#10b981" }}>✓ Criteria Met</div>
@@ -77,7 +71,6 @@ const AnswerBlockNode = ({ block, level = 1 }) => {
           </div>
         )}
 
-        {/* Missing / Unmet list */}
         {block.missing && block.missing.length > 0 && (
           <div style={blockStyles.listSection}>
             <div style={{ ...blockStyles.sectionLabel, color: "#ef4444" }}>✕ Missing / Unmet Points</div>
@@ -91,7 +84,6 @@ const AnswerBlockNode = ({ block, level = 1 }) => {
           </div>
         )}
 
-        {/* AI Evaluation Reason */}
         {block.earnedMarks?.reason && (
           <div style={blockStyles.reasonBox}>
             <div style={blockStyles.reasonLabel}>AI Evaluation Note</div>
@@ -99,7 +91,6 @@ const AnswerBlockNode = ({ block, level = 1 }) => {
           </div>
         )}
 
-        {/* Warnings or Issues if any */}
         {((block.errors && block.errors.length > 0) || (block.warnings && block.warnings.length > 0) || (block.issues && block.issues.length > 0)) && (
           <div style={blockStyles.issuesBox}>
             {block.issues?.map((issue, idx) => (
@@ -115,7 +106,6 @@ const AnswerBlockNode = ({ block, level = 1 }) => {
         )}
       </div>
 
-      {/* Render children elements recursively */}
       {hasChildren && (
         <div style={blockStyles.childrenWrapper}>
           {block.children.map((childBlock) => (
@@ -131,7 +121,6 @@ const AnswerBlockNode = ({ block, level = 1 }) => {
   );
 };
 
-// Main step4 Page Component
 function EvaluationResultsPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -140,7 +129,6 @@ function EvaluationResultsPage() {
   const [selectedId, setSelectedId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Initialize context from location state if deep-linked from dashboard
   useEffect(() => {
     const stateExamPaperId = location.state?.examPaperId || location.state?.questionPaperId;
     const stateFilename = location.state?.filename || location.state?.pdf_filename;
@@ -155,7 +143,6 @@ function EvaluationResultsPage() {
     }
   }, [location.state, examPaperId, setExamInfo]);
 
-  // Select first student by default, or specific student if passed in location state
   useEffect(() => {
     if (location.state?.selectedEvaluationId) {
       setSelectedId(location.state.selectedEvaluationId);
@@ -167,11 +154,11 @@ function EvaluationResultsPage() {
   if (evaluations.length === 0) {
     if (isBulkUploading) {
       return (
-        <div style={{ background: "#0b1120", minHeight: "100vh" }}>
+        <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
           <Navbar />
           <div style={styles.invalidContainer}>
             <h2>Evaluating Student Answer Sheets...</h2>
-            <p style={{ color: "#94a3b8", margin: "12px 0 24px", maxWidth: "450px", textAlign: "center" }}>
+            <p style={{ color: "var(--text-muted)", margin: "12px 0 24px", maxWidth: "450px", textAlign: "center" }}>
               AI evaluation is running in the background ({bulkProgress.current} of {bulkProgress.total} sheets processed). Results will automatically load on this page as they finish grading.
             </p>
             <div style={{ ...styles.backgroundProgressTrack, width: "300px", height: "8px", marginBottom: "24px" }}>
@@ -196,11 +183,11 @@ function EvaluationResultsPage() {
     }
 
     return (
-      <div style={{ background: "#0b1120", minHeight: "100vh" }}>
+      <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
         <Navbar />
         <div style={styles.invalidContainer}>
           <h2>No Assessment Results Found</h2>
-          <p style={{ color: "#94a3b8", margin: "12px 0 24px" }}>
+          <p style={{ color: "var(--text-muted)", margin: "12px 0 24px" }}>
             Please upload and successfully submit student answer sheets to view the evaluation dashboard.
           </p>
           <button onClick={() => navigate("/")} style={styles.backHomeBtn}>
@@ -211,7 +198,6 @@ function EvaluationResultsPage() {
     );
   }
 
-  // Filter students based on search query
   const filteredEvaluations = evaluations.filter((item) => {
     const name = (item.studentName || item.evaluationData?.studentMetadata?.name || "").toLowerCase();
     const roll = (item.evaluationData?.studentMetadata?.rollNumber || "").toLowerCase();
@@ -232,11 +218,10 @@ function EvaluationResultsPage() {
     : (totalMarks !== undefined && totalMarks !== null ? totalMarks : null);
 
   return (
-    <div style={{ background: "#0b1120", minHeight: "100vh" }}>
+    <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
       <Navbar />
       <WorkflowStepper currentStep={4} currentPageName="Evaluation Results" />
 
-      {/* Standardized Left-Aligned Page Header */}
       <div style={styles.pageHeader}>
         <h1 style={styles.pageTitle}>Step 4: Assessment & Evaluation Results</h1>
         <p style={styles.pageSubtitle}>
@@ -246,10 +231,8 @@ function EvaluationResultsPage() {
 
       <div style={{ ...styles.container, background: "transparent", paddingTop: "10px" }}>
 
-      {/* Main layout split */}
       <div style={styles.mainLayout}>
         
-        {/* Left column: Student list selection */}
         <div style={styles.sidebar}>
           {isBulkUploading && (
             <div style={styles.backgroundProgressBanner}>
@@ -282,7 +265,7 @@ function EvaluationResultsPage() {
 
           <div style={styles.studentList}>
             {filteredEvaluations.length === 0 ? (
-              <div style={{ color: "#64748b", padding: "20px", textAlign: "center", fontStyle: "italic" }}>
+              <div style={{ color: "var(--text-muted)", padding: "20px", textAlign: "center", fontStyle: "italic" }}>
                 No students found matching your search.
               </div>
             ) : (
@@ -303,9 +286,9 @@ function EvaluationResultsPage() {
                     onClick={() => setSelectedId(item.id)}
                     style={{
                       ...styles.studentCard,
-                      border: isSelected ? "1px solid #8b5cf6" : "1px solid #1e293b",
-                      background: isSelected ? "#1e1b4b" : "#131d30",
-                      boxShadow: isSelected ? "0 0 12px rgba(139, 92, 246, 0.25)" : "none",
+                      border: isSelected ? "1px solid var(--accent)" : "1px solid var(--border)",
+                      background: isSelected ? "var(--accent-bg)" : "var(--card-bg)",
+                      boxShadow: isSelected ? "0 0 12px var(--accent-bg)" : "none",
                     }}
                   >
                     <div style={styles.studentMetaRow}>
@@ -317,7 +300,7 @@ function EvaluationResultsPage() {
                     </div>
                     <div style={styles.studentCardSub}>
                       <span>Roll Number: {roll}</span>
-                      <span style={{ fontSize: "11px", color: "#64748b" }}>ID: {item.evaluationId?.substring(0, 8) || "..."}</span>
+                      <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>ID: {item.evaluationId?.substring(0, 8) || "..."}</span>
                     </div>
                   </div>
                 );
@@ -341,12 +324,10 @@ function EvaluationResultsPage() {
           </div>
         </div>
 
-        {/* Right column: Selected student analysis */}
         <div style={styles.detailsPanel}>
           {selectedItem ? (
             <div style={styles.detailsContent}>
               
-              {/* Top Summary Card */}
               <div style={styles.studentDetailHeader}>
                 <div style={styles.detailHeaderLeft}>
                   <h2 style={styles.studentNameTitle}>
@@ -364,14 +345,13 @@ function EvaluationResultsPage() {
                   <span style={styles.scoreDisplayValue}>
                     {activeTotalScore}
                     {activeMaxMarks !== null && (
-                      <span style={{ fontSize: "16px", color: "#94a3b8", fontWeight: "600" }}>/{activeMaxMarks}</span>
+                      <span style={{ fontSize: "16px", color: "var(--text-muted)", fontWeight: "600" }}>/{activeMaxMarks}</span>
                     )}
                   </span>
                   <span style={styles.scoreDisplayUnits}>Marks Awarded</span>
                 </div>
               </div>
 
-              {/* Status and Confidence */}
               {status && (
                 <div style={styles.parsingBanner}>
                   <div style={styles.parsingBannerItem}>
@@ -394,7 +374,7 @@ function EvaluationResultsPage() {
                           backgroundColor: status.overallConfidence >= 0.8 ? "#10b981" : status.overallConfidence >= 0.5 ? "#f59e0b" : "#ef4444"
                         }} />
                       </div>
-                      <span style={{ fontWeight: 700, fontSize: "13px", color: "#cbd5e1" }}>
+                      <span style={{ fontWeight: 700, fontSize: "13px", color: "var(--text-h)" }}>
                         {Math.round((status.overallConfidence || 0) * 100)}%
                       </span>
                     </div>
@@ -402,21 +382,18 @@ function EvaluationResultsPage() {
                 </div>
               )}
 
-              {/* Question list heading */}
               <h3 style={styles.sectionHeading}>Detailed Question-by-Question Grading</h3>
 
-              {/* Answer Blocks list */}
               <div style={styles.blocksContainer}>
                 {evalData?.answerBlocks && evalData.answerBlocks.length > 0 ? (
                   evalData.answerBlocks.map((block) => (
                     <AnswerBlockNode key={block.id} block={block} level={1} />
                   ))
                 ) : (
-                  <p style={{ fontStyle: "italic", color: "#64748b" }}>No grading blocks extracted for this student.</p>
+                  <p style={{ fontStyle: "italic", color: "var(--text-muted)" }}>No grading blocks extracted for this student.</p>
                 )}
               </div>
 
-              {/* Invalid answers / Redundant attempts note if any */}
               {evalData?.invalidAnswers && evalData.invalidAnswers.length > 0 && (
                 <div style={styles.invalidAnswersBox}>
                   <strong>Note: </strong> Conflicting or excess attempts detected and ignored:{" "}
@@ -432,13 +409,13 @@ function EvaluationResultsPage() {
             </div>
           ) : (
             <div style={styles.noSelectionContainer}>
-              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#334155" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--border)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 16v-4" />
                 <path d="M12 8h.01" />
               </svg>
               <h3>Select a student</h3>
-              <p style={{ color: "#64748b" }}>Click on any student row in the sidebar list to view their complete assessment breakdown.</p>
+              <p style={{ color: "var(--text-muted)" }}>Click on any student row in the sidebar list to view their complete assessment breakdown.</p>
             </div>
           )}
         </div>
@@ -449,13 +426,11 @@ function EvaluationResultsPage() {
   );
 }
 
-// ── Styles objects matching the ReviewPage design guidelines ───────────────────
-
 const styles = {
   container: {
     minHeight: "100vh",
-    background: "#0b1120",
-    color: "#fff",
+    background: "var(--bg)",
+    color: "var(--text-h)",
     padding: "40px 24px",
     fontFamily: "system-ui, -apple-system, sans-serif",
     boxSizing: "border-box",
@@ -473,12 +448,12 @@ const styles = {
   pageTitle: {
     fontSize: "28px",
     fontWeight: "700",
-    color: "#fff",
+    color: "var(--text-h)",
     margin: 0,
   },
   pageSubtitle: {
     fontSize: "15px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     margin: "8px 0 0 0",
     lineHeight: "1.5",
   },
@@ -489,8 +464,8 @@ const styles = {
     alignItems: "center",
     flexDirection: "column",
     gap: "16px",
-    backgroundColor: "#0b1120",
-    color: "#fff",
+    backgroundColor: "var(--bg)",
+    color: "var(--text-h)",
     fontFamily: "system-ui, -apple-system, sans-serif",
     padding: "20px",
     textAlign: "center",
@@ -508,7 +483,6 @@ const styles = {
     transition: "background-color 0.2s",
   },
 
-  // Main Page Layout
   mainLayout: {
     maxWidth: "1200px",
     width: "100%",
@@ -520,7 +494,6 @@ const styles = {
     alignItems: "stretch",
   },
 
-  // Left Sidebar
   sidebar: {
     width: "350px",
     display: "flex",
@@ -535,9 +508,9 @@ const styles = {
     width: "100%",
     padding: "12px 16px",
     borderRadius: "10px",
-    border: "1px solid #1e293b",
-    background: "#131d30",
-    color: "#fff",
+    border: "1px solid var(--border)",
+    background: "var(--card-bg)",
+    color: "var(--text-h)",
     fontSize: "14px",
     outline: "none",
     transition: "border-color 0.2s",
@@ -568,7 +541,7 @@ const styles = {
   studentCardName: {
     fontSize: "15px",
     fontWeight: "600",
-    color: "#e2e8f0",
+    color: "var(--text-h)",
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
@@ -587,30 +560,29 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     fontSize: "12px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
   },
   sidebarReturnBtn: {
     marginTop: "auto",
     padding: "12px 16px",
     borderRadius: "10px",
-    border: "1px solid #1e293b",
+    border: "1px solid var(--border)",
     background: "transparent",
-    color: "#cbd5e1",
+    color: "var(--text-h)",
     fontSize: "14px",
     fontWeight: "600",
     cursor: "pointer",
     transition: "all 0.2s",
   },
 
-  // Right Details Pane
   detailsPanel: {
     flex: 1,
     minWidth: 0,
-    background: "#101827",
-    border: "1px solid #28354d",
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
     borderRadius: "16px",
     padding: "28px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+    boxShadow: "var(--shadow)",
     overflowY: "auto",
     maxHeight: "calc(100vh - 200px)",
   },
@@ -627,17 +599,16 @@ const styles = {
     alignItems: "center",
     gap: "16px",
     textAlign: "center",
-    color: "#64748b",
+    color: "var(--text-muted)",
     padding: "40px",
   },
 
-  // Header inside Right Panel
   studentDetailHeader: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    background: "rgba(139, 92, 246, 0.03)",
-    border: "1px solid #1e293b",
+    background: "var(--accent-bg)",
+    border: "1px solid var(--border)",
     padding: "20px",
     borderRadius: "14px",
     gap: "20px",
@@ -650,7 +621,7 @@ const styles = {
   studentNameTitle: {
     fontSize: "24px",
     fontWeight: "700",
-    color: "#e2e8f0",
+    color: "var(--text-h)",
     margin: "0 0 14px 0",
   },
   metadataGrid: {
@@ -660,11 +631,11 @@ const styles = {
     fontSize: "13px",
   },
   metaLabel: {
-    color: "#64748b",
+    color: "var(--text-muted)",
     fontWeight: "600",
   },
   metaValue: {
-    color: "#cbd5e1",
+    color: "var(--text-h)",
     fontWeight: "500",
   },
   totalScoreDisplay: {
@@ -682,7 +653,7 @@ const styles = {
     fontSize: "10px",
     fontWeight: "700",
     textTransform: "uppercase",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     letterSpacing: "0.5px",
   },
   scoreDisplayValue: {
@@ -697,13 +668,12 @@ const styles = {
     color: "#a78bfa",
   },
 
-  // Parsing status banner
   parsingBanner: {
     display: "flex",
     gap: "30px",
     flexWrap: "wrap",
-    background: "#131d30",
-    border: "1px solid #1e293b",
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
     padding: "12px 20px",
     borderRadius: "10px",
   },
@@ -714,7 +684,7 @@ const styles = {
     fontSize: "13px",
   },
   bannerLabel: {
-    color: "#64748b",
+    color: "var(--text-muted)",
     fontWeight: "600",
   },
   bannerValue: {
@@ -726,7 +696,7 @@ const styles = {
     width: "80px",
     height: "5px",
     borderRadius: "3px",
-    background: "#1e293b",
+    background: "var(--border)",
     overflow: "hidden",
   },
   confidenceBarFill: {
@@ -734,11 +704,10 @@ const styles = {
     borderRadius: "3px",
   },
 
-  // Section details
   sectionHeading: {
     fontSize: "18px",
     fontWeight: "700",
-    color: "#cbd5e1",
+    color: "var(--text-h)",
     margin: "12px 0 4px 0",
     borderLeft: "4px solid #8b5cf6",
     paddingLeft: "10px",
@@ -749,13 +718,12 @@ const styles = {
     gap: "10px",
   },
 
-  // Invalid Answers Box
   invalidAnswersBox: {
     padding: "12px 16px",
     borderRadius: "8px",
     background: "rgba(239, 68, 68, 0.05)",
     border: "1px solid rgba(239, 68, 68, 0.15)",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     fontSize: "13px",
   },
   invalidAnswerChip: {
@@ -780,7 +748,7 @@ const styles = {
   backgroundProgressLabel: {
     fontSize: "12px",
     fontWeight: "600",
-    color: "#cbd5e1",
+    color: "var(--text-h)",
   },
   backgroundSpinner: {
     fontSize: "13px",
@@ -792,7 +760,7 @@ const styles = {
   backgroundProgressTrack: {
     height: "4px",
     width: "100%",
-    backgroundColor: "#1e293b",
+    backgroundColor: "var(--border)",
     borderRadius: "2px",
     overflow: "hidden",
   },
@@ -804,12 +772,10 @@ const styles = {
   },
 };
 
-// ── Styles for recursive AnswerBlock cards ──────────────────────────────────────
-
 const blockStyles = {
   card: {
-    background: "#131d30",
-    border: "1px solid #1e293b",
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
     borderRadius: "12px",
     padding: "20px",
     display: "flex",
@@ -824,7 +790,7 @@ const blockStyles = {
     alignItems: "center",
     flexWrap: "wrap",
     gap: "10px",
-    borderBottom: "1px solid #1e293b",
+    borderBottom: "1px solid var(--border)",
     paddingBottom: "10px",
   },
   headerLeft: {
@@ -841,9 +807,9 @@ const blockStyles = {
     fontSize: "14px",
   },
   subIdBadge: {
-    background: "#2e303a",
-    border: "1px solid #4b5563",
-    color: "#e5e7eb",
+    background: "var(--code-bg)",
+    border: "1px solid var(--border)",
+    color: "var(--text-h)",
     padding: "4px 10px",
     borderRadius: "6px",
     fontWeight: "600",
@@ -858,7 +824,7 @@ const blockStyles = {
   },
   scoreBadge: {
     fontSize: "13px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     fontWeight: "600",
   },
   summarySection: {
@@ -876,7 +842,7 @@ const blockStyles = {
   summaryText: {
     margin: 0,
     fontSize: "14px",
-    color: "#e2e8f0",
+    color: "var(--text-h)",
     lineHeight: "1.5",
   },
   listSection: {
@@ -894,7 +860,7 @@ const blockStyles = {
   },
   listItem: {
     fontSize: "13px",
-    color: "#cbd5e1",
+    color: "var(--text-h)",
     lineHeight: "1.4",
   },
   reasonBox: {
@@ -914,7 +880,7 @@ const blockStyles = {
   reasonText: {
     margin: 0,
     fontSize: "13px",
-    color: "#cbd5e1",
+    color: "var(--text-h)",
     lineHeight: "1.5",
     fontStyle: "italic",
   },
@@ -940,7 +906,6 @@ const blockStyles = {
   },
 };
 
-// ── Inject spin keyframes ───────────────────────────────────────────────────
 if (typeof document !== "undefined") {
   const id = "results-page-keyframes";
   if (!document.getElementById(id)) {

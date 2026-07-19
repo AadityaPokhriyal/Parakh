@@ -29,7 +29,7 @@ const CollapsiblePanel = ({ title, icon, defaultOpen = false, accentColor = "#8b
 
 // ── Choices Renderer (reused for section-level and global-level) ──────
 const ChoicesDisplay = ({ choices, label }) => {
-  if (!choices || choices.length === 0) return null;
+  if (!Array.isArray(choices) || choices.length === 0) return null;
   return (
     <div style={choiceStyles.container}>
       <div style={choiceStyles.label}>{label}</div>
@@ -101,7 +101,6 @@ function ReviewPage() {
     }
   }, [location.state]);
 
-  // ── Deep recursive update (works with both flat questions & sections) ─
   const updateQuestionInTree = (questions, id, updates) => {
     return questions.map((q) => {
       if (q.id === id) {
@@ -117,7 +116,6 @@ function ReviewPage() {
   const handleUpdate = (id, updates) => {
     setPaperData((prev) => {
       if (!prev) return prev;
-      // Section-based structure
       if (prev.sections && prev.sections.length > 0) {
         return {
           ...prev,
@@ -127,7 +125,6 @@ function ReviewPage() {
           })),
         };
       }
-      // Flat questions (backward compat)
       if (prev.questions) {
         return {
           ...prev,
@@ -138,7 +135,6 @@ function ReviewPage() {
     });
   };
 
-  // ── Submit ─────────────────────────────────────────────────────────────
   const handleSubmit = async () => {
     setSubmitStatus("submitting");
     setErrorMessage("");
@@ -179,15 +175,14 @@ function ReviewPage() {
     }
   };
 
-  // ── Empty state ─────────────────────────────────────────────────────────
   if (!paperData) {
     return (
-      <div style={{ background: "#0b1120", minHeight: "100vh" }}>
+      <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
         <Navbar />
         <div style={styles.container}>
           <div style={{ textAlign: "center", padding: "40px" }}>
             <h2>No Question Paper Data Found</h2>
-            <p style={{ color: "#94a3b8", margin: "16px 0" }}>Please go back and upload a PDF or images to begin.</p>
+            <p style={{ color: "var(--text-muted)", margin: "16px 0" }}>Please go back and upload a PDF or images to begin.</p>
             <button onClick={() => navigate("/upload")} style={styles.submitBtn}>
               ← Go to Upload
             </button>
@@ -197,14 +192,12 @@ function ReviewPage() {
     );
   }
 
-  // ── Derived data ────────────────────────────────────────────────────────
   const meta = paperData.paperMetadata;
   const status = paperData.parsingStatus;
   const hasSections = paperData.sections && paperData.sections.length > 0;
   const hasFlatQuestions = paperData.questions && paperData.questions.length > 0;
   const globalChoices = paperData.globalChoices;
 
-  // Confidence color
   const getConfidenceColor = (c) => {
     if (c >= 0.8) return "#10b981";
     if (c >= 0.5) return "#f59e0b";
@@ -236,15 +229,11 @@ function ReviewPage() {
     );
   };
 
-  // ═══════════════════════════════════════════════════════════════════════
-  //  RENDER
-  // ═══════════════════════════════════════════════════════════════════════
   return (
-    <div style={{ background: "#0b1120", minHeight: "100vh" }}>
+    <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
       <Navbar />
       <WorkflowStepper currentStep={2} currentPageName="Review Questions & Rubrics" />
 
-      {/* Standardized Left-Aligned Page Header */}
       <div style={styles.pageHeader}>
         <h1 style={styles.pageTitle}>Step 2: Question Review & Rubrics</h1>
         <p style={styles.pageSubtitle}>
@@ -273,6 +262,7 @@ function ReviewPage() {
 
       {/* ── Parsing Status Banner ───────────────────────────────────── */}
       {isStatusVisible && status && (
+      
         <div style={styles.statusBanner} id="status-banner">
           <div style={styles.statusHeader(isStatusExpanded)}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
@@ -386,7 +376,6 @@ function ReviewPage() {
       )}
 
       <main style={styles.main}>
-        {/* ── Paper Metadata Panel ─────────────────────────────────── */}
         {meta && (
           <CollapsiblePanel title="Paper Metadata" icon="📄" accentColor="#3b82f6">
             <div style={metaStyles.grid}>
@@ -417,14 +406,13 @@ function ReviewPage() {
               {meta.totalMarks !== undefined && (
                 <div style={metaStyles.item}>
                   <span style={metaStyles.label}>Total Marks</span>
-                  <span style={{ ...metaStyles.value, color: "#8b5cf6", fontWeight: 700, fontSize: "20px" }}>
+                  <span style={{ ...metaStyles.value, color: "var(--accent)", fontWeight: 700, fontSize: "20px" }}>
                     {meta.totalMarks}
                   </span>
                 </div>
               )}
             </div>
 
-            {/* Bilingual Instructions */}
             {meta.instructions && (meta.instructions.en || meta.instructions.hi) && (
               <div style={{ marginTop: "16px" }}>
                 <div style={{ display: "flex", gap: "4px", marginBottom: "10px" }}>
@@ -460,14 +448,12 @@ function ReviewPage() {
           </CollapsiblePanel>
         )}
 
-        {/* ── Sections-based questions ─────────────────────────────── */}
         {hasSections && paperData.sections.map((section, sIdx) => (
           <div
             key={section.sectionId || sIdx}
             id={`section-${section.sectionId || sIdx}`}
             style={sectionStyles.card}
           >
-            {/* Section Header */}
             <div style={sectionStyles.header}>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
                 <span style={sectionStyles.badge}>Section {section.sectionId}</span>
@@ -479,36 +465,31 @@ function ReviewPage() {
               </div>
             </div>
 
-            {/* Section Choices */}
             <ChoicesDisplay choices={section.sectionChoices} label="Section Choices" />
 
-            {/* Questions in this section */}
             <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "16px" }}>
               {(section.questions || []).map((q) => (
                 <QuestionNode key={q.id} question={q} onUpdate={handleUpdate} />
               ))}
               {(!section.questions || section.questions.length === 0) && (
-                <p style={{ color: "#64748b", fontStyle: "italic" }}>No questions in this section.</p>
+                <p style={{ color: "var(--text-muted)", fontStyle: "italic" }}>No questions in this section.</p>
               )}
             </div>
           </div>
         ))}
 
-        {/* ── Flat questions (backward compat) ─────────────────────── */}
         {!hasSections && hasFlatQuestions && (
           paperData.questions.map((q) => (
             <QuestionNode key={q.id} question={q} onUpdate={handleUpdate} />
           ))
         )}
 
-        {/* ── No questions at all ──────────────────────────────────── */}
         {!hasSections && !hasFlatQuestions && (
-          <p style={{ color: "#64748b", textAlign: "center", padding: "40px" }}>
+          <p style={{ color: "var(--text-muted)", textAlign: "center", padding: "40px" }}>
             No questions found in the document.
           </p>
         )}
 
-        {/* ── Global Choices Panel ─────────────────────────────────── */}
         {globalChoices && globalChoices.length > 0 && (
           <CollapsiblePanel title="Global Choices (Cross-Section)" icon="🔀" accentColor="#a855f7" defaultOpen>
             <ChoicesDisplay choices={globalChoices} label="" />
@@ -516,7 +497,6 @@ function ReviewPage() {
         )}
       </main>
 
-      {/* ── Footer ─────────────────────────────────────────────────── */}
       <footer style={styles.footer}>
         <button
           onClick={handleSubmit}
@@ -535,14 +515,11 @@ function ReviewPage() {
   );
 }
 
-// ════════════════════════════════════════════════════════════════════════
-//  STYLES
-// ════════════════════════════════════════════════════════════════════════
 const styles = {
   container: {
     minHeight: "100vh",
-    background: "#0b1120",
-    color: "#fff",
+    background: "var(--bg)",
+    color: "var(--text-h)",
     padding: "40px 24px",
     fontFamily: "system-ui, -apple-system, sans-serif",
   },
@@ -557,12 +534,12 @@ const styles = {
   pageTitle: {
     fontSize: "28px",
     fontWeight: "700",
-    color: "#fff",
+    color: "var(--text-h)",
     margin: 0,
   },
   pageSubtitle: {
     fontSize: "15px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     margin: "8px 0 0 0",
     lineHeight: "1.5",
   },
@@ -577,7 +554,7 @@ const styles = {
     maxWidth: "1000px",
     margin: "32px auto 0",
     paddingTop: "24px",
-    borderTop: "1px solid #28354d",
+    borderTop: "1px solid var(--border)",
     display: "flex",
     justifyContent: "flex-end",
   },
@@ -606,7 +583,6 @@ const styles = {
     color: "#ef4444",
     fontSize: "14px",
   },
-  // ── Parsing Status Banner ─────────────────────────────────────
   statusBanner: {
     position: "sticky",
     top: "12px",
@@ -615,9 +591,9 @@ const styles = {
     margin: "0 auto 24px",
     padding: "16px 20px",
     borderRadius: "14px",
-    background: "#131d30",
-    border: "1px solid #1e293b",
-    boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4)",
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
+    boxShadow: "var(--shadow)",
     transition: "box-shadow 0.2s ease",
   },
   statusRow: {
@@ -636,7 +612,7 @@ const styles = {
   statusLabel: {
     fontSize: "11px",
     fontWeight: 600,
-    color: "#64748b",
+    color: "var(--text-muted)",
     textTransform: "uppercase",
     letterSpacing: "0.5px",
   },
@@ -644,7 +620,7 @@ const styles = {
     width: "100px",
     height: "6px",
     borderRadius: "3px",
-    background: "#1e293b",
+    background: "var(--border)",
     overflow: "hidden",
   },
   confidenceBarFill: {
@@ -684,10 +660,10 @@ const styles = {
     alignItems: "center",
   },
   jumpBtn: {
-    background: "rgba(139, 92, 246, 0.12)",
-    border: "1px solid rgba(139, 92, 246, 0.35)",
+    background: "var(--accent-bg)",
+    border: "1px solid var(--accent-border)",
     borderRadius: "8px",
-    color: "#c4b5fd",
+    color: "var(--accent)",
     padding: "5px 12px",
     fontSize: "12px",
     fontWeight: "700",
@@ -728,14 +704,13 @@ const styles = {
   },
 };
 
-// ── Collapsible Panel Styles ─────────────────────────────────────
 const panelStyles = {
   wrapper: {
     borderRadius: "14px",
-    border: "1px solid #1e293b",
-    background: "#131d30",
+    border: "1px solid var(--border)",
+    background: "var(--card-bg)",
     overflow: "hidden",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+    boxShadow: "var(--shadow)",
   },
   header: {
     display: "flex",
@@ -750,14 +725,13 @@ const panelStyles = {
   headerTitle: {
     fontSize: "15px",
     fontWeight: 600,
-    color: "#e2e8f0",
+    color: "var(--text-h)",
   },
   body: {
     padding: "18px",
   },
 };
 
-// ── Metadata Panel Styles ────────────────────────────────────────
 const metaStyles = {
   grid: {
     display: "grid",
@@ -772,30 +746,30 @@ const metaStyles = {
   label: {
     fontSize: "11px",
     fontWeight: 600,
-    color: "#64748b",
+    color: "var(--text-muted)",
     textTransform: "uppercase",
     letterSpacing: "0.5px",
   },
   value: {
     fontSize: "15px",
-    color: "#e2e8f0",
+    color: "var(--text-h)",
     fontWeight: 500,
   },
   langTab: {
     padding: "6px 14px",
     borderRadius: "8px",
-    border: "1px solid #28354d",
+    border: "1px solid var(--border)",
     background: "transparent",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     fontSize: "12px",
     fontWeight: 600,
     cursor: "pointer",
     transition: "all 0.15s ease",
   },
   langTabActive: {
-    background: "rgba(139, 92, 246, 0.15)",
-    borderColor: "rgba(139, 92, 246, 0.4)",
-    color: "#c4b5fd",
+    background: "var(--accent-bg)",
+    borderColor: "var(--accent-border)",
+    color: "var(--accent)",
   },
   instrList: {
     display: "flex",
@@ -804,15 +778,15 @@ const metaStyles = {
     maxHeight: "300px",
     overflowY: "auto",
     padding: "12px",
-    background: "#0f172a",
+    background: "var(--code-bg)",
     borderRadius: "10px",
-    border: "1px solid #1e293b",
+    border: "1px solid var(--border)",
   },
   instrItem: {
     display: "flex",
     gap: "10px",
     fontSize: "13px",
-    color: "#cbd5e1",
+    color: "var(--text-h)",
     lineHeight: "1.6",
     alignItems: "baseline",
   },
@@ -821,8 +795,8 @@ const metaStyles = {
     width: "22px",
     height: "22px",
     borderRadius: "50%",
-    background: "rgba(139,92,246,0.12)",
-    color: "#a78bfa",
+    background: "var(--accent-bg)",
+    color: "var(--accent)",
     fontSize: "11px",
     fontWeight: 700,
     display: "inline-flex",
@@ -831,19 +805,18 @@ const metaStyles = {
   },
 };
 
-// ── Section Styles ───────────────────────────────────────────────
 const sectionStyles = {
   card: {
     borderRadius: "16px",
-    border: "1px solid #28354d",
-    background: "#101827",
+    border: "1px solid var(--border)",
+    background: "var(--card-bg)",
     overflow: "hidden",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+    boxShadow: "var(--shadow)",
   },
   header: {
     padding: "16px 20px",
-    background: "rgba(139, 92, 246, 0.04)",
-    borderBottom: "1px solid #28354d",
+    background: "var(--accent-bg)",
+    borderBottom: "1px solid var(--border)",
   },
   badge: {
     display: "inline-flex",
@@ -852,19 +825,18 @@ const sectionStyles = {
     borderRadius: "20px",
     background: "linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.2))",
     border: "1px solid rgba(139,92,246,0.3)",
-    color: "#c4b5fd",
+    color: "var(--accent)",
     fontSize: "13px",
     fontWeight: 700,
     letterSpacing: "0.4px",
   },
   instrText: {
     fontSize: "13px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     fontStyle: "italic",
   },
 };
 
-// ── Choices Styles ───────────────────────────────────────────────
 const choiceStyles = {
   container: {
     padding: "12px 20px",
@@ -903,12 +875,12 @@ const choiceStyles = {
   },
   summary: {
     fontSize: "13px",
-    color: "#cbd5e1",
+    color: "var(--text-h)",
     lineHeight: "1.5",
   },
   detail: {
     fontSize: "12px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     marginTop: "4px",
     lineHeight: "1.5",
   },

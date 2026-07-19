@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { User, LogOut } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
+import { User, LogOut, Sun, Moon } from "lucide-react";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isAuthenticated, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const handleLogout = () => {
@@ -46,6 +48,14 @@ export default function Navbar() {
       </nav>
 
       <div style={styles.actions}>
+        <button
+          onClick={toggleTheme}
+          style={styles.themeBtn}
+          aria-label="Toggle day/night theme"
+        >
+          {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
+
         {isAuthenticated ? (
           <div style={styles.profileWrapper}>
             <button
@@ -53,7 +63,7 @@ export default function Navbar() {
               style={styles.profileBadge}
             >
               <div style={styles.avatarCircle}>
-                <User size={16} style={{ color: "#8b5cf6" }} />
+                <User size={16} style={{ color: "var(--accent)" }} />
               </div>
               <span style={styles.userName}>{user?.name || "Teacher"}</span>
             </button>
@@ -89,10 +99,10 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "14px 32px",
-    background: "rgba(15, 23, 42, 0.65)",
+    background: "var(--bg)",
     backdropFilter: "blur(16px)",
     WebkitBackdropFilter: "blur(16px)",
-    border: "1px solid rgba(255, 255, 255, 0.08)",
+    border: "1px solid var(--border)",
     borderRadius: "20px",
     position: "sticky",
     top: "16px",
@@ -101,13 +111,14 @@ const styles = {
     maxWidth: "1280px",
     margin: "16px auto 0 auto",
     boxSizing: "border-box",
-    boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)",
+    boxShadow: "var(--shadow)",
+    transition: "background 0.3s ease, border 0.3s ease",
   },
   logo: {
     fontSize: "24px",
     fontWeight: "800",
     cursor: "pointer",
-    color: "#fff",
+    color: "var(--text-h)",
     letterSpacing: "-0.5px",
   },
   gradient: {
@@ -123,7 +134,7 @@ const styles = {
   navLink: {
     background: "none",
     border: "none",
-    color: "#94a3b8",
+    color: "var(--text)",
     fontSize: "14px",
     fontWeight: "500",
     cursor: "pointer",
@@ -135,21 +146,34 @@ const styles = {
     transition: "all 0.2s ease",
   },
   navLinkActive: {
-    color: "#fff",
-    background: "rgba(139, 92, 246, 0.1)",
-    border: "1px solid rgba(139, 92, 246, 0.2)",
+    color: "var(--text-h)",
+    background: "var(--accent-bg)",
+    border: "1px solid var(--accent-border)",
   },
   actions: {
     display: "flex",
     alignItems: "center",
     gap: "16px",
   },
+  themeBtn: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "36px",
+    height: "36px",
+    borderRadius: "50%",
+    border: "1px solid var(--border)",
+    background: "var(--code-bg)",
+    color: "var(--text-h)",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+  },
   loginBtn: {
     padding: "10px 22px",
     borderRadius: "10px",
-    border: "1px solid #334155",
-    background: "rgba(30, 41, 59, 0.5)",
-    color: "#e2e8f0",
+    border: "1px solid var(--border)",
+    background: "var(--code-bg)",
+    color: "var(--text-h)",
     fontSize: "14px",
     fontWeight: "600",
     cursor: "pointer",
@@ -162,8 +186,8 @@ const styles = {
     display: "flex",
     alignItems: "center",
     gap: "10px",
-    background: "#1e293b",
-    border: "1px solid #334155",
+    background: "var(--code-bg)",
+    border: "1px solid var(--border)",
     padding: "6px 14px",
     borderRadius: "999px",
     cursor: "pointer",
@@ -173,13 +197,13 @@ const styles = {
     width: "28px",
     height: "28px",
     borderRadius: "50%",
-    background: "rgba(139, 92, 246, 0.15)",
+    background: "var(--accent-bg)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   userName: {
-    color: "#e2e8f0",
+    color: "var(--text-h)",
     fontSize: "14px",
     fontWeight: "500",
   },
@@ -187,12 +211,12 @@ const styles = {
     position: "absolute",
     right: 0,
     top: "calc(100% + 10px)",
-    background: "#0f172a",
-    border: "1px solid #1e293b",
+    background: "var(--bg)",
+    border: "1px solid var(--border)",
     borderRadius: "16px",
     width: "240px",
     padding: "16px",
-    boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5)",
+    boxShadow: "var(--shadow)",
     animation: "fadeIn 0.2s ease-out",
   },
   dropdownHeader: {
@@ -202,23 +226,23 @@ const styles = {
     textAlign: "left",
   },
   dropdownName: {
-    color: "#fff",
+    color: "var(--text-h)",
     fontSize: "15px",
     fontWeight: "600",
   },
   dropdownEmail: {
-    color: "#64748b",
+    color: "var(--text)",
     fontSize: "13px",
   },
   dropdownSub: {
-    color: "#8b5cf6",
+    color: "var(--accent)",
     fontSize: "12px",
     marginTop: "4px",
     fontWeight: "500",
   },
   dropdownDivider: {
     height: "1px",
-    background: "#1e293b",
+    background: "var(--border)",
     margin: "12px 0",
   },
   dropdownBtn: {

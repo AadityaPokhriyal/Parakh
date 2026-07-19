@@ -23,7 +23,6 @@ export default function NewLoginPage() {
   const [showPw, setShowPw] = useState(false);
   const [showCpw, setShowCpw] = useState(false);
 
-  // Form states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -34,7 +33,6 @@ export default function NewLoginPage() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  // Focus states
   const [focusedField, setFocusedField] = useState("");
 
   const handleAuth = async (e) => {
@@ -42,7 +40,6 @@ export default function NewLoginPage() {
     if (loading) return;
     setError("");
 
-    // Client-side validation for register
     if (!isLogin && password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
@@ -81,23 +78,21 @@ export default function NewLoginPage() {
 
   return (
     <div style={styles.container}>
-      {/* Background decoration elements */}
       <div style={styles.glowOrbs}>
         <div style={styles.orb1} />
         <div style={styles.orb2} />
       </div>
 
-      {/* Top Header/Navbar */}
       <div style={styles.header}>
         <button
           style={styles.backBtn}
           onClick={() => navigate("/")}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = "#fff";
-            e.currentTarget.style.background = "rgba(255, 255, 255, 0.05)";
+            e.currentTarget.style.color = "var(--text-h)";
+            e.currentTarget.style.background = "var(--accent-bg)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = "#94a3b8";
+            e.currentTarget.style.color = "var(--text-muted)";
             e.currentTarget.style.background = "transparent";
           }}
         >
@@ -109,12 +104,11 @@ export default function NewLoginPage() {
         </div>
       </div>
 
-      {/* Main card */}
       <div style={styles.cardContainer}>
         {success ? (
           <div style={styles.successWrapper}>
             <div style={styles.successIconWrapper}>
-              <CheckCircle size={48} className="text-green-400" style={{ color: "#4ade80" }} />
+              <CheckCircle size={48} style={{ color: "#4ade80" }} />
             </div>
             <h2 style={styles.successTitle}>
               {isLogin ? "Welcome Back!" : "Account Created!"}
@@ -127,7 +121,6 @@ export default function NewLoginPage() {
           </div>
         ) : (
           <div style={styles.card}>
-            {/* Tab selector */}
             <div style={styles.tabs}>
               <button
                 style={{
@@ -155,7 +148,7 @@ export default function NewLoginPage() {
 
             <div style={styles.formHeader}>
               <div style={styles.logoIcon}>
-                <GraduationCap size={24} style={{ color: "#8b5cf6" }} />
+                <GraduationCap size={24} style={{ color: "var(--accent)" }} />
               </div>
               <h2 style={styles.title}>
                 {isLogin ? "Sign In to Parakh" : "Create an Account"}
@@ -170,7 +163,6 @@ export default function NewLoginPage() {
             <form onSubmit={handleAuth} style={styles.form}>
               {!isLogin && (
                 <>
-                  {/* Name field */}
                   <div style={styles.inputGroup}>
                     <label style={styles.label}>Full Name</label>
                     <div
@@ -193,7 +185,6 @@ export default function NewLoginPage() {
                     </div>
                   </div>
 
-                  {/* Institution field */}
                   <div style={styles.inputGroup}>
                     <label style={styles.label}>Institution Name</label>
                     <div
@@ -216,7 +207,6 @@ export default function NewLoginPage() {
                     </div>
                   </div>
 
-                  {/* Role select */}
                   <div style={styles.inputGroup}>
                     <label style={styles.label}>Your Role</label>
                     <div style={styles.roleGrid}>
@@ -238,7 +228,6 @@ export default function NewLoginPage() {
                 </>
               )}
 
-              {/* Email field */}
               <div style={styles.inputGroup}>
                 <label style={styles.label}>Email Address</label>
                 <div
@@ -261,7 +250,6 @@ export default function NewLoginPage() {
                 </div>
               </div>
 
-              {/* Password field */}
               <div style={styles.inputGroup}>
                 <div style={styles.labelRow}>
                   <label style={styles.label}>Password</label>
@@ -299,7 +287,6 @@ export default function NewLoginPage() {
               </div>
 
               {!isLogin && (
-                /* Confirm Password field */
                 <div style={styles.inputGroup}>
                   <label style={styles.label}>Confirm Password</label>
                   <div
@@ -330,7 +317,6 @@ export default function NewLoginPage() {
                 </div>
               )}
 
-              {/* Error message */}
               {error && (
                 <div style={styles.errorBox}>
                   <AlertCircle size={16} style={{ flexShrink: 0 }} />
@@ -338,7 +324,6 @@ export default function NewLoginPage() {
                 </div>
               )}
 
-              {/* Submit button */}
               <button
                 type="submit"
                 disabled={loading}
@@ -383,8 +368,8 @@ export default function NewLoginPage() {
 const styles = {
   container: {
     minHeight: "100vh",
-    background: "#0b1120",
-    color: "#fff",
+    background: "var(--bg)",
+    color: "var(--text-h)",
     padding: "20px 24px 80px 24px",
     position: "relative",
     display: "flex",
@@ -392,6 +377,7 @@ const styles = {
     alignItems: "center",
     overflow: "hidden",
     fontFamily: "Inter, system-ui, sans-serif",
+    transition: "background 0.3s ease, color 0.3s ease",
   },
 
   glowOrbs: {
@@ -434,7 +420,7 @@ const styles = {
     alignItems: "center",
     marginBottom: "60px",
     zIndex: 10,
-    borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
+    borderBottom: "1px solid var(--border)",
     paddingBottom: "15px",
   },
 
@@ -444,7 +430,7 @@ const styles = {
     gap: "8px",
     background: "transparent",
     border: "none",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     fontSize: "14px",
     fontWeight: "500",
     cursor: "pointer",
@@ -458,6 +444,7 @@ const styles = {
     fontWeight: "800",
     letterSpacing: "-0.5px",
     cursor: "pointer",
+    color: "var(--text-h)",
   },
 
   gradient: {
@@ -478,22 +465,23 @@ const styles = {
 
   card: {
     width: "100%",
-    background: "#172033",
-    border: "1px solid #28354d",
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
     borderRadius: "24px",
     padding: "40px 32px 32px 32px",
-    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
+    boxShadow: "var(--shadow)",
     display: "flex",
     flexDirection: "column",
+    transition: "background 0.3s ease, border 0.3s ease",
   },
 
   tabs: {
     display: "flex",
-    background: "#0f172a",
+    background: "var(--code-bg)",
     padding: "4px",
     borderRadius: "12px",
     marginBottom: "32px",
-    border: "1px solid #1e293b",
+    border: "1px solid var(--border)",
   },
 
   tab: {
@@ -501,7 +489,7 @@ const styles = {
     padding: "10px 0",
     background: "transparent",
     border: "none",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     fontSize: "14px",
     fontWeight: "600",
     borderRadius: "8px",
@@ -510,8 +498,8 @@ const styles = {
   },
 
   activeTab: {
-    background: "#1e293b",
-    color: "#fff",
+    background: "var(--btn-sec-bg)",
+    color: "var(--text-h)",
     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
   },
 
@@ -524,12 +512,12 @@ const styles = {
     width: "48px",
     height: "48px",
     borderRadius: "14px",
-    background: "rgba(139, 92, 246, 0.1)",
+    background: "var(--accent-bg)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     margin: "0 auto 16px auto",
-    border: "1px solid rgba(139, 92, 246, 0.2)",
+    border: "1px solid var(--accent-border)",
   },
 
   title: {
@@ -537,11 +525,12 @@ const styles = {
     fontWeight: "700",
     margin: "0 0 8px 0",
     letterSpacing: "-0.5px",
+    color: "var(--text-h)",
   },
 
   subtitle: {
     fontSize: "14px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     margin: 0,
     lineHeight: "1.5",
   },
@@ -567,13 +556,13 @@ const styles = {
   label: {
     fontSize: "13px",
     fontWeight: "600",
-    color: "#cbd5e1",
+    color: "var(--text-muted)",
   },
 
   forgotLink: {
     background: "transparent",
     border: "none",
-    color: "#8b5cf6",
+    color: "var(--accent)",
     fontSize: "12px",
     fontWeight: "500",
     cursor: "pointer",
@@ -583,8 +572,8 @@ const styles = {
   inputWrapper: {
     display: "flex",
     alignItems: "center",
-    background: "#0f172a",
-    border: "1px solid #1e293b",
+    background: "var(--code-bg)",
+    border: "1px solid var(--border)",
     borderRadius: "12px",
     padding: "0 14px",
     height: "48px",
@@ -592,13 +581,13 @@ const styles = {
   },
 
   inputWrapperFocused: {
-    borderColor: "#8b5cf6",
-    boxShadow: "0 0 0 3px rgba(139, 92, 246, 0.15)",
-    background: "#0f172a",
+    borderColor: "var(--accent)",
+    boxShadow: "0 0 0 3px var(--accent-bg)",
+    background: "var(--code-bg)",
   },
 
   inputIcon: {
-    color: "#475569",
+    color: "var(--text-muted)",
     marginRight: "12px",
     flexShrink: 0,
   },
@@ -607,7 +596,7 @@ const styles = {
     flex: 1,
     background: "transparent",
     border: "none",
-    color: "#fff",
+    color: "var(--text-h)",
     fontSize: "14px",
     outline: "none",
     width: "100%",
@@ -616,7 +605,7 @@ const styles = {
   showHideBtn: {
     background: "transparent",
     border: "none",
-    color: "#475569",
+    color: "var(--text-muted)",
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
@@ -633,10 +622,10 @@ const styles = {
 
   roleBtn: {
     padding: "10px 0",
-    background: "#0f172a",
-    border: "1px solid #1e293b",
+    background: "var(--code-bg)",
+    border: "1px solid var(--border)",
     borderRadius: "10px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     fontSize: "13px",
     fontWeight: "500",
     cursor: "pointer",
@@ -644,9 +633,9 @@ const styles = {
   },
 
   roleBtnActive: {
-    background: "rgba(139, 92, 246, 0.1)",
-    borderColor: "#8b5cf6",
-    color: "#a78bfa",
+    background: "var(--accent-bg)",
+    borderColor: "var(--accent)",
+    color: "var(--accent)",
     fontWeight: "600",
   },
 
@@ -683,13 +672,13 @@ const styles = {
   },
 
   footerText: {
-    color: "#94a3b8",
+    color: "var(--text-muted)",
   },
 
   footerLink: {
     background: "transparent",
     border: "none",
-    color: "#8b5cf6",
+    color: "var(--accent)",
     fontWeight: "600",
     cursor: "pointer",
     padding: 0,
@@ -702,8 +691,8 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     padding: "48px 32px",
-    background: "#172033",
-    border: "1px solid #28354d",
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
     borderRadius: "24px",
     textAlign: "center",
     width: "100%",
@@ -725,11 +714,12 @@ const styles = {
     fontSize: "24px",
     fontWeight: "700",
     margin: "0 0 10px 0",
+    color: "var(--text-h)",
   },
 
   successSubtitle: {
     fontSize: "14px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     margin: 0,
   },
 
@@ -747,7 +737,6 @@ const styles = {
   },
 };
 
-// Add standard spin animation keyframes to document on load
 if (typeof document !== "undefined") {
   const styleSheet = document.createElement("style");
   styleSheet.type = "text/css";

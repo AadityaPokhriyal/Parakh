@@ -4,7 +4,7 @@ import WorkflowStepper from "../components/WorkflowStepper";
 
 function UploadPage() {
   return (
-    <div style={{ background: "#0f172a", minHeight: "100vh" }}>
+    <div style={{ background: "var(--bg)", minHeight: "100vh", transition: "background 0.3s ease" }}>
       <Navbar />
       <WorkflowStepper currentStep={1} currentPageName="Upload Question Paper" />
       
@@ -33,12 +33,12 @@ const styles = {
   pageTitle: {
     fontSize: "28px",
     fontWeight: "700",
-    color: "#fff",
+    color: "var(--text-h)",
     margin: 0,
   },
   pageSubtitle: {
     fontSize: "15px",
-    color: "#94a3b8",
+    color: "var(--text-muted)",
     margin: "8px 0 0 0",
     lineHeight: "1.5",
   },

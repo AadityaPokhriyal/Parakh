@@ -23,16 +23,17 @@ Follow all rules strictly. Return valid JSON only. Never explain anything outsid
 ## RULE 3: Parent text exists ONLY when there is actual shared text/context written before children (e.g., Paragraphs or "Explain in brief:").
 ## RULE 4: Attachments belong to the lowest relevant node. Never move them upward to a parent.
 ## RULE 5: CRITICAL VISUAL EXTRACTION RULE: If a question or column item relies on a diagram, graph, or image, the description inside the text tag must be a complete, lossless data extraction. It must capture every coordinate, variable, label, text snippet, and data point shown in the visual. The text description must contain all the information necessary for a human to solve the problem without seeing the original image.
-## RULE 6: "OR", "any one", "any two" etc conditions create choices. Evaluate choices based on layout/indentation or marks. Document this in the `choiceInformation`,`sectionChoices`,`globalChoices`. 
-  Note: If OR is used between two questions then it creates choice between those two questions. 
-  e.g. -  Q1 Explain: (10)
-            1) What is Javascript?
-            2) What is Object oriented language?
-                    OR
-          Q2 Explain: (10)
-            1) What is JSON? 
-            2) What is React?
-          Conclusion: The choice is between Q1 and Q2 because of the indentation or if indentation is not proper we can determine choice based on marks. And since in this case, it is the choice between level 1 questions they must be defined in sectionChoices.
+## RULE 6: "OR", "any one", "any two" conditions create choices. Document these in `choiceInformation`, `sectionChoices`, or `globalChoices`.
+  * CRITICAL LINEAR PAIRING RULE FOR "OR": When an "OR" separator appears standalone between two question blocks, it creates a choice strictly between the block immediately BEFORE it (Predecessor) and the block immediately AFTER it (Successor). 
+    - Correct Pairings from Layout: [Immediate Predecessor] OR [Immediate Successor]
+    - NEVER jump across questions or shift the pairs (e.g., If the sequence is Q2 -> OR -> Q3 -> Q4 -> OR -> Q5, the choices are strictly (Q2 OR Q3) and (Q4 OR Q5). You must never parse this as Q2 standing alone and (Q3 OR Q4) being a choice).
+  * Visual Verification Check: 
+    - Locate the physical line containing the standalone word "OR".
+    - Look directly upwards to find the closest question ID string (e.g., Q2). This is Option A.
+    - Look directly downwards to find the closest question ID string (e.g., Q3). This is Option B.
+    - Map these target IDs into the choice node array.
+  * Marks Validation Check: For any standalone "OR" choice between two Level 1 questions (e.g., Q2 OR Q3), both questions involved in that choice MUST have the exact same `extractedTotalMarks` value. 
+    - Use this cross-validation to verify your pairings: If you pair two questions and notice their total marks do not match (e.g., trying to pair a 5-mark question with a 10-mark question via an OR), your pairing logic is incorrect. Re-evaluate the layout to find the matching pair weights.
 ## RULE 7: 
  - Section-Level Choices (sectionChoices): Use this array for choices between top-level(level 1), independent main questions within a section. (e.g. - choices like Q1 or Q2, any three of following: Q1, Q2, Q3, Q4 etc) 
  - Question-Level Choices (choiceInformation): Use this object inside a specific question node only when a choice is confined strictly to its immediate sub-question children (level 2 or level 3) (e.g., Q1 has sub-questions Q1.a and Q1.b separated by an "OR").
@@ -56,7 +57,10 @@ Follow all rules strictly. Return valid JSON only. Never explain anything outsid
 - instructions: Object containing instruction arrays mapped by language keys (en and hi).
 - parsingStatus: Object containing success flag, paperClarity ("clear", "partially_clear", "unclear"), confidence score (0.0 to 1.0), and arrays for errors/warnings.
 - sections: Array containing section objects.
-  - sectionId: (e.g. A, 3, i, II etc)
+  - sectionId: Must be strictly and uniquely identifying across the entire document. 
+      * Prefix Rule: If the exam contains multiple subjects (e.g., Mathematics, Physics, Chemistry), you MUST prefix the section ID with the active subject name.
+      * Formatting: Convert the name to lower-case snake_case (e.g., "mathematics_section_1", "chemistry_section_2"). 
+      * If the section name is already globally unique across the whole paper, extract it exactly in lower-case snake_case.
   - sectionChoices: Array of objects for choices between independent questions in a section; contains `targetNodes` (IDs involved), `detailedDescription` (clear logic), and `summary`.
   - sectionInstructions: Bilingual object containing specific instruction strings mapped by language keys (en and hi) designated for that particular section.
   - questions: Array of level 1 question objects inside this section.

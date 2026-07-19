@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Navbar from "../components/Navbar";
+import "./DashboardPage.css";
 import {
   FileText,
   Users,
@@ -167,7 +168,7 @@ export default function DashboardPage() {
     <div style={styles.container}>
       <Navbar />
 
-      <div style={styles.mainContent}>
+      <div className="dashboard-main">
         {/* Glow Elements */}
         <div style={styles.glowOrbs}>
           <div style={styles.orbPurple} />
@@ -175,7 +176,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Welcome Section */}
-        <section style={styles.welcomeSection}>
+        <section className="welcome-section">
           <div style={styles.welcomeInfo}>
             <span style={styles.badgeText}>Portal Hub</span>
             <h1 style={styles.welcomeTitle}>
@@ -200,7 +201,7 @@ export default function DashboardPage() {
         )}
 
         {/* Stats Grid */}
-        <section style={styles.statsGrid}>
+        <section className="stats-grid">
           <div style={styles.statCard}>
             <div style={{ ...styles.statIconWrapper, background: "rgba(139, 92, 246, 0.12)" }}>
               <FileText size={22} style={{ color: "#a78bfa" }} />
@@ -247,7 +248,7 @@ export default function DashboardPage() {
           <h2 style={styles.sectionHeader}>Assessment Pipeline</h2>
           <p style={styles.sectionSub}>Follow these simple steps to grade answer papers with generative intelligence.</p>
 
-          <div style={styles.pipelineGrid}>
+          <div className="pipeline-grid">
             <div style={styles.pipelineCard} onClick={() => navigate("/upload")}>
               <div style={styles.pipelineNumber}>01</div>
               <h4 style={styles.pipelineStepTitle}>Upload QP</h4>
@@ -317,7 +318,7 @@ export default function DashboardPage() {
         </section>
 
         {/* Double Layout Grid: Left - Question Papers Repository, Right - Recent Evaluations */}
-        <div style={styles.twoColumnGrid}>
+        <div className="two-column-grid">
           {/* Question Papers Repository */}
           <div style={styles.gridColumn}>
             <div style={styles.columnHeaderRow}>
@@ -572,15 +573,15 @@ const styles = {
     color: "var(--text-muted)",
     fontWeight: "500",
   },
-  mainContent: {
-    maxWidth: "1280px",
-    margin: "0 auto",
-    padding: "40px 24px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "36px",
-    position: "relative",
-  },
+  // mainContent: {
+  //   maxWidth: "1280px",
+  //   margin: "0 auto",
+  //   padding: "40px 24px",
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   gap: "36px",
+  //   position: "relative",
+  // },
   glowOrbs: {
     position: "absolute",
     top: 0,
@@ -610,14 +611,14 @@ const styles = {
     filter: "blur(80px)",
     borderRadius: "50%",
   },
-  welcomeSection: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-    gap: "24px",
-    zIndex: 1,
-  },
+  // welcomeSection: {
+  //   display: "flex",
+  //   justifyContent: "space-between",
+  //   alignItems: "center",
+  //   flexWrap: "wrap",
+  //   gap: "24px",
+  //   zIndex: 1,
+  // },
   welcomeInfo: {
     display: "flex",
     flexDirection: "column",
@@ -701,12 +702,12 @@ const styles = {
     textDecoration: "underline",
     cursor: "pointer",
   },
-  statsGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: "20px",
-    zIndex: 1,
-  },
+  // statsGrid: {
+  //   display: "grid",
+  //   gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  //   gap: "20px",
+  //   zIndex: 1,
+  // },
   statCard: {
     background: "var(--card-bg)",
     border: "1px solid var(--border)",
@@ -763,11 +764,11 @@ const styles = {
     marginTop: "4px",
     marginBottom: "24px",
   },
-  pipelineGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-    gap: "20px",
-  },
+  // pipelineGrid: {
+  //   display: "grid",
+  //   gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+  //   gap: "20px",
+  // },
   pipelineCard: {
     background: "var(--code-bg)",
     border: "1px solid var(--border)",
@@ -808,12 +809,12 @@ const styles = {
     right: "20px",
     color: "var(--text-muted)",
   },
-  twoColumnGrid: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "28px",
-    zIndex: 1,
-  },
+  // twoColumnGrid: {
+  //   display: "grid",
+  //   gridTemplateColumns: "1fr 1fr",
+  //   gap: "28px",
+  //   zIndex: 1,
+  // },
   gridColumn: {
     display: "flex",
     flexDirection: "column",

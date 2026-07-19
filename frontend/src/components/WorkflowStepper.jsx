@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Check } from "lucide-react";
+import "./WorkflowStepper.css";
 
 export default function WorkflowStepper({ currentStep, currentPageName }) {
   const navigate = useNavigate();
@@ -12,45 +13,43 @@ export default function WorkflowStepper({ currentStep, currentPageName }) {
   ];
 
   return (
-    <div style={styles.outerContainer}>
+    <div className="workflow-container">
       {/* 1. Breadcrumbs Row */}
-      <div style={styles.breadcrumbRow}>
-        <span style={styles.dashboardLink} onClick={() => navigate("/dashboard")}>
+      <div className="breadcrumb-row">
+        <span className="dashboard-link" onClick={() => navigate("/dashboard")}>
           Dashboard
         </span>
-        <span style={styles.breadcrumbSeparator}>›</span>
-        <span style={styles.activePage}>{currentPageName}</span>
+        <span className="breadcrumb-separator">›</span>
+        <span className="active-page">{currentPageName}</span>
       </div>
 
       {/* 2. Stepper Row */}
-      <div style={styles.stepperContainer}>
+      <div className="stepper-container">
         {steps.map((step, idx) => {
           const isCompleted = step.number < currentStep;
           const isActive = step.number === currentStep;
 
           return (
-            <div key={step.number} style={styles.stepWrapper}>
-              <div style={styles.stepMain}>
+            <div key={step.number} className="step-wrapper">
+              <div className="step-main">
                 {isCompleted ? (
-                  <div style={styles.completedCircle}>
+                  <div className="completed-circle">
                     <Check size={14} strokeWidth={3} />
                   </div>
                 ) : isActive ? (
-                  <div style={styles.activeCircle}>{step.number}</div>
+                  <div className="active-circle">{step.number}</div>
                 ) : (
-                  <div style={styles.futureCircle}>{step.number}</div>
+                  <div className="future-circle">{step.number}</div>
                 )}
 
                 <span
-                  style={{
-                    ...styles.stepLabel,
-                    color: isActive
-                      ? "var(--text-h)"
-                      : isCompleted
-                      ? "var(--text-muted)"
-                      : "var(--text-muted)",
-                    fontWeight: isActive ? "600" : "500",
-                  }}
+                 className={`step-label ${
+                   isActive
+                     ? "active-label"
+                     : isCompleted
+                     ? "completed-label"
+                     : "future-label"
+                 }`}
                 >
                   {step.label}
                 </span>
@@ -58,10 +57,9 @@ export default function WorkflowStepper({ currentStep, currentPageName }) {
 
               {idx < steps.length - 1 && (
                 <div
-                  style={{
-                    ...styles.line,
-                    background: step.number < currentStep ? "#10b981" : "var(--border)",
-                  }}
+                  className={`step-line ${
+                    step.number < currentStep ? "line-completed" : "line-future"
+                  }`}
                 />
               )}
             </div>
@@ -72,100 +70,3 @@ export default function WorkflowStepper({ currentStep, currentPageName }) {
   );
 }
 
-const styles = {
-  outerContainer: {
-    maxWidth: "1280px",
-    width: "100%",
-    margin: "0 auto",
-    padding: "24px 40px 8px 40px",
-    boxSizing: "border-box",
-    fontFamily: "system-ui, 'Segoe UI', Roboto, sans-serif",
-  },
-  breadcrumbRow: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "8px",
-    fontSize: "14px",
-    fontWeight: "500",
-    marginBottom: "20px",
-  },
-  dashboardLink: {
-    color: "#60a5fa",
-    cursor: "pointer",
-    transition: "color 0.2s",
-  },
-  breadcrumbSeparator: {
-    color: "var(--text-muted)",
-    fontSize: "16px",
-    userSelect: "none",
-  },
-  activePage: {
-    color: "var(--text-h)",
-  },
-  stepperContainer: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "12px",
-    flexWrap: "wrap",
-    width: "100%",
-  },
-  stepWrapper: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-  },
-  stepMain: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-  },
-  completedCircle: {
-    width: "28px",
-    height: "28px",
-    borderRadius: "50%",
-    background: "#10b981",
-    color: "#fff",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    boxShadow: "0 0 10px rgba(16, 185, 129, 0.2)",
-  },
-  activeCircle: {
-    width: "28px",
-    height: "28px",
-    borderRadius: "50%",
-    background: "linear-gradient(135deg, #8b5cf6, #3b82f6)",
-    color: "#fff",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "13px",
-    fontWeight: "700",
-    boxShadow: "0 0 12px rgba(139, 92, 246, 0.3)",
-  },
-  futureCircle: {
-    width: "28px",
-    height: "28px",
-    borderRadius: "50%",
-    background: "var(--code-bg)",
-    border: "2px solid var(--border)",
-    color: "var(--text-muted)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "13px",
-    fontWeight: "700",
-  },
-  stepLabel: {
-    fontSize: "13px",
-    letterSpacing: "0.2px",
-  },
-  line: {
-    height: "2px",
-    width: "48px",
-    borderRadius: "1px",
-    transition: "background 0.3s ease",
-  },
-};

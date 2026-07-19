@@ -1,0 +1,228 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    background: var(--bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    position: sticky;
+    top: 16px;
+    z-index: 100;
+    width: calc(100% - 48px);
+    max-width: 1280px;
+    margin: 16px auto 0;
+    box-sizing: border-box;
+    box-shadow: var(--shadow);
+    transition: background 0.3s ease, border 0.3s ease;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    cursor: pointer;
+    color: var(--text-h);
+    letter-spacing: -0.5px;
+}
+
+.gradient {
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navGroup {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.navLink {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.navLinkActive {
+    color: var(--text-h);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.themeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
+    color: var(--text-h);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.loginBtn {
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
+    color: var(--text-h);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.profileWrapper {
+    position: relative;
+}
+
+.profileBadge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.avatarCircle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.userName {
+    color: var(--text-h);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.profileDropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 240px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+}
+
+.dropdownHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+}
+
+.dropdownName {
+    color: var(--text-h);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dropdownEmail {
+    color: var(--text);
+    font-size: 13px;
+}
+
+.dropdownSub {
+    color: var(--accent);
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.dropdownDivider {
+    height: 1px;
+    background: var(--border);
+    margin: 12px 0;
+}
+
+.dropdownBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    color: #f43f5e;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    transition: background 0.2s;
+}
+
+@media (max-width: 640px) {
+    .navbar {
+        padding: 12px 16px;
+        width: calc(100% - 20px);
+        top: 8px;
+        border-radius: 14px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .navGroup {
+        gap: 12px;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .navGroup::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari */
+    }
+
+    .navLink {
+        flex-shrink: 0;
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+
+    .userName {
+        display: none;
+    }
+
+    .profileBadge {
+        padding: 6px;
+    }
+}

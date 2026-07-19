@@ -1,0 +1,68 @@
+.results-layout {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 24px;
+    flex: 1;
+    box-sizing: border-box;
+    align-items: stretch;
+}
+
+.results-sidebar {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.results-details {
+    flex: 1;
+    min-width: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+.student-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 14px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .results-layout {
+        flex-direction: column;
+    }
+
+    .results-sidebar {
+        width: 100%;
+    }
+
+    .results-details {
+        width: 100%;
+        max-height: none;
+        overflow: visible;
+        padding: 16px;
+    }
+
+    .student-detail-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .total-score-display {
+        width: 100%;
+    }
+}

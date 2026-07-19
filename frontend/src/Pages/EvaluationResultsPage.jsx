@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEvaluation } from "../context/EvaluationContext";
 import Navbar from "../components/Navbar";
 import WorkflowStepper from "../components/WorkflowStepper";
+import "./EvaluationResultsPage.css";
 
 const calculateTotalMarks = (evaluationData) => {
   if (!evaluationData || !evaluationData.answerBlocks) return 0;
@@ -231,9 +232,11 @@ function EvaluationResultsPage() {
 
       <div style={{ ...styles.container, background: "transparent", paddingTop: "10px" }}>
 
-      <div style={styles.mainLayout}>
+      {/* Main layout split */}
+      <div className="results-layout">
         
-        <div style={styles.sidebar}>
+        {/* Left column: Student list selection */}
+        <div className="results-sidebar">
           {isBulkUploading && (
             <div style={styles.backgroundProgressBanner}>
               <div style={styles.backgroundProgressHeader}>
@@ -324,11 +327,13 @@ function EvaluationResultsPage() {
           </div>
         </div>
 
-        <div style={styles.detailsPanel}>
+        {/* Right column: Selected student analysis */}
+        <div className="results-details">
           {selectedItem ? (
             <div style={styles.detailsContent}>
               
-              <div style={styles.studentDetailHeader}>
+              {/* Top Summary Card */}
+              <div className="student-detail-header">
                 <div style={styles.detailHeaderLeft}>
                   <h2 style={styles.studentNameTitle}>
                     {selectedItem.studentName || metadata?.name || "Unknown Student"}
@@ -340,7 +345,7 @@ function EvaluationResultsPage() {
                     <div><span style={styles.metaLabel}>File:</span> <span style={styles.metaValue} title={selectedItem.filename}>{selectedItem.filename}</span></div>
                   </div>
                 </div>
-                <div style={styles.totalScoreDisplay}>
+                <div className="total-score-display">
                   <span style={styles.scoreDisplayLabel}>Total Score</span>
                   <span style={styles.scoreDisplayValue}>
                     {activeTotalScore}
@@ -483,24 +488,8 @@ const styles = {
     transition: "background-color 0.2s",
   },
 
-  mainLayout: {
-    maxWidth: "1200px",
-    width: "100%",
-    margin: "0 auto",
-    display: "flex",
-    gap: "24px",
-    flex: 1,
-    boxSizing: "border-box",
-    alignItems: "stretch",
-  },
 
-  sidebar: {
-    width: "350px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-    flexShrink: 0,
-  },
+  // Left Sidebar
   searchWrapper: {
     width: "100%",
   },
@@ -575,17 +564,7 @@ const styles = {
     transition: "all 0.2s",
   },
 
-  detailsPanel: {
-    flex: 1,
-    minWidth: 0,
-    background: "var(--card-bg)",
-    border: "1px solid var(--border)",
-    borderRadius: "16px",
-    padding: "28px",
-    boxShadow: "var(--shadow)",
-    overflowY: "auto",
-    maxHeight: "calc(100vh - 200px)",
-  },
+  // Right Details Panel
   detailsContent: {
     display: "flex",
     flexDirection: "column",
@@ -603,17 +582,7 @@ const styles = {
     padding: "40px",
   },
 
-  studentDetailHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    background: "var(--accent-bg)",
-    border: "1px solid var(--border)",
-    padding: "20px",
-    borderRadius: "14px",
-    gap: "20px",
-    flexWrap: "wrap",
-  },
+  // Header inside Right Panel
   detailHeaderLeft: {
     flex: 1,
     minWidth: "250px",
@@ -637,17 +606,6 @@ const styles = {
   metaValue: {
     color: "var(--text-h)",
     fontWeight: "500",
-  },
-  totalScoreDisplay: {
-    background: "linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)",
-    border: "1px solid rgba(139, 92, 246, 0.3)",
-    borderRadius: "12px",
-    padding: "16px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "120px",
-    textAlign: "center",
   },
   scoreDisplayLabel: {
     fontSize: "10px",

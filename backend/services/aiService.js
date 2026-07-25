@@ -52,11 +52,21 @@ const parseQuestionPaper = async (files) => {
 const evaluateAnswers = async (files, questionJsonData) => {
   const formData = new FormData();
   files.forEach((file) => {
+    const ext = (file.originalname || "").toLowerCase();
+    let contentType = file.mimetype;
+    if (!contentType || contentType === "application/octet-stream") {
+      if (ext.endsWith(".pdf")) contentType = "application/pdf";
+      else if (ext.endsWith(".png")) contentType = "image/png";
+      else if (ext.endsWith(".jpg") || ext.endsWith(".jpeg")) contentType = "image/jpeg";
+      else if (ext.endsWith(".webp")) contentType = "image/webp";
+      else contentType = "image/png";
+    }
+
     formData.append("answers", file.buffer, {
       filename: file.originalname,
-      contentType: file.mimetype,
+      contentType: contentType,
     });
-    console.log(file.originalname,file.mimetype);
+    console.log(file.originalname, contentType);
   });
 
   const questionJsonBuffer = Buffer.from(JSON.stringify(questionJsonData));

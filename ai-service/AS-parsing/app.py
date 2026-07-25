@@ -1,8 +1,9 @@
-from fastapi import FastAPI, UploadFile, HTTPException
+from fastapi import FastAPI, UploadFile, HTTPException, File
 from google import genai
+from google.genai import types
 
 from helpers.prompt import evaluation_prompt
-from helpers.validate_pdf import is_valid_pdf
+from helpers.validate import get_clean_mime_type, sort_files_by_index, validate_file_batch
 from helpers.validate_json import is_valid_json
 
 from pydantic_models.evaluation_response_model import EvaluationOutput
@@ -10,8 +11,8 @@ from pydantic_models.questions_schema_model import QuestionPaper
 
 import os
 import logging
+from typing import List
 from dotenv import load_dotenv
-
 
 # logs setup
 logging.basicConfig(
@@ -27,107 +28,131 @@ load_dotenv()
 app = FastAPI()
 
 # gemini sdk setup
-client = genai.Client(api_key = os.getenv("GEMINI_API_KEY"));
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 logger.info("client loaded")
 
 
-
-
-# ENDPOINTS
 @app.get('/')
 def status():
-    return {"messege": "api is running"}
+    return {"message": "api is running"}
 
-# TODO:add more file validations and annotations (for better api docs)
-# TODO: implement concurrency feature
+
 @app.post('/ai/evaluate-answers')
-async def evaluate(answer_pdf: UploadFile, question_json: UploadFile):
-
-    # pdf format check
-    if answer_pdf.content_type != "application/pdf":
-        raise HTTPException(
-            status_code=400,
-            detail="Answer sheet must be a pdf"
-        )
-    logger.info("answer pdf format okay")
-    
-    # json format check
+async def evaluate(
+    answers: List[UploadFile] = File(..., alias="answers"),
+    question_json: UploadFile = File(..., alias="question_json")
+):
+    # 1. JSON Format and Schema Check
     if question_json.content_type != "application/json":
         raise HTTPException(
-            status_code= 400,
-            detail="Question paper must be submitted as json file"
+            status_code=400,
+            detail="Question paper must be submitted as a JSON file"
         )
-    logger.info("question json format okay")
     
-    # validate pdf
-    if not is_valid_pdf(answer_pdf.file):
-        raise HTTPException(
-            status_code = 422,
-            detail = "invalid pdf"
-        )
-    logger.info("answer pdf validation Okay")
-    
-    # validate json structure
     if not await is_valid_json(question_json, QuestionPaper):
         raise HTTPException(
-            status_code = 422,
-            detail = "unexpected json schema, read docs."
+            status_code=422,
+            detail="Unexpected question JSON schema, please refer to docs."
         )
-    logger.info("question json schema okay")
+    logger.info("Question JSON format and schema validated")
 
-    # upload answer sheet
-    uploaded_answersheet = client.files.upload(
-        file = answer_pdf.file,
-        config = dict(mime_type='application/pdf')
-    )
-    logger.info("answer pdf uploaded")
+    # 2. Sort answer files by index prefix
+    sorted_answer_files = sort_files_by_index(answers)
 
-    # TODO: send question json as text directly instead of uploading
-    # upload question json
-    uploaded_questionJson = client.files.upload(
-        file = question_json.file,
-        config = dict(mime_type='application/json')
-    )
-    logger.info("question json uploaded")
-
+    # 3. Validate batch content (single PDF or all images)
     try:
-        # make request to model
+        batch_type = validate_file_batch(sorted_answer_files)
+        logger.info(f"Answer files validated successfully. Detected type: {batch_type}")
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+
+    uploaded_gemini_files = []
+    
+    try:
+        # 4. Upload Question Paper JSON to Gemini Files API
+        question_json.file.seek(0)
+        uploaded_question_json = client.files.upload(
+            file=question_json.file,
+            config=dict(mime_type='application/json')
+        )
+        uploaded_gemini_files.append(uploaded_question_json)
+        logger.info("Question JSON uploaded to Gemini Files API")
+
+        answer_parts = []
+
+        if batch_type == "pdf":
+            # PDF Flow: Upload via Files API
+            pdf_file = sorted_answer_files[0]
+            pdf_file.file.seek(0)
+            uploaded_pdf = client.files.upload(
+                file=pdf_file.file,
+                config=dict(mime_type="application/pdf")
+            )
+            uploaded_gemini_files.append(uploaded_pdf)
+            
+            answer_parts.append({
+                "type": "document",
+                "uri": uploaded_pdf.uri,
+                "mime_type": "application/pdf"
+            })
+            logger.info(f"Uploaded PDF {pdf_file.filename} via Files API")
+
+        else:
+            # Images Flow: Upload each image via Files API
+            for file_obj in sorted_answer_files:
+                mime_type = get_clean_mime_type(file_obj) or "image/png"
+                file_obj.file.seek(0)
+                
+                uploaded_img = client.files.upload(
+                    file=file_obj.file,
+                    config=dict(mime_type=mime_type)
+                )
+                uploaded_gemini_files.append(uploaded_img)
+
+                answer_parts.append({
+                    "type": "image",
+                    "uri": uploaded_img.uri,
+                    "mime_type": mime_type
+                })
+                logger.info(f"Uploaded image {file_obj.filename} via Files API")
+
+        # 5. Build interaction input payload
+        input_payload = [
+            {
+                "type": "document",
+                "uri": uploaded_question_json.uri,
+                "mime_type": "application/json"
+            },
+            *answer_parts,
+            {"type": "text", "text": evaluation_prompt}
+        ]
+
+        # 6. Model Request
         interaction = client.interactions.create(
             model="gemini-3-flash-preview",
-            store = False,
-            input=[
-                {
-                    "type":"document",
-                    "uri": uploaded_questionJson.uri,
-                    "mime_type":"application/json"
-                },
-                {
-                    "type": "document",
-                    "uri": uploaded_answersheet.uri,
-                    "mime_type": "application/pdf"
-                }, 
-                {"type": "text", "text": evaluation_prompt}
-            ],
-            generation_config = {
-                "temperature" : 0,
-                "thinking_level" : "high"
+            store=False,
+            input=input_payload,
+            generation_config={
+                "temperature": 0,
+                "thinking_level": "high"
             },
-            response_format = {
-                "type":"text",
-                "mime_type":"application/json",
-                "schema":EvaluationOutput.model_json_schema()
+            response_format={
+                "type": "text",
+                "mime_type": "application/json",
+                "schema": EvaluationOutput.model_json_schema()
             }
         )
-        logger.info("gemini interaction created")
-
+        logger.info("Gemini interaction created successfully")
     finally:
-        # make sure the files dont accumulate
-        client.files.delete(name = uploaded_questionJson.name)
-        client.files.delete(name = uploaded_answersheet.name)
-        logger.info("uploaded files deleted")
+        # 7. Clean up Files API uploads (Question JSON and PDF if applicable)
+        for g_file in uploaded_gemini_files:
+            try:
+                client.files.delete(name=g_file.name)
+            except Exception as err:
+                logger.warning(f"Failed to delete Gemini file {g_file.name}: {err}")
+        logger.info("Uploaded temporary files cleaned up")
 
-    # validate the output and return json
     eval_json = EvaluationOutput.model_validate_json(interaction.output_text)
-    logger.info("json file loaded")
+    logger.info("Evaluation output parsed and ready")
 
     return eval_json

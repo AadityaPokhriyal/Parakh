@@ -22,7 +22,11 @@ Follow all rules strictly. Return valid JSON only. Never explain anything outsid
 ## RULE 2: Parent nodes without unique text must have empty strings for all language tags inside the text object (e.g., `"text": {"en": "", "hi": ""}`). Do not duplicate child text into the parent.
 ## RULE 3: Parent text exists ONLY when there is actual shared text/context written before children (e.g., Paragraphs or "Explain in brief:").
 ## RULE 4: Attachments belong to the lowest relevant node. Never move them upward to a parent.
-## RULE 5: CRITICAL VISUAL EXTRACTION RULE: If a question or column item relies on a diagram, graph, or image, the description inside the text tag must be a complete, lossless data extraction. It must capture every coordinate, variable, label, text snippet, and data point shown in the visual. The text description must contain all the information necessary for a human to solve the problem without seeing the original image.
+## RULE 5: CRITICAL VISUAL EXTRACTION RULE: 
+  * If a question, option, or column item relies on a diagram, graph, circuit, or image, the description inside the `text` tag or `attachments` must be a complete, lossless data extraction. 
+  * It must capture every coordinate, variable, label, vector, text snippet, and data point shown in the visual so a student or evaluator can solve/evaluate the problem without seeing the original image.
+  * QUESTION-TO-DIAGRAM AUDIT: Carefully read what the question text asks for or calculates. Your visual description MUST explicitly extract and cross-reference every visual element referenced by that question text (e.g., if the question asks for "voltage across R2", the visual description MUST capture R2's value, placement, and polarity as shown in the diagram).
+  * SOURCE TRUTH GUARANTEE: Never invent, assume, or hallucinate missing diagram components. If a required value mentioned in the question text is visibly unlabelled or missing from the diagram, explicitly state in the description: "[Visual Note: Label X is referenced in text but not visually marked in diagram]".
 ## RULE 6: "OR", "any one", "any two" conditions create choices. Document these in `choiceInformation`, `sectionChoices`, or `globalChoices`.
   * CRITICAL LINEAR PAIRING RULE FOR "OR": When an "OR" separator appears standalone between two question blocks, it creates a choice strictly between the block immediately BEFORE it (Predecessor) and the block immediately AFTER it (Successor). 
     - Correct Pairings from Layout: [Immediate Predecessor] OR [Immediate Successor]

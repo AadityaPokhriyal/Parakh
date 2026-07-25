@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const evaluationController = require("../controllers/evaluationController");
 const authMiddleware = require("../middleware/authMiddleware");
+const { aiLimiter } = require("../middleware/rateLimiter");
 const router = express.Router();
 
 // Configure multer for in-memory storage (no disk writes)
@@ -19,6 +20,7 @@ router.use(authMiddleware);
 // Expects 'files' array and 'question_paper_id' text field
 router.post(
   "/upload-answers",
+  aiLimiter,
   upload.array("files", 15),
   evaluationController.uploadAnswers
 );

@@ -5,11 +5,27 @@ import Navbar from "../components/Navbar";
 import WorkflowStepper from "../components/WorkflowStepper";
 import "./EvaluationResultsPage.css";
 
+const formatMarks = (val) => {
+  if (val === null || val === undefined) return "0";
+  const num = typeof val === "number" ? val : parseFloat(val);
+  if (isNaN(num)) return "0";
+  return Number.isInteger(num) ? num.toString() : (Math.round(num * 100) / 100).toString();
+};
+
+const sumBlockMarks = (block) => {
+  if (block.children && block.children.length > 0) {
+    return block.children.reduce((sum, child) => sum + sumBlockMarks(child), 0);
+  }
+  const val = parseFloat(block.earnedMarks?.value);
+  return isNaN(val) ? 0 : val;
+};
+
 const calculateTotalMarks = (evaluationData) => {
   if (!evaluationData || !evaluationData.answerBlocks) return 0;
-  return evaluationData.answerBlocks.reduce((sum, block) => {
-    return sum + (block.earnedMarks?.value || 0);
+  const rawSum = evaluationData.answerBlocks.reduce((sum, block) => {
+    return sum + sumBlockMarks(block);
   }, 0);
+  return Math.round(rawSum * 100) / 100;
 };
 
 const AnswerBlockNode = ({ block, level = 1 }) => {
@@ -48,7 +64,7 @@ const AnswerBlockNode = ({ block, level = 1 }) => {
           </div>
 
           <div style={blockStyles.scoreBadge}>
-            Score: <strong style={{ color: "#a78bfa" }}>{block.earnedMarks?.value ?? 0}</strong>
+            Score: <strong style={{ color: "#a78bfa" }}>{formatMarks(block.earnedMarks?.value)}</strong>
           </div>
         </div>
 
@@ -297,8 +313,8 @@ function EvaluationResultsPage() {
                     <div style={styles.studentMetaRow}>
                       <span style={styles.studentCardName}>{sName}</span>
                       <span style={styles.studentScoreBadge}>
-                        {totalScore}
-                        {paperMaxMarks !== null ? ` / ${paperMaxMarks}` : ""} Marks
+                        {formatMarks(totalScore)}
+                        {paperMaxMarks !== null ? ` / ${formatMarks(paperMaxMarks)}` : ""} Marks
                       </span>
                     </div>
                     <div style={styles.studentCardSub}>
@@ -345,15 +361,36 @@ function EvaluationResultsPage() {
                     <div><span style={styles.metaLabel}>File:</span> <span style={styles.metaValue} title={selectedItem.filename}>{selectedItem.filename}</span></div>
                   </div>
                 </div>
-                <div className="total-score-display">
-                  <span style={styles.scoreDisplayLabel}>Total Score</span>
-                  <span style={styles.scoreDisplayValue}>
-                    {activeTotalScore}
-                    {activeMaxMarks !== null && (
-                      <span style={{ fontSize: "16px", color: "var(--text-muted)", fontWeight: "600" }}>/{activeMaxMarks}</span>
+                
+                <div style={styles.scoreCardContainer}>
+                  <span style={styles.scoreCardLabel}>Total Score</span>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+                    <span style={styles.scoreCardObtained}>{formatMarks(activeTotalScore)}</span>
+                    {activeMaxMarks !== null && activeMaxMarks !== undefined && (
+                      <span style={styles.scoreCardMax}>/ {formatMarks(activeMaxMarks)}</span>
                     )}
-                  </span>
-                  <span style={styles.scoreDisplayUnits}>Marks Awarded</span>
+                  </div>
+                  {activeMaxMarks && activeMaxMarks > 0 ? (
+                    <div style={{
+                      marginTop: "6px",
+                      fontSize: "11px",
+                      fontWeight: "700",
+                      padding: "3px 10px",
+                      borderRadius: "999px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
+                      backgroundColor: (activeTotalScore / activeMaxMarks) >= 0.8 ? "rgba(16, 185, 129, 0.14)" : (activeTotalScore / activeMaxMarks) >= 0.5 ? "rgba(245, 158, 11, 0.14)" : "rgba(239, 68, 68, 0.14)",
+                      color: (activeTotalScore / activeMaxMarks) >= 0.8 ? "#34d399" : (activeTotalScore / activeMaxMarks) >= 0.5 ? "#fbbf24" : "#f87171",
+                      border: `1px solid ${(activeTotalScore / activeMaxMarks) >= 0.8 ? "rgba(16, 185, 129, 0.3)" : (activeTotalScore / activeMaxMarks) >= 0.5 ? "rgba(245, 158, 11, 0.3)" : "rgba(239, 68, 68, 0.3)"}`,
+                    }}>
+                      <span>{Math.round((activeTotalScore / activeMaxMarks) * 100)}%</span>
+                      <span style={{ opacity: 0.7 }}>•</span>
+                      <span>{(activeTotalScore / activeMaxMarks) >= 0.8 ? "Excellent" : (activeTotalScore / activeMaxMarks) >= 0.5 ? "Passing" : "Needs Review"}</span>
+                    </div>
+                  ) : (
+                    <span style={styles.scoreDisplayUnits}>Marks Awarded</span>
+                  )}
                 </div>
               </div>
 
@@ -603,9 +640,37 @@ const styles = {
     color: "var(--text-muted)",
     fontWeight: "600",
   },
-  metaValue: {
-    color: "var(--text-h)",
-    fontWeight: "500",
+  scoreCardContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    background: "var(--card-bg)",
+    border: "1px solid var(--border)",
+    padding: "14px 20px",
+    borderRadius: "14px",
+    boxShadow: "var(--shadow)",
+    minWidth: "160px",
+  },
+  scoreCardLabel: {
+    fontSize: "11px",
+    fontWeight: "700",
+    textTransform: "uppercase",
+    color: "var(--text-muted)",
+    letterSpacing: "0.5px",
+    marginBottom: "2px",
+  },
+  scoreCardObtained: {
+    fontSize: "32px",
+    fontWeight: "800",
+    color: "var(--accent)",
+    lineHeight: "1.1",
+  },
+  scoreCardMax: {
+    fontSize: "18px",
+    fontWeight: "600",
+    color: "var(--text-muted)",
   },
   scoreDisplayLabel: {
     fontSize: "10px",

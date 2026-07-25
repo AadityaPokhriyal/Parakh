@@ -43,7 +43,10 @@ export function AuthProvider({ children }) {
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(data.error || "Registration failed.");
+      const errMsg = typeof data.error === "string" 
+        ? data.error 
+        : data.error?.message || data.message || "Registration failed.";
+      throw new Error(errMsg);
     }
 
     setToken(data.token);
@@ -67,7 +70,10 @@ export function AuthProvider({ children }) {
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(data.error || "Login failed.");
+      const errMsg = typeof data.error === "string" 
+        ? data.error 
+        : data.error?.message || data.message || "Login failed.";
+      throw new Error(errMsg);
     }
 
     setToken(data.token);

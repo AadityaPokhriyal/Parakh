@@ -134,6 +134,7 @@ class ParsingStatus(StrictModel):
     confidence: Optional[float] = None
     errors: Optional[List[str]] = None
     warnings: Optional[List[str]] = None
+    extractedRisks: Optional[List[str]] = None
 
 
 # -----------------------------------------------------

@@ -160,10 +160,10 @@ export const EvaluationProvider = ({ children }) => {
 
     updateSheet(id, { uploadStatus: "uploading", errorMessage: "" });
 
-    let fileToUpload = files[0];
+    let filesToUpload = [...files];
 
-    // If files are images, compile them into a single PDF using jsPDF
-    if (files.length > 0 && files[0].type && files[0].type.startsWith("image/")) {
+    // If number of images are greater than 15, convert them into a single PDF using jsPDF
+    if (files.length > 15) {
       try {
         const doc = new jsPDF();
         const readFileAsDataURL = (file) => {
@@ -187,7 +187,9 @@ export const EvaluationProvider = ({ children }) => {
 
         const pdfBlob = doc.output("blob");
         const cleanName = studentName?.trim() ? studentName.trim().replace(/[^a-zA-Z0-9_-]/g, "_") : "answer_sheet";
-        fileToUpload = new File([pdfBlob], `${cleanName}.pdf`, { type: "application/pdf" });
+        const pdfFile = new File([pdfBlob], `${cleanName}.pdf`, { type: "application/pdf" });
+        updateSheet(id, { files: [pdfFile] });
+        filesToUpload = [pdfFile];
       } catch (error) {
         console.error("Error generating client-side PDF:", error);
         updateSheet(id, { uploadStatus: "error", errorMessage: "Failed to compile images into a PDF." });
@@ -196,7 +198,9 @@ export const EvaluationProvider = ({ children }) => {
     }
 
     const formData = new FormData();
-    formData.append("files", fileToUpload);
+    filesToUpload.forEach((file, index) => {
+      formData.append("files", file, `${index}_${file.name}`);
+    });
     formData.append("question_paper_id", examPaperId);
     if (studentName?.trim()) formData.append("student_name", studentName.trim());
 

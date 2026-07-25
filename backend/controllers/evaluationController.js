@@ -42,11 +42,23 @@ const uploadAnswers = async (req, res, next) => {
       file.mimetype === "application/pdf" ||
       file.originalname.toLowerCase().endsWith(".pdf");
 
-    if (!isPdf) {
-      console.warn(`[Evaluation] Validation failed: File ${file.originalname} is not a PDF.`);
+    const isImage =
+      file.mimetype.startsWith("image/");
+
+    if (isImage) {
+      files.forEach(imageFile => {
+        if (!imageFile.mimetype.startsWith("image/")) {
+          return res.status(400).json({
+            success: false,
+            error: "Please provide only images or a PDF file.",
+          });
+        }
+      });
+    }
+    if (isPdf && files.length > 1) {
       return res.status(400).json({
         success: false,
-        error: "Invalid file type. The student answer sheet must be a PDF file.",
+        error: "Please provide only images or a PDF file.",
       });
     }
 
@@ -57,7 +69,7 @@ const uploadAnswers = async (req, res, next) => {
     let examPaper;
     try {
       examPaper = await evaluationService.getQuestionPaperById(questionPaperId, userId);
-      console.log("[Evaluation] => Step 1: Question paper template retrieved successfully.");
+      console.log("[Evaluation] => i) : Question paper template retrieved successfully.");
     } catch (dbError) {
       console.error(`[Evaluation] [DB ERROR] => Failed to fetch question paper: ${dbError.message}`);
       if (dbError.statusCode === 404) {
@@ -74,15 +86,13 @@ const uploadAnswers = async (req, res, next) => {
       }
       throw dbError;
     }
-
     // Step 2: Call the AI service for evaluation
-    console.log("[Evaluation] => Step 2: Dispatching answer sheet PDF and template JSON to AI Evaluation Service (AS-parsing)...");
+    console.log("[Evaluation] => ii) : Dispatching answer sheet PDF or images and template JSON to AI Evaluation Service (AS-parsing)...");
     let evaluationData;
     try {
+      const fileArray=[...files];
       evaluationData = await aiService.evaluateAnswers(
-        file.buffer,
-        file.originalname,
-        file.mimetype,
+        fileArray,
         examPaper.parsed_data
       );
       console.log("[Evaluation] => Step 2: AI Service response received successfully.");

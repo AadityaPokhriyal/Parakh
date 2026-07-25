@@ -54,15 +54,17 @@ function UploadAnswersPage() {
   const dragItemRef = useRef({ sheetId: null, index: null });
 
   // Manage Object URLs for all sheets
-  useEffect(() => {
-    const newMap = {};
-    sheets.forEach((sheet) => {
-      if (sheet.files && sheet.files.length > 0) {
-        newMap[sheet.id] = sheet.files.map((file) => URL.createObjectURL(file));
-      } else {
-        newMap[sheet.id] = [];
-      }
-    });
+    useEffect(() => {
+      const newMap = {};
+      sheets.forEach((sheet) => {
+        if (sheet.files && sheet.files.length > 0) {
+          newMap[sheet.id] = sheet.files
+            .filter((file) => file instanceof Blob)   // only real File/Blob objects
+            .map((file) => URL.createObjectURL(file));
+        } else {
+          newMap[sheet.id] = [];
+        }
+      });
 
     const handle = setTimeout(() => {
       setPreviewUrlsMap(newMap);
@@ -76,7 +78,14 @@ function UploadAnswersPage() {
     };
   }, [sheets]);
 
-  // ── Guard ─────────────────────────────────────────────────────────────────
+  // ── Initialize Context ────────────────────────────────────────────────────
+  useEffect(() => {
+    if (examPaperId && examPaperId !== contextExamPaperId) {
+      setExamInfo({ examPaperId, filename, totalMarks });
+    }
+  }, [examPaperId, filename, totalMarks, contextExamPaperId, setExamInfo]);
+
+      // ── Guard ─────────────────────────────────────────────────────────────────
   if (!examPaperId) {
     return (
       <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
@@ -93,13 +102,6 @@ function UploadAnswersPage() {
       </div>
     );
   }
-
-  // ── Initialize Context ────────────────────────────────────────────────────
-  useEffect(() => {
-    if (examPaperId && examPaperId !== contextExamPaperId) {
-      setExamInfo({ examPaperId, filename, totalMarks });
-    }
-  }, [examPaperId, filename, totalMarks, contextExamPaperId, setExamInfo]);
 
   // ── File handling (scoped per sheet) ──────────────────────────────────────
 

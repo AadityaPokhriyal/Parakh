@@ -25,10 +25,15 @@ class EarnedMarks(BaseModel):
     value: float = Field(description="Marks awarded for this answer.")
     reason: str = Field(description="Short explanation for marks awarded or deducted.")
 
+# - extractionRisks: Array containing exactly 3 string items identifying potential edge cases or ambiguities where this extraction might be inaccurate (e.g., "Blurry subscript on Q14.b", "Ambiguous layout pairing on Q3 OR Q4").
+#   - confidence: Number (0–100) representing overall structural accuracy, mathematically evaluated ONLY based on the severe risks listed in `extractionRisks`.
+
+
 class ParsingStatus(BaseModel):
     success: bool
     paperClarity: PaperClarity
-    overallConfidence: float = Field(ge=0, le=1)
+    extractedRisks: List[str] = Field(min_length=3, max_length=3, description="""List containing exactly 3 string items identifying potential edge cases or ambiguities where this extraction might be inaccurate (e.g., "Blurry subscript on Q14.b", "repeated text/pages" etc).""")
+    overallConfidence: float = Field(ge=0, le=1, description="float (0-1) representing overall structural accuracy, mathematically evaluated ONLY based on the severe risks listed in `extractionRisks`.")
     errors: List[str]  # Required list
     warnings: List[str]
 

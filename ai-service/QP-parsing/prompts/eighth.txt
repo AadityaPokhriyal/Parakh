@@ -1,0 +1,115 @@
+You are given PDF/Images of a question paper.
+Your task is to read the question paper, evaluate OCR quality, and extract the information into the requested JSON schema structure.
+Follow all rules strictly. Return valid JSON only. Never explain anything outside the JSON.
+
+# RULES:
+- If a node has NO children: Extract the marks exactly as shown (e.g., "marks":"2").
+- RULES FOR MARKS (CRITICAL):
+  - Leaf Nodes (Nodes with NO children array): 
+    * If individual marks are explicitly printed next to this sub-part, extract them exactly (e.g., "marks": "5").
+    * If individual marks are NOT printed next to a sub-part, but the parent's text defines them mathematically:
+      - For symmetric math patterns (e.g., "Attempt any four... (4x5=20)"), extract the single item weight as the leaf node's marks (e.g., "marks": "5").
+      - For sequence/asymmetric math patterns (e.g., "Attempt all three... (3+3+4)"), map the weights sequentially to the respective child nodes (e.g., the 1st sub-question gets "marks": "3", the 2nd gets "marks": "3", the 3rd gets "marks": "4").
+      - Critical Note (NO SUB-QUESTION GENERATION): If math expressions (e.g., 4x5=20, 1/2x4, 2+2 etc.) or quantities are mentioned in the question text (e.g., "Enlist four test items...", "List 3 components..."), but the question paper does NOT explicitly present separate, distinct, demarcated sub-questions (e.g., labelled as a, b, c, or i, ii, iii), you must treat the question strictly as a SINGLE standalone Leaf Node. NEVER manufacture or generate dummy child nodes, empty child objects, or placeholders to match the mentioned count. The children array for this question must remain completely absent or empty.    * If no marks are shown for subparts and no choice math is provided, leave the field empty ("marks": ""). Do NOT guess, do NOT copy the parent's total marks, and NEVER use the "infer..." string on a leaf node.
+  - Parent Nodes (Nodes that DO contain a children array): 
+    * You must strictly write exactly: "marks": "infer from children and choice description"
+    * NEVER output a numerical value or a duplicated total score in a parent node's marks field if it has children.
+- If optional schema fields (like children, attachments, options, matchData, choiceInformation) have no data, OMIT the key entirely from the object. Do not output them as null or empty arrays.
+- Preserve spelling mistakes and formatting exactly as printed in the source document. Never paraphrase or correct grammar.
+
+# STRICT STRUCTURE RULES
+## RULE 1: Questions must not be treated as sections. If the question paper has no sections, the whole question paper will be treated as one single section.
+## RULE 2: Parent nodes without unique text must have empty strings for all language tags inside the text object (e.g., `"text": {"en": "", "hi": ""}`). Do not duplicate child text into the parent.
+## RULE 3: Parent text exists ONLY when there is actual shared text/context written before children (e.g., Paragraphs or "Explain in brief:").
+## RULE 4: Attachments belong to the lowest relevant node. Never move them upward to a parent.
+## RULE 5: CRITICAL VISUAL EXTRACTION RULE: 
+  * If a question, option, or column item relies on a diagram, graph, circuit, or image, the description inside the `text` tag or `attachments` must be a complete, lossless data extraction. 
+  * It must capture every coordinate, variable, label, vector, text snippet, and data point shown in the visual so a student or evaluator can solve/evaluate the problem without seeing the original image.
+  * QUESTION-TO-DIAGRAM AUDIT: Carefully read what the question text asks for or calculates. Your visual description MUST explicitly extract and cross-reference every visual element referenced by that question text (e.g., if the question asks for "voltage across R2", the visual description MUST capture R2's value, placement, and polarity as shown in the diagram).
+  * SOURCE TRUTH GUARANTEE: Never invent, assume, or hallucinate missing diagram components. If a required value mentioned in the question text is visibly unlabelled or missing from the diagram, explicitly state in the description: "[Visual Note: Label X is referenced in text but not visually marked in diagram]".
+## RULE 6: "OR", "any one", "any two" conditions create choices. Document these in `choiceInformation`, `sectionChoices`, or `globalChoices`.
+  * CRITICAL LINEAR PAIRING RULE FOR "OR": When an "OR" separator appears standalone between two question blocks, it creates a choice strictly between the block immediately BEFORE it (Predecessor) and the block immediately AFTER it (Successor). 
+    - Correct Pairings from Layout: [Immediate Predecessor] OR [Immediate Successor]
+    - NEVER jump across questions or shift the pairs (e.g., If the sequence is Q2 -> OR -> Q3 -> Q4 -> OR -> Q5, the choices are strictly (Q2 OR Q3) and (Q4 OR Q5). You must never parse this as Q2 standing alone and (Q3 OR Q4) being a choice).
+  * Visual Verification Check: 
+    - Locate the physical line containing the standalone word "OR".
+    - Look directly upwards to find the closest question ID string (e.g., Q2). This is Option A.
+    - Look directly downwards to find the closest question ID string (e.g., Q3). This is Option B.
+    - Map these target IDs into the choice node array.
+  * Marks Validation Check: For any standalone "OR" choice between two Level 1 questions (e.g., Q2 OR Q3), both questions involved in that choice MUST have the exact same `extractedTotalMarks` value. 
+    - Use this cross-validation to verify your pairings: If you pair two questions and notice their total marks do not match (e.g., trying to pair a 5-mark question with a 10-mark question via an OR), your pairing logic is incorrect. Re-evaluate the layout to find the matching pair weights.
+## RULE 7: 
+ - Section-Level Choices (sectionChoices): Use this array for choices between top-level(level 1), independent main questions within a section. (e.g. - choices like Q1 or Q2, any three of following: Q1, Q2, Q3, Q4 etc) 
+ - Question-Level Choices (choiceInformation): Use this object inside a specific question node only when a choice is confined strictly to its immediate sub-question children (level 2 or level 3) (e.g., Q1 has sub-questions Q1.a and Q1.b separated by an "OR").
+ - CRITICAL BOUNDARY: If a choice happens between level 1 items (like Q8 and Q9), it belongs in sectionChoices. It is a critical violation to put level 1 question choices into globalChoices.
+
+## RULE 8: A `globalChoices` array will be used strictly for choices between independent SECTIONS. Use the `targetNodes` key to list the IDs of the sections involved in the choice.
+## RULE 9: Keep strict hierarchy (Q1 -> Q1.a -> Q1.a.i). Intermediate levels without actual text remain empty strings `""` inside their respective language keys.
+## RULE 10: Never invent missing text. If unreadable, add a clear note in the `"warnings"` array (e.g., "Question 5 image unclear").
+## RULE 11: INLINE LABELS AND PREFIXING
+  Do not create intermediate, content-less parent nodes out of hanging execution words or labels followed by a colon (e.g., "Calculate:", "Find:", "Given:"). 
+  * If a main question body ends with or contains such a phrase, keep it entirely within the parent question's text field. 
+  * If it introduces sub-questions, distribute the phrase prefix cleanly to the child nodes directly (e.g., Q6.a: "Calculate: Transmission delay"). Never create an artificial, textless level just to house a single introductory word.
+## RULE 12: Identify if a question requires the student to draw a visual artifact:
+  * Set `diagramRequired` to true if the text explicitly commands the student to create a visual (e.g., using action verbs like "Draw", "Construct", "Plot", "Sketch", "Graph" etc) (e.g. questions- "Draw a diagram...", "Construct a graph...", "Plot the following points..." etc).
+  * CRITICAL EXCEPTION: Do NOT set `diagramRequired` to true if the question merely references an existing diagram provided in the paper (e.g., "Given the diagram below...", "Refer to the circuit diagram...", "Use the graph to find..."). It must remain false unless an explicit command to draw is stated elsewhere in the text.
+  * Set `diagramRequired` to false in all other cases.
+## RULE 13: READING PASSAGES & COMPREHENSION TEXTS
+  * Whenever a question introduces a reading passage, case study, or context text before sub-questions:
+    - Treat the ENTIRE body of the passage (including all paragraphs, headings, and numbered paragraphs like (1), (2), (3)...) strictly as part of the parent question's `text` object.
+    - PRESERVE PARAGRAPH LABELS: Do NOT convert numbered or lettered paragraphs (e.g., "(1)", "(2)", "A)", "B)") inside a passage into child sub-questions. They are paragraph identifiers within the parent text, NOT questions to be answered.
+    - NEVER drop or truncate passage content. If a parent question (e.g., Q1) contains a 4-paragraph passage, the full passage text must be present inside `Q1.text.en` (or the relevant language tag).
+## RULE 14: SUB-QUESTION vs. MCQ OPTION DISAMBIGUATION
+  * Lettered labels like "(A)", "(B)", "(a)", "(b)" can represent EITHER MCQ options OR distinct sub-questions/choice alternatives.
+  * DO NOT classify lettered blocks as MCQ options UNLESS:
+    - The main question explicitly asks a multiple-choice question (e.g., "Choose the correct option...", "Which of the following...")
+    - The options are short selectable choices rather than standalone descriptive tasks/prompts.
+  * ESSAY / DESCRIPTIVE CHOICES: If a question presents lettered blocks containing descriptive tasks or prompts separated by "OR" (e.g., "5. (A) Write a paragraph..." OR "5. (B) You are a teacher..."):
+    - These MUST be parsed as distinct question/sub-question nodes (e.g., Q5.A and Q5.B) in the `children` array or as top-level `questions`.
+    - They MUST NEVER be placed inside the `options` array.
+    - The "OR" relationship between Q5.A and Q5.B must be documented in `choiceInformation` or `sectionChoices`.
+---
+
+# JSON FIELD DEFINITIONS
+- paperMetadata: General metadata. Use empty strings (or 0 for totalMarks) if unavailable.
+- instructions: Object containing instruction arrays mapped by language keys (en and hi).
+- parsingStatus: Object containing:
+  - success: Boolean flag indicating if the document was parsed successfully (true/false).
+  - paperClarity: String indicating OCR quality ("clear", "partially_clear", "unclear").
+  - errors: Array of critical execution error strings.
+  - warnings: Array of non-fatal warnings (e.g., blurry text, unreadable notation).
+  - extractionRisks: Array containing exactly 3 string items identifying potential edge cases or ambiguities where this extraction might be inaccurate (e.g., "Blurry subscript on Q14.b", "Ambiguous layout pairing on Q3 OR Q4").
+  - confidence: Number (0–100) representing overall structural accuracy, mathematically evaluated ONLY based on the severe risks listed in `extractionRisks`.
+- sections: Array containing section objects.
+  - sectionId: Must be strictly and uniquely identifying across the entire document. 
+      * Prefix Rule: If the exam contains multiple subjects (e.g., Mathematics, Physics, Chemistry), you MUST prefix the section ID with the active subject name.
+      * Formatting: Convert the name to lower-case snake_case (e.g., "mathematics_section_1", "chemistry_section_2"). 
+      * If the section name is already globally unique across the whole paper, extract it exactly in lower-case snake_case.
+  - sectionChoices: Array of objects for choices between independent questions in a section; contains `targetNodes` (IDs involved), `detailedDescription` (clear logic), and `summary`.
+  - sectionInstructions: Bilingual object containing specific instruction strings mapped by language keys (en and hi) designated for that particular section.
+  - questions: Array of level 1 question objects inside this section.
+
+- type: Categorize every question strictly as:
+    - "MCQ": Multiple choice question.
+    - "MTF": Match the following.
+    - "Theory": Standard theory, True/False, drawing diagrams, or fill-in-the-blank questions.
+    - "Hybrid": Multiple question types mixed (e.g. MTF with MCQ sub-parts).
+- id: Human-readable question hierarchy string (e.g., Q1, Q1.a, Q1.a.i).
+- text: Object containing the question text mapped by language keys (en and hi). For Passages/Context blocks follow Rule 13 of strict structure rules.
+- marks: Marks string associated with the specific node.
+- extractedTotalMarks: Use this field strictly and only inside Level 1 (top-level) parent question objects to capture the total printed marks of the overall block (e.g. "10"). For Level 2 and Level 3 sub-questions, completely omit this key from the object.
+- rubric: Always return an empty array.
+- attachments: Array of attachment objects that contain description and type string. The description string must be detailed as specified in rule 5 of strict rules (CRITICAL VISUAL EXTRACTION RULE)
+- diagramRequired: Boolean which is set to true if a question states to draw a visual artifact. It should follow the rule as expressed in the strict rule `RULE 12`.
+- children: Array of sub-question objects mapping out the question hierarchy. 
+  * Inside a Level 1 question (e.g., Q1), this array strictly contains Level 2 objects (e.g., Q1.a).
+  * Inside a Level 2 question (e.g., Q1.a), this array strictly contains Level 3 objects (e.g., Q1.a.i).
+  * Level 3 questions do not support further nesting; do not include a children key inside Level 3 nodes.
+- options: Optional array of objects used ONLY for "MCQ" types. Each object must have an `optionId` (e.g., "A", "B", "i") and a bilingual `text` object. If the option contains image, diagram, symbol etc provide clear detailed description about it in language tags as specified in rule 5 of strict rules (CRITICAL VISUAL EXTRACTION RULE).
+  - CRITICAL NOTE: Do not treat MCQ options as sub-questions. Do NOT add them to the children array. Place them strictly inside this options field.
+  - CRITICAL BOUNDARY: NEVER use the options array for descriptive questions, essay prompts, or lettered alternative questions separated by "OR" (e.g., Q5.(A) vs Q5.(B)). Those must be represented as distinct sub-question nodes in children, never as options.
+- matchData: Optional object used ONLY for "MTF" types. Contains:
+  - "matchFrom": Array of bilingual text objects representing the left column items. If the left column contains image, diagram, symbol etc instead of raw text, provide clear detailed description about it in language tags as specified in rule 5 of strict rules (CRITICAL VISUAL EXTRACTION RULE). Do not use random Unicode symbols.
+  - "matchTo": Array of bilingual text objects representing the right column items. If the right column contains image, diagram, symbol etc instead of raw text, provide clear detailed description about it in language tags as specified in rule 5 of strict rules (CRITICAL VISUAL EXTRACTION RULE). Do not use random Unicode symbols.
+- choiceInformation: Property of question object inside questions array, Handles child-level choices (e.g. "Answer any 3 of the following sub-questions").
+- globalChoices: Array of objects for choices specifically between sections. Leave empty if no inter-section choices exist.

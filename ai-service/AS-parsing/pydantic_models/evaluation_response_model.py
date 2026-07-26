@@ -25,10 +25,6 @@ class EarnedMarks(BaseModel):
     value: float = Field(description="Marks awarded for this answer.")
     reason: str = Field(description="Short explanation for marks awarded or deducted.")
 
-# - extractionRisks: Array containing exactly 3 string items identifying potential edge cases or ambiguities where this extraction might be inaccurate (e.g., "Blurry subscript on Q14.b", "Ambiguous layout pairing on Q3 OR Q4").
-#   - confidence: Number (0–100) representing overall structural accuracy, mathematically evaluated ONLY based on the severe risks listed in `extractionRisks`.
-
-
 class ParsingStatus(BaseModel):
     success: bool
     paperClarity: PaperClarity

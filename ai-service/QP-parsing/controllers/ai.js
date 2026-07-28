@@ -1,12 +1,11 @@
 import { GoogleGenAI } from '@google/genai';
 // import finalPaperSchema from '../schemas/schema.js'; //this should be used if regression test fails.
 import finalPaperSchema from '../schemas/newSchema.js'; //this is new schema.
-import dotenv from 'dotenv';
 import fs from 'fs/promises';
-
+import dotenv from 'dotenv';
 import marksDistributor from '../utils/marksDistributor.js';
 
-dotenv.config();
+dotenv.config()
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY

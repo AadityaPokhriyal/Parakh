@@ -1,10 +1,11 @@
-from fastapi import FastAPI, UploadFile, HTTPException, File
+from fastapi import FastAPI, UploadFile, HTTPException, File, Depends
 from google import genai
 from google.genai import types
 
 from helpers.prompt import evaluation_prompt
 from helpers.validate import get_clean_mime_type, sort_files_by_index, validate_file_batch
 from helpers.validate_json import is_valid_json
+from helpers.authenticate import authenticate_ai_service
 
 from pydantic_models.evaluation_response_model import EvaluationOutput
 from pydantic_models.questions_schema_model import QuestionPaper
@@ -38,7 +39,10 @@ def status():
     return {"message": "api is running"}
 
 
-@app.post('/ai/evaluate-answers')
+@app.post(
+        '/ai/evaluate-answers',
+        dependencies=[Depends(authenticate_ai_service)]
+        )
 async def evaluate(
     answers: List[UploadFile] = File(..., alias="answers"),
     question_json: UploadFile = File(..., alias="question_json")
@@ -126,11 +130,11 @@ async def evaluate(
 
         # 6. Model Request
         interaction = client.interactions.create(
-            model="gemini-3.5-flash",
+            model="gemini-3-flash-preview",
             store=False,
             input=input_payload,
             generation_config={
-                "temperature": 1,
+                "temperature": 0.7,
                 "thinking_level": "high"
             },
             response_format={

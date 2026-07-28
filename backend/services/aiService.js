@@ -31,10 +31,11 @@ const parseQuestionPaper = async (files) => {
     {
       headers: {
         ...formData.getHeaders(),
+        Authorization: `Bearer ${process.env.QP_PARSING_SECRET}`
       },
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
-      timeout: 600000, // 5 minutes timeout for AI processing
+      timeout: 300000, // 5 minutes timeout for AI processing
     }
   );
 
@@ -81,6 +82,7 @@ const evaluateAnswers = async (files, questionJsonData) => {
     {
       headers: {
         ...formData.getHeaders(),
+        Authorization: `Bearer ${process.env.AS_PARSING_SECRET}`
       },
       maxContentLength: Infinity,
       maxBodyLength: Infinity,

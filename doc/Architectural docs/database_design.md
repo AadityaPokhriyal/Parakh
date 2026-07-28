@@ -10,6 +10,8 @@ The PostgreSQL database maintains a relationship where teachers/users own their 
 
 ```mermaid
 erDiagram
+    direction LR
+
     USERS ||--o{ EXAM_PAPERS : uploads
     EXAM_PAPERS ||--o{ EVALUATIONS : has
     

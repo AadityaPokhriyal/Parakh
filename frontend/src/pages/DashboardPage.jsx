@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import Navbar from "../components/Navbar";
+import { useAuth } from "../context/AuthContext.jsx";
+import Navbar from "../components/Navbar.jsx";
 import "./DashboardPage.css";
 import {
   FileText,

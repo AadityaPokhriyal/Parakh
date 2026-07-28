@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEvaluation, createBlankSheet } from "../context/EvaluationContext";
-import Navbar from "../components/Navbar";
-import WorkflowStepper from "../components/WorkflowStepper";
+import { useEvaluation, createBlankSheet } from "../context/EvaluationContext.jsx";
+import Navbar from "../components/Navbar.jsx";
+import WorkflowStepper from "../components/WorkflowStepper.jsx";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 

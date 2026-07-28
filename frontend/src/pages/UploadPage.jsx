@@ -1,6 +1,6 @@
-import FileUploader from "../components/FileUploader";
-import Navbar from "../components/Navbar";
-import WorkflowStepper from "../components/WorkflowStepper";
+import FileUploader from "../components/FileUploader.jsx";
+import Navbar from "../components/Navbar.jsx";
+import WorkflowStepper from "../components/WorkflowStepper.jsx";
 
 function UploadPage() {
   return (

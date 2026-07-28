@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEvaluation } from "../context/EvaluationContext";
-import Navbar from "../components/Navbar";
-import WorkflowStepper from "../components/WorkflowStepper";
+import { useEvaluation } from "../context/EvaluationContext.jsx";
+import Navbar from "../components/Navbar.jsx";
+import WorkflowStepper from "../components/WorkflowStepper.jsx";
 import "./EvaluationResultsPage.css";
 
 const formatMarks = (val) => {

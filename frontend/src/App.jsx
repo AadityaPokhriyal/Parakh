@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
-import UploadPage from "./pages/UploadPage";
-import ReviewPage from "./pages/ReviewPage";
-import UploadAnswersPage from "./pages/UploadAnswersPage";
-import EvaluationResultsPage from "./pages/EvaluationResultsPage";
-import NewLoginPage from "./pages/NewLoginPage";
-import DashboardPage from "./pages/DashboardPage";
-import { EvaluationProvider } from "./context/EvaluationContext";
-import { AuthProvider } from "./context/AuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+import LandingPage from "./pages/LandingPage.jsx";
+import UploadPage from "./pages/UploadPage.jsx";
+import ReviewPage from "./pages/ReviewPage.jsx";
+import UploadAnswersPage from "./pages/UploadAnswersPage.jsx";
+import EvaluationResultsPage from "./pages/EvaluationResultsPage.jsx";
+import NewLoginPage from "./pages/NewLoginPage.jsx";
+import DashboardPage from "./pages/DashboardPage.jsx";
+import { EvaluationProvider } from "./context/EvaluationContext.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   return (

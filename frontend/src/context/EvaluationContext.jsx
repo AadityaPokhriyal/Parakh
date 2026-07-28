@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback, useMemo, useRef, useEffect } from "react";
 import { jsPDF } from "jspdf";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./AuthContext.jsx";
 
 const EvaluationContext = createContext(null);
 

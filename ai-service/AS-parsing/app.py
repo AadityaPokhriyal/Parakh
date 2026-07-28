@@ -10,6 +10,7 @@ from pydantic_models.evaluation_response_model import EvaluationOutput
 from pydantic_models.questions_schema_model import QuestionPaper
 
 import os
+import base64
 import logging
 from typing import List
 from dotenv import load_dotenv
@@ -98,23 +99,19 @@ async def evaluate(
             logger.info(f"Uploaded PDF {pdf_file.filename} via Files API")
 
         else:
-            # Images Flow: Upload each image via Files API
+            # Images Flow: Inline as base64 data (no Files API upload needed)
             for file_obj in sorted_answer_files:
                 mime_type = get_clean_mime_type(file_obj) or "image/png"
                 file_obj.file.seek(0)
-                
-                uploaded_img = client.files.upload(
-                    file=file_obj.file,
-                    config=dict(mime_type=mime_type)
-                )
-                uploaded_gemini_files.append(uploaded_img)
+                image_bytes = await file_obj.read()
+                encoded_data = base64.standard_b64encode(image_bytes).decode("ascii")
 
                 answer_parts.append({
                     "type": "image",
-                    "uri": uploaded_img.uri,
+                    "data": encoded_data,
                     "mime_type": mime_type
                 })
-                logger.info(f"Uploaded image {file_obj.filename} via Files API")
+                logger.info(f"Inlined image {file_obj.filename} as base64 ({len(image_bytes)} bytes)")
 
         # 5. Build interaction input payload
         input_payload = [
@@ -129,11 +126,11 @@ async def evaluate(
 
         # 6. Model Request
         interaction = client.interactions.create(
-            model="gemini-3-flash-preview",
+            model="gemini-3.5-flash",
             store=False,
             input=input_payload,
             generation_config={
-                "temperature": 0,
+                "temperature": 1,
                 "thinking_level": "high"
             },
             response_format={

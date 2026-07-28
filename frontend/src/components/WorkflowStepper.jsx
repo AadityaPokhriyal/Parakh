@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Check } from "lucide-react";
-import "./WorkflowStepper.css";
+import "./workflowStepper.css";
 
 export default function WorkflowStepper({ currentStep, currentPageName }) {
   const navigate = useNavigate();

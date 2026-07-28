@@ -35,6 +35,11 @@ export default function NewLoginPage() {
 
   const [focusedField, setFocusedField] = useState("");
 
+  const allowRegistrationEnv = import.meta.env.VITE_ALLOW_REGISTRATION;
+  const isRegistrationAllowed = allowRegistrationEnv
+    ? !["false", "0", "closed", "disabled", "off"].includes(allowRegistrationEnv.toLowerCase().trim())
+    : true;
+
   const handleAuth = async (e) => {
     e.preventDefault();
     if (loading) return;
@@ -146,218 +151,239 @@ export default function NewLoginPage() {
               </button>
             </div>
 
-            <div style={styles.formHeader}>
-              <div style={styles.logoIcon}>
-                <GraduationCap size={24} style={{ color: "var(--accent)" }} />
+            {!isLogin && !isRegistrationAllowed ? (
+              <div style={styles.disabledBox}>
+                <div style={styles.disabledIconWrapper}>
+                  <AlertCircle size={32} style={{ color: "#f59e0b" }} />
+                </div>
+                <h3 style={styles.disabledTitle}>User Registration Closed</h3>
+                <p style={styles.disabledMessage}>
+                  User registration is currently closed for testing purposes. Please contact your administrator if you require access.
+                </p>
+                <button
+                  type="button"
+                  onClick={toggleMode}
+                  style={styles.backToLoginBtn}
+                >
+                  <ArrowLeft size={16} /> Back to Sign In
+                </button>
               </div>
-              <h2 style={styles.title}>
-                {isLogin ? "Sign In to Parakh" : "Create an Account"}
-              </h2>
-              <p style={styles.subtitle}>
-                {isLogin
-                  ? "Access your exam papers and AI-driven assessments."
-                  : "Start evaluating and parsing exam papers instantly."}
-              </p>
-            </div>
-
-            <form onSubmit={handleAuth} style={styles.form}>
-              {!isLogin && (
-                <>
-                  <div style={styles.inputGroup}>
-                    <label style={styles.label}>Full Name</label>
-                    <div
-                      style={{
-                        ...styles.inputWrapper,
-                        ...(focusedField === "name" ? styles.inputWrapperFocused : {}),
-                      }}
-                    >
-                      <User size={18} style={styles.inputIcon} />
-                      <input
-                        type="text"
-                        placeholder="Dr. Rajesh Kumar"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        onFocus={() => setFocusedField("name")}
-                        onBlur={() => setFocusedField("")}
-                        style={styles.input}
-                      />
-                    </div>
+            ) : (
+              <>
+                <div style={styles.formHeader}>
+                  <div style={styles.logoIcon}>
+                    <GraduationCap size={24} style={{ color: "var(--accent)" }} />
                   </div>
+                  <h2 style={styles.title}>
+                    {isLogin ? "Sign In to Parakh" : "Create an Account"}
+                  </h2>
+                  <p style={styles.subtitle}>
+                    {isLogin
+                      ? "Access your exam papers and AI-driven assessments."
+                      : "Start evaluating and parsing exam papers instantly."}
+                  </p>
+                </div>
 
-                  <div style={styles.inputGroup}>
-                    <label style={styles.label}>Institution Name</label>
-                    <div
-                      style={{
-                        ...styles.inputWrapper,
-                        ...(focusedField === "institution" ? styles.inputWrapperFocused : {}),
-                      }}
-                    >
-                      <Building2 size={18} style={styles.inputIcon} />
-                      <input
-                        type="text"
-                        placeholder="IIT Bombay, Delhi University..."
-                        value={institution}
-                        onChange={(e) => setInstitution(e.target.value)}
-                        required
-                        onFocus={() => setFocusedField("institution")}
-                        onBlur={() => setFocusedField("")}
-                        style={styles.input}
-                      />
-                    </div>
-                  </div>
-
-                  <div style={styles.inputGroup}>
-                    <label style={styles.label}>Your Role</label>
-                    <div style={styles.roleGrid}>
-                      {["Teacher", "HOD", "Admin"].map((r) => (
-                        <button
-                          key={r}
-                          type="button"
-                          onClick={() => setRole(r)}
+                <form onSubmit={handleAuth} style={styles.form}>
+                  {!isLogin && (
+                    <>
+                      <div style={styles.inputGroup}>
+                        <label style={styles.label}>Full Name</label>
+                        <div
                           style={{
-                            ...styles.roleBtn,
-                            ...(role === r ? styles.roleBtnActive : {}),
+                            ...styles.inputWrapper,
+                            ...(focusedField === "name" ? styles.inputWrapperFocused : {}),
                           }}
                         >
-                          {r}
-                        </button>
-                      ))}
+                          <User size={18} style={styles.inputIcon} />
+                          <input
+                            type="text"
+                            placeholder="Dr. Rajesh Kumar"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            onFocus={() => setFocusedField("name")}
+                            onBlur={() => setFocusedField("")}
+                            style={styles.input}
+                          />
+                        </div>
+                      </div>
+
+                      <div style={styles.inputGroup}>
+                        <label style={styles.label}>Institution Name</label>
+                        <div
+                          style={{
+                            ...styles.inputWrapper,
+                            ...(focusedField === "institution" ? styles.inputWrapperFocused : {}),
+                          }}
+                        >
+                          <Building2 size={18} style={styles.inputIcon} />
+                          <input
+                            type="text"
+                            placeholder="IIT Bombay, Delhi University..."
+                            value={institution}
+                            onChange={(e) => setInstitution(e.target.value)}
+                            required
+                            onFocus={() => setFocusedField("institution")}
+                            onBlur={() => setFocusedField("")}
+                            style={styles.input}
+                          />
+                        </div>
+                      </div>
+
+                      <div style={styles.inputGroup}>
+                        <label style={styles.label}>Your Role</label>
+                        <div style={styles.roleGrid}>
+                          {["Teacher", "HOD", "Admin"].map((r) => (
+                            <button
+                              key={r}
+                              type="button"
+                              onClick={() => setRole(r)}
+                              style={{
+                                ...styles.roleBtn,
+                                ...(role === r ? styles.roleBtnActive : {}),
+                              }}
+                            >
+                              {r}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  <div style={styles.inputGroup}>
+                    <label style={styles.label}>Email Address</label>
+                    <div
+                      style={{
+                        ...styles.inputWrapper,
+                        ...(focusedField === "email" ? styles.inputWrapperFocused : {}),
+                      }}
+                    >
+                      <Mail size={18} style={styles.inputIcon} />
+                      <input
+                        type="email"
+                        placeholder="you@university.edu"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        onFocus={() => setFocusedField("email")}
+                        onBlur={() => setFocusedField("")}
+                        style={styles.input}
+                      />
                     </div>
                   </div>
-                </>
-              )}
 
-              <div style={styles.inputGroup}>
-                <label style={styles.label}>Email Address</label>
-                <div
-                  style={{
-                    ...styles.inputWrapper,
-                    ...(focusedField === "email" ? styles.inputWrapperFocused : {}),
-                  }}
-                >
-                  <Mail size={18} style={styles.inputIcon} />
-                  <input
-                    type="email"
-                    placeholder="you@university.edu"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    onFocus={() => setFocusedField("email")}
-                    onBlur={() => setFocusedField("")}
-                    style={styles.input}
-                  />
-                </div>
-              </div>
+                  <div style={styles.inputGroup}>
+                    <div style={styles.labelRow}>
+                      <label style={styles.label}>Password</label>
+                      {isLogin && (
+                        <button type="button" style={styles.forgotLink}>
+                          Forgot?
+                        </button>
+                      )}
+                    </div>
+                    <div
+                      style={{
+                        ...styles.inputWrapper,
+                        ...(focusedField === "password" ? styles.inputWrapperFocused : {}),
+                      }}
+                    >
+                      <Lock size={18} style={styles.inputIcon} />
+                      <input
+                        type={showPw ? "text" : "password"}
+                        placeholder="••••••••"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        onFocus={() => setFocusedField("password")}
+                        onBlur={() => setFocusedField("")}
+                        style={styles.input}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPw(!showPw)}
+                        style={styles.showHideBtn}
+                      >
+                        {showPw ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
+                    </div>
+                  </div>
 
-              <div style={styles.inputGroup}>
-                <div style={styles.labelRow}>
-                  <label style={styles.label}>Password</label>
-                  {isLogin && (
-                    <button type="button" style={styles.forgotLink}>
-                      Forgot?
-                    </button>
+                  {!isLogin && (
+                    <div style={styles.inputGroup}>
+                      <label style={styles.label}>Confirm Password</label>
+                      <div
+                        style={{
+                          ...styles.inputWrapper,
+                          ...(focusedField === "confirmPassword" ? styles.inputWrapperFocused : {}),
+                        }}
+                      >
+                        <Lock size={18} style={styles.inputIcon} />
+                        <input
+                          type={showCpw ? "text" : "password"}
+                          placeholder="••••••••"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          required
+                          onFocus={() => setFocusedField("confirmPassword")}
+                          onBlur={() => setFocusedField("")}
+                          style={styles.input}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowCpw(!showCpw)}
+                          style={styles.showHideBtn}
+                        >
+                          {showCpw ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
+                      </div>
+                    </div>
                   )}
-                </div>
-                <div
-                  style={{
-                    ...styles.inputWrapper,
-                    ...(focusedField === "password" ? styles.inputWrapperFocused : {}),
-                  }}
-                >
-                  <Lock size={18} style={styles.inputIcon} />
-                  <input
-                    type={showPw ? "text" : "password"}
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    onFocus={() => setFocusedField("password")}
-                    onBlur={() => setFocusedField("")}
-                    style={styles.input}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPw(!showPw)}
-                    style={styles.showHideBtn}
-                  >
-                    {showPw ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </div>
 
-              {!isLogin && (
-                <div style={styles.inputGroup}>
-                  <label style={styles.label}>Confirm Password</label>
-                  <div
-                    style={{
-                      ...styles.inputWrapper,
-                      ...(focusedField === "confirmPassword" ? styles.inputWrapperFocused : {}),
+                  {error && (
+                    <div style={styles.errorBox}>
+                      <AlertCircle size={16} style={{ flexShrink: 0 }} />
+                      <span>{error}</span>
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    style={styles.submitBtn}
+                    onMouseEnter={(e) => {
+                      if (!loading) {
+                        e.currentTarget.style.transform = "translateY(-1px)";
+                        e.currentTarget.style.boxShadow = "0 8px 24px rgba(139, 92, 246, 0.4)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
                     }}
                   >
-                    <Lock size={18} style={styles.inputIcon} />
-                    <input
-                      type={showCpw ? "text" : "password"}
-                      placeholder="••••••••"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      required
-                      onFocus={() => setFocusedField("confirmPassword")}
-                      onBlur={() => setFocusedField("")}
-                      style={styles.input}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowCpw(!showCpw)}
-                      style={styles.showHideBtn}
-                    >
-                      {showCpw ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
-                  </div>
+                    {loading ? (
+                      <div style={styles.spinner} />
+                    ) : (
+                      <>
+                        <span>{isLogin ? "Sign In" : "Register Now"}</span>
+                        <ArrowRight size={18} />
+                      </>
+                    )}
+                  </button>
+                </form>
+
+                <div style={styles.footer}>
+                  <span style={styles.footerText}>
+                    {isLogin ? "New to our platform?" : "Already have an account?"}
+                  </span>{" "}
+                  <button onClick={toggleMode} style={styles.footerLink}>
+                    {isLogin ? "Create an account" : "Sign in here"}
+                  </button>
                 </div>
-              )}
-
-              {error && (
-                <div style={styles.errorBox}>
-                  <AlertCircle size={16} style={{ flexShrink: 0 }} />
-                  <span>{error}</span>
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={loading}
-                style={styles.submitBtn}
-                onMouseEnter={(e) => {
-                  if (!loading) {
-                    e.currentTarget.style.transform = "translateY(-1px)";
-                    e.currentTarget.style.boxShadow = "0 8px 24px rgba(139, 92, 246, 0.4)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                {loading ? (
-                  <div style={styles.spinner} />
-                ) : (
-                  <>
-                    <span>{isLogin ? "Sign In" : "Register Now"}</span>
-                    <ArrowRight size={18} />
-                  </>
-                )}
-              </button>
-            </form>
-
-            <div style={styles.footer}>
-              <span style={styles.footerText}>
-                {isLogin ? "New to our platform?" : "Already have an account?"}
-              </span>{" "}
-              <button onClick={toggleMode} style={styles.footerLink}>
-                {isLogin ? "Create an account" : "Sign in here"}
-              </button>
-            </div>
+              </>
+            )}
           </div>
         )}
       </div>
@@ -734,6 +760,56 @@ const styles = {
     color: "#f87171",
     fontSize: "13px",
     lineHeight: "1.4",
+  },
+
+  disabledBox: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+    padding: "24px 16px 12px 16px",
+  },
+
+  disabledIconWrapper: {
+    width: "64px",
+    height: "64px",
+    borderRadius: "50%",
+    background: "rgba(245, 158, 11, 0.12)",
+    border: "1px solid rgba(245, 158, 11, 0.25)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "16px",
+  },
+
+  disabledTitle: {
+    fontSize: "20px",
+    fontWeight: "700",
+    color: "var(--text-h)",
+    margin: "0 0 10px 0",
+  },
+
+  disabledMessage: {
+    fontSize: "14px",
+    color: "var(--text-muted)",
+    lineHeight: "1.6",
+    margin: "0 0 24px 0",
+    maxWidth: "360px",
+  },
+
+  backToLoginBtn: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "10px 20px",
+    borderRadius: "12px",
+    background: "var(--accent-bg, rgba(99, 102, 241, 0.1))",
+    border: "1px solid var(--border)",
+    color: "var(--accent, #6366f1)",
+    fontWeight: "600",
+    fontSize: "14px",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
   },
 };
 

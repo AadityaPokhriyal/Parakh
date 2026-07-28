@@ -35,6 +35,18 @@ const register = async (req, res, next) => {
   console.log(`[Auth] >>> Incoming POST /api/auth/register. Email: ${email || "undefined"}`);
 
   try {
+    // Check if new user registration is enabled via environment variable
+    const allowRegistration = process.env.ALLOW_REGISTRATION
+      ? !["false", "0", "closed", "disabled", "off"].includes(process.env.ALLOW_REGISTRATION.toLowerCase().trim())
+      : true;
+
+    if (!allowRegistration) {
+      return res.status(403).json({
+        success: false,
+        error: "User registration is currently closed for testing purposes. Please contact your administrator if you require access.",
+      });
+    }
+
     // Validate required fields
     if (!email || !password || !name || !institution) {
       return res.status(400).json({

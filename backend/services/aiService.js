@@ -35,7 +35,7 @@ const parseQuestionPaper = async (files) => {
       },
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
-      timeout: 300000, // 5 minutes timeout for AI processing
+      timeout: 600000, // 10 minutes timeout for AI processing
     }
   );
 

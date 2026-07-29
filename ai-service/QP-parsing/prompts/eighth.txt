@@ -60,14 +60,16 @@ Follow all rules strictly. Return valid JSON only. Never explain anything outsid
     - PRESERVE PARAGRAPH LABELS: Do NOT convert numbered or lettered paragraphs (e.g., "(1)", "(2)", "A)", "B)") inside a passage into child sub-questions. They are paragraph identifiers within the parent text, NOT questions to be answered.
     - NEVER drop or truncate passage content. If a parent question (e.g., Q1) contains a 4-paragraph passage, the full passage text must be present inside `Q1.text.en` (or the relevant language tag).
 ## RULE 14: SUB-QUESTION vs. MCQ OPTION DISAMBIGUATION
-  * Lettered labels like "(A)", "(B)", "(a)", "(b)" can represent EITHER MCQ options OR distinct sub-questions/choice alternatives.
-  * DO NOT classify lettered blocks as MCQ options UNLESS:
-    - The main question explicitly asks a multiple-choice question (e.g., "Choose the correct option...", "Which of the following...")
-    - The options are short selectable choices rather than standalone descriptive tasks/prompts.
-  * ESSAY / DESCRIPTIVE CHOICES: If a question presents lettered blocks containing descriptive tasks or prompts separated by "OR" (e.g., "5. (A) Write a paragraph..." OR "5. (B) You are a teacher..."):
-    - These MUST be parsed as distinct question/sub-question nodes (e.g., Q5.A and Q5.B) in the `children` array or as top-level `questions`.
-    - They MUST NEVER be placed inside the `options` array.
-    - The "OR" relationship between Q5.A and Q5.B must be documented in `choiceInformation` or `sectionChoices`.
+  * HIERARCHY RULE: Lettered identifiers (e.g., A, B, C, D or a, b, c, d) can represent either sub-questions OR MCQ options depending on their level:
+    - Sub-Questions (Children Array): Represent distinct tasks, prompts, or individual questions under a passage/parent (e.g., Q1.A, Q1.B). If a passage question contains multiple sub-questions where the student must answer each one (or pick between choices like OR), treat these strictly as child nodes in the `children` array.
+    - MCQ Options (Options Array): Belong strictly INSIDE a specific leaf question node whose `type` is set to "MCQ". 
+  * PASSAGE SUB-QUESTIONS THAT ARE MCQs: If a reading passage contains sub-questions that are themselves multiple-choice (e.g., Q1.A asks a question followed by options i, ii, iii, iv or A, B, C, D):
+    - Create Q1.A as a child node inside Q1's `children` array.
+    - Set Q1.A's `type` to "MCQ".
+    - Place Q1.A's choices strictly inside Q1.A's `options` array.
+  * ESSAY / DESCRIPTIVE CHOICES: If lettered blocks contain descriptive tasks or essay prompts separated by "OR" (e.g., "5. (A) Write a paragraph..." OR "5. (B) You are a teacher..."):
+    - These MUST be parsed as distinct question nodes (e.g., Q5.A and Q5.B). They MUST NEVER be placed in an `options` array.
+    
 ---
 
 # JSON FIELD DEFINITIONS

@@ -127,10 +127,10 @@ async def evaluate(
             *answer_parts,
             {"type": "text", "text": evaluation_prompt}
         ]
-
+        model_name=os.getenv("MODEL_NAME")
         # 6. Model Request
         interaction = client.interactions.create(
-            model="gemini-3-flash-preview",
+            model=model_name,
             store=False,
             input=input_payload,
             generation_config={

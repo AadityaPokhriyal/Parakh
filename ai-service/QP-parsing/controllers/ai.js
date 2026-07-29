@@ -21,8 +21,8 @@ export default async function parseQuestionPaper(req, res, next) {
 
         console.log("Generating response...");
 
-        const primaryModel="gemini-2.5-flash"; // Not using 3.5-flash right now because of busy servers and less priority to free tier. 3.1-flash-lite is suited for speed and it is not reading prompt correctly.
-        const fallbackModel="gemini-2.5-pro";
+        const primaryModel=process.env.PRIMARY_MODEL_NAME; // Not using 3.5-flash right now because of busy servers and less priority to free tier. 3.1-flash-lite is suited for speed and it is not reading prompt correctly.
+        const fallbackModel=process.env.FALLBACK_MODEL_NAME;
         
         const maxRetries = 5;
         
@@ -33,10 +33,17 @@ export default async function parseQuestionPaper(req, res, next) {
                         responseMimeType: 'application/json',
                         responseSchema: finalPaperSchema, 
                         temperature:0.1,
-                        thinkingConfig: {
-                            thinkingBudget:8192
-                        }
                     };
+            if(model_name === fallbackModel){
+                baseConfig.thinkingConfig={
+                  thinkingLevel:"medium"  
+                };
+            }
+            else{
+                baseConfig.thinkingConfig={
+                    thinkingBudget:8192
+                };
+            }
 
             try {
                 const responseStream = await ai.models.generateContentStream({
@@ -47,14 +54,16 @@ export default async function parseQuestionPaper(req, res, next) {
 
                 // 2. Real-time Assembly Line
                 let completeText = "";
-                
+                let jsonSizeInChars=0;
                 // The stream object is an async iterable. Loop over chunks as they arrive.
                 for await (const chunk of responseStream) {
                     if (chunk.text) {
                         completeText += chunk.text;
-                        console.log(`Received chunk of size: ${chunk.text.length}`);
+                        jsonSizeInChars += chunk.text.length;
                     }
                 }
+                console.log(`JSON size derived = ${jsonSizeInChars} characters.`);
+                
                 // 1. Guard against empty or obviously non-JSON responses
                 if (!completeText || !completeText.trim().startsWith('{')) {
                     const structuralErr = new Error(`API returned non-JSON payload: ${completeText?.substring(0, 100)}`);

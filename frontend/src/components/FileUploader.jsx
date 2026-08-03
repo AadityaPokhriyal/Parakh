@@ -60,6 +60,7 @@ export default function FileUploader() {
   const [errorMessage, setErrorMessage] = useState("");
   const [responseData, setResponseData] = useState(null);
   const fileInputRef = useRef(null);
+  const addMoreInputRef = useRef(null);
   const [previewUrls, setPreviewUrls] = useState([]);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [viewerActiveIndex, setViewerActiveIndex] = useState(0);
@@ -151,6 +152,23 @@ export default function FileUploader() {
   const handleFileChange = (e) => {
     if (e.target.files) {
       validateAndSetFile(e.target.files);
+    }
+  };
+
+  // Handle adding more images to existing selection
+  const handleAddMoreImages = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const selectedFiles = Array.from(e.target.files);
+      const allAreImages = selectedFiles.every((file) => file.type.startsWith("image/"));
+
+      if (!allAreImages) {
+        setErrorMessage("Invalid input! All selected items must be images.");
+        setUploadStatus("error");
+      } else {
+        setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+        resetStatus();
+      }
+      e.target.value = "";
     }
   };
 
@@ -365,6 +383,14 @@ export default function FileUploader() {
               style={styles.hiddenInput}
               multiple
             />
+            <input
+              ref={addMoreInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleAddMoreImages}
+              style={styles.hiddenInput}
+              multiple
+            />
 
             {/* Drag & Drop Area */}
             {files.length === 0 && (
@@ -493,6 +519,30 @@ export default function FileUploader() {
                       </div>
                     ))}
                   </div>
+                )}
+
+                {/* Add More Images Button */}
+                {!isPdf && uploadStatus !== "uploading" && uploadStatus !== "success" && (
+                  <button
+                    type="button"
+                    onClick={() => addMoreInputRef.current?.click()}
+                    style={styles.addMoreButton}
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Add More Images
+                  </button>
                 )}
 
                 {/* Progress bar for upload */}
@@ -809,6 +859,23 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: "12px",
+  },
+  addMoreButton: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "6px",
+    width: "100%",
+    padding: "9px 16px",
+    borderRadius: "8px",
+    border: "1px dashed var(--accent)",
+    backgroundColor: "var(--accent-bg)",
+    color: "var(--accent)",
+    fontSize: "13px",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    marginTop: "4px",
   },
   fileDetailsRow: {
     display: "flex",

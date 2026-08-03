@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import { useAuth } from "../context/AuthContext.jsx";
+import CameraModal from "./CameraModal.jsx";
 
 export default function FileUploader() {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ export default function FileUploader() {
   const [uploadStatus, setUploadStatus] = useState("idle"); // idle | uploading | success | error
   const [errorMessage, setErrorMessage] = useState("");
   const [responseData, setResponseData] = useState(null);
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
   const fileInputRef = useRef(null);
   const addMoreInputRef = useRef(null);
   const [previewUrls, setPreviewUrls] = useState([]);
@@ -66,6 +68,21 @@ export default function FileUploader() {
   const [viewerActiveIndex, setViewerActiveIndex] = useState(0);
   const dragItem = useRef(null);
   const backendUrl = `${import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"}/api/exams/upload-paper`;
+
+  const handleCameraCapturedFiles = (capturedFiles) => {
+    if (!capturedFiles || capturedFiles.length === 0) return;
+    if (files.length === 0) {
+      validateAndSetFile(capturedFiles);
+    } else {
+      const isExistingPdf = files.length === 1 && (files[0].type === "application/pdf" || files[0].name.endsWith(".pdf"));
+      if (isExistingPdf) {
+        validateAndSetFile(capturedFiles);
+      } else {
+        setFiles((prevFiles) => [...prevFiles, ...capturedFiles]);
+        resetStatus();
+      }
+    }
+  };
 
   // Handle Object URL generation and cleanup
   useEffect(() => {
@@ -427,6 +444,20 @@ export default function FileUploader() {
                 <p style={styles.dropText}>
                   Drag & drop your PDF or Images here, or <span style={styles.browseText}>browse</span>
                 </p>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsCameraOpen(true);
+                  }}
+                  style={styles.cameraDropBtn}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6 }}>
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                    <circle cx="12" cy="13" r="4" />
+                  </svg>
+                  Use Camera
+                </button>
                 <p style={styles.limitText}>Maximum size: 20 MB</p>
               </div>
             )}
@@ -521,28 +552,55 @@ export default function FileUploader() {
                   </div>
                 )}
 
-                {/* Add More Images Button */}
+                {/* Add More Images & Camera Buttons */}
                 {!isPdf && uploadStatus !== "uploading" && uploadStatus !== "success" && (
-                  <button
-                    type="button"
-                    onClick={() => addMoreInputRef.current?.click()}
-                    style={styles.addMoreButton}
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                  <div style={{ display: "flex", gap: "10px", marginTop: "12px" }}>
+                    <button
+                      type="button"
+                      onClick={() => addMoreInputRef.current?.click()}
+                      style={styles.addMoreButton}
                     >
-                      <line x1="12" y1="5" x2="12" y2="19" />
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                    Add More Images
-                  </button>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                      </svg>
+                      Add More Images
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsCameraOpen(true)}
+                      style={{
+                        ...styles.addMoreButton,
+                        background: "var(--accent-bg)",
+                        borderColor: "var(--accent-border)",
+                        color: "var(--accent)",
+                      }}
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                        <circle cx="12" cy="13" r="4" />
+                      </svg>
+                      Take Photo
+                    </button>
+                  </div>
                 )}
 
                 {/* Progress bar for upload */}
@@ -770,11 +828,34 @@ export default function FileUploader() {
           </div>
         </div>
       )}
+
+      {/* Camera Capture Modal */}
+      <CameraModal
+        isOpen={isCameraOpen}
+        onClose={() => setIsCameraOpen(false)}
+        onCapture={handleCameraCapturedFiles}
+        onCaptureTitle="Attach to Question Paper"
+      />
     </div>
   );
 }
 
 const styles = {
+  cameraDropBtn: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "12px 0 8px 0",
+    padding: "8px 16px",
+    borderRadius: "8px",
+    border: "1px solid var(--accent-border, rgba(170, 59, 255, 0.4))",
+    backgroundColor: "var(--accent-bg, rgba(170, 59, 255, 0.1))",
+    color: "var(--accent)",
+    fontSize: "14px",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+  },
   container: {
     display: "flex",
     justifyContent: "center",

@@ -47,6 +47,7 @@ function UploadAnswersPage() {
 
   // We keep a Map of refs keyed by sheet id for file inputs
   const fileInputRefs = useRef({});
+  const addMoreInputRefs = useRef({});
 
   // Preview URLs map and Viewer state
   const [previewUrlsMap, setPreviewUrlsMap] = useState({});
@@ -147,6 +148,30 @@ function UploadAnswersPage() {
 
   const handleFileChange = (id, e) => {
     if (e.target.files) validateAndSetFile(id, e.target.files);
+  };
+
+  const handleAddMoreImages = (id, e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const selectedFiles = Array.from(e.target.files);
+      const allAreImages = selectedFiles.every((file) => file.type.startsWith("image/"));
+
+      if (!allAreImages) {
+        updateSheet(id, {
+          errorMessage: "Invalid input! All selected items must be images.",
+          uploadStatus: "error",
+        });
+      } else {
+        const sheet = sheets.find((s) => s.id === id);
+        if (sheet) {
+          updateSheet(id, {
+            files: [...sheet.files, ...selectedFiles],
+            uploadStatus: "idle",
+            errorMessage: "",
+          });
+        }
+      }
+      e.target.value = "";
+    }
   };
 
   const triggerFilePicker = (id) => {
@@ -337,6 +362,14 @@ function UploadAnswersPage() {
                   style={styles.hiddenInput}
                   multiple
                 />
+                <input
+                  ref={(el) => { addMoreInputRefs.current[sheet.id] = el; }}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleAddMoreImages(sheet.id, e)}
+                  style={styles.hiddenInput}
+                  multiple
+                />
 
                 {/* Drop zone (shown when no file selected) */}
                 {sheet.files.length === 0 && sheet.uploadStatus !== "success" && (
@@ -454,6 +487,30 @@ function UploadAnswersPage() {
                             );
                           })}
                         </div>
+                      )}
+
+                      {/* Add More Images Button */}
+                      {!isPdf && sheet.uploadStatus !== "uploading" && sheet.uploadStatus !== "success" && !globalDisabled && (
+                        <button
+                          type="button"
+                          onClick={() => addMoreInputRefs.current[sheet.id]?.click()}
+                          style={styles.addMoreButton}
+                        >
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                          </svg>
+                          Add More Images
+                        </button>
                       )}
 
                       {/* Per‑card uploading indicator */}
@@ -963,6 +1020,23 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: "10px",
+  },
+  addMoreButton: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "6px",
+    width: "100%",
+    padding: "9px 16px",
+    borderRadius: "8px",
+    border: "1px dashed var(--accent)",
+    backgroundColor: "var(--accent-bg)",
+    color: "var(--accent)",
+    fontSize: "13px",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    marginTop: "4px",
   },
   fileDetailsRow: { display: "flex", alignItems: "center", gap: "12px" },
   pdfBadge: {

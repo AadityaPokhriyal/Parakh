@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEvaluation, createBlankSheet } from "../context/EvaluationContext.jsx";
 import Navbar from "../components/Navbar.jsx";
 import WorkflowStepper from "../components/WorkflowStepper.jsx";
+import CameraModal from "../components/CameraModal.jsx";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -49,10 +50,32 @@ function UploadAnswersPage() {
   const fileInputRefs = useRef({});
   const addMoreInputRefs = useRef({});
 
-  // Preview URLs map and Viewer state
+  // Preview URLs map, Viewer state, and Camera state
   const [previewUrlsMap, setPreviewUrlsMap] = useState({});
   const [viewerState, setViewerState] = useState({ isOpen: false, sheetId: null, activeIndex: 0 });
+  const [cameraModalState, setCameraModalState] = useState({ isOpen: false, sheetId: null });
   const dragItemRef = useRef({ sheetId: null, index: null });
+
+  const handleCameraCapturedFilesForSheet = (sheetId, capturedFiles) => {
+    if (!sheetId || !capturedFiles || capturedFiles.length === 0) return;
+    const sheet = sheets.find((s) => s.id === sheetId);
+    if (!sheet) return;
+
+    if (sheet.files.length === 0) {
+      validateAndSetFile(sheetId, capturedFiles);
+    } else {
+      const isPdf = sheet.files.length === 1 && (sheet.files[0].type === "application/pdf" || sheet.files[0].name.toLowerCase().endsWith(".pdf"));
+      if (isPdf) {
+        validateAndSetFile(sheetId, capturedFiles);
+      } else {
+        updateSheet(sheetId, {
+          files: [...sheet.files, ...capturedFiles],
+          uploadStatus: "idle",
+          errorMessage: "",
+        });
+      }
+    }
+  };
 
   // Manage Object URLs for all sheets
     useEffect(() => {
@@ -396,6 +419,20 @@ function UploadAnswersPage() {
                     <p style={styles.dropText}>
                       Drag & drop answer sheet (PDF or Images) here, or <span style={styles.browseText}>browse</span>
                     </p>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCameraModalState({ isOpen: true, sheetId: sheet.id });
+                      }}
+                      style={styles.cameraDropBtn}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6 }}>
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                        <circle cx="12" cy="13" r="4" />
+                      </svg>
+                      Use Camera
+                    </button>
                     <p style={styles.limitText}>PDF or Images accepted (Max 20 MB)</p>
                   </div>
                 )}
@@ -489,28 +526,55 @@ function UploadAnswersPage() {
                         </div>
                       )}
 
-                      {/* Add More Images Button */}
+                      {/* Add More Images & Camera Buttons */}
                       {!isPdf && sheet.uploadStatus !== "uploading" && sheet.uploadStatus !== "success" && !globalDisabled && (
-                        <button
-                          type="button"
-                          onClick={() => addMoreInputRefs.current[sheet.id]?.click()}
-                          style={styles.addMoreButton}
-                        >
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
+                        <div style={{ display: "flex", gap: "10px", marginTop: "12px" }}>
+                          <button
+                            type="button"
+                            onClick={() => addMoreInputRefs.current[sheet.id]?.click()}
+                            style={styles.addMoreButton}
                           >
-                            <line x1="12" y1="5" x2="12" y2="19" />
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                          </svg>
-                          Add More Images
-                        </button>
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <line x1="12" y1="5" x2="12" y2="19" />
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                            Add More Images
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setCameraModalState({ isOpen: true, sheetId: sheet.id })}
+                            style={{
+                              ...styles.addMoreButton,
+                              background: "var(--accent-bg)",
+                              borderColor: "var(--accent-border)",
+                              color: "var(--accent)",
+                            }}
+                          >
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                              <circle cx="12" cy="13" r="4" />
+                            </svg>
+                            Take Photo
+                          </button>
+                        </div>
                       )}
 
                       {/* Per‑card uploading indicator */}
@@ -744,6 +808,16 @@ function UploadAnswersPage() {
           </div>
         );
       })()}
+
+      {/* Camera Capture Modal */}
+      <CameraModal
+        isOpen={cameraModalState.isOpen}
+        onClose={() => setCameraModalState({ isOpen: false, sheetId: null })}
+        onCapture={(capturedFiles) =>
+          handleCameraCapturedFilesForSheet(cameraModalState.sheetId, capturedFiles)
+        }
+        onCaptureTitle="Attach to Answer Sheet"
+      />
     </div>
   );
 }
@@ -751,6 +825,21 @@ function UploadAnswersPage() {
 // ── Styles ───────────────────────────────────────────────────────────────────
 
 const styles = {
+  cameraDropBtn: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "12px 0 8px 0",
+    padding: "8px 16px",
+    borderRadius: "8px",
+    border: "1px solid var(--accent-border, rgba(170, 59, 255, 0.4))",
+    backgroundColor: "var(--accent-bg, rgba(170, 59, 255, 0.1))",
+    color: "var(--accent)",
+    fontSize: "14px",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+  },
   container: {
     display: "flex",
     justifyContent: "center",

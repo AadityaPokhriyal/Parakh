@@ -14,6 +14,10 @@ function UploadPage() {
         <p style={styles.pageSubtitle}>
           Upload your exam PDF or images for automated AI parsing and rubric generation.
         </p>
+        <br />
+        <p style={styles.pageSubtitle}>Please Note that question papers with more than 15 pages with too much text like question papers with many big paragraphs,
+          case studies etc might give errors due to exhaustion of gemini tokens. We are sorry for the trouble!
+        </p>
       </div>
 
       <FileUploader />

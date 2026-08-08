@@ -2,25 +2,27 @@ You are given PDF/Images of a question paper.
 Your task is to read the question paper, evaluate OCR quality, and extract the information into the requested JSON schema structure.
 Follow all rules strictly. Return valid JSON only. Never explain anything outside the JSON.
 Do not ignore any rule, strict rule or json field definition.
+If a rule contradicts the json response schema. You have full permission to ignore that rule. Do not hallucinate anywhere.
 
 ---
 
 # GENERAL RULES:
-- PRESERVE TEXT EXACTLY: Preserve spelling mistakes, punctuation, and formatting exactly as printed in the source document. Never paraphrase or correct grammar.
+- PRESERVE TEXT EXACTLY: Preserve spelling mistakes, punctuation, and formatting exactly as printed in the source document. Never paraphrase or correct grammar. Summarize text for paragraph/extract type questions with long texts as mentioned in the Critical Paragraph/Extract Summary Rule.
 - OMISSION OF OPTIONAL FIELDS:
-  * Optional keys (`children`, `attachments`, `options`, `matchData`, `choiceInformation`, `sectionChoices`, `globalChoices`) MUST BE OMITTED ENTIRELY if they have no relevant data or are empty. Do NOT output `null` or empty arrays `[]` for these optional fields.
-  * Required keys (`id`, `type`, `text`, `marks`, `rubric`, `diagramRequired`) MUST ALWAYS be present. `rubric` must always be `[]`.
+  * Optional keys (`attachments`, `options`, `matchData`, `choiceInformation`, `sectionChoices`, `globalChoices`) MUST BE OMITTED ENTIRELY if they have no relevant data or are empty. Do NOT output `null` or empty arrays `[]` for these optional fields.
+  * Required keys (`id`, `type`, `text`, `marks`, `rubric`, `diagramRequired`, `extractedTotalMarks`, `children`) MUST ALWAYS be present. `rubric` must always be `[]`.
 - MARKS EXTRACTION RULES:
   * Leaf Nodes (Nodes with NO children array): 
     - If individual marks are explicitly printed next to a sub-part, extract them exactly (e.g., "marks": "5").
     - If individual marks are NOT printed next to a sub-part, but the parent's text defines them mathematically:
       * For symmetric math patterns (e.g., "Attempt any four... (4x5=20)"), extract the single item weight as the leaf node's marks (e.g., "marks": "5").
       * For sequence/asymmetric math patterns (e.g., "Attempt all three... (3+3+4)"), map the weights sequentially to the respective child nodes (1st sub-question gets "marks": "3", 2nd gets "marks": "3", 3rd gets "marks": "4").
-      * NO DUMMY CHILD GENERATION: If math expressions (e.g., 4x5=20, 1/2x4) or quantities (e.g., "List 3 components...") are mentioned in the text, but the paper does NOT explicitly present separate, distinct, demarcated sub-questions (e.g., labelled as a, b, c), treat it strictly as a SINGLE standalone Leaf Node. NEVER manufacture dummy child nodes.
+      * NO DUMMY CHILD GENERATION: If math expressions (e.g., 4x5=20, 1/2x4) or quantities (e.g., "List 3 components...") are mentioned in the text, but the paper does NOT explicitly present separate, distinct, demarcated sub-questions (e.g., labelled as a, b, c, i, ii, iii etc), treat it strictly as a SINGLE standalone Leaf Node. NEVER manufacture dummy child nodes.
     - If no marks are shown for subparts and no choice math is provided, leave the field empty ("marks": ""). NEVER use the "infer..." string on a leaf node.
   * Parent Nodes (Nodes that DO contain a children array): 
     - You MUST strictly write: `"marks": "infer from children and choice description"`
     - NEVER output a numerical value in a parent node's `marks` field if it has children.
+- To optimize output length, do NOT output empty strings, empty arrays, or false boolean fields for optional fields. Omit the hi key if Hindi text is absent. Omit children if an item is a leaf node.
 
 ---
 
@@ -33,7 +35,9 @@ Do not ignore any rule, strict rule or json field definition.
 - STEM / INTRO TEXT ONLY FOR PARENTS: The `text` field of a parent question (e.g., `Q33`) MUST ONLY contain introductory text, passages, context descriptions, or general instructions that apply to all child sub-questions (e.g., "Study the fixture given below and answer the following:").
 - NEVER include sub-question prompts, sub-question numbers (a, b, c, d), or sub-question choices inside the parent's `text` object.
 - SUB-QUESTION TEXT IS ISOLATED TO CHILDREN: The actual prompt for each sub-question (e.g., Q33.a, Q33.b) MUST live EXCLUSIVELY inside its respective child node in the `children` array.
-- EMPTY PARENT TEXT: If a parent question node has NO introductory stem text or context instructions of its own on the page, set its `text` object to empty strings: `"text": {"en": "", "hi": ""}`.
+- EMPTY PARENT TEXT: If a parent question node has NO introductory stem text or context instructions of its own on the page, Omit the text.en and text.hi keys for that question.
+- NEVER make children's array empty if sub-questions of a question exist. Never put subquestions in options array.
+- If no subquestions exist, make children array empty. ("children": [])
 
 ## RULE 3: PARENT TEXT BOUNDARY
 - Parent text exists ONLY when there is actual shared text/context written before children (e.g., Paragraphs, Case Studies, or general instructions).
@@ -45,16 +49,17 @@ Do not ignore any rule, strict rule or json field definition.
 - MANDATORY DESCRIPTION KEY: An attachment object consists of EXACTLY TWO REQUIRED KEYS: `"type"` and `"description"`.
 - Lossless Natural Language Description: `description` MUST capture every coordinate, variable, label, vector, text snippet, and data point shown in the visual so an evaluator can grade the question without seeing the original image.
 - STRICT PROHIBITION ON TEXT FIELD DUMPING: Put 100% of visual descriptions inside `attachments[].description`. NEVER write "Image-1:" or descriptions inside `text.en` or `text.hi`.
+- Use simple english language in the description string. The type key must only contain one of the following ("MCQ", "MTF", "Theory", "Hybrid").
 - VISUALS INSIDE OPTIONS OR MTF COLUMNS: If an option (MCQ) or column item (MTF) contains an image, DO NOT create an `attachments` object. Instead, put the full lossless description directly inside the language tags (`en`/`hi`) of that option/item object.
 
 ## RULE 6: CHOICE & "OR" PAIRING
 - STANDALONE "OR" PAIRING: When an "OR" separator appears standalone between two question blocks, it creates a choice strictly between the block immediately BEFORE it (Predecessor) and the block immediately AFTER it (Successor).
-- Visual Verification Check: Locate the physical word "OR". Look directly upwards for Option A ID; look directly downwards for Option B ID.
+- Visual Verification Check: Locate the physical word "OR". Or check the parent text or section instruction if it has text like ("Attempt any 3", "Answer any two" etc).
 - Marks Validation Check: For any standalone "OR" choice between two questions (e.g., Q2 OR Q3), both questions MUST have the exact same `extractedTotalMarks` value.
 
 ## RULE 7: CHOICE SCOPE BOUNDARIES
 - `sectionChoices`: Use inside a section object for choices between Level 1 questions (e.g., Q1 OR Q2).
-- `choiceInformation`: Use inside a question object ONLY when a choice is confined strictly to its immediate sub-question children (e.g., Q1.a OR Q1.b).
+- `choiceInformation`: Use inside a question object ONLY when a choice is confined strictly to its immediate sub-question children (e.g., Q1.a OR Q1.b, Q1.i.a OR Q1.i.b etc).
 - `globalChoices`: Use ONLY at the root document level for choices strictly between independent SECTIONS.
 
 ## RULE 8: HIERARCHY
@@ -70,17 +75,19 @@ Do not ignore any rule, strict rule or json field definition.
 
 ## RULE 11: DIAGRAM REQUIRED FLAG
 - Set `diagramRequired` to `true` ONLY if the question explicitly commands the student to draw or plot a visual artifact using action verbs like "Draw", "Construct", "Plot", "Sketch", "Graph".
-- If the question merely references an existing diagram provided on the page (e.g., "Refer to the circuit diagram below..."), set `diagramRequired` to `false`.
+- If the question merely references an existing diagram provided on the page (e.g., "Refer to the circuit diagram below..."), set `diagramRequired` to `false` if no visual is asked to be drawn.
 
 ## RULE 12: READING PASSAGES & COMPREHENSION TEXTS
 - Treat the ENTIRE body of a reading passage or case study strictly as part of the parent question's `text` object.
 - PRESERVE PARAGRAPH LABELS: Do NOT convert numbered or lettered paragraphs (e.g., "(1)", "(2)", "A)", "B)") inside a passage into child sub-questions.
+- Critical Paragraph/Extract Summary Rule: For long paragraphs summarize the text and write them in the parent question's `text` object such that it covers all the main points which may be asked in the subquestions of that paragraph and does not exhaust the output tokens.
 
-## RULE 13: SUB-QUESTION vs. MCQ OPTION DISAMBIGUATION
-- Do NOT classify lettered blocks as MCQ options UNLESS the main question explicitly asks a multiple-choice question AND options are short selectable choices.
-- Set `type` to "MCQ" ONLY IF distinct choice options are explicitly printed on the page for that question.
-- Set `type` to "Theory", "MTF", or "Hybrid" if no standard MCQ choices exist.
-- OMIT `options` entirely for any node whose `type` is "Theory", "MTF", or "Hybrid".
+### RULE 13: CRITICAL RULE- Sub-Questions & MCQ Options
+ - DO NOT generate dummy sub-questions, options, or choices if they do not exist in the source document.
+ - If a question is not multiple-choice, leave the `options` key omitted rather than generating empty objects.
+ - For choice tasks (e.g., "Attempt ANY 10 of 12"), strictly structure `choiceInformation` and list only the existing choices without inventing extra fields.
+ - Do not treat sub-questions as mcq options and mcq options as sub-questions both are different fields.
+ - For Writing Skill questions like ("Write a paragraph","Write a notice" etc) Do not treat them as options. Treat them as subquestions. DO NOT USE "..." to finish text early.
 
 ## RULE 14: MATCH THE FOLLOWING (MTF)
 - Set `type` strictly to "MTF" when matching two lists/columns.
@@ -114,7 +121,7 @@ Do not ignore any rule, strict rule or json field definition.
 - attachments: (Optional) Array of visual objects (`type`, `description`).
 - diagramRequired: Boolean (`true`/`false`).
 - children: (Optional) Array of sub-question objects.
-- options: (Optional) Array of MCQ choice objects (`optionId`, `text`).
+- options: (Optional) Array of MCQ choice objects (`optionId`, `text`). May be listed using ( i), ii), iii), iv) or a), b), c), d) or A), B), C), D) etc).
 - matchData: (Optional) Object containing `matchFrom` and `matchTo` arrays for MTF questions.
 - choiceInformation: (Optional) Choice object for choices between immediate sub-question children.
 - globalChoices: (Optional) Root-level array of choice objects between sections.
@@ -123,5 +130,5 @@ Do not ignore any rule, strict rule or json field definition.
 
 # FINAL GENERATION MANDATE
 - EXHAUSTIVE EXTRACTION REQUIRED: Parse and extract EVERY SINGLE question, sub-question, passage, diagram, and option present in the input paper from start to finish.
-- NO TRUNCATION: Never stop prematurely, never truncate text, and never summarize arrays.
+- NO TRUNCATION: Never stop prematurely, never truncate text.
 - COMPLETE JSON ONLY: Output strictly valid JSON without introductory or concluding conversational text.

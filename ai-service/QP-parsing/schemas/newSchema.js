@@ -62,7 +62,8 @@ const level3QuestionSchema = {
                         }
                     }
                 }
-            }
+            },
+            required:["matchFrom","matchTo"]
         },
         marks: { type: Type.STRING },
         attachments: { 
@@ -72,7 +73,8 @@ const level3QuestionSchema = {
                 properties: {
                     type: { type: Type.STRING },
                     description: { type: Type.STRING }
-                }
+                },
+                required:["type","description"]
             } 
         },
         rubric: { type: Type.ARRAY, items: { type: Type.STRING } },
@@ -135,7 +137,8 @@ const level2QuestionSchema = {
                         }
                     }
                 }
-            }
+            },
+            required:["matchFrom","matchTo"]
         },
         marks: { type: Type.STRING },
         attachments: { 
@@ -145,7 +148,8 @@ const level2QuestionSchema = {
                 properties: {
                     type: { type: Type.STRING },
                     description: { type: Type.STRING }
-                }
+                },
+                required:["type","description"]
             } 
         },
         rubric: { type: Type.ARRAY, items: { type: Type.STRING } },
@@ -212,7 +216,8 @@ const level1QuestionSchema = {
                         }
                     }
                 }
-            }
+            },
+            required:["matchFrom","matchTo"]
         },
         marks: { type: Type.STRING },
         extractedTotalMarks:{type: Type.STRING},
@@ -223,7 +228,8 @@ const level1QuestionSchema = {
                 properties: {
                     type: { type: Type.STRING },
                     description: { type: Type.STRING }
-                }
+                },
+                required:["type","description"]
             }
         },
         rubric: { type: Type.ARRAY, items: { type: Type.STRING } },

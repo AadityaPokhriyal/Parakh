@@ -31,19 +31,9 @@ export default async function parseQuestionPaper(req, res, next) {
 
             const baseConfig={
                         responseMimeType: 'application/json',
-                        responseSchema: finalPaperSchema, 
-                        temperature:0.1,
+                        responseSchema: finalPaperSchema,
+                        temperature: 0.5,
                     };
-            if(model_name === fallbackModel){
-                baseConfig.thinkingConfig={
-                  thinkingLevel:"medium"  
-                };
-            }
-            else{
-                baseConfig.thinkingConfig={
-                    thinkingBudget:8192
-                };
-            }
 
             try {
                 const responseStream = await ai.models.generateContentStream({
